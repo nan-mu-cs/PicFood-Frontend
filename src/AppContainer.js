@@ -4,9 +4,11 @@ import { Container, Content, FooterTab, Button, Text } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import ImageCard from "./components/ImageCard";
+import Timeline from "./components/Timeline";
+import SearchPage from "./components/SearchPage";
+import { connect } from 'react-redux';
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <Container>
@@ -14,7 +16,8 @@ export default class App extends React.Component {
         <Grid>
           <Row size={9}>
             <Col>
-              <ImageCard/>
+                {this.props.currentTab == "timeline" && <Timeline />}
+                {this.props.currentTab == "search" && <SearchPage />}
             </Col>
           </Row>
           <Row size={1}>
@@ -36,3 +39,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+const mapStateToProps = (state, ownProps) => {
+    return{
+      currentTab:state.currentTab
+    }
+};
+
+export default connect(
+    mapStateToProps
+)(App);
