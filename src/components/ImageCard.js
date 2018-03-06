@@ -10,31 +10,31 @@ export default class ImageCard extends Component {
             <Card>
                 <CardItem>
                     <Left>
-                        <Thumbnail source={{uri: 'Image URL'}} />
+                        <Thumbnail source={{uri: this.props.avatar}} />
                         <Body>
-                        <Text>Kai</Text>
-                        <Text note>HHH</Text>
+                        <Text>{this.props.user}</Text>
+                        <Text note>{this.props.location}</Text>
                         </Body>
                     </Left>
                 </CardItem>
                 <CardItem cardBody>
-                    <Image source={{uri: 'http://via.placeholder.com/350x150'}} style={{height: 200, width: null, flex: 1}}/>
+                    <Image source={{uri: this.props.image}} style={{height: 200, width: null, flex: 1}}/>
                 </CardItem>
                 <CardItem>
                     <Left>
                         <Button transparent>
                             <Icon active name="thumbs-up" />
-                            <Text>12</Text>
+                            <Text>{this.props.likes}</Text>
                         </Button>
                     </Left>
                     <Body>
                     <Button transparent>
                         <Icon active name="chatbubbles" />
-                        <Text>4</Text>
+                        <Text>{this.props.comments.length}</Text>
                     </Button>
                     </Body>
                     <Right>
-                        <Text>11h ago</Text>
+                        <Text>{this.props.time}</Text>
                     </Right>
                 </CardItem>
             </Card>

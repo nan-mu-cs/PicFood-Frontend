@@ -28,7 +28,11 @@ class SearchPage extends Component {
         //         </Row>
         //     </Grid>
         // );
-        return (<Text></Text>)
+        return (
+            <Container>
+                <SearchBar/>
+            </Container>
+        )
     }
 }
 
