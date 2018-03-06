@@ -9,7 +9,7 @@ import { createStore, applyMiddleware, combineReducers, compose} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 // import createLogger from 'redux-logger'
 import reducer from './src/reducers'
-
+import initialState from "./src/reducers/initialState";
 // middleware that logs actions
 // const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__  });
 
@@ -23,7 +23,7 @@ function configureStore(initialState) {
     return createStore(reducer, initialState, enhancer);
 }
 
-const store = configureStore({});
+const store = configureStore(initialState);
 
 export default () => (
     <Provider store={store}>
