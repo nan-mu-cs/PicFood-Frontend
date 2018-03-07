@@ -13,7 +13,7 @@ class ImageCard extends Component {
         this.handleClickImage = this.handleClickImage.bind(this);
     }
     handleClickImage(){
-        console.log("click");
+        //console.log("click");
         this.props.history.push({
             pathname: "/image-detail",
             state:{

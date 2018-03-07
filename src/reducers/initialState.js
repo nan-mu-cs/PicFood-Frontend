@@ -320,6 +320,311 @@ export default {
         avatar:"http://via.placeholder.com/150x150",
         posts:6,
         followers:48,
-        following:76
+        following:76,
+        images:[
+            {
+                id:1,
+                user:"Kai",
+                avatar:"this is a url",
+                location:"this is a location",
+                image:"http://via.placeholder.com/350x150",
+                likes:12,
+                time:"11h ago",
+                comments:[
+                    {
+                        id:1,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:2,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:3,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:4,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:5,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:6,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:7,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:8,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                ]
+
+            },
+            {
+                id:2,
+                user:"Kai",
+                avatar:"this is a url",
+                location:"this is a location",
+                image:"http://via.placeholder.com/350x150",
+                likes:12,
+                time:"11h ago",
+                comments:[
+                    {
+                        id:1,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:2,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:3,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:4,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:5,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    }
+                ]
+
+            },
+            {
+                id:3,
+                user:"Kai",
+                avatar:"this is a url",
+                location:"this is a location",
+                image:"http://via.placeholder.com/350x150",
+                likes:12,
+                time:"11h ago",
+                comments:[
+                    {
+                        id:1,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:2,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:3,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:4,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:5,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    }
+                ]
+
+            },
+            {
+                id:3,
+                user:"Kai",
+                avatar:"this is a url",
+                location:"this is a location",
+                image:"http://via.placeholder.com/350x150",
+                likes:12,
+                time:"11h ago",
+                comments:[
+                    {
+                        id:1,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:2,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:3,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:4,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:5,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    }
+                ]
+
+            },
+            {
+                id:4,
+                user:"Kai",
+                avatar:"this is a url",
+                location:"this is a location",
+                image:"http://via.placeholder.com/350x150",
+                likes:12,
+                time:"11h ago",
+                comments:[
+                    {
+                        id:1,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:2,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:3,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:4,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:5,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    }
+                ]
+
+            },
+            {
+                id:5,
+                user:"Kai",
+                avatar:"this is a url",
+                location:"this is a location",
+                image:"http://via.placeholder.com/350x150",
+                likes:12,
+                time:"11h ago",
+                comments:[
+                    {
+                        id:1,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:2,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:3,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:4,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    },
+                    {
+                        id:5,
+                        user:"Kai",
+                        avatar:"this is a url",
+                        comment:"this is a comment.",
+                        time:"11h ago"
+                    }
+                ]
+
+            }
+        ]
     }
 };
