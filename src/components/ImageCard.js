@@ -2,42 +2,67 @@
  * Created by kai on 05/03/2018.
  */
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Image, TouchableWithoutFeedback } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
-export default class ImageCard extends Component {
+import { withRouter } from 'react-router-native';
+
+class ImageCard extends Component {
+    constructor(props,context){
+        super(props);
+        this.state = {};
+        this.handleClickImage = this.handleClickImage.bind(this);
+    }
+    handleClickImage(){
+        console.log("click");
+        this.props.history.push({
+            pathname: "/image-detail",
+            state:{
+                avatar:this.props.data.avatar,
+                user:this.props.data.user,
+                location:this.props.data.location,
+                image:this.props.data.image,
+                comments: this.props.data.comments
+            }
+        });
+    }
     render() {
+        // console.log(this.props);
         return (
             <Card>
                 <CardItem>
                     <Left>
-                        <Thumbnail source={{uri: this.props.avatar}} />
+                        <Thumbnail source={{uri: this.props.data.avatar}} />
                         <Body>
-                        <Text>{this.props.user}</Text>
-                        <Text note>{this.props.location}</Text>
+                        <Text>{this.props.data.user}</Text>
+                        <Text note>{this.props.data.location}</Text>
                         </Body>
                     </Left>
                 </CardItem>
-                <CardItem cardBody>
-                    <Image source={{uri: this.props.image}} style={{height: 200, width: null, flex: 1}}/>
+                <CardItem cardBody >
+                    <TouchableWithoutFeedback onPress={this.handleClickImage}>
+                        <Image source={{uri: this.props.data.image}} style={{height: 200, width: null, flex: 1}} />
+                    </TouchableWithoutFeedback>
                 </CardItem>
                 <CardItem>
                     <Left>
                         <Button transparent>
                             <Icon active name="thumbs-up" />
-                            <Text>{this.props.likes}</Text>
+                            <Text>{this.props.data.likes}</Text>
                         </Button>
                     </Left>
                     <Body>
                     <Button transparent>
                         <Icon active name="chatbubbles" />
-                        <Text>{this.props.comments.length}</Text>
+                        <Text>{this.props.data.comments.length}</Text>
                     </Button>
                     </Body>
                     <Right>
-                        <Text>{this.props.time}</Text>
+                        <Text>{this.props.data.time}</Text>
                     </Right>
                 </CardItem>
             </Card>
         );
     }
 }
+
+export default withRouter(ImageCard);

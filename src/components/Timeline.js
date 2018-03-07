@@ -7,6 +7,8 @@ import {StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
 import ImageCard from "./ImageCard";
 import Footer from "./Footer";
+import { withRouter } from 'react-router-native';
+
 class Timeline extends Component {
     constructor(props, context){
         super(props);
@@ -33,7 +35,7 @@ class Timeline extends Component {
                 <List dataArray={this.props.timelines}
                       renderRow={(item) =>
                           <ListItem>
-                              <ImageCard  {...item}/>
+                              <ImageCard  data={item}/>
                           </ListItem>
                       }>
                 </List>
@@ -53,6 +55,6 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps
-)(Timeline);
+)(Timeline));

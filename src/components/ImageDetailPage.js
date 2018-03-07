@@ -1,0 +1,73 @@
+/**
+ * Created by kai on 06/03/2018.
+ */
+import React, { Component } from 'react';
+import { Container, Header, Content, Button, Text, Icon,Body,Title,List, ListItem,Left,Right,Card,CardItem,Thumbnail } from 'native-base';
+import {StyleSheet,Image} from 'react-native';
+import { connect } from 'react-redux';
+import Comments from "./Comments";
+import { withRouter } from 'react-router-native';
+
+class ImageDetailPage extends Component {
+    constructor(props, context){
+        super(props);
+        this.state={
+
+        };
+        this.handleClickBack = this.handleClickBack.bind(this);
+    }
+    handleClickBack(){
+        this.props.history.goBack();
+    }
+    render() {
+        const {avatar,user,location,image,comments} = this.props.location.state;
+        return (
+            <Container>
+                <Header>
+                    <Left>
+                        <Button transparent onPress={this.handleClickBack}>
+                            <Icon name='arrow-back' />
+                        </Button>
+                    </Left>
+                    <Body>
+                    <Title>Photo</Title>
+                    </Body>
+                    <Right />
+                </Header>
+                <Card>
+                    <CardItem>
+                        <Left>
+                            <Thumbnail source={{uri: avatar}} />
+                            <Body>
+                            <Text>{user}</Text>
+                            <Text note>{location}</Text>
+                            </Body>
+                        </Left>
+                    </CardItem>
+                    <CardItem cardBody>
+                        <Image source={{uri:image}} style={{height: 200, width: null, flex: 1}}/>
+                    </CardItem>
+                    <CardItem>
+                        <Left>
+                            <Comments comments={comments}/>
+                        </Left>
+                    </CardItem>
+                </Card>
+            </Container>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+});
+
+
+const mapStateToProps = (state, ownProps) => {
+    return{
+
+    }
+};
+
+export default withRouter(connect(
+    mapStateToProps
+)(ImageDetailPage));
