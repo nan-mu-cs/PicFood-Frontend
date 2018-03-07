@@ -7,6 +7,7 @@ import {StyleSheet,Image} from 'react-native';
 import { connect } from 'react-redux';
 import Comments from "./Comments";
 import { withRouter } from 'react-router-native';
+import { Col, Row, Grid } from "react-native-easy-grid";
 
 class ImageDetailPage extends Component {
     constructor(props, context){
@@ -34,36 +35,46 @@ class ImageDetailPage extends Component {
                     </Body>
                     <Right />
                 </Header>
-                <Card>
-                    <CardItem>
-                        <Left>
-                            <Thumbnail source={{uri: avatar}} />
-                            <Body>
-                            <Text>{user}</Text>
-                            <Text note>{location}</Text>
-                            </Body>
-                        </Left>
-                    </CardItem>
-                    <CardItem cardBody>
-                        <Image source={{uri:image}} style={{height: 200, width: null, flex: 1}}/>
-                    </CardItem>
-                    <CardItem>
-                        <Left>
-                            <Button transparent>
-                                <Icon active name="chatbubbles" />
-                                {/*<Text>{this.props.data.comments.length}</Text>*/}
-                            </Button>
-                        </Left>
-                    </CardItem>
-                    <CardItem>
-                        <Left>
-                            <Comments comments={comments}/>
-                        </Left>
-                    </CardItem>
-                </Card>
-                <Item rounded style={styles.inputItem}>
-                    <Input placeholder='Rounded Textbox'/>
-                </Item>
+                <Grid>
+                    <Row size={9}>
+                        <Col>
+                            <Card>
+                                <CardItem>
+                                    <Left>
+                                        <Thumbnail source={{uri: avatar}} />
+                                        <Body>
+                                        <Text>{user}</Text>
+                                        <Text note>{location}</Text>
+                                        </Body>
+                                    </Left>
+                                </CardItem>
+                                <CardItem cardBody>
+                                    <Image source={{uri:image}} style={{height: 200, width: null, flex: 1}}/>
+                                </CardItem>
+                                {/*<CardItem>*/}
+                                {/*<Left>*/}
+                                {/*<Button transparent>*/}
+                                {/*<Icon active name="chatbubbles" />*/}
+                                {/*/!*<Text>{this.props.data.comments.length}</Text>*!/*/}
+                                {/*</Button>*/}
+                                {/*</Left>*/}
+                                {/*</CardItem>*/}
+                                <CardItem>
+                                    <Left>
+                                        <Comments  comments={comments}/>
+                                    </Left>
+                                </CardItem>
+                            </Card>
+                        </Col>
+                    </Row>
+                    <Row size={1}>
+                        <Col>
+                            <Item rounded style={styles.inputItem}>
+                                <Input placeholder='Rounded Textbox'/>
+                            </Item>
+                        </Col>
+                    </Row>
+                </Grid>
             </Container>
         );
     }
@@ -73,6 +84,9 @@ const styles = StyleSheet.create({
     inputItem:{
         position:"absolute",
         bottom:0
+    },
+    comments:{
+        height:"100%"
     }
 });
 

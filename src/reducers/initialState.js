@@ -53,7 +53,28 @@ export default {
                     avatar:"this is a url",
                     comment:"this is a comment.",
                     time:"11h ago"
-                }
+                },
+                {
+                    id:6,
+                    user:"Kai",
+                    avatar:"this is a url",
+                    comment:"this is a comment.",
+                    time:"11h ago"
+                },
+                {
+                    id:7,
+                    user:"Kai",
+                    avatar:"this is a url",
+                    comment:"this is a comment.",
+                    time:"11h ago"
+                },
+                {
+                    id:8,
+                    user:"Kai",
+                    avatar:"this is a url",
+                    comment:"this is a comment.",
+                    time:"11h ago"
+                },
             ]
 
         },
@@ -292,5 +313,13 @@ export default {
             ]
 
         },
-    ]
+    ],
+    user:{
+        id:"kaiyang1261",
+        name:"Kai Yang",
+        avatar:"http://via.placeholder.com/150x150",
+        posts:6,
+        followers:48,
+        following:76
+    }
 };

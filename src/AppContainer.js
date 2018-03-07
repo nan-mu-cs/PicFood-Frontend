@@ -9,7 +9,7 @@ import SearchPage from "./components/SearchPage";
 import { connect } from 'react-redux';
 import { NativeRouter,Route,Switch } from 'react-router-native'
 import ImageDetailPage from "./components/ImageDetailPage";
-
+import PersonalPage from "./components/PersonalPage";
 class App extends React.Component {
   render() {
     return (
@@ -17,6 +17,7 @@ class App extends React.Component {
           <Switch>
           <Route exact path="/" component={Timeline}/>
           <Route path="/search" component={SearchPage}/>
+          <Route path="/person" component={PersonalPage}/>
           <Route path="/image-detail" component={ImageDetailPage}/>
           </Switch>
         </NativeRouter>
