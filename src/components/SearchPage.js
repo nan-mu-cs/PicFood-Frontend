@@ -3,13 +3,13 @@
  */
 
 import React, { Component } from 'react';
-import { Container, Header, Content, Footer, FooterTab, Button, Text, Icon } from 'native-base';
+import { Container, Header, Content, Button, Text, Icon } from 'native-base';
 import {StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
 import ImageCard from "./ImageCard";
 import SearchBar from "./SearchBar";
 import { Col, Row, Grid } from "react-native-easy-grid";
-
+import Footer from "./Footer"
 class SearchPage extends Component {
     constructor(props, context){
         super(props);
@@ -31,6 +31,7 @@ class SearchPage extends Component {
         return (
             <Container>
                 <SearchBar/>
+                <Footer/>
             </Container>
         )
     }

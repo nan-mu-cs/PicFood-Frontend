@@ -7,25 +7,17 @@ import Footer from "./components/Footer";
 import Timeline from "./components/Timeline";
 import SearchPage from "./components/SearchPage";
 import { connect } from 'react-redux';
+import { NativeRouter,Route,Switch } from 'react-router-native'
 
 class App extends React.Component {
   render() {
     return (
-      <Container>
-        <Grid>
-          <Row size={9}>
-            <Col>
-                {this.props.currentTab == "timeline" && <Timeline />}
-                {this.props.currentTab == "search" && <SearchPage />}
-            </Col>
-          </Row>
-          <Row size={1}>
-            <Col>
-              <Footer/>
-            </Col>
-          </Row>
-        </Grid>
-      </Container>
+        <NativeRouter>
+          <Switch>
+          <Route exact path="/" component={Timeline}/>
+          <Route path="/search" component={SearchPage}/>
+          </Switch>
+        </NativeRouter>
     );
   }
 }

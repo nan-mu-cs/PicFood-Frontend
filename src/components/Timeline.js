@@ -2,10 +2,11 @@
  * Created by kai on 05/03/2018.
  */
 import React, { Component } from 'react';
-import { Container, Header, Content, Footer, FooterTab, Button, Text, Icon,Body,Title,List, ListItem } from 'native-base';
+import { Container, Header, Content, FooterTab, Button, Text, Icon,Body,Title,List, ListItem } from 'native-base';
 import {StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
 import ImageCard from "./ImageCard";
+import Footer from "./Footer";
 class Timeline extends Component {
     constructor(props, context){
         super(props);
@@ -36,6 +37,7 @@ class Timeline extends Component {
                           </ListItem>
                       }>
                 </List>
+                <Footer/>
             </Container>
         );
     }

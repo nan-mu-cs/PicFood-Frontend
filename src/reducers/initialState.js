@@ -4,10 +4,10 @@
 export default {
     currentTab:"timeline",
     tabs:[
-        {id:"timeline",icon:"home"},
-        {id:"search",icon:"search"},
-        {id:"camera",icon:"camera"},
-        {id:"person",icon:"person"}
+        {id:"timeline",icon:"home",url:"/"},
+        {id:"search",icon:"search",url:"/search"},
+        {id:"camera",icon:"camera",url:"/camera"},
+        {id:"person",icon:"person",url:"/person"}
     ],
     timelines:[
         {
