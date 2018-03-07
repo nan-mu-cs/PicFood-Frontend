@@ -34,7 +34,7 @@ class Timeline extends Component {
                 </Header>
                 <List dataArray={this.props.timelines}
                       renderRow={(item) =>
-                          <ListItem>
+                          <ListItem style={styles.listItem}>
                               <ImageCard  data={item}/>
                           </ListItem>
                       }>
@@ -46,6 +46,9 @@ class Timeline extends Component {
 }
 
 const styles = StyleSheet.create({
+    listItem:{
+        borderColor:"transparent"
+    }
 });
 
 

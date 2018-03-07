@@ -2,7 +2,7 @@
  * Created by kai on 06/03/2018.
  */
 import React, { Component } from 'react';
-import { Container, Header, Content, Button, Text, Icon,Body,Title,List, ListItem,Left,Right,Card,CardItem,Thumbnail } from 'native-base';
+import { Container, Header, Content, Button, Text, Icon,Body,Title,List, ListItem,Left,Right,Card,CardItem,Thumbnail,Item, Input } from 'native-base';
 import {StyleSheet,Image} from 'react-native';
 import { connect } from 'react-redux';
 import Comments from "./Comments";
@@ -49,16 +49,31 @@ class ImageDetailPage extends Component {
                     </CardItem>
                     <CardItem>
                         <Left>
+                            <Button transparent>
+                                <Icon active name="chatbubbles" />
+                                {/*<Text>{this.props.data.comments.length}</Text>*/}
+                            </Button>
+                        </Left>
+                    </CardItem>
+                    <CardItem>
+                        <Left>
                             <Comments comments={comments}/>
                         </Left>
                     </CardItem>
                 </Card>
+                <Item rounded style={styles.inputItem}>
+                    <Input placeholder='Rounded Textbox'/>
+                </Item>
             </Container>
         );
     }
 }
 
 const styles = StyleSheet.create({
+    inputItem:{
+        position:"absolute",
+        bottom:0
+    }
 });
 
 
