@@ -68,10 +68,14 @@ class ImageDetailPage extends Component {
                         </Col>
                     </Row>
                     <Row size={1}>
-                        <Col>
-                            <Item rounded style={styles.inputItem}>
-                                <Input placeholder='Rounded Textbox'/>
+                        <Col searchBar rounded>
+                            <Item>
+                                <Icon name="ios-search" />
+                                <Input placeholder="Search" />
                             </Item>
+                            <Button transparent>
+                                <Text>Search</Text>
+                            </Button>
                         </Col>
                     </Row>
                 </Grid>

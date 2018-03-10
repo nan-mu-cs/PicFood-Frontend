@@ -17,8 +17,8 @@ class App extends React.Component {
           <Switch>
           <Route exact path="/" component={Timeline}/>
           <Route path="/search" component={SearchPage}/>
-          <Route path="/person" component={PersonalPage}/>
-          <Route path="/image-detail" component={ImageDetailPage}/>
+          {/*<Route path="/person" component={PersonalPage}/>*/}
+          {/*<Route path="/image-detail" component={ImageDetailPage}/>*/}
           </Switch>
         </NativeRouter>
     );

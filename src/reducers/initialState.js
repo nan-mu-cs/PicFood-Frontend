@@ -6,8 +6,8 @@ export default {
     tabs:[
         {id:"timeline",icon:"home",url:"/"},
         {id:"search",icon:"search",url:"/search"},
-        {id:"camera",icon:"camera",url:"/camera"},
-        {id:"person",icon:"person",url:"/person"}
+        // {id:"camera",icon:"camera",url:"/camera"},
+        // {id:"person",icon:"person",url:"/person"}
     ],
     timelines:[
         {
