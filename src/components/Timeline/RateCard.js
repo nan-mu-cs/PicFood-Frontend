@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { Image, TouchableWithoutFeedback } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import { withRouter } from 'react-router-native';
+import StarRating from 'react-native-star-rating';
 
 class RateCard extends Component {
     constructor(props,context){
@@ -42,7 +43,11 @@ class RateCard extends Component {
                     <TouchableWithoutFeedback onPress={this.handleClickImage}>
                         <Body>
                             <Text>Rate on dish {this.props.data.dish}:</Text>
-                            <Text>{this.props.data.rate}</Text>
+                            <StarRating
+                                disabled={true}
+                                maxStars={5}
+                                rating={this.props.data.rate}
+                            />
                         </Body>
                     </TouchableWithoutFeedback>
                 </CardItem>
