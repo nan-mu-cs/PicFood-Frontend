@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { Container, Header, Content, Button, Text, Icon } from 'native-base';
 import {StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
-import ImageCard from "./ImageCard";
+import ImageCard from "./Timeline/PostCard";
 import SearchBar from "./SearchBar";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Footer from "./Footer"

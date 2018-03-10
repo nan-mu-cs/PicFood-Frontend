@@ -28,6 +28,7 @@ class OurFooter extends Component {
 
             );
         });
+        // console.log(tabs);
         return (
             <Footer>
                 <FooterTab style={styles.footerTab}>

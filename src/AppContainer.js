@@ -4,7 +4,7 @@ import { Container, Content, FooterTab, Button, Text } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Footer from "./components/Footer";
 // import Header from "./components/Header";
-import Timeline from "./components/Timeline";
+import Timeline from "./components/Timeline/Timeline";
 import SearchPage from "./components/SearchPage";
 import { connect } from 'react-redux';
 import { NativeRouter,Route,Switch } from 'react-router-native'

@@ -14,16 +14,16 @@ class ImageCard extends Component {
     }
     handleClickImage(){
         //console.log("click");
-        this.props.history.push({
-            pathname: "/image-detail",
-            state:{
-                avatar:this.props.data.avatar,
-                user:this.props.data.user,
-                location:this.props.data.location,
-                image:this.props.data.image,
-                comments: this.props.data.comments
-            }
-        });
+        // this.props.history.push({
+        //     pathname: "/image-detail",
+        //     state:{
+        //         avatar:this.props.data.avatar,
+        //         user:this.props.data.user,
+        //         location:this.props.data.location,
+        //         image:this.props.data.image,
+        //         comments: this.props.data.comments
+        //     }
+        // });
     }
     render() {
         // console.log(this.props);
@@ -43,23 +43,23 @@ class ImageCard extends Component {
                         <Image source={{uri: this.props.data.image}} style={{height: 200, width: null, flex: 1}} />
                     </TouchableWithoutFeedback>
                 </CardItem>
-                <CardItem>
-                    <Left>
-                        <Button transparent>
-                            <Icon active name="thumbs-up" />
-                            <Text>{this.props.data.likes}</Text>
-                        </Button>
-                    </Left>
-                    <Body>
-                    <Button transparent>
-                        <Icon active name="chatbubbles" />
-                        <Text>{this.props.data.comments.length}</Text>
-                    </Button>
-                    </Body>
-                    <Right>
-                        <Text>{this.props.data.time}</Text>
-                    </Right>
-                </CardItem>
+                {/*<CardItem>*/}
+                    {/*<Left>*/}
+                        {/*<Button transparent>*/}
+                            {/*<Icon active name="thumbs-up" />*/}
+                            {/*<Text>{this.props.data.likes}</Text>*/}
+                        {/*</Button>*/}
+                    {/*</Left>*/}
+                    {/*<Body>*/}
+                    {/*<Button transparent>*/}
+                        {/*<Icon active name="chatbubbles" />*/}
+                        {/*<Text>{this.props.data.comments.length}</Text>*/}
+                    {/*</Button>*/}
+                    {/*</Body>*/}
+                    {/*<Right>*/}
+                        {/*<Text>{this.props.data.time}</Text>*/}
+                    {/*</Right>*/}
+                {/*</CardItem>*/}
             </Card>
         );
     }

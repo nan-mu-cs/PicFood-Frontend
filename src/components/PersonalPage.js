@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { Container, Header, Content, FooterTab, Button, Text, Icon,Body,Title,List, ListItem,Thumbnail } from 'native-base';
 import {StyleSheet,ScrollView,Dimensions,Image,View,TouchableWithoutFeedback} from 'react-native';
 import { connect } from 'react-redux';
-import ImageCard from "./ImageCard";
+import ImageCard from "./Timeline/PostCard";
 import Footer from "./Footer";
 import { withRouter } from 'react-router-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
