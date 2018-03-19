@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 // import Header from "./components/Header";
 import Timeline from "./components/Timeline/Timeline";
 import SearchPage from "./components/SearchPage";
+import RestaurantPage from "./components/RestaurantPage"
 import { connect } from 'react-redux';
 import { NativeRouter,Route,Switch } from 'react-router-native'
 import ImageDetailPage from "./components/ImageDetailPage";
@@ -17,6 +18,7 @@ class App extends React.Component {
           <Switch>
           <Route exact path="/" component={Timeline}/>
           <Route path="/search" component={SearchPage}/>
+          <Route path="/restaurants" component={RestaurantPage}/>
           {/*<Route path="/person" component={PersonalPage}/>*/}
           {/*<Route path="/image-detail" component={ImageDetailPage}/>*/}
           </Switch>

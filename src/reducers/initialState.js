@@ -5,7 +5,8 @@ export default {
     currentTab:"timeline",
     tabs:[
         {id:"timeline",icon:"home",url:"/"},
-        {id:"search",icon:"search",url:"/search"}
+        {id:"search",icon:"search",url:"/search"},
+        {id:"restaurants",icon:"cart",url:"/restaurants"}
         // {id:"camera",icon:"camera",url:"/camera"},
         // {id:"person",icon:"person",url:"/person"}
     ],
@@ -369,5 +370,60 @@ export default {
 
             }
         ]
-    }
+    },
+    restaurant:
+        {
+            id:1,
+            name:"GreatWall Restaurant",
+            rate:5.0,
+            avatar:"http://via.placeholder.com/100x100",
+            location:"this is a location",
+            address:"200 temple street",
+            dishes:[
+                {
+                    id:1,
+                    name:"zuozong chicken",
+                    rate:2.0,
+
+                    avatar1:"http://via.placeholder.com/20x20"
+                    ,
+                    avatar2:"http://via.placeholder.com/20x20"
+                    ,
+                    avatar3:"http://via.placeholder.com/20x20"
+                    ,
+                    avatar4:"http://via.placeholder.com/20x20"
+                    ,
+                    avatar5:"http://via.placeholder.com/20x20"
+                },
+                {
+                    id:2,
+                    name:"sichuan beef",
+                    rate:1.0,
+                    avatar1:"http://via.placeholder.com/20x20"
+                    ,
+                    avatar2:"http://via.placeholder.com/20x20"
+                    ,
+                    avatar3:"http://via.placeholder.com/20x20"
+                    ,
+                    avatar4:"http://via.placeholder.com/20x20"
+                    ,
+                    avatar5:"http://via.placeholder.com/20x20"
+                },
+                {
+                    id:3,
+                    name:"fried fish",
+                    rate:4.0,
+                    avatar1:"http://via.placeholder.com/20x20"
+                    ,
+                    avatar2:"http://via.placeholder.com/20x20"
+                    ,
+                    avatar3:"http://via.placeholder.com/20x20"
+                    ,
+                    avatar4:"http://via.placeholder.com/20x20"
+                    ,
+                    avatar5:"http://via.placeholder.com/20x20"
+                }
+
+            ]
+        }
 };
