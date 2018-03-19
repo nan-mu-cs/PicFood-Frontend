@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { Image, TouchableWithoutFeedback } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Text, Button, Left, Body, Right } from 'native-base';
 import { withRouter } from 'react-router-native';
 import StarRating from 'react-native-star-rating';
 
@@ -29,24 +29,29 @@ class RateCard extends Component {
     render() {
         // console.log(this.props);
         return (
-            <Card>
+            <Card style={{borderColor:"transparent",shadowColor:"transparent"}}>
                 <CardItem>
                     <Left>
-                        <Thumbnail source={{uri: this.props.data.avatar}} />
+                        <Thumbnail small source={{uri: this.props.data.avatar}} />
                         <Body>
-                        <Text>{this.props.data.user}</Text>
-                        <Text note>{this.props.data.location}</Text>
+                        <Text style={{fontSize:16}}>{this.props.data.user}</Text>
+                        <Text note style={{fontSize:14}}>{this.props.data.location}</Text>
                         </Body>
                     </Left>
                 </CardItem>
                 <CardItem cardBody >
                     <TouchableWithoutFeedback onPress={this.handleClickImage}>
-                        <Body>
-                            <Text>Rate on dish {this.props.data.dish}:</Text>
+                        <Body style={{paddingTop:5,paddingBottom:20,paddingLeft:20,paddingRight:20}}>
+                        <Text note><Icon name="md-star" style={{fontSize:35}}/>    Rate on dish <Text style={{marginLeft:5}}>{this.props.data.dish}</Text>:</Text>
                             <StarRating
                                 disabled={true}
                                 maxStars={5}
                                 rating={this.props.data.rate}
+                                containerStyle={{marginTop:10,alignSelf:"center"}}
+                                fullStarColor={"#f5af4b"}
+                                emptyStarColor={"#f5af4b"}
+                                halfStarEnabled
+                                starSize={25}
                             />
                         </Body>
                     </TouchableWithoutFeedback>

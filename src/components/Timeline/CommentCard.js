@@ -28,21 +28,21 @@ class CommentCard extends Component {
     render() {
         // console.log(this.props);
         return (
-            <Card>
+            <Card style={{borderColor:"transparent",shadowColor:"transparent"}}>
                 <CardItem>
                     <Left>
-                        <Thumbnail source={{uri: this.props.data.avatar}} />
+                        <Thumbnail small source={{uri: this.props.data.avatar}} />
                         <Body>
-                        <Text>{this.props.data.user}</Text>
-                        <Text note>{this.props.data.location}</Text>
+                        <Text style={{fontSize:16}}>{this.props.data.user}</Text>
+                        <Text note style={{fontSize:14}}>{this.props.data.location}</Text>
                         </Body>
                     </Left>
                 </CardItem>
                 <CardItem cardBody >
                     <TouchableWithoutFeedback onPress={this.handleClickImage}>
-                        <Body>
-                            <Text>Comment on dish {this.props.data.dish}:</Text>
-                            <Text>{this.props.data.comment}</Text>
+                        <Body style={{paddingTop:5,paddingBottom:20,paddingLeft:20,paddingRight:20}}>
+                        <Text note><Icon ios="ios-quote" android="quote" style={{fontSize:35}} />    Comment on dish <Text style={{marginLeft:10}}>{this.props.data.dish}</Text>:</Text>
+                            <Text style={{marginTop:5,marginLeft:10}}>{this.props.data.comment}</Text>
                         </Body>
                     </TouchableWithoutFeedback>
                 </CardItem>

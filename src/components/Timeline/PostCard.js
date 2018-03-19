@@ -28,13 +28,13 @@ class ImageCard extends Component {
     render() {
         // console.log(this.props);
         return (
-            <Card>
+            <Card style={{borderColor:"transparent"}}>
                 <CardItem>
                     <Left>
-                        <Thumbnail source={{uri: this.props.data.avatar}} />
+                        <Thumbnail small source={{uri: this.props.data.avatar}} />
                         <Body>
-                        <Text>{this.props.data.user}</Text>
-                        <Text note>{this.props.data.location}</Text>
+                        <Text style={{fontSize:16}}>{this.props.data.user}</Text>
+                        <Text note style={{fontSize:14}}>{this.props.data.location}</Text>
                         </Body>
                     </Left>
                 </CardItem>

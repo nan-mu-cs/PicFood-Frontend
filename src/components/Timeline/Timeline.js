@@ -32,7 +32,7 @@ class Timeline extends Component {
             else if(item.type === "comment")
                 card = <CommentCard data={item}/>;
             return (
-                <ListItem key={item.id}>
+                <ListItem key={item.id} style={styles.listItem}>
                     {card}
                 </ListItem>
             );
@@ -71,7 +71,14 @@ class Timeline extends Component {
 
 const styles = StyleSheet.create({
     listItem:{
-        borderColor:"transparent"
+        borderColor:"transparent",
+        marginBottom:-20,
+        marginTop: -17,
+        marginLeft:-3,
+        marginRight:-17,
+    },
+    listItemLast:{
+
     }
 });
 

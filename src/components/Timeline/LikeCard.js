@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { Image, TouchableWithoutFeedback } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+import { Container, Header, Content, Card, Text,CardItem, Thumbnail, Button, Icon, Left, Body, Right } from 'native-base';
 import { withRouter } from 'react-router-native';
 
 class LikeCard extends Component {
@@ -28,19 +28,21 @@ class LikeCard extends Component {
     render() {
         // console.log(this.props);
         return (
-            <Card>
+            <Card style={{borderColor:"transparent",shadowColor:"transparent"}}>
                 <CardItem>
                     <Left>
-                        <Thumbnail source={{uri: this.props.data.avatar}} />
+                        <Thumbnail small source={{uri: this.props.data.avatar}} />
                         <Body>
-                        <Text>{this.props.data.user}</Text>
-                        <Text note>{this.props.data.location}</Text>
+                            <Text style={{fontSize:16}}>{this.props.data.user}</Text>
+                            <Text note style={{fontSize:14}}>{this.props.data.location}</Text>
                         </Body>
                     </Left>
                 </CardItem>
                 <CardItem cardBody >
                     <TouchableWithoutFeedback onPress={this.handleClickImage}>
-                        <Text>Liked  dish {this.props.data.dish}:</Text>
+                        <Body style={{paddingTop:5,paddingBottom:20,paddingLeft:20,paddingRight:20}}>
+                            <Text note ><Icon name="md-heart" style={{fontSize:35}}/>    Liked  dish <Text style={{marginLeft:5}}>{this.props.data.dish}</Text></Text>
+                        </Body>
                     </TouchableWithoutFeedback>
                 </CardItem>
                 {/*<CardItem>*/}
