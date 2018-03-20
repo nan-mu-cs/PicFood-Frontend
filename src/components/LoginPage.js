@@ -31,15 +31,15 @@ class LoginPage extends Component {
                            <Input ref={(input)=>this.username=input}/>
                        </Item>
                        <Item floatingLabel >
-                           <Label ref={(input)=>this.password=input}>Password</Label>
-                           <Input />
+                           <Label >Password</Label>
+                           <Input secureTextEntry ref={(input)=>this.password=input}/>
                        </Item>
                    </Form>
                    <Container style={{flexDirection:"row",marginTop:30}}>
                     <Button primary block style={{flex:1,marginLeft:5,marginRight:5}}>
                         <Text>Login</Text>
                     </Button>
-                    <Button success block style={{flex:1,marginLeft:5,marginRight:5}}>
+                    <Button success block style={{flex:1,marginLeft:5,marginRight:5}} onPress={()=>{this.props.history.push("/register")}}>
                         <Text>Register</Text>
                     </Button>
                    </Container>
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
 //     mapStateToProps
 // )(Timeline));
 
-export default LoginPage;
+export default withRouter(LoginPage);

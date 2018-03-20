@@ -12,6 +12,7 @@ import { NativeRouter,Route,Switch } from 'react-router-native'
 import ImageDetailPage from "./components/ImageDetailPage";
 import PersonalPage from "./components/PersonalPage";
 import LoginPage from "./components/LoginPage";
+import RegisterPage from "./components/RegisterPage";
 class App extends React.Component {
   constructor(props,context){
       super(props,context);
@@ -27,6 +28,7 @@ class App extends React.Component {
           <Route exact path="/" component={LoginPage}/>
           <Route path="/search" component={SearchPage}/>
           <Route path="/restaurants" component={RestaurantPage}/>
+          <Route exact path="/register" component={RegisterPage}/>
           {/*<Route path="/person" component={PersonalPage}/>*/}
           {/*<Route path="/image-detail" component={ImageDetailPage}/>*/}
           </Switch>
