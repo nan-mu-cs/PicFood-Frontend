@@ -8,22 +8,50 @@ import Timeline from "./components/Timeline/Timeline";
 import SearchPage from "./components/SearchPage";
 import RestaurantPage from "./components/RestaurantPage"
 import { connect } from 'react-redux';
+import {AsyncStorage} from "react-native";
 import { NativeRouter,Route,Switch } from 'react-router-native'
 import ImageDetailPage from "./components/ImageDetailPage";
 import PersonalPage from "./components/PersonalPage";
+import LoginPage from "./components/LoginPage";
+import RegisterPage from "./components/RegisterPage";
+import { withRouter } from 'react-router-native';
+
 class App extends React.Component {
+  constructor(props,context){
+      super(props,context);
+
+  }
+  componentDidMount(){
+      // console.log(this.props);
+      AsyncStorage.multiGet(["username","password"],function (err,stores) {
+          if(err||!username||!password){
+              this.props.history.push("/login");
+              console.log(err);
+              return;
+          }
+          // console.log(username);
+          // console.log(password);
+          let username=stores[0][0];
+          let password=stores[0][0];
+      }.bind(this));
+  }
   render() {
-    return (
-        <NativeRouter>
+      return (
           <Switch>
-          <Route exact path="/" component={Timeline}/>
-          <Route path="/search" component={SearchPage}/>
-          <Route path="/restaurants" component={RestaurantPage}/>
-          {/*<Route path="/person" component={PersonalPage}/>*/}
-          {/*<Route path="/image-detail" component={ImageDetailPage}/>*/}
+              <Route exact path="/" component={Timeline}/>
+              <Route path="/search" component={SearchPage}/>
+              <Route path="/restaurants" component={RestaurantPage}/>
+              <Route exact path="/login" component={LoginPage}/>
+              <Route exact path="/register" component={RegisterPage}/>
+              {/*<Route path="/person" component={PersonalPage}/>*/}
+              {/*<Route path="/image-detail" component={ImageDetailPage}/>*/}
           </Switch>
-        </NativeRouter>
-    );
+      )
+    // return (
+    //     {/*<NativeRouter>*/}
+    //
+    //     {/*</NativeRouter>*/}
+    // );
   }
 }
 
@@ -42,6 +70,6 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps
-)(App);
+)(App));

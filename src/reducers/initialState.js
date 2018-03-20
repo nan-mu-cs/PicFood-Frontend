@@ -425,5 +425,11 @@ export default {
                 }
 
             ]
-        }
+        },
+    login:{
+        username:"",
+        password:"",
+        isLogin:false,
+        token:""
+    }
 };
