@@ -425,5 +425,7 @@ export default {
                 }
 
             ]
-        }
+        },
+    username:"",
+    password:""
 };

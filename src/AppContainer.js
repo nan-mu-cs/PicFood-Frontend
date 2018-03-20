@@ -11,12 +11,20 @@ import { connect } from 'react-redux';
 import { NativeRouter,Route,Switch } from 'react-router-native'
 import ImageDetailPage from "./components/ImageDetailPage";
 import PersonalPage from "./components/PersonalPage";
+import LoginPage from "./components/LoginPage";
 class App extends React.Component {
+  constructor(props,context){
+      super(props,context);
+
+  }
+  componentDidMount(){
+
+  }
   render() {
     return (
         <NativeRouter>
           <Switch>
-          <Route exact path="/" component={Timeline}/>
+          <Route exact path="/" component={LoginPage}/>
           <Route path="/search" component={SearchPage}/>
           <Route path="/restaurants" component={RestaurantPage}/>
           {/*<Route path="/person" component={PersonalPage}/>*/}
