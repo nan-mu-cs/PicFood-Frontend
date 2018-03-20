@@ -426,6 +426,10 @@ export default {
 
             ]
         },
-    username:"",
-    password:""
+    login:{
+        username:"",
+        password:"",
+        isLogin:false,
+        token:""
+    }
 };
