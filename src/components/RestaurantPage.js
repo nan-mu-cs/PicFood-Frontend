@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 import Dishes from "./Dishes";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Footer from "./Footer"
+import StarRating from 'react-native-star-rating';
+
 class RestaurantPage extends Component {
     constructor(props, context){
         super(props);
@@ -32,11 +34,6 @@ class RestaurantPage extends Component {
         return (
             <Container>
                 <Header>
-                    <Left>
-                        <Button transparent onPress={this.handleClickBack}>
-                            <Icon name='arrow-back' />
-                        </Button>
-                    </Left>
                     <Body>
                     <Title>Restaurant</Title>
                     </Body>
@@ -45,11 +42,23 @@ class RestaurantPage extends Component {
                 <Grid>
                     <Row size={9}>
                         <Col>
+                            <ScrollView>
                             <Card>
+
                                 <CardItem>
                                     <Left>
                                         <Body>
                                         <Text>{this.props.restaurant.name}</Text>
+                                        <StarRating
+                                            disabled={true}
+                                            maxStars={5}
+                                            rating={this.props.restaurant.rate}
+                                            containerStyle={{marginTop:10,alignSelf:"center"}}
+                                            fullStarColor={"#f5af4b"}
+                                            emptyStarColor={"#f5af4b"}
+                                            halfStarEnabled
+                                            starSize={25}
+                                        />
                                         <Text note>{this.props.restaurant.location}</Text>
                                         <Text note>{this.props.restaurant.address}</Text>
                                         </Body>
@@ -66,21 +75,13 @@ class RestaurantPage extends Component {
                                         </List>
                                     </ScrollView>
                                 </CardItem>
+
                             </Card>
+                            </ScrollView>
                         </Col>
                     </Row>
-                    {/*<Row size={1}>*/}
-                        {/*<Col searchBar rounded>*/}
-                            {/*<Item>*/}
-                                {/*<Icon name="ios-search" />*/}
-                                {/*<Input placeholder="Search" />*/}
-                            {/*</Item>*/}
-                            {/*<Button transparent>*/}
-                                {/*<Text>Search</Text>*/}
-                            {/*</Button>*/}
-                        {/*</Col>*/}
-                    {/*</Row>*/}
                 </Grid>
+                <Footer/>
             </Container>
         )
     }
