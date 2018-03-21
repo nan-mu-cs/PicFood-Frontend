@@ -509,5 +509,11 @@ export default {
         restaurant: "Great Wall",
         address:"200 temple street",
       },
-    ]
+    ],
+    login:{
+        username:"",
+        password:"",
+        isLogin:false,
+        token:""
+    }
 };
