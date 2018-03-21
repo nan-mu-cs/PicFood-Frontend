@@ -40,7 +40,7 @@ class App extends React.Component {
       return (
           <Switch>
               <Route exact path="/" component={Timeline}/>
-              <Route path="/search" component={SearchPage}/>
+              <Route path="/search" component={SearchTab}/>
             <Route path="/restaurants" component={RestaurantPage}>
               <Route path=":id" component={RestaurantPage}/>
             </Route>
