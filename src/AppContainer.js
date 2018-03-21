@@ -1,28 +1,32 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Container, Content, FooterTab, Button, Text } from 'native-base';
-import { Col, Row, Grid } from "react-native-easy-grid";
+import {StyleSheet, View} from 'react-native';
+import {Container, Content, FooterTab, Button, Text} from 'native-base';
+import {Col, Row, Grid} from "react-native-easy-grid";
 import Footer from "./components/Footer";
 // import Header from "./components/Header";
 import Timeline from "./components/Timeline/Timeline";
+import SearchTab from "./components/SearchTab/SearchTab";
 import SearchPage from "./components/SearchPage";
 import RestaurantPage from "./components/RestaurantPage"
-import { connect } from 'react-redux';
-import { NativeRouter,Route,Switch } from 'react-router-native'
+import {connect} from 'react-redux';
+import {NativeRouter, Route, Switch} from 'react-router-native'
 import ImageDetailPage from "./components/ImageDetailPage";
 import PersonalPage from "./components/PersonalPage";
+
 class App extends React.Component {
   render() {
     return (
-        <NativeRouter>
-          <Switch>
+      <NativeRouter>
+        <Switch>
           <Route exact path="/" component={Timeline}/>
-          <Route path="/search" component={SearchPage}/>
-          <Route path="/restaurants" component={RestaurantPage}/>
+          <Route path="/search" component={SearchTab}/>
+          <Route path="/restaurants" component={RestaurantPage}>
+            <Route path=":id" component={RestaurantPage}/>
+          </Route>
           {/*<Route path="/person" component={PersonalPage}/>*/}
           {/*<Route path="/image-detail" component={ImageDetailPage}/>*/}
-          </Switch>
-        </NativeRouter>
+        </Switch>
+      </NativeRouter>
     );
   }
 }
@@ -37,11 +41,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state, ownProps) => {
-    return{
-      currentTab:state.currentTab
-    }
+  return {
+    currentTab: state.currentTab
+  }
 };
 
 export default connect(
-    mapStateToProps
+  mapStateToProps
 )(App);

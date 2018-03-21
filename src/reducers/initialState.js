@@ -425,5 +425,89 @@ export default {
                 }
 
             ]
-        }
+        },
+    searchedRestaurants:[
+      {
+        id:1,
+        name:"GreatWall Restaurant",
+        rate: 4.0,
+        avatar:"http://via.placeholder.com/100x100",
+        location:"this is a location",
+        address:"200 temple street",
+      },
+      {
+        id:2,
+        name:"GreatWall Restaurant",
+        rate: 4.5,
+        avatar:"http://via.placeholder.com/100x100",
+        location:"this is a location",
+        address:"200 temple street",
+      },
+      {
+        id:3,
+        name:"GreatWall Restaurant",
+        rate: 3.0,
+        avatar:"http://via.placeholder.com/100x100",
+        location:"this is a location",
+        address:"200 temple street",
+      },
+      {
+        id:4,
+        name:"GreatWall Restaurant",
+        rate: 1.0,
+        avatar:"http://via.placeholder.com/100x100",
+        location:"this is a location",
+        address:"200 temple street",
+      },
+      {
+        id:5,
+        name:"GreatWall Restaurant",
+        rate:2.0,
+        avatar:"http://via.placeholder.com/100x100",
+        location:"this is a location",
+        address:"200 temple street",
+      },
+    ],
+    searchedDishes:[
+      {
+        id:1,
+        name:"Spicy Chicken",
+        rate: 4.0,
+        avatar:"http://via.placeholder.com/100x100",
+        restaurant: "Great Wall",
+        address:"200 temple street",
+      },
+      {
+        id:2,
+        name:"Mixed Chicken",
+        rate: 4.5,
+        avatar:"http://via.placeholder.com/100x100",
+        restaurant: "Great Wall",
+        address:"200 temple street",
+      },
+      {
+        id:3,
+        name:"Curry",
+        rate: 3.0,
+        avatar:"http://via.placeholder.com/100x100",
+        restaurant: "Great Wall",
+        address:"200 temple street",
+      },
+      {
+        id:4,
+        name:"Spicy Beef",
+        rate: 1.0,
+        avatar:"http://via.placeholder.com/100x100",
+        restaurant: "Great Wall",
+        address:"200 temple street",
+      },
+      {
+        id:5,
+        name:"Orange Chicken",
+        rate:2.0,
+        avatar:"http://via.placeholder.com/100x100",
+        restaurant: "Great Wall",
+        address:"200 temple street",
+      },
+    ]
 };
