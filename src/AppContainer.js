@@ -15,6 +15,7 @@ import ImageDetailPage from "./components/ImageDetailPage";
 import PersonalPage from "./components/PersonalPage";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
+import FollowList from "./components/Users/FollowList";
 import { withRouter } from 'react-router-native';
 
 class App extends React.Component {
@@ -41,9 +42,12 @@ class App extends React.Component {
           <Switch>
               <Route exact path="/" component={Timeline}/>
               <Route path="/search" component={SearchTab}/>
-            <Route path="/restaurants" component={RestaurantPage}>
-              <Route path=":id" component={RestaurantPage}/>
-            </Route>
+              <Route path="/restaurants" component={RestaurantPage}>
+                  <Route path=":id" component={RestaurantPage}/>
+              </Route>
+              <Route path="/followers" component={FollowList}>
+                  <Route path=":id" component={FollowList}/>
+              </Route>
               <Route exact path="/login" component={LoginPage}/>
               <Route exact path="/register" component={RegisterPage}/>
               {/*<Route path="/person" component={PersonalPage}/>*/}

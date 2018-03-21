@@ -14,6 +14,9 @@ export default (state = initialState, action) => {
             return {...state, restaurantId: action.data};
         case "NAVIGATE_TO_DISH_PAGE":
             return {...state, dishId: action.data};
+        case "NAVIGATE_TO_FOLLOWER_LIST_PAGE":
+            return {...state, userId: action.data};
+
         default:
             return state;
     }

@@ -515,5 +515,53 @@ export default {
         password:"",
         isLogin:false,
         token:""
-    }
+    },
+    followers: [
+      {
+        id: 1,
+        user:"Ashe",
+        avatar:"http://via.placeholder.com/100x100",
+      },
+      {
+        id: 2,
+        user:"Brown",
+        avatar:"http://via.placeholder.com/100x100",
+      },{
+        id:3,
+        user:"Chris",
+        avatar:"http://via.placeholder.com/100x100",
+      },{
+        id: 4,
+        user:"David",
+        avatar:"http://via.placeholder.com/100x100",
+      },{
+        id: 5,
+        user:"Ed",
+        avatar:"http://via.placeholder.com/100x100",
+      },
+    ],
+    followees: [
+      {
+        id: 5,
+        user:"Ashe",
+        avatar:"http://via.placeholder.com/100x100",
+      },
+      {
+        id: 4,
+        user:"Brown",
+        avatar:"http://via.placeholder.com/100x100",
+      },{
+        id:3,
+        user:"Chris",
+        avatar:"http://via.placeholder.com/100x100",
+      },{
+        id: 2,
+        user:"David",
+        avatar:"http://via.placeholder.com/100x100",
+      },{
+        id: 1,
+        user:"Ed",
+        avatar:"http://via.placeholder.com/100x100",
+      },
+    ],
 };

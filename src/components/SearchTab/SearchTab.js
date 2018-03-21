@@ -44,6 +44,9 @@ class SearchTab extends Component {
   }
 
   onSortPress = () => {
+    let userId = 1;
+    this.props.dispatch({type: "NAVIGATE_TO_FOLLOWER_LIST_PAGE", data: userId});
+    this.props.history.push(`/followers/${userId}`);
     // ActionSheet.show(
     //   {
     //     options: BUTTONS,
