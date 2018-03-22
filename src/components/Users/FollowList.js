@@ -38,7 +38,7 @@ class FollowList extends Component {
   }
 
   onBackPress = () => {
-    this.props.history.push(`/search`);
+    this.props.history.push(`/users`);
   }
 
 

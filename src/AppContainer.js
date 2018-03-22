@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Timeline from "./components/Timeline/Timeline";
 import SearchTab from "./components/SearchTab/SearchTab";
 import SearchPage from "./components/SearchPage";
+import UserPage from "./components/UserPage"
 import RestaurantPage from "./components/RestaurantPage"
 import { connect } from 'react-redux';
 import {AsyncStorage} from "react-native";
@@ -44,6 +45,9 @@ class App extends React.Component {
               <Route path="/search" component={SearchTab}/>
               <Route path="/restaurants" component={RestaurantPage}>
                   <Route path=":id" component={RestaurantPage}/>
+              </Route>
+              <Route path="/users" component={UserPage}>
+                  <Route path=":id" component={UserPage}/>
               </Route>
               <Route path="/followers" component={FollowList}>
                   <Route path=":id" component={FollowList}/>
