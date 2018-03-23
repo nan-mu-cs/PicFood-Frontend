@@ -18,8 +18,12 @@ class RestaurantPage extends Component {
         this.state={
 
         };
-    }
 
+        this.handleClickBack = this.handleClickBack.bind(this);
+    }
+    handleClickBack(){
+        this.props.history.goBack();
+    }
     render() {
         let dish = this.props.restaurant.dishes.map((item)=>{
             let dishes;
@@ -34,6 +38,11 @@ class RestaurantPage extends Component {
         return (
             <Container>
                 <Header>
+                    <Left>
+                        <Button transparent onPress={this.handleClickBack}>
+                            <Icon name='arrow-back' />
+                        </Button>
+                    </Left>
                     <Body>
                     <Title>Restaurant</Title>
                     </Body>
