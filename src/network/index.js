@@ -1,14 +1,15 @@
+import {store} from "../../App";
 const HOST = 'http://172.26.62.62:8080';
 
 export default {
 
   account: {
     login(body) {
-      return fetch(`/login`, verb('post', body)).then(handleResponse);
+      return fetch(`${HOST}/login`, verb('POST', body))
     },
 
     register(body) {
-      return fetch(`/register`, verb('post', body)).then(handleResponse);
+      return fetch(`${HOST}/register`, verb('post', body)).then(handleResponse);
     },
 
     getUserAccount() {
@@ -124,18 +125,20 @@ function verb(method, body) {
     method: method,
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',
-      'x-access-token': '' // TODO token storage
+      'x-access-token': store.getState().token
     },
     body: JSON.stringify(body)
   }
 }
 
 function handleResponse(res) {
-  let json = res.json();
-  return res.status < 400 ?
-    json
-      :
-    json.then(json => {
-      throw json;
-    });
+  //console.log(typeof res);
+  return res.json();
+  // let json = res.json();
+  // return res.status < 400 ?
+  //   json
+  //     :
+  //   json.then(json => {
+  //     throw json;
+  //   });
 }

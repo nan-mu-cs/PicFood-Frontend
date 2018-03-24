@@ -564,4 +564,5 @@ export default {
         avatar:"http://via.placeholder.com/100x100",
       },
     ],
+    token:""
 };
