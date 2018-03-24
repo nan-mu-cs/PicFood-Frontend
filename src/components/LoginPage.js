@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react';
-import { Container, Header, Content, FooterTab, Button, Text, Icon,Body,Title,List, ListItem,Form,Input,Label,Item } from 'native-base';
+import { Container, Header, Content, FooterTab, Button, Text, Icon,Body,Title,List, ListItem,Form,Input,Label,Item,Toast } from 'native-base';
 import {StyleSheet,ScrollView,AsyncStorage} from 'react-native';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-native';
@@ -14,31 +14,48 @@ class LoginPage extends Component {
     constructor(props, context){
         super(props);
         this.state={
-            username:"",
-            password:""
+            email:"",
+            password:"",
+            error:false
+
         };
         this.handleLogin = this.handleLogin.bind(this);
     }
     handleLogin(){
         // console.log(this.refs)
-        console.log(this.state);
-        console.log(this.state);
-        AsyncStorage.multiSet([["username",this.state.username],["password",this.state.password]],function (err) {
+        // console.log(this.state);
+        // console.log(this.state);
+        AsyncStorage.multiSet([["email",this.state.email],["password",this.state.password]],(err) => {
             if(err){
                 console.log(err);
                 return;
             }
-            this.props.history.push("/");
-        }.bind(this));
+            network.account.login({email: this.state.email, password: this.state.password})
+                .then(response=>response.json())
+                .then((res) => {
+                    //res = res.json();
+                    //console.log(res);
+                    if(!res.token){
+                        this.setState({
+                            error:true
+                        });
+                        return ;
+                    }
+                    // console.log(res);
+                    // console.log(res._bodyInit);
+                    this.props.dispatch({type:"UPDATE_TOKEN",data:res.token});
+                    this.props.history.push("/");
+                })
+                .catch((e) => {
+                    this.setState({
+                        error:true
+                    });
+                    console.log("ERR"+e.message);
+                });
+        });
     }
     componentDidMount() {
-      network.account.login({email: 'a', password: 'b'})
-        .then((res) => {
-          console.log('componentDidMount', res);
-        })
-        .catch((e) => {
-          console.log('componentDidMount', e);
-        });
+
     }
     render() {
        return (
@@ -51,8 +68,8 @@ class LoginPage extends Component {
                <Container style={{flexDirection:"column",justifyContent:"center"}}>
                    <Form>
                        <Item floatingLabel>
-                           <Label>Username</Label>
-                           <Input value={this.state.username} onChangeText={(val)=>this.setState({username:val})}/>
+                           <Label>Email</Label>
+                           <Input value={this.state.email} onChangeText={(val)=>this.setState({email:val})}/>
                        </Item>
                        <Item floatingLabel >
                            <Label >Password</Label>
@@ -66,6 +83,12 @@ class LoginPage extends Component {
                     <Button success block style={{flex:1,marginLeft:5,marginRight:5}} onPress={()=>{this.props.history.push("/register")}}>
                         <Text>Register</Text>
                     </Button>
+                       {this.state.error && Toast.show({
+                           text: 'Wrong email or password!',
+                           position: 'bottom',
+                           buttonText: 'Okay'
+                            })
+                       }
                    </Container>
                </Container>
            </Container>
@@ -82,8 +105,7 @@ const styles = StyleSheet.create({
 //     }
 // };
 //
-// export default withRouter(connect(
-//     mapStateToProps
-// )(Timeline));
+export default withRouter(connect(
+)(LoginPage));
 
-export default withRouter(LoginPage);
+// export default withRouter(LoginPage);

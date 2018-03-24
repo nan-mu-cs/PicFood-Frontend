@@ -567,6 +567,6 @@ export default {
     dish: {
         id: 1,
         name: 'Spicy Chicken',
-
-    }
+    },
+    token:""
 };
