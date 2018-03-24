@@ -2,16 +2,31 @@
  * Created by jin on 19/03/2018.
  */
 
-import React, { Component } from 'react';
-import { Container, Header, Content, Button, Text, Icon, ListItem,Left, Body,
-     Card, CardItem, List, Title, Right,Fab } from 'native-base';
-import {StyleSheet, ScrollView,Image} from 'react-native';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {
+  Body,
+  Button,
+  Card,
+  CardItem,
+  Container,
+  Content,
+  Fab,
+  Header,
+  Icon,
+  Left,
+  List,
+  ListItem,
+  Right,
+  Text,
+  Title
+} from 'native-base';
+import {Image, ScrollView, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
 import Dishes from "./Dishes";
-import { Col, Row, Grid } from "react-native-easy-grid";
-import Footer from "./Footer"
+import {Col, Grid, Row} from "react-native-easy-grid";
+import Footer from "../Footer";
 import StarRating from 'react-native-star-rating';
-import { ImagePicker } from 'expo';
+import {ImagePicker} from 'expo';
 
 class RestaurantPage extends Component {
     constructor(props, context){

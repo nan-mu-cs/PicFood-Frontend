@@ -33,6 +33,11 @@ class DishCard extends Component {
   }
 
   render() {
+    let avatar;
+    if(!this.props.data.avatar)
+      avatar = "http://via.placeholder.com/100x100";
+    else
+      avatar = this.props.data.avatar;
     return (
       <Card onPress={this.onCardPress.bind(this, this.props.data.id)}>
         <CardItem>

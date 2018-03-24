@@ -9,7 +9,7 @@ import SearchTab from "./components/SearchTab/SearchTab";
 import SearchPage from "./components/SearchPage";
 import UserPage from "./components/UserPage"
 import DishPhoto from "./components/DishPhoto"
-import RestaurantPage from "./components/RestaurantPage"
+import RestaurantPage from "./components/Restaurant/RestaurantPage"
 import DishPage from "./components/Restaurant/DishPage"
 import { connect } from 'react-redux';
 import {AsyncStorage} from "react-native";

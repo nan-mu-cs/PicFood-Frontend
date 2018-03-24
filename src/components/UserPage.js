@@ -7,7 +7,6 @@ import { Container, Header, Content, Button, Text, Icon, ListItem,Left, Body,
      Card, CardItem, List, Title, Right } from 'native-base';
 import {StyleSheet, ScrollView,Image} from 'react-native';
 import { connect } from 'react-redux';
-import Dishes from "./Dishes";
 import FollowList from "./Users/FollowList"
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Footer from "./Footer"
