@@ -32,7 +32,7 @@ class Timeline extends Component {
             network.social.getTimeline()
                 .then(res=>res.json())
                 .then(data=>{
-                    //console.log(data)
+                    console.log(data)
                     this.setState({data});
                 }).catch(err=>{
                 console.log(err);
@@ -40,21 +40,35 @@ class Timeline extends Component {
         }
     }
     render() {
-        let cards = null;
-        // let cards = this.state.data.map((item)=>{
-        //     let card;
-        //     if(item.creatorId)
-        //         card = <PostCard data={item}/>;
-        //     else if(item.upvoteId)
-        //         card = <LikeCard data={item}/>;
-        //     else if(item.commenterId)
-        //         card = <CommentCard data={item}/>;
-        //     return (
-        //         <ListItem key={item.id} style={styles.listItem}>
-        //             {card}
-        //         </ListItem>
-        //     );
-        // });
+        let cards = this.state.data.map((item)=>{
+            let card;
+            if(item.creatorId)
+                return (
+                    <ListItem key={item.postId} style={styles.listItem}>
+                        <PostCard data={item}/>
+                    </ListItem>
+                );
+                // card = <PostCard data={item}/>;
+            else if(item.upvoteId)
+                return (
+                    <ListItem key={item.upvoteId} style={styles.listItem}>
+                        <LikeCard data={item}/>
+                    </ListItem>
+                );
+                // card = <LikeCard data={item}/>;
+            else if(item.commentId)
+                return (
+                    <ListItem key={item.commentId} style={styles.listItem}>
+                        <CommentCard data={item}/>
+                    </ListItem>
+                );
+                // card = <CommentCard data={item}/>;
+            // return (
+            //     <ListItem key={item.postId} style={styles.listItem}>
+            //         {card}
+            //     </ListItem>
+            // );
+        });
         return (
             <Container>
                 <Header>

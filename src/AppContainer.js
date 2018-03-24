@@ -35,7 +35,7 @@ class App extends React.Component {
   }
   componentDidMount(){
       // console.log(this.props);
-      this.getUserInformation();
+      // this.getUserInformation();
       this.getLocation();
   }
 
@@ -91,8 +91,8 @@ class App extends React.Component {
           })
   }
   render() {
-      if(this.state.loading)
-          return <Spinner />;
+      // if(this.state.loading)
+      //     return <Spinner />;
       return (
           <Switch>
               <Route exact path="/" component={Timeline}/>

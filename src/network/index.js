@@ -13,7 +13,7 @@ export default {
     },
 
     getUserAccount() {
-      return fetch(HOST + '/api/users/me', verb('get')).then(handleResponse);
+      return fetch(HOST + '/api/users/me', verb('get'));
     },
 
     postUserAccount(body) { // avatar, bio, email, name, password (all optional)
@@ -40,6 +40,11 @@ export default {
             },
         };
       return fetch(`${HOST}/storage/uploadFile`,options);
+    }
+  },
+  post:{
+    getPostInfo(id){
+      return fetch(`${HOST}/api/post/${id}`,verb('get'));
     }
   },
   social: {
@@ -118,7 +123,7 @@ export default {
 
   dish: {
     getDishInfoById(id) {
-      return fetch(HOST + `/api/dishes/${id}/info`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/dishes/${id}/info`, verb('get'));
     },
 
     getDishImages(id) {

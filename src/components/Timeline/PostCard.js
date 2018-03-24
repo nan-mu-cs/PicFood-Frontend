@@ -5,11 +5,14 @@ import React, { Component } from 'react';
 import { Image, TouchableWithoutFeedback } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import { withRouter } from 'react-router-native';
-
+import network from "../../network";
 class ImageCard extends Component {
     constructor(props,context){
         super(props);
-        this.state = {};
+        this.state = {
+            avatar:"",
+            name:""
+        };
         this.handleClickImage = this.handleClickImage.bind(this);
     }
     handleClickImage(){
@@ -25,22 +28,42 @@ class ImageCard extends Component {
         //     }
         // });
     }
+    componentDidMount(){
+        network.account.getUserAccount({userId:this.props.data.creatorId})
+            .then((res)=>res.json())
+            .then(data=>{
+                this.setState({
+                    avatar,name
+                });
+                console.log(data);
+            }).catch(err=>{
+                console.log(err);
+        });
+
+    }
     render() {
         // console.log(this.props);
+        let avatar = this.state.avatar;
+        if(!avatar)
+            avatar = "http://via.placeholder.com/100x100";
+        let name = this.state.name;
+        if(!name)
+            name = "PlaceHolder Name";
+        let image = "http://via.placeholder.com/350x150";
         return (
             <Card style={{borderColor:"transparent"}}>
                 <CardItem>
                     <Left>
-                        <Thumbnail small source={{uri: this.props.data.avatar}} />
+                        <Thumbnail small source={{uri: avatar}} />
                         <Body>
-                        <Text style={{fontSize:16}}>{this.props.data.user}</Text>
-                        <Text note style={{fontSize:14}}>{this.props.data.location}</Text>
+                        <Text style={{fontSize:16}}>{name}</Text>
+                        {/*<Text note style={{fontSize:14}}>{this.props.data.location}</Text>*/}
                         </Body>
                     </Left>
                 </CardItem>
                 <CardItem cardBody >
                     <TouchableWithoutFeedback onPress={this.handleClickImage}>
-                        <Image source={{uri: this.props.data.image}} style={{height: 200, width: null, flex: 1}} />
+                        <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}} />
                     </TouchableWithoutFeedback>
                 </CardItem>
                 {/*<CardItem>*/}
