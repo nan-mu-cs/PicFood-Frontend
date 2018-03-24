@@ -42,9 +42,22 @@ class DishPage extends Component {
 
   render() {
     let photos = this.props.dish.photos.map(item =>
-      <CardItem key={item.imgId} onPress={this.onDishPhotoPress.bind(this,item.imgId)}>
-      <Image source={{uri: item.imgUrl}} style={{height: 200, width: null, flex: 1}}/>
-      </CardItem>
+      <Card>
+        <CardItem key={item.imgId} onPress={this.onDishPhotoPress.bind(this,item.imgId)}>
+        <Image source={{uri: item.imgUrl}} style={{height: 200, width: null, flex: 1}}/>
+        </CardItem>
+        <CardItem>
+          <Left>
+            <Button transparent>
+              <Icon active name="thumbs-up" />
+              <Text>12 Likes</Text>
+            </Button>
+          </Left>
+          <Right>
+            <Text>posted by User</Text>
+          </Right>
+        </CardItem>
+      </Card>
     );
     return (
       <Container>
