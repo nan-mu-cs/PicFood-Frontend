@@ -37,6 +37,7 @@ export default {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'multipart/form-data',
+                'Authorization': store.getState().token
             },
         };
       return fetch(`${HOST}/storage/uploadFile`,options);
@@ -111,8 +112,8 @@ export default {
       return fetch(HOST + `/api/restaurants/${id}/dishes`, verb('get')).then(handleResponse);
     },
 
-    getRestaurantsByLocation(location) {
-      return fetch(HOST + `/api/restaurants/${location}`, verb('get')).then(handleResponse);
+    getRestaurantsByLocation(lat, lon) {
+      return fetch(HOST + `/api/restaurants?lat=${lat}&lon=${lon}`, verb('get')).then(handleResponse);
     },
 
     searchRestaurants(keyword) {
