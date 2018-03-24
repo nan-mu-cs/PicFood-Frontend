@@ -567,6 +567,31 @@ export default {
     dish: {
         id: 1,
         name: 'Spicy Chicken',
+        restaurantId: 2,
+        restaurant: 'Great Wall',
+        rate: 4.5,
+        photos: [
+          {
+              imgId: 1,
+            imgUrl: "http://via.placeholder.com/100x100",
+          },
+          {
+            imgId: 2,
+            imgUrl: "http://via.placeholder.com/100x100",
+          },
+          {
+            imgId: 3,
+            imgUrl: "http://via.placeholder.com/100x100",
+          },
+          {
+            imgId: 4,
+            imgUrl: "http://via.placeholder.com/100x100",
+          },
+          {
+            imgId: 5,
+            imgUrl: "http://via.placeholder.com/100x100",
+          },
+        ]
     },
     token:""
 };

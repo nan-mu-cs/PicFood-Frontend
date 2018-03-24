@@ -46,9 +46,6 @@ class SearchTab extends Component {
   }
 
   onSortPress = () => {
-    // let userId = 1;
-    // this.props.dispatch({type: "NAVIGATE_TO_FOLLOWER_LIST_PAGE", data: userId});
-    // this.props.history.push(`/followers/${userId}`);
     // ActionSheet.show(
     //   {
     //     options: BUTTONS,
@@ -67,13 +64,12 @@ class SearchTab extends Component {
   }
 
   render() {
-    let {searchedRestaurants, searchedDishes} = this.props;
-    let restaurantCards = searchedRestaurants.map(item =>
+    let restaurantCards = this.props.searchedRestaurants.map(item =>
       <ListItem key={item.id} style={styles.listItem}>
         <RestaurantCard data={item}/>
       </ListItem>
     );
-    let dishCards = searchedDishes.map(item =>
+    let dishCards = this.props.searchedDishes.map(item =>
       <ListItem key={item.id} style={styles.listItem}>
         <DishCard data={item}/>
       </ListItem>

@@ -4,14 +4,24 @@
 
 import React, {Component} from 'react';
 import {
-  Container, Header, Content, Button, Text, Icon, ListItem, Left, Body,
-  Card, CardItem, List, Title, Right
+  Body,
+  Button,
+  Card,
+  CardItem,
+  Container,
+  Content,
+  Header,
+  Text,
+  Icon,
+  Left,
+  List,
+  ListItem,
+  Right,
+  Title
 } from 'native-base';
-import {StyleSheet, ScrollView, Image} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import Dishes from "./Dishes";
-import {Col, Row, Grid} from "react-native-easy-grid";
-import Footer from "./Footer"
+import Footer from "../Footer";
 import StarRating from 'react-native-star-rating';
 
 class DishPage extends Component {
@@ -26,17 +36,16 @@ class DishPage extends Component {
     this.props.history.goBack();
   }
 
-  render() {
-    let dish = this.props.restaurant.dishes.map((item) => {
-      let dishes;
+  onDishPhotoPress(imgId) {
+    this.props.history.push(`/dishphoto/${imgId}`);
+  }
 
-      dishes = <Dishes data={item}/>;
-      return (
-        <ListItem key={item.id} style={styles.listItem}>
-          {dishes}
-        </ListItem>
-      );
-    });
+  render() {
+    let photos = this.props.dish.photos.map(item =>
+      <CardItem key={item.imgId} onPress={this.onDishPhotoPress.bind(this,item.imgId)}>
+      <Image source={{uri: item.imgUrl}} style={{height: 200, width: null, flex: 1}}/>
+      </CardItem>
+    );
     return (
       <Container>
         <Header>
@@ -46,63 +55,49 @@ class DishPage extends Component {
             </Button>
           </Left>
           <Body>
-          <Title>Restaurant</Title>
+          <Title>Dish</Title>
           </Body>
           <Right/>
         </Header>
-        <Grid>
-          <Row size={9}>
-            <Col>
-              <ScrollView>
-                <Card>
-                  <CardItem>
-                    <Left>
-                      <Body>
-                      <Text>{this.props.restaurant.name}</Text>
-                      <StarRating
-                        disabled={true}
-                        maxStars={5}
-                        rating={this.props.restaurant.rate}
-                        containerStyle={{marginTop: 10, alignSelf: "center"}}
-                        fullStarColor={"#f5af4b"}
-                        emptyStarColor={"#f5af4b"}
-                        halfStarEnabled
-                        starSize={25}
-                      />
-                      <Text note>{this.props.restaurant.location}</Text>
-                      <Text note>{this.props.restaurant.address}</Text>
-                      </Body>
-                    </Left>
-                  </CardItem>
-                  <CardItem cardBody>
-                    <Image source={{uri: this.props.restaurant.avatar}} style={{height: 200, width: null, flex: 1}}/>
-                  </CardItem>
-
-                  <CardItem>
-                    <ScrollView>
-                      <List>
-                        {dish}
-                      </List>
-                    </ScrollView>
-                  </CardItem>
-
-                </Card>
-              </ScrollView>
-            </Col>
-          </Row>
-        </Grid>
+        <Content>
+          <Text style={styles.dishName}>{this.props.dish.name}</Text>
+          <StarRating
+            disabled={true}
+            maxStars={5}
+            rating={this.props.dish.rate}
+            containerStyle={{marginTop: 3, alignSelf: "center"}}
+            fullStarColor={"#f5af4b"}
+            emptyStarColor={"#f5af4b"}
+            halfStarEnabled
+            starSize={15}
+          />
+          <Text style={styles.restaurant}>{this.props.dish.restaurant}</Text>
+          <List>
+            {photos}
+          </List>
+        </Content>
         <Footer/>
       </Container>
     )
   }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  dishName: {
+    paddingTop: 10,
+    textAlign: 'center',
+  },
+  restaurant: {
+    paddingTop: 10,
+    fontSize: 17,
+    textAlign: 'center',
+  }
+});
 
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    restaurant: state.restaurant
+    dish: state.dish
   }
 };
 
