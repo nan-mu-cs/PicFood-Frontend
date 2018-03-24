@@ -3,19 +3,19 @@ const HOST = 'http://172.26.62.62:8080';
 export default {
 
   account: {
-    login(body) {
-      return fetch(`/login`, verb('post', body)).then(handleResponse);
+    login(email, password) {
+      return fetch(`/login`, verb('post', {email, password})).then(handleResponse);
     },
 
-    register(body) {
-      return fetch(`/register`, verb('post', body)).then(handleResponse);
+    register(email, password) {
+      return fetch(`/register`, verb('post', email, password)).then(handleResponse);
     },
 
     getUserAccount() {
       return fetch(HOST + '/api/users/me', verb('get')).then(handleResponse);
     },
 
-    postUserAccount(body) {
+    postUserAccount(body) { // avatar, bio, email, name, password (all optional)
       return fetch(HOST + '/api/users/me', verb('post', body)).then(handleResponse);
     },
   },
@@ -33,12 +33,20 @@ export default {
       return fetch(HOST + `/api/post/${id}`, verb('get')).then(handleResponse);
     },
 
-    deletePost(id) {
-      return fetch(HOST + `/delete/post`, verb('post', {id})).then(handleResponse);
+    deletePost(postId) {
+      return fetch(HOST + `/delete/post`, verb('post', {postId})).then(handleResponse);
     },
 
-    postPost(body) {
+    addPost(body) { // restaurantId, dishName, rate, category, content, imageId (optional)
       return fetch(HOST + `/post`, verb('post', body)).then(handleResponse);
+    },
+
+    upvotePost(postId) {
+      return fetch(HOST + `/upvote`, verb('post', {postId})).then(handleResponse);
+    },
+
+    deleteUpvoteOfPost(postId) {
+      return fetch(HOST + `/delete/upvote`, verb('post', {postId})).then(handleResponse);
     },
 
     getMyFollowers() {
@@ -57,12 +65,12 @@ export default {
       return fetch(HOST + `/api/followings/${id}`, verb('get')).then(handleResponse);
     },
 
-    postFollow(id) {
-      return fetch(HOST + `/api/follow`, verb('post', {id})).then(handleResponse);
+    followUserById(id) {
+      return fetch(HOST + `/api/follow/?id=${id}`, verb('post', {})).then(handleResponse);
     },
 
-    postUnfollow(id) {
-      return fetch(HOST + `/api/unfollow`, verb('post', {id})).then(handleResponse);
+    unfollowUserById(id) {
+      return fetch(HOST + `/api/unfollow/?id=${id}`, verb('post', {})).then(handleResponse);
     },
   },
 
@@ -77,6 +85,10 @@ export default {
 
     getRestaurantsByLocation(location) {
       return fetch(HOST + `/api/restaurants/${location}`, verb('get')).then(handleResponse);
+    },
+
+    searchRestaurants(keyword) {
+      return fetch(HOST + `/search/restaurants?keyword=${keyword}`, verb('get')).then(handleResponse);
     }
 
   },
@@ -94,26 +106,30 @@ export default {
       return fetch(HOST + `/api/dishes/${id}/post`, verb('get')).then(handleResponse);
     },
 
-    postPhoto(body) {
+    postPhoto(body) { // {FormData} file
       return fetch(HOST + `/storage/uploadFile`, verb('post', body)).then(handleResponse);
     },
 
     deletePhoto(fileUrl) {
       return fetch(HOST + `/storage/deleteFile`, verb('delete', {fileUrl})).then(handleResponse);
     },
+
+    searchDishes(keyword) {
+      return fetch(HOST + `/search/dishes?keyword=${keyword}`, verb('get')).then(handleResponse);
+    }
   },
 
   comment: {
-    getCommentById(id) {
-      return fetch(HOST + `/api/comments/${id}`, verb('get')).then(handleResponse);
+    getCommentsOfPost(postId) {
+      return fetch(HOST + `/api/comments/${postId}`, verb('get')).then(handleResponse);
     },
 
-    postComment(body) {
-      return fetch(HOST + '/comment', verb('post', body)).then(handleResponse);
+    postComment(postId, content) {
+      return fetch(HOST + '/comment', verb('post', {postId, content})).then(handleResponse);
     },
 
-    deleteComment(id) {
-      return fetch(HOST + '/delete/comment', verb('post', {id})).then(handleResponse);
+    deleteComment(commentId) {
+      return fetch(HOST + '/delete/comment', verb('post', {commentId})).then(handleResponse);
     }
   }
 }
