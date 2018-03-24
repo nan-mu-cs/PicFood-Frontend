@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Container, Content, FooterTab, Button, Text} from 'native-base';
+import {Container, Content, FooterTab, Button, Text,Spinner} from 'native-base';
 import {Col, Row, Grid} from "react-native-easy-grid";
 import Footer from "./components/Footer";
 // import Header from "./components/Header";
@@ -26,6 +26,9 @@ import { Constants, Location, Permissions } from 'expo';
 class App extends React.Component {
   constructor(props,context){
       super(props,context);
+      this.state={
+        loading:true
+      };
       this.getUserInformation = this.getUserInformation.bind(this);
       this.getLocation = this.getLocation.bind(this);
   }
@@ -34,6 +37,7 @@ class App extends React.Component {
       this.getUserInformation();
       this.getLocation();
   }
+
   getUserInformation(){
       AsyncStorage.multiGet(["email","password"],function (err,stores) {
           if(err){
@@ -53,10 +57,18 @@ class App extends React.Component {
           network.account.login({email,password})
               .then(response=>response.json())
               .then((res) => {
+                  this.setState({
+                      loading:false
+                  });
+                  console.log("token ");
+                  console.log(res);
                   this.props.dispatch({type:"UPDATE_TOKEN",data:res.token});
                   this.props.history.push("/");
               })
               .catch((e) => {
+                  this.setState({
+                      loading:false
+                  });
                   this.props.history.push("/login");
                   console.log("ERR"+e.message);
               });
@@ -78,6 +90,8 @@ class App extends React.Component {
           })
   }
   render() {
+      if(this.state.loading)
+          return <Spinner />;
       return (
           <Switch>
               <Route exact path="/" component={Timeline}/>
@@ -118,7 +132,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    currentTab: state.currentTab
+    currentTab: state.currentTab,
+    token:state.token
   }
 };
 

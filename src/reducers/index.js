@@ -17,6 +17,7 @@ export default (state = initialState, action) => {
         case "NAVIGATE_TO_FOLLOWER_LIST_PAGE":
             return {...state, userId: action.data};
         case "UPDATE_TOKEN":
+            //console.log(action.data);
             return {...state,token:action.data};
         case "GET_LOCATION":
             return {...state,location:action.data};
