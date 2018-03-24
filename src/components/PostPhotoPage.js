@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import StarRating from 'react-native-star-rating';
 import network from "../network";
+// import Autocomplete from "react-native-autocomplete-input";
 
 class PostPhotoPage extends Component {
     constructor(props, context){
@@ -17,7 +18,8 @@ class PostPhotoPage extends Component {
             avatar:"",
             dishname:"",
             rate:0,
-            comment:""
+            comment:"",
+            category:""
         };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickPost = this.handleClickPost.bind(this);
@@ -40,6 +42,7 @@ class PostPhotoPage extends Component {
     render() {
         //console.log(this.props.location.state.image);
         //let {image} = this.props.location.state;
+        let data  = ["React","Native","Android","Java","Hello World"];
         return (
             <Container>
             <Header>

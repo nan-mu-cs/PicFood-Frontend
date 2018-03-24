@@ -33,9 +33,10 @@ class ImageCard extends Component {
             .then((res)=>res.json())
             .then(data=>{
                 this.setState({
-                    avatar,name
+                    avatar:data.avatar,
+                    name:data.name
                 });
-                console.log(data);
+                //console.log(data);
             }).catch(err=>{
                 console.log(err);
         });
@@ -49,7 +50,9 @@ class ImageCard extends Component {
         let name = this.state.name;
         if(!name)
             name = "PlaceHolder Name";
-        let image = "http://via.placeholder.com/350x150";
+        let image = this.props.data.imageUrl;
+        if(!image)
+            image = "http://via.placeholder.com/350x150";
         return (
             <Card style={{borderColor:"transparent"}}>
                 <CardItem>
