@@ -52,7 +52,7 @@ class SearchTab extends Component {
   onSubmitEditing() {
     network.restaurant.searchRestaurants(this.state.keyword)
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res});
       })
       .catch(err => {
@@ -64,7 +64,7 @@ class SearchTab extends Component {
     // console.log('lat', this.props.location.lat);
     network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res});
       })
       .catch(err => {

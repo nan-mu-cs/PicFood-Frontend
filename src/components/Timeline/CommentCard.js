@@ -9,7 +9,10 @@ import network from "../../network";
 class CommentCard extends Component {
     constructor(props,context){
         super(props);
-        this.state = {};
+        this.state = {
+            avatar:"",
+            name:""
+        };
         this.handleClickImage = this.handleClickImage.bind(this);
     }
     handleClickImage(){
@@ -30,19 +33,20 @@ class CommentCard extends Component {
             .then((res)=>res.json())
             .then(data=>{
                 this.setState({
-                    avatar,name
+                    avatar:data.avatar,
+                    name:data.name
                 });
                 console.log(data);
             }).catch(err=>{
             console.log(err);
         });
-        network.post.getPostInfo(this.props.data.postId)
-            .then(res=>res.json())
-            .then(data=>{
-                console.log(data);
-            }).catch(err=>{
-                console.log(err);
-        });
+        // network.post.getPostInfo(this.props.data.postId)
+        //     .then(res=>res.json())
+        //     .then(data=>{
+        //         console.log(data);
+        //     }).catch(err=>{
+        //         console.log(err);
+        // });
         // network.dish.getDishInfoById({id:this.props.data.dishId})
         //     .then(res=>res.json())
         //     .then(data=>{

@@ -5,11 +5,15 @@ import React, { Component } from 'react';
 import { Image, TouchableWithoutFeedback } from 'react-native';
 import { Container, Header, Content, Card, Text,CardItem, Thumbnail, Button, Icon, Left, Body, Right } from 'native-base';
 import { withRouter } from 'react-router-native';
+import network from "../../network";
 
 class LikeCard extends Component {
     constructor(props,context){
         super(props);
-        this.state = {};
+        this.state = {
+            avatar:"",
+            name:""
+        };
         this.handleClickImage = this.handleClickImage.bind(this);
     }
     handleClickImage(){
@@ -25,16 +29,49 @@ class LikeCard extends Component {
         //     }
         // });
     }
+    componentDidMount(){
+        network.account.getUserAccount({userId:this.props.data.userId})
+            .then((res)=>res.json())
+            .then(data=>{
+                this.setState({
+                    avatar:data.avatar,
+                    name:data.name
+                });
+                console.log(data);
+            }).catch(err=>{
+            console.log(err);
+        });
+        // network.post.getPostInfo(this.props.data.postId)
+        //     .then(res=>res.json())
+        //     .then(data=>{
+        //         console.log(data);
+        //     }).catch(err=>{
+        //         console.log(err);
+        // });
+        // network.dish.getDishInfoById({id:this.props.data.dishId})
+        //     .then(res=>res.json())
+        //     .then(data=>{
+        //         console.log(data);
+        //     }).catch(err=>{
+        //     console.log(err);
+        // })
+    }
     render() {
+        let avatar = this.state.avatar;
+        if(!avatar)
+            avatar = "http://via.placeholder.com/100x100";
+        let name = this.state.name;
+        if(!name)
+            name = "PlaceHolder Name";
         // console.log(this.props);
         return (
             <Card style={{borderColor:"transparent",shadowColor:"transparent"}}>
                 <CardItem>
                     <Left>
-                        <Thumbnail small source={{uri: this.props.data.avatar}} />
+                        <Thumbnail small source={{uri: avatar}} />
                         <Body>
-                            <Text style={{fontSize:16}}>{this.props.data.user}</Text>
-                            <Text note style={{fontSize:14}}>{this.props.data.location}</Text>
+                            <Text style={{fontSize:16}}>{name}</Text>
+                            {/*<Text note style={{fontSize:14}}>{this.props.data.location}</Text>*/}
                         </Body>
                     </Left>
                 </CardItem>
