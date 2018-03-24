@@ -46,9 +46,9 @@ class SearchTab extends Component {
   }
 
   onSortPress = () => {
-    let userId = 1;
-    this.props.dispatch({type: "NAVIGATE_TO_FOLLOWER_LIST_PAGE", data: userId});
-    this.props.history.push(`/followers/${userId}`);
+    // let userId = 1;
+    // this.props.dispatch({type: "NAVIGATE_TO_FOLLOWER_LIST_PAGE", data: userId});
+    // this.props.history.push(`/followers/${userId}`);
     // ActionSheet.show(
     //   {
     //     options: BUTTONS,
@@ -63,7 +63,7 @@ class SearchTab extends Component {
   }
 
   async componentDidMount() {
-    let restaurantInfo = await network.restaurant.getRestaurantInfoById(1);
+    // let restaurantInfo = await network.restaurant.getRestaurantInfoById(1);
   }
 
   render() {

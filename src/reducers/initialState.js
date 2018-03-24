@@ -564,5 +564,9 @@ export default {
         avatar:"http://via.placeholder.com/100x100",
       },
     ],
+    dish: {
+        id: 1,
+        name: 'Spicy Chicken',
+    },
     token:""
 };
