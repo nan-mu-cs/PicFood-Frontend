@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Timeline from "./components/Timeline/Timeline";
 import SearchTab from "./components/SearchTab/SearchTab";
 import SearchPage from "./components/SearchPage";
+import SearchBy from "./components/SearchTab/SearchBy";
 import UserPage from "./components/UserPage"
 import DishPhoto from "./components/DishPhoto"
 import RestaurantPage from "./components/RestaurantPage"
@@ -92,6 +93,7 @@ class App extends React.Component {
               <Route path="/dishphoto" component={DishPhoto}>
                 <Route path=":id"/>
               </Route>
+              <Route exact path="/searchby" component={SearchBy}/>
               <Route path="/users" component={UserPage}>
                   <Route path=":id" component={UserPage}/>
               </Route>

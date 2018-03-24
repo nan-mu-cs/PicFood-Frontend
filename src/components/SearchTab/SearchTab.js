@@ -46,6 +46,7 @@ class SearchTab extends Component {
   }
 
   onSortPress = () => {
+    this.props.history.push(`/searchby`);
     // ActionSheet.show(
     //   {
     //     options: BUTTONS,
