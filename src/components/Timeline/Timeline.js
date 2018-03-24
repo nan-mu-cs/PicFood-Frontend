@@ -21,8 +21,8 @@ class Timeline extends Component {
         };
         this.handlePostImage = this.handlePostImage.bind(this);
     }
-    async handlePostImage(){
-        let result = ImagePicker.launchImageLibraryAsync({
+    handlePostImage(){
+        ImagePicker.launchImageLibraryAsync({
             allowsEditing: true,
             aspect: [4, 3],
         }).then((result)=>{

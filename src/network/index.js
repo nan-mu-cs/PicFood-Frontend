@@ -20,7 +20,28 @@ export default {
       return fetch(HOST + '/api/users/me', verb('post', body)).then(handleResponse);
     },
   },
+  storage:{
 
+    uploadFile(uri){
+        let uriParts = uri.split('.');
+        let fileType = uriParts[uriParts.length - 1];
+        let formData = new FormData();
+        formData.append('file', {
+            uri,
+            name: `photo.${fileType}`,
+            type: `image/${fileType}`,
+        });
+        let options = {
+            method: 'POST',
+            body: formData,
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'multipart/form-data',
+            },
+        };
+      return fetch(`${HOST}/storage/uploadFile`,options);
+    }
+  },
   social: {
     getTimeline() { // TODO on backend
       return fetch(HOST + '/api/timeline', verb('get')).then(handleResponse);
