@@ -9,7 +9,7 @@ export default {
     },
 
     register(body) {
-      return fetch(`${HOST}/register`, verb('post', body)).then(handleResponse);
+      return fetch(`${HOST}/register`, verb('post', body));
     },
 
     getUserAccount() {
