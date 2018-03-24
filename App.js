@@ -12,6 +12,8 @@ import { NativeRouter,Route,Switch } from 'react-router-native'
 // import createLogger from 'redux-logger'
 import reducer from './src/reducers'
 import initialState from "./src/reducers/initialState";
+import { Root } from "native-base";
+
 // middleware that logs actions
 // const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__  });
 
@@ -25,14 +27,16 @@ function configureStore(initialState) {
     return createStore(reducer, initialState, enhancer);
 }
 
-const store = configureStore(initialState);
+export const store = configureStore(initialState);
 
 export default () => (
+    <Root>
     <Provider store={store}>
         <NativeRouter>
         <AppContainer />
         </NativeRouter>
     </Provider>
+    </Root>
 );
 
 // AppRegistry.registerComponent('PicFood', () => App);

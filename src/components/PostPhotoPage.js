@@ -18,7 +18,7 @@ class PostPhotoPage extends Component {
         this.props.history.goBack();
     }
     render() {
-        console.log(this.props.location.state.image);
+        //console.log(this.props.location.state.image);
         //let {image} = this.props.location.state;
         return (
             <Container>

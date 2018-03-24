@@ -16,7 +16,8 @@ export default (state = initialState, action) => {
             return {...state, dishId: action.data};
         case "NAVIGATE_TO_FOLLOWER_LIST_PAGE":
             return {...state, userId: action.data};
-
+        case "UPDATE_TOKEN":
+            return {...state,token:action.data};
         default:
             return state;
     }
