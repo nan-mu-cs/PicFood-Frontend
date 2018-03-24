@@ -12,12 +12,11 @@ export default class Dishes extends Component {
     render() {
 
         return (
-            <Card style={{borderColor:"transparent"}}>
-
+            <Card style={{borderBottomWidth: 0}}>
                 <CardItem>
                     <Left>
                         <Body>
-                        <Text>{this.props.data.name}</Text>
+                        <Text style={styles.dish}>{this.props.data.name}</Text>
                         <StarRating
                             disabled={true}
                             maxStars={5}
@@ -26,7 +25,7 @@ export default class Dishes extends Component {
                             fullStarColor={"#f5af4b"}
                             emptyStarColor={"#f5af4b"}
                             halfStarEnabled
-                            starSize={25}
+                            starSize={15}
                         />
                         </Body>
                     </Left>
@@ -53,6 +52,10 @@ export default class Dishes extends Component {
 
 const styles = StyleSheet.create({
     listItem:{
-        borderColor:"transparent"
+      borderColor:"transparent"
+    },
+    dish: {
+      fontSize: 17,
+      textAlign: 'center',
     }
 });
