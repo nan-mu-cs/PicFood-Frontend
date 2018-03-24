@@ -43,8 +43,9 @@ export default {
     }
   },
   social: {
-    getTimeline() { // TODO on backend
-      return fetch(HOST + '/api/timeline', verb('get')).then(handleResponse);
+    getTimeline() {
+      console.log(verb('get'));
+      return fetch(HOST + '/api/timeline', verb('get'));
     },
 
     getActivitiesOfAnUser(id) { // TODO on backend
@@ -158,14 +159,20 @@ export default {
 
 
 function verb(method, body) {
-  return {
+  // console.log("token"+store.getState().token);
+  //   console.log(method);
+  let data ={
     method: method,
     headers: {
-      'Content-Type': 'application/json; charset=UTF-8',
-      'x-access-token': store.getState().token
+      'Content-Type':'application/json; charset=UTF-8',
+      'Authorization': `${store.getState().token}`
     },
-    body: JSON.stringify(body)
+  };
+  if(method === "post" || method === "POST"){
+      data.body = JSON.stringify(body);
   }
+  // console.log(data);
+  return data;
 }
 
 function handleResponse(res) {

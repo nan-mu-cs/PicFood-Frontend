@@ -12,31 +12,49 @@ import CommentCard from "./CommentCard";
 import Footer from "../Footer";
 import { withRouter } from 'react-router-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
+import network from "../../network";
+
 class Timeline extends Component {
     constructor(props, context){
         super(props);
         this.state={
-            active:false
+            data:[]
         };
     }
-
+    componentDidMount(){
+        //console.log(this.props.token);
+    }
+    componentWillUpdate(nextProps){
+        // console.log(this.props.token);
+        //console.log(nextProps.token);
+        if(this.props.token !== nextProps.token && nextProps.token){
+            //console.log("call timeline");
+            network.social.getTimeline()
+                .then(res=>res.json())
+                .then(data=>{
+                    //console.log(data)
+                    this.setState({data});
+                }).catch(err=>{
+                console.log(err);
+            });
+        }
+    }
     render() {
-        let cards = this.props.timelines.map((item)=>{
-            let card;
-            if(item.type === "post")
-                card = <PostCard data={item}/>;
-            else if(item.type === "like")
-                card = <LikeCard data={item}/>;
-            else if(item.type === "rate")
-                card = <RateCard data={item}/>;
-            else if(item.type === "comment")
-                card = <CommentCard data={item}/>;
-            return (
-                <ListItem key={item.id} style={styles.listItem}>
-                    {card}
-                </ListItem>
-            );
-        });
+        let cards = null;
+        // let cards = this.state.data.map((item)=>{
+        //     let card;
+        //     if(item.creatorId)
+        //         card = <PostCard data={item}/>;
+        //     else if(item.upvoteId)
+        //         card = <LikeCard data={item}/>;
+        //     else if(item.commenterId)
+        //         card = <CommentCard data={item}/>;
+        //     return (
+        //         <ListItem key={item.id} style={styles.listItem}>
+        //             {card}
+        //         </ListItem>
+        //     );
+        // });
         return (
             <Container>
                 <Header>
@@ -85,7 +103,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
     return{
-        timelines:state.timelines
+        timelines:state.timelines,
+        token:state.token
     }
 };
 
