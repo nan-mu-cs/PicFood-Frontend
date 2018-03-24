@@ -27,12 +27,15 @@ import {Col, Grid, Row} from "react-native-easy-grid";
 import Footer from "../Footer";
 import StarRating from 'react-native-star-rating';
 import {ImagePicker} from 'expo';
+import network from '../../network';
 
 class RestaurantPage extends Component {
   constructor(props, context) {
     super(props);
-    this.state = {};
-
+    this.state = {
+      restaurantId: this.props.match.params.id
+    };
+    // console.log('RestaurantPage', this.props.match.params.id);
     this.handleClickBack = this.handleClickBack.bind(this);
     this.handlePostImage = this.handlePostImage.bind(this);
   }
@@ -58,6 +61,17 @@ class RestaurantPage extends Component {
 
   handleClickBack() {
     this.props.history.goBack();
+  }
+
+  componentDidMount() {
+    network.restaurant.getRestaurantInfoById(this.state.restaurantId)
+      .then(res => {
+        console.log(res);
+        this.props.dispatch({type: "GET_RESTAURANT_INFO", data: res});
+      })
+      .catch(err => {
+
+      })
   }
 
   render() {
@@ -97,7 +111,7 @@ class RestaurantPage extends Component {
                       <StarRating
                         disabled={true}
                         maxStars={5}
-                        rating={this.props.restaurant.rate}
+                        rating={this.props.restaurant.avgRate}
                         containerStyle={{marginTop: 10, alignSelf: "center"}}
                         fullStarColor={"#f5af4b"}
                         emptyStarColor={"#f5af4b"}
@@ -106,6 +120,8 @@ class RestaurantPage extends Component {
                       />
                       <Text note>{this.props.restaurant.location}</Text>
                       <Text note>{this.props.restaurant.address}</Text>
+                      <Text note>{this.props.restaurant.teleNumber}</Text>
+                      <Text note>{this.props.restaurant.category}</Text>
                       </Body>
                     </Left>
                   </CardItem>

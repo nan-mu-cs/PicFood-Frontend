@@ -23,6 +23,9 @@ export default (state = initialState, action) => {
             return {...state,location:action.data};
         case "GET_SEARCHED_RESTAURANTS":
             return {...state, searchedRestaurants:action.data};
+        case "GET_RESTAURANT_INFO":
+                return {...state, restaurant:action.data};
+
         default:
             return state;
     }

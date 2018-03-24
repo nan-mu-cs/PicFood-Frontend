@@ -26,7 +26,7 @@ class PostPhotoPage extends Component {
         this.props.history.goBack();
     }
     handleClickPost(){
-        console.log(this.state);
+        // console.log(this.state);
     }
     componentDidMount(){
         network.storage.uploadFile(this.props.location.state.image)
