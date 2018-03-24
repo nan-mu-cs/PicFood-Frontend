@@ -1,3 +1,2 @@
 /register
 error message returned string, should return json.
-avatar string? need a way to upload image.

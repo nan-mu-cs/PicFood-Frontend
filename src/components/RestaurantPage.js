@@ -4,13 +4,14 @@
 
 import React, { Component } from 'react';
 import { Container, Header, Content, Button, Text, Icon, ListItem,Left, Body,
-     Card, CardItem, List, Title, Right } from 'native-base';
+     Card, CardItem, List, Title, Right,Fab } from 'native-base';
 import {StyleSheet, ScrollView,Image} from 'react-native';
 import { connect } from 'react-redux';
 import Dishes from "./Dishes";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Footer from "./Footer"
 import StarRating from 'react-native-star-rating';
+import { ImagePicker } from 'expo';
 
 class RestaurantPage extends Component {
     constructor(props, context){
@@ -20,6 +21,25 @@ class RestaurantPage extends Component {
         };
 
         this.handleClickBack = this.handleClickBack.bind(this);
+        this.handlePostImage = this.handlePostImage.bind(this);
+    }
+    handlePostImage(){
+        ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+        }).then((result)=>{
+            // console.log(result);
+            if (!result.cancelled) {
+                this.props.history.push({
+                    pathname: "/post",
+                    state:{
+                        image:result.uri
+                    }
+                });
+            }
+        }).catch(err=>{
+
+        });
     }
     handleClickBack(){
         this.props.history.goBack();
@@ -89,6 +109,21 @@ class RestaurantPage extends Component {
                             </ScrollView>
                         </Col>
                     </Row>
+                    <Fab
+                        active={this.state.active}
+                        direction="up"
+                        containerStyle={{ }}
+                        style={{ backgroundColor: '#5067FF' }}
+                        position="bottomRight"
+                        onPress={() => this.setState({ active: !this.state.active })}>
+                        <Icon name="add" />
+                        <Button style={{ backgroundColor: '#34A34F' }} onPress={this.handlePostImage}>
+                            <Icon name="ios-images" />
+                        </Button>
+                        <Button style={{ backgroundColor: '#3B5998' }}>
+                            <Icon name="ios-camera" />
+                        </Button>
+                    </Fab>
                 </Grid>
                 <Footer/>
             </Container>

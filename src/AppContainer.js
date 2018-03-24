@@ -8,6 +8,7 @@ import Timeline from "./components/Timeline/Timeline";
 import SearchTab from "./components/SearchTab/SearchTab";
 import SearchPage from "./components/SearchPage";
 import UserPage from "./components/UserPage"
+import DishPhoto from "./components/DishPhoto"
 import RestaurantPage from "./components/RestaurantPage"
 import DishPage from "./components/Restaurant/DishPage"
 import { connect } from 'react-redux';
@@ -21,14 +22,20 @@ import FollowList from "./components/Users/FollowList";
 import PostPhotoPage from "./components/PostPhotoPage";
 import { withRouter } from 'react-router-native';
 import network from "./network";
+import { Constants, Location, Permissions } from 'expo';
 
 class App extends React.Component {
   constructor(props,context){
       super(props,context);
-
+      this.getUserInformation = this.getUserInformation.bind(this);
+      this.getLocation = this.getLocation.bind(this);
   }
   componentDidMount(){
       // console.log(this.props);
+      this.getUserInformation();
+      this.getLocation();
+  }
+  getUserInformation(){
       AsyncStorage.multiGet(["email","password"],function (err,stores) {
           if(err){
               this.props.history.push("/login");
@@ -56,16 +63,34 @@ class App extends React.Component {
               });
       }.bind(this));
   }
+  getLocation(){
+      Permissions.askAsync(Permissions.LOCATION)
+          .then(res=>{
+              //console.log(status);
+              if (res.status !== 'granted')
+                  return;
+              Location.getCurrentPositionAsync({})
+                  .then((res)=>{
+                    //console.log(res);
+                     this.props.dispatch({type:"GET_LOCATION",data:{lat:res.coords.latitude,lon:res.coords.longitude}});
+                  }).catch(err=>{
+                      console.log(err);
+              })
+          })
+  }
   render() {
       return (
           <Switch>
               <Route exact path="/" component={Timeline}/>
               <Route path="/search" component={SearchTab}/>
               <Route path="/restaurants" component={RestaurantPage}>
-                  <Route path=":id" component={RestaurantPage}/>
+                  <Route path=":id"/>
               </Route>
               <Route path="/dishes" component={DishPage}>
-                  <Route path=":id" component={DishPage}/>
+                  <Route path=":id"/>
+              </Route>
+              <Route path="/dishphoto" component={DishPhoto}>
+                <Route path=":id"/>
               </Route>
               <Route path="/users" component={UserPage}>
                   <Route path=":id" component={UserPage}/>
