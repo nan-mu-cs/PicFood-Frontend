@@ -21,11 +21,15 @@ export default {
   },
 
   social: {
-    getTimelines() { // TODO on backend
-      return fetch(HOST + '/api/posts', verb('get')).then(handleResponse);
+    getTimeline() { // TODO on backend
+      return fetch(HOST + '/api/timeline', verb('get')).then(handleResponse);
     },
 
-    getPostById(id) {
+    getActivitiesOfAnUser(id) { // TODO on backend
+      return fetch(HOST + '/api/activities/${id}', verb('get')).then(handleResponse);
+    },
+
+    getPostByPostId(id) {
       return fetch(HOST + `/api/post/${id}`, verb('get')).then(handleResponse);
     },
 
@@ -37,19 +41,19 @@ export default {
       return fetch(HOST + `/post`, verb('post', body)).then(handleResponse);
     },
 
-    getFollowers() {
+    getMyFollowers() {
       return fetch(HOST + `/api/followers`, verb('get')).then(handleResponse);
     },
 
-    getFollowees() {
+    getMyFollowings() {
       return fetch(HOST + `/api/followings`, verb('get')).then(handleResponse);
     },
 
-    getFollowersById(id) { // TODO on backend
+    getFollowersById(id) {
       return fetch(HOST + `/api/followers/${id}`, verb('get')).then(handleResponse);
     },
 
-    getFolloweesById(id) { // TODO on backend
+    getFollowingsById(id) {
       return fetch(HOST + `/api/followings/${id}`, verb('get')).then(handleResponse);
     },
 
