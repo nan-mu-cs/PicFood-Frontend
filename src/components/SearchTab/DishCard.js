@@ -27,14 +27,14 @@ class DishCard extends Component {
     this.state = {};
   }
 
-  handleClickImage = (dishId) => {
+  onCardPress(dishId) {
     this.props.dispatch({type:"NAVIGATE_TO_DISH_PAGE", data: dishId});
     this.props.history.push(`/dishes/${dishId}`);
   }
 
   render() {
     return (
-      <Card onPress={this.handleClickImage}>
+      <Card onPress={this.onCardPress.bind(this, this.props.data.id)}>
         <CardItem>
           <Left>
             <Thumbnail source={{uri: this.props.data.avatar}}/>
@@ -55,9 +55,9 @@ class DishCard extends Component {
           </Left>
         </CardItem>
         <CardItem cardBody>
-          {/*<TouchableWithoutFeedback>*/}
+          <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.id)}>
             <Image source={{uri: this.props.data.avatar}} style={{height: 200, width: null, flex: 1}}/>
-          {/*</TouchableWithoutFeedback>*/}
+          </TouchableWithoutFeedback>
         </CardItem>
       </Card>
     );

@@ -10,6 +10,7 @@ import SearchPage from "./components/SearchPage";
 import UserPage from "./components/UserPage"
 import DishPhoto from "./components/DishPhoto"
 import RestaurantPage from "./components/RestaurantPage"
+import DishPage from "./components/Restaurant/DishPage"
 import { connect } from 'react-redux';
 import {AsyncStorage} from "react-native";
 import { NativeRouter,Route,Switch } from 'react-router-native'
@@ -97,9 +98,14 @@ class App extends React.Component {
               <Route exact path="/" component={Timeline}/>
               <Route path="/search" component={SearchTab}/>
               <Route path="/restaurants" component={RestaurantPage}>
-                  <Route path=":id" component={RestaurantPage}/>
+                  <Route path=":id"/>
               </Route>
-              <Route exact path="/dishphoto" component={DishPhoto}/>
+              <Route path="/dishes" component={DishPage}>
+                  <Route path=":id"/>
+              </Route>
+              <Route path="/dishphoto" component={DishPhoto}>
+                <Route path=":id"/>
+              </Route>
               <Route path="/users" component={UserPage}>
                   <Route path=":id" component={UserPage}/>
               </Route>
