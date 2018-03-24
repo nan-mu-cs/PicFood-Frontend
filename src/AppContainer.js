@@ -20,14 +20,20 @@ import FollowList from "./components/Users/FollowList";
 import PostPhotoPage from "./components/PostPhotoPage";
 import { withRouter } from 'react-router-native';
 import network from "./network";
+import { Constants, Location, Permissions } from 'expo';
 
 class App extends React.Component {
   constructor(props,context){
       super(props,context);
-
+      this.getUserInformation = this.getUserInformation.bind(this);
+      this.getLocation = this.getLocation.bind(this);
   }
   componentDidMount(){
       // console.log(this.props);
+      this.getUserInformation();
+      this.getLocation();
+  }
+  getUserInformation(){
       AsyncStorage.multiGet(["email","password"],function (err,stores) {
           if(err){
               this.props.history.push("/login");
@@ -54,6 +60,21 @@ class App extends React.Component {
                   console.log("ERR"+e.message);
               });
       }.bind(this));
+  }
+  getLocation(){
+      Permissions.askAsync(Permissions.LOCATION)
+          .then(res=>{
+              //console.log(status);
+              if (res.status !== 'granted')
+                  return;
+              Location.getCurrentPositionAsync({})
+                  .then((res)=>{
+                    //console.log(res);
+                     this.props.dispatch({type:"GET_LOCATION",data:{lat:res.coords.latitude,lon:res.coords.longitude}});
+                  }).catch(err=>{
+                      console.log(err);
+              })
+          })
   }
   render() {
       return (

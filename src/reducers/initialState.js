@@ -568,5 +568,6 @@ export default {
         id: 1,
         name: 'Spicy Chicken',
     },
-    token:""
+    token:"",
+    location:{lat:1,lon:1}
 };

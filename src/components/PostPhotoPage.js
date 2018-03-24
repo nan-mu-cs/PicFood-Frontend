@@ -7,6 +7,7 @@ import {StyleSheet,Image} from 'react-native';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
+import StarRating from 'react-native-star-rating';
 import network from "../network";
 
 class PostPhotoPage extends Component {
@@ -14,7 +15,9 @@ class PostPhotoPage extends Component {
         super(props);
         this.state={
             avatar:"",
-            dishname:""
+            dishname:"",
+            rate:0,
+            comment:""
         };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickPost = this.handleClickPost.bind(this);
@@ -51,12 +54,7 @@ class PostPhotoPage extends Component {
                 <Right />
             </Header>
             <Grid>
-                <Row size={6}>
-                    <Col>
-                        {this.props.location.state.image && <Image source={{uri: this.props.location.state.image}} style={{height:300}} />}
-                    </Col>
-                </Row>
-                <Row size={3}>
+                <Row size={1}>
                     <Col>
                         <Item floatingLabel>
                             <Label>Dish name</Label>
@@ -64,7 +62,35 @@ class PostPhotoPage extends Component {
                         </Item>
                     </Col>
                 </Row>
-                <Row size={4}>
+                <Row size={1} style={{justifyContent:"center"}}>
+                    <Col>
+                        <StarRating
+                            disabled={false}
+                            maxStars={5}
+                            rating={this.state.rate}
+                            containerStyle={{alignSelf:"center"}}
+                            fullStarColor={"#f5af4b"}
+                            emptyStarColor={"#f5af4b"}
+                            halfStarEnabled
+                            starSize={25}
+                            selectedStar={(rate) => this.setState({rate})}
+                        />
+                    </Col>
+                </Row>
+                <Row size={1} style={{justifyContent:"center"}}>
+                    <Col>
+                        <Item floatingLabel>
+                            <Label>Comment</Label>
+                            <Input value={this.state.comment} onChangeText={(val)=>this.setState({comment:val})} />
+                        </Item>
+                    </Col>
+                </Row>
+                <Row size={8} >
+                    <Col>
+                        {this.props.location.state.image && <Image source={{uri: this.props.location.state.image}} style={{height:300}} />}
+                    </Col>
+                </Row>
+                <Row size={2}>
                     <Col size={2}>
                         <Button success block onPress={this.handleClickPost}>
                             <Text>Post</Text>

@@ -18,6 +18,8 @@ export default (state = initialState, action) => {
             return {...state, userId: action.data};
         case "UPDATE_TOKEN":
             return {...state,token:action.data};
+        case "GET_LOCATION":
+            return {...state,location:action.data};
         default:
             return state;
     }
