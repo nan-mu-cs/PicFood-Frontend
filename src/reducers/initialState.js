@@ -373,12 +373,12 @@ export default {
     },
     restaurant:
         {
-            id:1,
-            name:"GreatWall Restaurant",
-            rate:5.0,
-            avatar:"http://via.placeholder.com/100x100",
-            location:"this is a location",
-            address:"200 temple street",
+            // id:1,
+            // name:"GreatWall Restaurant",
+            // rate:5.0,
+            // avatar:"http://via.placeholder.com/100x100",
+            // location:"this is a location",
+            // address:"200 temple street",
             dishes:[
                 {
                     id:1,

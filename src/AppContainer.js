@@ -98,9 +98,7 @@ class App extends React.Component {
           <Switch>
               <Route exact path="/" component={Timeline}/>
               <Route path="/search" component={SearchTab}/>
-              <Route path="/restaurants" component={RestaurantPage}>
-                  <Route path=":id"/>
-              </Route>
+              <Route path="/restaurants/:id" component={RestaurantPage} />
               <Route path="/dishes" component={DishPage}>
                   <Route path=":id"/>
               </Route>

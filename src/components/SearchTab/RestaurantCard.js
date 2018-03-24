@@ -28,13 +28,13 @@ class RestaurantCard extends Component {
   }
 
   onCardPress(restaurantId) {
-    // console.log('handleClickImage', restaurantId);
+    console.log('handleClickImage', restaurantId);
     // this.props.dispatch({type: "NAVIGATE_TO_RESTAURANT_PAGE", data: restaurantId});
     this.props.history.push(`/restaurants/${restaurantId}`);
   }
 
   render() {
-    // console.log('RestaurantCard', this.props.data)
+    console.log('RestaurantCard', this.props.data.restaurantId)
     let avatar;
     if(!this.props.data.avatar)
       avatar = "http://via.placeholder.com/100x100";
@@ -62,7 +62,7 @@ class RestaurantCard extends Component {
           </Left>
         </CardItem>
         <CardItem cardBody>
-          <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.id)}>
+          <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.restaurantId)}>
             <Image source={{uri: avatar}} style={{height: 200, width: null, flex: 1}}/>
           </TouchableWithoutFeedback>
         </CardItem>
