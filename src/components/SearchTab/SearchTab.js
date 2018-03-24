@@ -26,6 +26,8 @@ import RestaurantCard from "./RestaurantCard";
 import DishCard from "./DishCard";
 import Footer from "../Footer";
 import {withRouter} from 'react-router-native';
+import network from '../../network';
+
 
 const BUTTONS = [
   { text: "Option 0", icon: "american-football", iconColor: "#2c8ef4" },
@@ -58,6 +60,10 @@ class SearchTab extends Component {
     //     this.setState({clicked: BUTTONS[buttonIndex]});
     //   }
     // )
+  }
+
+  async componentDidMount() {
+    let restaurantInfo = await network.restaurant.getRestaurantInfoById(1);
   }
 
   render() {

@@ -8,6 +8,8 @@ import {StyleSheet,ScrollView,AsyncStorage} from 'react-native';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
+import network from "../network";
+
 class LoginPage extends Component {
     constructor(props, context){
         super(props);
@@ -28,6 +30,15 @@ class LoginPage extends Component {
             }
             this.props.history.push("/");
         }.bind(this));
+    }
+    componentDidMount() {
+      network.account.login({email: 'a', password: 'b'})
+        .then((res) => {
+          console.log('componentDidMount', res);
+        })
+        .catch((e) => {
+          console.log('componentDidMount', e);
+        });
     }
     render() {
        return (
