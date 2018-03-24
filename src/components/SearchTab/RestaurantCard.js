@@ -35,7 +35,11 @@ class RestaurantCard extends Component {
 
   render() {
     // console.log('RestaurantCard', this.props.data)
-
+    let avatar;
+    if(!this.props.data.avatar)
+      avatar = "http://via.placeholder.com/100x100";
+    else
+      avatar = this.props.data.avatar;
     return (
       <Card>
         <CardItem>
@@ -59,7 +63,7 @@ class RestaurantCard extends Component {
         </CardItem>
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.id)}>
-            <Image source={{uri: this.props.data.avatar}} style={{height: 200, width: null, flex: 1}}/>
+            <Image source={{uri: avatar}} style={{height: 200, width: null, flex: 1}}/>
           </TouchableWithoutFeedback>
         </CardItem>
       </Card>

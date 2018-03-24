@@ -70,7 +70,7 @@ class SearchTab extends Component {
     //   })
     network.restaurant.searchRestaurants('b')
       .then(res => {
-        // console.log(res)
+        console.log(res)
         this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res});
       })
       .catch(err => {
