@@ -19,6 +19,7 @@ import RegisterPage from "./components/RegisterPage";
 import FollowList from "./components/Users/FollowList";
 import PostPhotoPage from "./components/PostPhotoPage";
 import { withRouter } from 'react-router-native';
+import network from "./network";
 
 class App extends React.Component {
   constructor(props,context){
@@ -27,16 +28,31 @@ class App extends React.Component {
   }
   componentDidMount(){
       // console.log(this.props);
-      AsyncStorage.multiGet(["username","password"],function (err,stores) {
-          if(err||!username||!password){
+      AsyncStorage.multiGet(["email","password"],function (err,stores) {
+          if(err){
               this.props.history.push("/login");
               console.log(err);
               return;
           }
           // console.log(username);
           // console.log(password);
-          let username=stores[0][0];
-          let password=stores[0][0];
+          let email=stores[0][1];
+          let password=stores[1][1];
+          if(!email||!password){
+              this.props.history.push("/login");
+              console.log(err);
+              return;
+          }
+          network.account.login({email,password})
+              .then(response=>response.json())
+              .then((res) => {
+                  this.props.dispatch({type:"UPDATE_TOKEN",data:res.token});
+                  this.props.history.push("/");
+              })
+              .catch((e) => {
+                  this.props.history.push("/login");
+                  console.log("ERR"+e.message);
+              });
       }.bind(this));
   }
   render() {
