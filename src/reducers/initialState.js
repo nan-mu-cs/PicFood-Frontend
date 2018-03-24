@@ -6,7 +6,7 @@ export default {
     tabs:[
         {id:"timeline",icon:"home",url:"/"},
         {id:"search",icon:"search",url:"/search"},
-        {id:"restaurants",icon:"cart",url:"/restaurants"},
+        //{id:"restaurants",icon:"cart",url:"/restaurants"},
         // {id:"camera",icon:"camera",url:"/camera"},
         {id:"users",icon:"person",url:"/users"}
     ],

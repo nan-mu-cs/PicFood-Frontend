@@ -19,7 +19,8 @@ class RegisterPage extends Component {
             password:"",
             email:"",
             avatar:"",
-            error:false
+            error:false,
+            errorMessage:""
         };
         this.handleClickRegister = this.handleClickRegister.bind(this);
         this.handleUploadAvatar = this.handleUploadAvatar.bind(this);
@@ -54,7 +55,8 @@ class RegisterPage extends Component {
                 this.props.history.push("/");
             }).catch(error=>{
                 this.setState({
-                    error:true
+                    error:true,
+                    errorMessage:error.error
                 });
                 console.log(error);
             });
@@ -103,7 +105,7 @@ class RegisterPage extends Component {
                             <Text>Register</Text>
                         </Button>
                         {this.state.error && Toast.show({
-                            text: 'Unable to register, please try back later',
+                            text: this.state.errorMessage,
                             position: 'bottom',
                             buttonText: 'Okay'
                         })
