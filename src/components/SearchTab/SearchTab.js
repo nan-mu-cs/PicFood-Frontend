@@ -46,31 +46,46 @@ class SearchTab extends Component {
   }
 
   onSortPress = () => {
-    // ActionSheet.show(
-    //   {
-    //     options: BUTTONS,
-    //     cancelButtonIndex: CANCEL_INDEX,
-    //     destructiveButtonIndex: DESTRUCTIVE_INDEX,
-    //     title: "Testing ActionSheet"
-    //   },
-    //   buttonIndex => {
-    //     this.setState({clicked: BUTTONS[buttonIndex]});
-    //   }
-    // )
   }
 
-  async componentDidMount() {
-    // let restaurantInfo = await network.restaurant.getRestaurantInfoById(1);
+  onSubmitEditing() {
+    // network.restaurant.searchRestaurants(this.state.keyword)
+    //   .then(res => {
+    //     console.log(res)
+    //     this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res});
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
+  }
+
+  componentDidMount() {
+    // console.log('lat', this.props.location.lat);
+    // network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
+    //   .then(res => {
+    //     console.log(res)
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
+    network.restaurant.searchRestaurants('b')
+      .then(res => {
+        // console.log(res)
+        this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res});
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   render() {
     let restaurantCards = this.props.searchedRestaurants.map(item =>
-      <ListItem key={item.id} style={styles.listItem}>
+      <ListItem key={item.restaurantId} style={styles.listItem}>
         <RestaurantCard data={item}/>
       </ListItem>
     );
     let dishCards = this.props.searchedDishes.map(item =>
-      <ListItem key={item.id} style={styles.listItem}>
+      <ListItem key={item.dishId} style={styles.listItem}>
         <DishCard data={item}/>
       </ListItem>
     );
@@ -80,7 +95,10 @@ class SearchTab extends Component {
         <Header searchBar hasTabs rounded>
           <Item>
             <Icon name="ios-search"/>
-            <Input placeholder="Search"/>
+            <Input
+              placeholder="Search"
+              onChangeText={(value) => this.setState({keyword: value})}
+              onSubmitEditing={this.onSubmitEditing.bind(this)}/>
           </Item>
           <Button transparent onPress={this.onSortPress}>
             <Icon name='ios-menu'/>
@@ -118,6 +136,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     searchedRestaurants: state.searchedRestaurants,
     searchedDishes: state.searchedDishes,
+    location: state.location,
   }
 };
 

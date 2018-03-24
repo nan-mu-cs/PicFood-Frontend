@@ -20,6 +20,8 @@ export default (state = initialState, action) => {
             return {...state,token:action.data};
         case "GET_LOCATION":
             return {...state,location:action.data};
+        case "GET_SEARCHED_RESTAURANTS":
+            return {...state, searchedRestaurants:action.data};
         default:
             return state;
     }

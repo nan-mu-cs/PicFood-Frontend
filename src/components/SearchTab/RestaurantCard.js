@@ -34,18 +34,20 @@ class RestaurantCard extends Component {
   }
 
   render() {
+    // console.log('RestaurantCard', this.props.data)
+
     return (
       <Card>
         <CardItem>
           <Left>
-            <Thumbnail source={{uri: this.props.data.avatar}}/>
+            <Thumbnail source={{uri: this.props.data.avatar || "http://via.placeholder.com/100x100"}}/>
             <Body>
             <Text>{this.props.data.name}</Text>
             <Text note>{this.props.data.location}</Text>
             <StarRating
               disabled={true}
               maxStars={5}
-              rating={this.props.data.rate}
+              rating={this.props.data.avgRate}
               containerStyle={{marginTop: 3, alignSelf: "flex-start"}}
               fullStarColor={"#f5af4b"}
               emptyStarColor={"#f5af4b"}
