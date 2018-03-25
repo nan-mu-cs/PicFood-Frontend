@@ -55,7 +55,7 @@ export default {
     },
 
     getUserProfile(userId) {
-      return fetch(HOST + '/api/users/${userId}', verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/users/${userId}`, verb('get'));
     },
 
     getAllUsers(userId) {
@@ -63,7 +63,7 @@ export default {
     },
 
     getActivitiesOfAnUser(id) { // TODO on backend
-      return fetch(HOST + '/api/activities/${id}', verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/activities/${id}`, verb('get')).then(handleResponse);
     },
 
     getPostByPostId(id) {

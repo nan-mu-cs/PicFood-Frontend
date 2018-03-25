@@ -18,7 +18,7 @@ class CommentCard extends Component {
         this.handleClickImage = this.handleClickImage.bind(this);
     }
     handleClickImage(){
-        this.props.history.push(`/dishes/${this.state.dishId}`)
+        this.props.history.push(`/dishes/${this.props.data.dishId}`)
         //console.log("click");
         // this.props.history.push({
         //     pathname: "/image-detail",

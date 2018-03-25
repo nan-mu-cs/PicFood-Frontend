@@ -42,7 +42,7 @@ class LikeCard extends Component {
                 });
                 console.log(data);
             }).catch(err=>{
-            console.log(err);
+            //console.log(err);
         });
         network.post.getPostInfo(this.props.data.postId)
             .then(res=>res.json())
@@ -53,7 +53,7 @@ class LikeCard extends Component {
                 });
                 //console.log(data);
             }).catch(err=>{
-                console.log(err);
+                //console.log(err);
         });
         // network.dish.getDishInfoById({id:this.props.data.dishId})
         //     .then(res=>res.json())
