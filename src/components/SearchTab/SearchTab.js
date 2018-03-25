@@ -77,12 +77,12 @@ class SearchTab extends Component {
   }
 
   render() {
-    let restaurantCards = this.props.searchedRestaurants.map(item =>
+    let restaurantCards = this.props.searchedRestaurants.splice(0, 8).map(item =>
       <ListItem key={item.restaurantId} style={styles.listItem}>
         <RestaurantCard data={item}/>
       </ListItem>
     );
-    let dishCards = this.props.searchedDishes.map(item =>
+    let dishCards = this.props.searchedDishes.splice(0, 8).map(item =>
       <ListItem key={item.dishId} style={styles.listItem}>
         <DishCard data={item}/>
       </ListItem>

@@ -37,17 +37,20 @@ class App extends React.Component {
   }
 
   getUserInformation(){
+      console.log("login!!!");
       AsyncStorage.multiGet(["email","password"],function (err,stores) {
+          console.log("err"+err);
           if(err){
               this.props.history.push("/login");
               console.log(err);
               return;
           }
-          // console.log(username);
-          // console.log(password);
           let email=stores[0][1];
           let password=stores[1][1];
           if(!email||!password){
+            this.setState({
+              loading:false
+            });
               this.props.history.push("/login");
               console.log(err);
               return;
@@ -58,8 +61,8 @@ class App extends React.Component {
                   this.setState({
                       loading:false
                   });
-                  //console.log("token ");
-                  //console.log(res);
+                  console.log("token ");
+                  console.log(res);
                   this.props.dispatch({type:"UPDATE_TOKEN",data:res.token});
                   this.props.history.push("/");
               })
