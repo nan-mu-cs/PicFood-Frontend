@@ -41,14 +41,19 @@ class FollowingList extends Component {
     this.props.history.goBack();
   }
 
-  onUnfollowPress() {
-
+  onUnfollowPress(userId) {
+    network.social.unfollowUserById(userId)
+      .then(res => {
+        console.log('onUnfollowPress', res);
+      })
+      .catch(res => {
+      })
   }
 
   componentDidMount() {
     network.social.getMyFollowings()
       .then(res => {
-        // console.log('FollowingList', res);
+        console.log('FollowingList', res);
         this.props.dispatch({type: "GET_FOLLOWINGS", data: res});
       })
       .catch(err => {})
@@ -56,13 +61,13 @@ class FollowingList extends Component {
 
   render() {
     let userList = this.props.followings.map(item =>
-      <ListItem key={item.id} style={styles.listItem}>
+      <ListItem key={item.userId} style={styles.listItem}>
         <Left>
           <Thumbnail source={{uri: item.avatar}}/>
           <Text>{item.user}</Text>
         </Left>
         <Right>
-          <Button small onPress={this.onUnfollowPress.bind(this)}>
+          <Button small onPress={this.onUnfollowPress.bind(this, item.userId)}>
             <Text style={styles.buttonText}>Unfollow</Text>
           </Button>
         </Right>

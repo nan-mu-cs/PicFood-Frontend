@@ -34,7 +34,9 @@ import network from "../../network";
 class FollowerList extends Component {
   constructor(props, context) {
     super(props);
-    this.state = {};
+    this.state = {
+      userId: this.props.match.params.userId
+    };
   }
 
   onBackPress() {

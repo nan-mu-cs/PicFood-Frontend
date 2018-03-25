@@ -106,8 +106,8 @@ class App extends React.Component {
               <Route path="/searchby" component={SearchBy}/>
               <Route path="/users" component={UserPage} />
               <Route path="/users/:id" component={UserPage} />
-              <Route path="/followers/:id" component={FollowerList}/>
-              <Route path="/followings/:id" component={FollowingList}/>
+              <Route path="/followers/:userId" component={FollowerList}/>
+              <Route path="/followings/:userId" component={FollowingList}/>
               <Route exact path="/login" component={LoginPage}/>
               <Route exact path="/register" component={RegisterPage}/>
               <Route exact path="/post" component={PostPhotoPage}/>
