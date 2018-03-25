@@ -36,9 +36,13 @@ class DishPage extends Component {
     this.props.history.goBack();
   }
   componentDidMount(){
-    network.dish.getPostsOfDish(this.props.dishid)
+    let dishId = "2c9ad7fa6255a250016255a26cf50000";
+    console.log(this.props.match.params.id);
+    network.dish.getPostsOfDish(dishId)
+        .then(res=>res.json())
     .then(res => {
-      console.log(res)
+      console.log("dish page!!!");
+      console.log(res);
       this.props.dispatch({type:"GET_POSTS_OF_DISH", data: res});
     })
     .catch(err => {
@@ -68,6 +72,7 @@ class DishPage extends Component {
         </CardItem>
       </Card>
     );
+    //console.log(this.props);
     return (
       <Container>
         <Header>
@@ -82,7 +87,7 @@ class DishPage extends Component {
           <Right/>
         </Header>
         <Content>
-          <Text style={styles.dishName}>{this.props.postsOfDish.dishName}</Text>
+          <Text style={styles.dishName}>{this.props.dish.name}</Text>
           <StarRating
             disabled={true}
             maxStars={5}
