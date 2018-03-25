@@ -88,7 +88,7 @@ class ViewPost extends Component {
                 </Header>
                 <Content>
                   <Card>
-                    <CardItem cardBody>
+                    <CardItem cardBody style = {styles.star}>
                       <Image source={{uri:image}} style={{height: 200, width: null, flex: 1}}/>
                     </CardItem>
                     <StarRating
@@ -124,6 +124,9 @@ class ViewPost extends Component {
 }
 
 const styles = StyleSheet.create({
+    star: {
+        marginBottom:20,
+    }
 });
 
 
