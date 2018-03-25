@@ -20,10 +20,8 @@ import {
   Text,
   Title
 } from 'native-base';
-import {Image, ScrollView, StyleSheet} from 'react-native';
+import {Image, StyleSheet, ScrollView, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
-import Dishes from "./Dishes";
-import {Col, Grid, Row} from "react-native-easy-grid";
 import Footer from "../Footer";
 import StarRating from 'react-native-star-rating';
 import {ImagePicker} from 'expo';
@@ -35,7 +33,6 @@ class RestaurantPage extends Component {
     this.state = {
       restaurantId: this.props.match.params.id
     };
-    // console.log('RestaurantPage', this.props.match.params.id);
     this.handleClickBack = this.handleClickBack.bind(this);
     // this.handlePostImage = this.handlePostImage.bind(this);
   }
@@ -73,33 +70,33 @@ class RestaurantPage extends Component {
     this.props.history.goBack();
   }
 
-  componentDidMount() {
-    network.restaurant.getRestaurantInfoById(this.state.restaurantId)
-      .then(res => {
-        console.log(res);
-        this.props.dispatch({type: "GET_RESTAURANT_INFO", data: res});
-      })
-      .catch(err => {
+  onDishCardPress(dishId) {
+    this.props.history.push(`/dishes/${dishId}`);
+  }
 
-      })
+  async componentDidMount() {
+    try {
+      let restaurantInfo = await network.restaurant.getRestaurantInfoById(this.state.restaurantId);
+      let restaurantDishes = await network.restaurant.getRestaurantDishesById(this.state.restaurantId);
+      restaurantInfo.dishes = restaurantDishes;
+      this.props.dispatch({type: "GET_RESTAURANT_INFO", data: restaurantInfo});
+    } catch(e) {
+    }
   }
 
   render() {
     let dishes = this.props.restaurant.dishes.map((item) => {
       return (
-        <ListItem key={item.dishId} style={styles.listItem}>
-          <Card>
-            <CardItem>
-              {item.name}
-            </CardItem>
-            <CardItem cardBody>
-              <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, item.dishId)}>
-                <Image source={{uri: item.avatar || "http://via.placeholder.com/100x100"}}
-                       style={{height: 100, width: null, flex: 1}}/>
-              </TouchableWithoutFeedback>
-            </CardItem>
-          </Card>
-        </ListItem>
+        <Card key={item.dishId} onPress={this.onDishCardPress.bind(this, item.dishId)}>
+          <CardItem>
+            <Text>{item.name}</Text>
+          </CardItem>
+          <CardItem>
+            <TouchableWithoutFeedback>
+              <Image source={{uri: item.avatar || "http://via.placeholder.com/100x100"}} style={{height: 200, width: null, flex: 1}}/>
+            </TouchableWithoutFeedback>
+          </CardItem>
+        </Card>
       );
     });
 
@@ -139,31 +136,25 @@ class RestaurantPage extends Component {
                 </Body>
               </Left>
             </CardItem>
-            {/*<CardItem cardBody>*/}
-            {/*<Image source={{uri: this.props.restaurant.avatar}} style={{height: 200, width: null, flex: 1}}/>*/}
-            {/*</CardItem>*/}
           </Card>
-          <ScrollView>
-            <List>
-              {dishes}
-            </List>
-          </ScrollView>
+          <Text style={styles.titleForDishes}>Dishes</Text>
+          {dishes}
+          <Fab
+            active={this.state.active}
+            direction="up"
+            containerStyle={{}}
+            style={{backgroundColor: '#5067FF'}}
+            position="bottomRight"
+            onPress={() => this.setState({active: !this.state.active})}>
+            <Icon name="add"/>
+            <Button style={{backgroundColor: '#34A34F'}} onPress={this.handlePostImage.bind(this, "image")}>
+              <Icon name="ios-images"/>
+            </Button>
+            <Button style={{backgroundColor: '#3B5998'}} onPress={this.handlePostImage.bind(this, "camera")}>
+              <Icon name="ios-camera"/>
+            </Button>
+          </Fab>
         </Content>
-        <Fab
-          active={this.state.active}
-          direction="up"
-          containerStyle={{}}
-          style={{backgroundColor: '#5067FF'}}
-          position="bottomRight"
-          onPress={() => this.setState({active: !this.state.active})}>
-          <Icon name="add"/>
-          <Button style={{backgroundColor: '#34A34F'}} onPress={this.handlePostImage.bind(this, "image")}>
-            <Icon name="ios-images"/>
-          </Button>
-          <Button style={{backgroundColor: '#3B5998'}} onPress={this.handlePostImage.bind(this, "camera")}>
-            <Icon name="ios-camera"/>
-          </Button>
-        </Fab>
         <Footer/>
       </Container>
     )
@@ -172,13 +163,15 @@ class RestaurantPage extends Component {
 
 
 const styles = StyleSheet.create({
-  dishName: {
+  titleForDishes: {
     paddingTop: 10,
+    paddingBottom: 10,
+    fontSize: 17,
     textAlign: 'center',
   },
   restaurant: {
     paddingTop: 10,
-    fontSize: 17,
+    fontSize: 19,
     textAlign: 'center',
   }
 });

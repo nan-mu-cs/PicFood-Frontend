@@ -414,7 +414,6 @@ export default {
                     avatar4:"http://via.placeholder.com/50x50",
                     avatar5:"http://via.placeholder.com/50x50"
                 }
-
             ]
         },
     searchedRestaurants:[

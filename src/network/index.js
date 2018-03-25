@@ -13,7 +13,7 @@ export default {
     },
 
     getMyProfile() {
-      return fetch(HOST + '/api/users/me', verb('get'));
+      return fetch(HOST + '/api/users/me', verb('get')).then(handleResponse);
     },
 
     postUserProfile(body) { // avatar, bio, email, name, password (all optional)
@@ -55,11 +55,11 @@ export default {
     },
 
     getUserProfile(userId) {
-      return fetch(HOST + '/api/users/${userId}', verb('get'));
+      return fetch(HOST + '/api/users/${userId}', verb('get')).then(handleResponse);
     },
 
     getAllUsers(userId) {
-      return fetch(HOST + '/api/users', verb('get'));
+      return fetch(HOST + '/api/users', verb('get')).then(handleResponse);
     },
 
     getActivitiesOfAnUser(id) { // TODO on backend
@@ -131,7 +131,7 @@ export default {
 
   dish: {
     getDishInfoById(id) {
-      return fetch(HOST + `/api/dishes/${id}/info`, verb('get'));
+      return fetch(HOST + `/api/dishes/${id}/info`, verb('get')).then(handleResponse);
     },
 
     getDishImages(id) {
@@ -139,7 +139,7 @@ export default {
     },
 
     getPostsOfDish(id) {
-      return fetch(HOST + `/api/dishes/${id}/post`, verb('get'));
+      return fetch(HOST + `/api/dishes/${id}/post`, verb('get')).then(handleResponse);
     },
 
     postPhoto(body) { // {FormData} file
