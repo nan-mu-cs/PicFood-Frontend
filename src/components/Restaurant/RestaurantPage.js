@@ -95,7 +95,7 @@ class RestaurantPage extends Component {
   }
 
   render() {
-    let dishes = this.props.restaurant.dishes.map((item) => {
+    let dishes = this.state.restaurant.dishes.map((item) => {
       return (
         <Dishes key={item.dishId} data={item}/>
       );
