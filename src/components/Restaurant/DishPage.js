@@ -54,23 +54,29 @@ class DishPage extends Component {
   // }
 
   render() {
-    let photos = this.props.postsOfDish.map(item =>
-      <Card key={item.dishId}>
-        <CardItem>
-          <Image source={{uri: item.imageUrl}} style={{height: 200, width: null, flex: 1}}/>
-        </CardItem>
-        <CardItem>
-          <Left>
-            <Button transparent>
-              <Icon active name="thumbs-up" />
-              <Text>{item.upvoteCount} Likes</Text>
-            </Button>
-          </Left>
-          <Right>
-            <Text>posted by {item.creator}</Text>
-          </Right>
-        </CardItem>
-      </Card>
+    let photos = this.props.postsOfDish.map(item => {
+        let image = item.imageUrl;
+        if(!image)
+          image = "http://via.placeholder.com/100x100";
+        return (
+            <Card key={item.dishId}>
+              <CardItem>
+                <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}}/>
+              </CardItem>
+              <CardItem>
+                <Left>
+                  <Button transparent>
+                    <Icon active name="thumbs-up" />
+                    <Text>{item.upvoteCount} Likes</Text>
+                  </Button>
+                </Left>
+                <Right>
+                  <Text>posted by {item.creator}</Text>
+                </Right>
+              </CardItem>
+            </Card>
+          )
+    }
     );
     //console.log(this.props);
     return (
