@@ -36,6 +36,10 @@ export default (state = initialState, action) => {
             return {...state, timelines: action.data};
         case "SORT_CRITERIA":
             return {...state, sort_criteria: action.data};
+        case "UPDATE_USER_PROFILE":
+            return {...state,user:action.data};
+        case "UPDATE_USER_TIMELINE":
+            return {...state,userTimeline:action.data};
         default:
             return state;
     }
