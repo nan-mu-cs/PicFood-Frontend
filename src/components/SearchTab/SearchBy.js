@@ -14,30 +14,31 @@ const Item = Picker.Item;
 class SearchBy extends Component {
     constructor(props, context){
         super(props);
-        this.state={
-            selected1: "key0",
-            selected2: "key1"
-        };
+        this.state={};
     }
 
     onValueChange1(value: string) {
-      this.setState({
-        selected1: value
-      });
+        // console.log("selected1 = " + this.props.selected1);
+        // console.log("selected2 = " + this.props.selected2);
+        // console.log("value = " + value);
+        this.props.dispatch({type:"SORT_CRITERIA", data:{distance:value, sort_by:this.props.sort_by}});
     }
 
     onValueChange2(value: string) {
-      this.setState({
-        selected2: value
-      });
+        // console.log("selected1 = " + this.props.selected1);
+        // console.log("selected2 = " + this.props.selected2);
+        // console.log("value = " + value);
+        this.props.dispatch({type:"SORT_CRITERIA", data:{distance:this.props.distance, sort_by:value}});
     }
 
     render() {
+        // console.log("distance = " + this.props.distance);
+        // console.log("sort_by = " + this.props.sort_by);
         return (
             <Container>
                 <Header>
                     <Left>
-                      <Button transparent onPress={() => this.props.history.push(`/search`)}>
+                      <Button transparent onPress={() => this.props.history.goBack()}>
                         <Icon name="arrow-back" />
                       </Button>
                     </Left>
@@ -58,7 +59,7 @@ class SearchBy extends Component {
                       headerStyle={{ backgroundColor: "#b95dd3" }}
                       headerBackButtonTextStyle={{ color: "#fff" }}
                       headerTitleStyle={{ color: "#fff" }}
-                      selectedValue={this.state.selected1}
+                      selectedValue={this.props.distance}
                       onValueChange={this.onValueChange1.bind(this)}
                     >
                       <Item label="<2 miles" value="key0" />
@@ -80,7 +81,7 @@ class SearchBy extends Component {
                         headerStyle={{ backgroundColor: "#b95dd3" }}
                         headerBackButtonTextStyle={{ color: "#fff" }}
                         headerTitleStyle={{ color: "#fff" }}
-                        selectedValue={this.state.selected2}
+                        selectedValue={this.props.sort_by}
                         onValueChange={this.onValueChange2.bind(this)}
                       >
                         <Item label="Distance" value="key0" />
@@ -106,7 +107,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
     return{
-        
+        distance: state.sort_criteria.distance,
+        sort_by: state.sort_criteria.sort_by,
     }
 };
 
