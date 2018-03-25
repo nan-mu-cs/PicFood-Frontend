@@ -11,7 +11,7 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import Footer from "./Footer"
 import StarRating from 'react-native-star-rating';
 import network from '../network';
-import moment from 'moment'
+import moment from 'moment';
 
 class ViewPost extends Component {
     constructor(props, context){

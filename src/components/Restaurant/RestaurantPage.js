@@ -150,24 +150,26 @@ class RestaurantPage extends Component {
             </CardItem>
           </Card>
           <Text style={styles.titleForDishes}>Dishes</Text>
-          {dishes}
-          <Fab
+            <List>
+                {dishes}
+            </List>
+        </Content>}
+        <Footer/>
+        <Fab
             active={this.state.active}
             direction="up"
             containerStyle={{}}
-            style={{backgroundColor: '#5067FF'}}
+            style={{backgroundColor: '#5067FF',bottom:100}}
             position="bottomRight"
             onPress={() => this.setState({active: !this.state.active})}>
-            <Icon name="add"/>
-            <Button style={{backgroundColor: '#34A34F'}} onPress={this.handlePostImage.bind(this, "image")}>
-              <Icon name="ios-images"/>
-            </Button>
-            <Button style={{backgroundColor: '#3B5998'}} onPress={this.handlePostImage.bind(this, "camera")}>
-              <Icon name="ios-camera"/>
-            </Button>
-          </Fab>
-        </Content>}
-        <Footer/>
+          <Icon name="add"/>
+          <Button style={{backgroundColor: '#34A34F'}} onPress={this.handlePostImage.bind(this, "image")}>
+            <Icon name="ios-images"/>
+          </Button>
+          <Button style={{backgroundColor: '#3B5998'}} onPress={this.handlePostImage.bind(this, "camera")}>
+            <Icon name="ios-camera"/>
+          </Button>
+        </Fab>
       </Container>
     )
   }
