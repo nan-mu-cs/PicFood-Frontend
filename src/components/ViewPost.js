@@ -1,9 +1,9 @@
 /**
- * Created by Xiaoxin on 24/03/2018.
+ * Created by Xiaoxin on 23/03/2018.
  */
 
 import React, { Component } from 'react';
-import { Container, Header, Content, Button, Text, Icon, ListItem,Left, Body,
+import { Container, Header, Content, Button, Text, Icon, ListItem,Left, Body, Thumbnail,
      Card, CardItem, List, Title, Right } from 'native-base';
 import {StyleSheet, ScrollView,Image} from 'react-native';
 import { connect } from 'react-redux';
@@ -18,6 +18,10 @@ class ViewPost extends Component {
         this.state={
             postId: this.props.match.params.postId
         };
+    }
+
+    onBackPress() {
+      this.props.history.goBack();
     }
 
     componentDidMount() {
@@ -36,36 +40,50 @@ class ViewPost extends Component {
         let image = this.props.post.imageUrl;
         if(!image)
           image = "http://via.placeholder.com/100x100";
-        // let comments = this.props.post.map(item => {
-        //     return (
-        //         <ListItem>
-        //               <Text>Comment1</Text>
-        //         </ListItem>
-        //         <Card key={item.dishId}>
-        //           <CardItem>
-        //             <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}}/>
-        //           </CardItem>
-        //           <CardItem>
-        //             <Left>
-        //               <Button transparent>
-        //                 <Icon active name="thumbs-up" />
-        //                 <Text>{item.upvoteCount} Likes</Text>
-        //               </Button>
-        //             </Left>
-        //             <Right>
-        //               <Text>posted by {item.creator}</Text>
-        //             </Right>
-        //           </CardItem>
-        //         </Card>
-        //       )
-        // }
-        // );
+        console.log(this.props.post);
+        let reviews;
+        if(this.props.post.comments)
+          reviews = this.props.post.comments.map(item => {
+            let avatar = item.commenterAvatar;
+            if(!avatar)
+              avatar = "http://via.placeholder.com/100x100";
+            let name = item.commenter;
+            if(!name)
+              name = "Xiaoxin"
+            return (
+                <Card key={item.commentId}>
+                  <CardItem>
+                    <Left>
+                        <Thumbnail small source={{uri: avatar}} />
+                        <Body>
+                        <Text style={{fontSize:16}}>{name}</Text>
+                        </Body>
+                    </Left>
+                  </CardItem>
+                  <ListItem>
+                    <Left>
+                    <Text>{item.content}</Text>
+                    </Left>
+                    <Right>
+                    <Text>{item.time}</Text>
+                    </Right>
+                  </ListItem>
+                </Card>
+              )
+        }
+        );
         return (
             <Container>
                 <Header>
+                    <Left>
+                      <Button transparent onPress={this.onBackPress.bind(this)}>
+                        <Icon name='arrow-back'/>
+                      </Button>
+                    </Left>
                     <Body>
                     <Title>{this.props.post.dishName}</Title>
                     </Body>
+                    <Right/>
                 </Header>
                 <Content>
                   <Card>
@@ -80,7 +98,7 @@ class ViewPost extends Component {
                       fullStarColor={"#f5af4b"}
                       emptyStarColor={"#f5af4b"}
                       halfStarEnabled
-                      starSize={15}
+                      starSize={30}
                     />
                     <CardItem>
                       <Left>
@@ -95,15 +113,7 @@ class ViewPost extends Component {
                     </CardItem>
                   </Card>
                   <List>
-                    <ListItem>
-                      <Text>Comment1</Text>
-                    </ListItem>
-                    <ListItem>
-                      <Text>Comment2</Text>
-                    </ListItem>
-                    <ListItem>
-                      <Text>Comment3</Text>
-                    </ListItem>
+                    {reviews}
                   </List>
                 </Content>
                 <Footer/>

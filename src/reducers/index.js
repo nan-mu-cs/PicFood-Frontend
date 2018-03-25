@@ -15,6 +15,8 @@ export default (state = initialState, action) => {
             return {...state,token:action.data};
         case "GET_LOCATION":
             return {...state,location:action.data};
+      case "GET_USER_PROFILE":
+            return {...state, user: action.data};
         case "GET_SEARCHED_RESTAURANTS":
             return {...state, searchedRestaurants:action.data};
         case "GET_SEARCHED_DISHES":
