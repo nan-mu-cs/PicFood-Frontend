@@ -87,7 +87,6 @@ class PostPhotoPage extends Component {
                             containerStyle={{alignSelf:"center"}}
                             fullStarColor={"#f5af4b"}
                             emptyStarColor={"#f5af4b"}
-                            halfStarEnabled
                             starSize={25}
                             selectedStar={(rate) => this.setState({rate})}
                         />
