@@ -30,6 +30,8 @@ export default (state = initialState, action) => {
             return {...state, post:action.data};
         case "GET_FOLLOWERS":
             return {...state, followers: action.data};
+        case "GET_USERS":
+            return {...state, users: action.data};
         case "GET_FOLLOWINGS":
             return {...state, followings: action.data};
         case "UPDATE_TIMELINE":
