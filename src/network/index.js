@@ -67,7 +67,7 @@ export default {
     },
 
     addPost(body) { // restaurantId, dishName, rate, category, content, imageId (optional)
-      return fetch(HOST + `/post`, verb('post', body));
+      return fetch(HOST + `/api/post`, verb('post', body));
     },
 
     upvotePost(postId) {

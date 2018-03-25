@@ -34,11 +34,11 @@ class PostPhotoPage extends Component {
             dishName:this.state.dishname,
             rate:this.state.rate,
             content:this.state.comment,
-            imageUrl:this.state.avatar,
-            userId:"2c9abebe624f3d20016255574e6f0000"
+            imageUrl:this.state.avatar
         }).then(res=>res.json())
             .then(data=>{
-                console.log(data);
+                this.props.history.goBack();
+                // console.log(data);
             }).catch(err=>{
                 console.log(err);
         });
