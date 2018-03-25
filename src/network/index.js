@@ -1,5 +1,5 @@
 import {store} from "../../App";
-const HOST = 'http://172.26.62.62:8080';
+const HOST = 'http://172.27.92.158:8080';
 
 export default {
 
