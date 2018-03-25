@@ -23,42 +23,56 @@ import {Image, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Footer from "../Footer";
 import StarRating from 'react-native-star-rating';
+import network from '../../network';
 
 class DishPage extends Component {
   constructor(props, context) {
     super(props);
     this.state = {};
-
     this.handleClickBack = this.handleClickBack.bind(this);
   }
 
   handleClickBack() {
     this.props.history.goBack();
   }
-
-  onDishPhotoPress(imgId) {
-    this.props.history.push(`/dishphoto/${imgId}`);
+  componentDidMount(){
+    let dishId = "2c9ad7fa6255a250016255a26cf50000";
+    console.log(this.props.match.params.id);
+    network.dish.getPostsOfDish(dishId)
+        .then(res=>res.json())
+    .then(res => {
+      console.log("dish page!!!");
+      console.log(res);
+      this.props.dispatch({type:"GET_POSTS_OF_DISH", data: res});
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
+  // onDishPhotoPress(imageUrl) {
+  //   this.props.history.push(`/dishphoto/${imageUrl}`);
+  // }
 
   render() {
-    let photos = this.props.dish.photos.map(item =>
-      <Card>
-        <CardItem key={item.imgId} onPress={this.onDishPhotoPress.bind(this,item.imgId)}>
-        <Image source={{uri: item.imgUrl}} style={{height: 200, width: null, flex: 1}}/>
+    let photos = this.props.postsOfDish.map(item =>
+      <Card key={item.dishId}>
+        <CardItem>
+          <Image source={{uri: item.imageUrl}} style={{height: 200, width: null, flex: 1}}/>
         </CardItem>
         <CardItem>
           <Left>
             <Button transparent>
               <Icon active name="thumbs-up" />
-              <Text>12 Likes</Text>
+              <Text>{item.upvoteCount} Likes</Text>
             </Button>
           </Left>
           <Right>
-            <Text>posted by User</Text>
+            <Text>posted by {item.creator}</Text>
           </Right>
         </CardItem>
       </Card>
     );
+    //console.log(this.props);
     return (
       <Container>
         <Header>
@@ -84,7 +98,7 @@ class DishPage extends Component {
             halfStarEnabled
             starSize={15}
           />
-          <Text style={styles.restaurant}>{this.props.dish.restaurant}</Text>
+          <Text style={styles.restaurant}>{this.props.postsOfDish.restaurantName}</Text>
           <List>
             {photos}
           </List>
@@ -110,7 +124,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    dish: state.dish
+    dish: state.dish,
+    postsOfDish: state.postsOfDish,
+    dishid: state.dishID
   }
 };
 

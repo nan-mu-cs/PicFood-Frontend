@@ -41,7 +41,7 @@ class Timeline extends Component {
         network.social.getTimeline()
             .then(res=>res.json())
             .then(data=>{
-                // console.log(data)
+                console.log(data)
                 this.setState({
                     data,
                     refreshing:false,
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
     return{
-        timelines:state.timelines,
+        // timelines:state.timelines,
         token:state.token
     }
 };

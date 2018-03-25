@@ -8,8 +8,10 @@ import UserPage from "./components/User/UserPage"
 import DishPhoto from "./components/DishPhoto"
 import RestaurantPage from "./components/Restaurant/RestaurantPage"
 import DishPage from "./components/Restaurant/DishPage"
-import {connect} from 'react-redux';
-import {Route, Switch, withRouter} from 'react-router-native'
+import { connect } from 'react-redux';
+import { NativeRouter,Route,Switch,withRouter } from 'react-router-native'
+import ImageDetailPage from "./components/ImageDetailPage";
+import PersonalPage from "./components/PersonalPage";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import FollowerList from "./components/User/FollowerList";

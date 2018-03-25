@@ -8,56 +8,57 @@ export default {
         {id:"search",icon:"search",url:"/search"},
         //{id:"restaurants",icon:"cart",url:"/restaurants"},
         // {id:"camera",icon:"camera",url:"/camera"},
+        {id:"post",icon:"cart",url:"/post"},
         {id:"users",icon:"person",url:"/users"}
     ],
-    timelines:[
-        {
-            type:"post",
-            id:1,
-            user:"Kai",
-            avatar:"http://via.placeholder.com/100x100",
-            location:"this is a location",
-            image:"http://via.placeholder.com/350x150",
-            time:"11h ago"
-
-        },
-        {
-            type:"comment",
-            id:2,
-            user:"Kai",
-            avatar:"http://via.placeholder.com/100x100",
-            location:"this is a location",
-            image:"http://via.placeholder.com/350x150",
-            likes:12,
-            dish:"Spice Fish",
-            time:"11h ago",
-            comment:"this is very good"
-        },
-        {
-            type:"rate",
-            id:3,
-            user:"Kai",
-            avatar:"http://via.placeholder.com/100x100",
-            location:"this is a location",
-            image:"http://via.placeholder.com/350x150",
-            likes:12,
-            dish:"Spice Fish",
-            time:"11h ago",
-            rate:3.5
-        },
-        {
-            type:"like",
-            id:4,
-            user:"Kai",
-            avatar:"http://via.placeholder.com/100x100",
-            location:"this is a location",
-            image:"http://via.placeholder.com/350x150",
-            likes:12,
-            dish:"Spice Fish",
-            time:"11h ago"
-        },
-
-    ],
+    // timelines:[
+    //     {
+    //         type:"post",
+    //         id:1,
+    //         user:"Kai",
+    //         avatar:"http://via.placeholder.com/100x100",
+    //         location:"this is a location",
+    //         image:"http://via.placeholder.com/350x150",
+    //         time:"11h ago"
+    //
+    //     },
+    //     {
+    //         type:"comment",
+    //         id:2,
+    //         user:"Kai",
+    //         avatar:"http://via.placeholder.com/100x100",
+    //         location:"this is a location",
+    //         image:"http://via.placeholder.com/350x150",
+    //         likes:12,
+    //         dish:"Spice Fish",
+    //         time:"11h ago",
+    //         comment:"this is very good"
+    //     },
+    //     {
+    //         type:"rate",
+    //         id:3,
+    //         user:"Kai",
+    //         avatar:"http://via.placeholder.com/100x100",
+    //         location:"this is a location",
+    //         image:"http://via.placeholder.com/350x150",
+    //         likes:12,
+    //         dish:"Spice Fish",
+    //         time:"11h ago",
+    //         rate:3.5
+    //     },
+    //     {
+    //         type:"like",
+    //         id:4,
+    //         user:"Kai",
+    //         avatar:"http://via.placeholder.com/100x100",
+    //         location:"this is a location",
+    //         image:"http://via.placeholder.com/350x150",
+    //         likes:12,
+    //         dish:"Spice Fish",
+    //         time:"11h ago"
+    //     },
+    //
+    // ],
     user:{
         id:"kaiyang1261",
         name:"Kai Yang",
@@ -595,4 +596,36 @@ export default {
     },
     token:"",
     location:{lat:1,lon:1},
+    postsOfDish: [
+        {
+            postId: "11",
+            creatorId: "111",
+            creator: "Xiaoxin",
+            creatorAvatar: "222",
+            content: "",
+            imageUrl: "http://via.placeholder.com/100x100",
+            dishId: 5,
+            restaurantName: "KFC",
+            dishName: "Burger",
+            upvoteCount: 120,
+            time: "2018-03-21 22:58:43",
+        },
+        {
+            postId: "22",
+            creatorId: "222",
+            creator: "Xiaoxin123",
+            creatorAvatar: "333",
+            content: "",
+            imageUrl: "http://via.placeholder.com/100x100",
+            dishId: 6,
+            restaurantName: "KFC",
+            dishName: "Burger",
+            upvoteCount: 560,
+            time: "2018-02-24 05:15:26",
+        },
+    ],
+    dishID: 5,
+    post:{
+
+    }
 };
