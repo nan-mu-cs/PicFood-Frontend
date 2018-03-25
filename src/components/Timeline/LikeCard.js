@@ -12,7 +12,9 @@ class LikeCard extends Component {
         super(props);
         this.state = {
             avatar:"",
-            name:""
+            name:"",
+            dishname:"",
+            dishId:""
         };
         this.handleClickImage = this.handleClickImage.bind(this);
     }
@@ -41,13 +43,17 @@ class LikeCard extends Component {
             }).catch(err=>{
             console.log(err);
         });
-        // network.post.getPostInfo(this.props.data.postId)
-        //     .then(res=>res.json())
-        //     .then(data=>{
-        //         console.log(data);
-        //     }).catch(err=>{
-        //         console.log(err);
-        // });
+        network.post.getPostInfo(this.props.data.postId)
+            .then(res=>res.json())
+            .then(data=>{
+                this.setState({
+                    dishname:data.dishName,
+                    dishId:data.dishId
+                });
+                //console.log(data);
+            }).catch(err=>{
+                console.log(err);
+        });
         // network.dish.getDishInfoById({id:this.props.data.dishId})
         //     .then(res=>res.json())
         //     .then(data=>{
@@ -78,7 +84,7 @@ class LikeCard extends Component {
                 <CardItem cardBody >
                     <TouchableWithoutFeedback onPress={this.handleClickImage}>
                         <Body style={{paddingTop:5,paddingBottom:20,paddingLeft:20,paddingRight:20}}>
-                            <Text note ><Icon name="md-heart" style={{fontSize:35}}/>    Liked  dish <Text style={{marginLeft:5}}>{this.props.data.dish}</Text></Text>
+                            <Text note ><Icon name="md-heart" style={{fontSize:35}}/>    Liked  dish <Text style={{marginLeft:5}}>{this.state.dishname}</Text></Text>
                         </Body>
                     </TouchableWithoutFeedback>
                 </CardItem>

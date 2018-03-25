@@ -11,7 +11,9 @@ class CommentCard extends Component {
         super(props);
         this.state = {
             avatar:"",
-            name:""
+            name:"",
+            dishname:"",
+            dishId:""
         };
         this.handleClickImage = this.handleClickImage.bind(this);
     }
@@ -36,17 +38,21 @@ class CommentCard extends Component {
                     avatar:data.avatar,
                     name:data.name
                 });
-                console.log(data);
+                //console.log(data);
             }).catch(err=>{
             console.log(err);
         });
-        // network.post.getPostInfo(this.props.data.postId)
-        //     .then(res=>res.json())
-        //     .then(data=>{
-        //         console.log(data);
-        //     }).catch(err=>{
-        //         console.log(err);
-        // });
+        network.post.getPostInfo(this.props.data.postId)
+            .then(res=>res.json())
+            .then(data=>{
+                this.setState({
+                    dishname:data.dishName,
+                    dishId:data.dishId
+                });
+                console.log(data);
+            }).catch(err=>{
+                console.log(err);
+        });
         // network.dish.getDishInfoById({id:this.props.data.dishId})
         //     .then(res=>res.json())
         //     .then(data=>{
@@ -77,7 +83,7 @@ class CommentCard extends Component {
                 <CardItem cardBody >
                     <TouchableWithoutFeedback onPress={this.handleClickImage}>
                         <Body style={{paddingTop:5,paddingBottom:20,paddingLeft:20,paddingRight:20}}>
-                        <Text note><Icon ios="ios-quote" android="quote" style={{fontSize:35}} />    Comment on dish <Text style={{marginLeft:10}}>{this.props.data.dish}</Text>:</Text>
+                        <Text note><Icon ios="ios-quote" android="quote" style={{fontSize:35}} />    Comment on dish <Text style={{marginLeft:10}}>{this.state.dishname}</Text>:</Text>
                             <Text style={{marginTop:5,marginLeft:10}}>{this.props.data.content}</Text>
                         </Body>
                     </TouchableWithoutFeedback>
