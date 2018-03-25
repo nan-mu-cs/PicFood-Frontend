@@ -3,47 +3,45 @@
  */
 
 import React, { Component } from 'react';
-import { Image,StyleSheet } from 'react-native';
+import { Image,StyleSheet,TouchableWithoutFeedback } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right, List, ListItem } from 'native-base';
 import {withRouter} from "react-router-native";
-import StarRating from 'react-native-star-rating';
+import network from "../../network";
 
-export default class Dishes extends Component {
+class Dishes extends Component {
+    constructor(props,context){
+        super(props,context);
+        this.state={
+            imageUrl:""
+        }
+    }
+    componentDidMount(){
+        network.dish.getDishImages(this.props.data.dishId)
+            .then(res=>res.json())
+            .then(data=>{
+                console.log(data);
+                if(data && data.length > 0)
+                    this.setState({
+                        imageUrl:data[0]
+                    });
+            }).catch(err=>{
+                console.log(err);
+        });
+    }
+    onDishCardPress(dishId) {
+        this.props.history.push(`/dishes/${dishId}`);
+    }
     render() {
 
         return (
-            <Card style={{borderBottomWidth: 0}}>
+            <Card >
                 <CardItem>
-                    <Left>
-                        <Body>
-                        <Text style={styles.dish}>{this.props.data.name}</Text>
-                        <StarRating
-                            disabled={true}
-                            maxStars={5}
-                            rating={this.props.data.rate}
-                            containerStyle={{marginTop:10,alignSelf:"center"}}
-                            fullStarColor={"#f5af4b"}
-                            emptyStarColor={"#f5af4b"}
-                            halfStarEnabled
-                            starSize={15}
-                        />
-                        </Body>
-                    </Left>
+                    <Text>{this.props.data.name}</Text>
                 </CardItem>
-                <CardItem cardBody >
-                        <Image source={{uri:this.props.data.avatar1}} style={{height: 50, width: null, flex: 1}}/>
-                </CardItem>
-                <CardItem cardBody >
-                        <Image source={{uri:this.props.data.avatar2}} style={{height: 50, width: null, flex: 1}}/>
-                </CardItem>
-                <CardItem cardBody >
-                        <Image source={{uri:this.props.data.avatar3}} style={{height: 50, width: null, flex: 1}}/>
-                </CardItem>
-                <CardItem cardBody >
-                        <Image source={{uri:this.props.data.avatar4}} style={{height: 50, width: null, flex: 1}}/>
-                </CardItem>
-                <CardItem cardBody >
-                        <Image source={{uri:this.props.data.avatar5}} style={{height: 50, width: null, flex: 1}}/>
+                <CardItem>
+                    <TouchableWithoutFeedback onPress={this.onDishCardPress.bind(this, this.props.data.dishId)}>
+                        <Image source={{uri: this.state.imageUrl || "http://via.placeholder.com/100x100"}} style={{height: 200, width: null, flex: 1}}/>
+                    </TouchableWithoutFeedback>
                 </CardItem>
             </Card>
         );
@@ -59,3 +57,5 @@ const styles = StyleSheet.create({
       textAlign: 'center',
     }
 });
+
+export default withRouter(Dishes);
