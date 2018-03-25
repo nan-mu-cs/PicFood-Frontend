@@ -29,31 +29,41 @@ import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Footer from "../Footer";
 import {withRouter} from 'react-router-native';
+import network from "../../network";
 
-class FollowList extends Component {
+class FollowerList extends Component {
   constructor(props, context) {
     super(props);
-    this.state = {};
-    console.log('hello')
+    this.state = {
+      userId: this.props.match.params.userId
+    };
   }
 
-  onBackPress = () => {
-    this.props.history.push(`/users`);
+  onBackPress() {
+    this.props.history.goBack();
   }
 
+  componentDidMount() {
+    network.social.getMyFollowers()
+      .then(res => {
+        // console.log('FollowerList', res);
+        this.props.dispatch({type: "GET_FOLLOWERS", data: res});
+      })
+      .catch(err => {})
+  }
 
   render() {
     let userList = this.props.followers.map(item =>
-      <ListItem key={item.id} style={styles.listItem}>
+      <ListItem key={item.userId} style={styles.listItem}>
         <Left>
-          <Thumbnail source={{uri: item.avatar}}/>
+          <Thumbnail source={{uri: item.avatar || "http://via.placeholder.com/100x100"}}/>
           <Text>{item.user}</Text>
         </Left>
-        <Right>
-          <Button small>
-            <Text style={styles.buttonText}>Unfollow</Text>
-          </Button>
-        </Right>
+        {/*<Right>*/}
+          {/*<Button small onPress={this.onUnfollowPress.bind(this)}>*/}
+            {/*<Text style={styles.buttonText}>Unfollow</Text>*/}
+          {/*</Button>*/}
+        {/*</Right>*/}
       </ListItem>
     );
 
@@ -61,14 +71,14 @@ class FollowList extends Component {
       <Container>
         <Header>
           <Left>
-            <Button transparent onPress={this.onBackPress}>
-              <Icon name='arrow-back' />
+            <Button transparent onPress={this.onBackPress.bind(this)}>
+              <Icon name='arrow-back'/>
             </Button>
           </Left>
           <Body>
           <Title>Followers</Title>
           </Body>
-          <Right />
+          <Right/>
         </Header>
         <Content>
           <List>
@@ -98,4 +108,4 @@ const mapStateToProps = (state, ownProps) => {
 
 export default withRouter(connect(
   mapStateToProps
-)(FollowList));
+)(FollowerList));

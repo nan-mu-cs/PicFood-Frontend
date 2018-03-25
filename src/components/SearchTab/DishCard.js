@@ -33,16 +33,12 @@ class DishCard extends Component {
   }
 
   render() {
-    let avatar;
-    if(!this.props.data.avatar)
-      avatar = "http://via.placeholder.com/100x100";
-    else
-      avatar = this.props.data.avatar;
+    let avatar = this.props.data.avatar || "http://via.placeholder.com/100x100";
     return (
       <Card onPress={this.onCardPress.bind(this, this.props.data.id)}>
         <CardItem>
           <Left>
-            <Thumbnail source={{uri: this.props.data.avatar}}/>
+            <Thumbnail source={{uri: avatar}}/>
             <Body>
             <Text>{this.props.data.name}</Text>
             <Text note>{this.props.data.restaurant}</Text>
@@ -61,7 +57,7 @@ class DishCard extends Component {
         </CardItem>
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.id)}>
-            <Image source={{uri: this.props.data.avatar}} style={{height: 200, width: null, flex: 1}}/>
+            <Image source={{uri: avatar}} style={{height: 200, width: null, flex: 1}}/>
           </TouchableWithoutFeedback>
         </CardItem>
       </Card>
