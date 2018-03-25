@@ -92,7 +92,7 @@ class RestaurantPage extends Component {
             <Text>{item.name}</Text>
           </CardItem>
           <CardItem>
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={this.onDishCardPress.bind(this, item.dishId)}>
               <Image source={{uri: item.avatar || "http://via.placeholder.com/100x100"}} style={{height: 200, width: null, flex: 1}}/>
             </TouchableWithoutFeedback>
           </CardItem>
