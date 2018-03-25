@@ -27,6 +27,10 @@ class Timeline extends Component {
     }
     componentDidMount(){
         //console.log(this.props.token);
+        if(this.props.token){
+            this.setState({loading:true});
+            this.getData();
+        }
     }
     componentWillUpdate(nextProps){
         // console.log(this.props.token);
