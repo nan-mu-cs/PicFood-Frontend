@@ -77,7 +77,6 @@ class DishPage extends Component {
             </Card>
           )
     }
-      
     );
     //console.log(this.props);
     return (
