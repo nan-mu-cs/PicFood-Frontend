@@ -61,8 +61,8 @@ class UserPage extends Component {
                     <Title>{this.props.user.name}</Title>
                     </Body>
                 </Header>
+              {this.state.loading ? <Content><Spinner/></Content> :
                 <Content>
-                  {this.state.loading && <Spinner/>}
                   <CardItem cardBody>
                     <Image source={{uri:this.props.user.avatar || "http://via.placeholder.com/100x100"}} style={{height: 200, width: null, flex: 1}}/>
                   </CardItem>
@@ -77,7 +77,7 @@ class UserPage extends Component {
                       <Text>{this.props.user.following} Following</Text>
                     </ListItem>
                   </List>
-                </Content>
+                </Content>}
                 <Footer/>
             </Container>
         )

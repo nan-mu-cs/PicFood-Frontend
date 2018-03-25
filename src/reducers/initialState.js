@@ -334,39 +334,39 @@ export default {
             // location:"this is a location",
             // address:"200 temple street",
             dishes:[
-                {
-                    dishId:1,
-                    name:"zuozong chicken",
-                    rate:2.0,
-                    avatar:"http://via.placeholder.com/50x50",
-                    avatar1:"http://via.placeholder.com/50x50",
-                    avatar2:"http://via.placeholder.com/50x50",
-                    avatar3:"http://via.placeholder.com/50x50",
-                    avatar4:"http://via.placeholder.com/50x50",
-                    avatar5:"http://via.placeholder.com/50x50"
-                },
-                {
-                    dishId:2,
-                    name:"sichuan beef",
-                    rate:1.0,
-                    avatar:"http://via.placeholder.com/50x50",
-                    avatar1:"http://via.placeholder.com/50x50",
-                    avatar2:"http://via.placeholder.com/50x50",
-                    avatar3:"http://via.placeholder.com/50x50",
-                    avatar4:"http://via.placeholder.com/50x50",
-                    avatar5:"http://via.placeholder.com/50x50"
-                },
-                {
-                    dishId:3,
-                    name:"fried fish",
-                    rate:4.0,
-                    avatar:"http://via.placeholder.com/50x50",
-                    avatar1:"http://via.placeholder.com/50x50",
-                    avatar2:"http://via.placeholder.com/50x50",
-                    avatar3:"http://via.placeholder.com/50x50",
-                    avatar4:"http://via.placeholder.com/50x50",
-                    avatar5:"http://via.placeholder.com/50x50"
-                }
+                // {
+                //     dishId:1,
+                //     name:"zuozong chicken",
+                //     rate:2.0,
+                //     avatar:"http://via.placeholder.com/50x50",
+                //     avatar1:"http://via.placeholder.com/50x50",
+                //     avatar2:"http://via.placeholder.com/50x50",
+                //     avatar3:"http://via.placeholder.com/50x50",
+                //     avatar4:"http://via.placeholder.com/50x50",
+                //     avatar5:"http://via.placeholder.com/50x50"
+                // },
+                // {
+                //     dishId:2,
+                //     name:"sichuan beef",
+                //     rate:1.0,
+                //     avatar:"http://via.placeholder.com/50x50",
+                //     avatar1:"http://via.placeholder.com/50x50",
+                //     avatar2:"http://via.placeholder.com/50x50",
+                //     avatar3:"http://via.placeholder.com/50x50",
+                //     avatar4:"http://via.placeholder.com/50x50",
+                //     avatar5:"http://via.placeholder.com/50x50"
+                // },
+                // {
+                //     dishId:3,
+                //     name:"fried fish",
+                //     rate:4.0,
+                //     avatar:"http://via.placeholder.com/50x50",
+                //     avatar1:"http://via.placeholder.com/50x50",
+                //     avatar2:"http://via.placeholder.com/50x50",
+                //     avatar3:"http://via.placeholder.com/50x50",
+                //     avatar4:"http://via.placeholder.com/50x50",
+                //     avatar5:"http://via.placeholder.com/50x50"
+                // }
             ]
         },
     searchedRestaurants:[
@@ -569,5 +569,6 @@ export default {
     dishID: 5,
     post:{
 
-    }
+    },
+    cachedRestaurants: {}
 };

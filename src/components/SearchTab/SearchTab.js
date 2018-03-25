@@ -62,10 +62,13 @@ class SearchTab extends Component {
         .catch(err => {
           console.log(err)
         })
+    else
+      this.setState({loading: false})
     // network.dish.searchDishes('rice', 'rate', this.props.location.lat, this.props.location.lon)
     if(this.props.searchedDishes.length === 0)
       network.dish.searchDishes('rice', 'rate', 41, -71)
         .then(res => {
+          console.log(res)
           this.props.dispatch({type:"GET_SEARCHED_DISHES", data: res});
         })
         .catch(err => {
@@ -103,8 +106,7 @@ class SearchTab extends Component {
           <Tab heading="Restaurants">
             <Content>
               <List>
-                {this.state.loading && <Spinner/>}
-                {restaurantCards}
+                {this.state.loading ? <Spinner/> : restaurantCards}
               </List>
             </Content>
           </Tab>

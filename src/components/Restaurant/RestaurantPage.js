@@ -33,7 +33,10 @@ class RestaurantPage extends Component {
     super(props);
     this.state = {
       loading: true,
-      restaurantId: this.props.match.params.id
+      restaurantId: this.props.match.params.id,
+      restaurant: {
+        dishes: []
+      }
     };
     this.handleClickBack = this.handleClickBack.bind(this);
     // this.handlePostImage = this.handlePostImage.bind(this);
@@ -77,18 +80,23 @@ class RestaurantPage extends Component {
   }
 
   async componentDidMount() {
+    let cache = this.props.cachedRestaurants[this.state.restaurantId];
+    if(cache) {
+      this.setState({loading: false, restaurant: cache});
+      return;
+    }
     try {
       let restaurantInfo = await network.restaurant.getRestaurantInfoById(this.state.restaurantId);
       let restaurantDishes = await network.restaurant.getRestaurantDishesById(this.state.restaurantId);
       restaurantInfo.dishes = restaurantDishes;
-      this.props.dispatch({type: "GET_RESTAURANT_INFO", data: restaurantInfo});
-      this.setState({loading: false});
+      this.props.dispatch({type: "GET_RESTAURANT_INFO", restaurantId: restaurantInfo.restaurantId, data: restaurantInfo});
+      this.setState({loading: false, restaurant: restaurantInfo});
     } catch(e) {
     }
   }
 
   render() {
-    let dishes = this.props.restaurant.dishes.map((item) => {
+    let dishes = this.state.restaurant.dishes.map((item) => {
       return (
         <Card key={item.dishId} onPress={this.onDishCardPress.bind(this, item.dishId)}>
           <CardItem>
@@ -116,27 +124,27 @@ class RestaurantPage extends Component {
           </Body>
           <Right/>
         </Header>
+        {this.state.loading ? <Content><Spinner/></Content> :
         <Content>
-          {this.state.loading ? <Spinner/> :
           <Card>
             <CardItem>
               <Left>
                 <Body>
-                <Text style={styles.restaurant}>{this.props.restaurant.name}</Text>
+                <Text style={styles.restaurant}>{this.state.restaurant.name}</Text>
                 <StarRating
                   disabled={true}
                   maxStars={5}
-                  rating={this.props.restaurant.avgRate}
+                  rating={this.state.restaurant.avgRate}
                   containerStyle={{marginTop: 10, alignSelf: "center"}}
                   fullStarColor={"#f5af4b"}
                   emptyStarColor={"#f5af4b"}
                   halfStarEnabled
                   starSize={15}
                 />
-                <Text note>{this.props.restaurant.location}</Text>
-                <Text note>{this.props.restaurant.address}</Text>
-                <Text note>{this.props.restaurant.teleNumber}</Text>
-                <Text note>{this.props.restaurant.category}</Text>
+                <Text note>{this.state.restaurant.location}</Text>
+                <Text note>{this.state.restaurant.address}</Text>
+                <Text note>{this.state.restaurant.teleNumber}</Text>
+                <Text note>{this.state.restaurant.category}</Text>
                 </Body>
               </Left>
             </CardItem>
@@ -157,8 +165,8 @@ class RestaurantPage extends Component {
             <Button style={{backgroundColor: '#3B5998'}} onPress={this.handlePostImage.bind(this, "camera")}>
               <Icon name="ios-camera"/>
             </Button>
-          </Fab>}
-        </Content>
+          </Fab>
+        </Content>}
         <Footer/>
       </Container>
     )
@@ -183,7 +191,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    restaurant: state.restaurant
+    cachedRestaurants: state.cachedRestaurants
   }
 };
 
