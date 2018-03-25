@@ -42,26 +42,15 @@ class UserPage extends Component {
 
     componentDidMount() {
       let profile = this.state.userId ?
-        network.social.getUserProfile(this.state.userId) : network.account.getMyProfile()
+        network.social.getUserProfile(this.state.userId) : network.account.getMyProfile();
       profile.then(res => {
-          console.log('Profile', res);
+          this.props.dispatch({type: 'GET_USER_PROFILE', data: res});
         })
         .catch(err => {
-
         })
     }
 
     render() {
-        // let img = this.props.user.images.map((item)=>{
-        //     let images;
-
-        //     images = <Images data={item}/>;
-        //     return (
-        //         <ListItem key={item.id} style={styles.listItem}>
-        //             {images}
-        //         </ListItem>
-        //     );
-        // });
         return (
             <Container>
                 <Header>
@@ -71,7 +60,7 @@ class UserPage extends Component {
                 </Header>
                 <Content>
                   <CardItem cardBody>
-                    <Image source={{uri:this.props.user.avatar}} style={{height: 200, width: null, flex: 1}}/>
+                    <Image source={{uri:this.props.user.avatar || "http://via.placeholder.com/100x100"}} style={{height: 200, width: null, flex: 1}}/>
                   </CardItem>
                   <List>
                     <ListItem last>
