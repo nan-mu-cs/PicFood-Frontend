@@ -8,7 +8,7 @@ export default {
         {id:"search",icon:"search",url:"/search"},
         //{id:"restaurants",icon:"cart",url:"/restaurants"},
         // {id:"camera",icon:"camera",url:"/camera"},
-        {id:"post",icon:"cart",url:"/post"}
+        {id:"post",icon:"cart",url:"/post"},
         {id:"users",icon:"person",url:"/users"}
     ],
     // timelines:[
@@ -596,7 +596,6 @@ export default {
     },
     token:"",
     location:{lat:1,lon:1},
-<<<<<<< HEAD
     postsOfDish: [
         {
             postId: "11",
@@ -629,6 +628,4 @@ export default {
     post:{
 
     }
-=======
->>>>>>> 1826355abad73b4aad90c9d54c0811e7f15b9bb7
 };
