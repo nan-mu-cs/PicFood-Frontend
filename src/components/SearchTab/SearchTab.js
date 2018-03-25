@@ -56,7 +56,7 @@ class SearchTab extends Component {
     if(this.props.searchedRestaurants.length === 0)
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
         .then(res => {
-          this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res});
+          this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res.splice(0, 8)});
           this.setState({loading: false})
         })
         .catch(err => {
@@ -69,7 +69,7 @@ class SearchTab extends Component {
       network.dish.searchDishes('rice', 'rate', 41, -71)
         .then(res => {
           console.log(res)
-          this.props.dispatch({type:"GET_SEARCHED_DISHES", data: res});
+          this.props.dispatch({type:"GET_SEARCHED_DISHES", data: res.splice(0, 8)});
         })
         .catch(err => {
           console.log(err)
@@ -77,12 +77,12 @@ class SearchTab extends Component {
   }
 
   render() {
-    let restaurantCards = this.props.searchedRestaurants.splice(0, 8).map(item =>
+    let restaurantCards = this.props.searchedRestaurants.map(item =>
       <ListItem key={item.restaurantId} style={styles.listItem}>
         <RestaurantCard data={item}/>
       </ListItem>
     );
-    let dishCards = this.props.searchedDishes.splice(0, 8).map(item =>
+    let dishCards = this.props.searchedDishes.map(item =>
       <ListItem key={item.dishId} style={styles.listItem}>
         <DishCard data={item}/>
       </ListItem>
