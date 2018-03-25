@@ -87,7 +87,6 @@ class App extends React.Component {
           })
   }
   initialRestaurantsDishes(lat, lon) {
-    console.log('initialRestaurantsDishes', lat, lon);
     network.restaurant.getRestaurantsByLocation(lat, lon)
       .then(res => {
         console.log(res);
