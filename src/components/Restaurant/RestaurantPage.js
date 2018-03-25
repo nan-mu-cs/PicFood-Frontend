@@ -27,6 +27,7 @@ import Footer from "../Footer";
 import StarRating from 'react-native-star-rating';
 import {ImagePicker} from 'expo';
 import network from '../../network';
+import Dishes from "./Dishes";
 
 class RestaurantPage extends Component {
   constructor(props, context) {
@@ -75,9 +76,7 @@ class RestaurantPage extends Component {
     this.props.history.goBack();
   }
 
-  onDishCardPress(dishId) {
-    this.props.history.push(`/dishes/${dishId}`);
-  }
+
 
   async componentDidMount() {
     let cache = this.props.cachedRestaurants[this.state.restaurantId];
@@ -98,16 +97,7 @@ class RestaurantPage extends Component {
   render() {
     let dishes = this.state.restaurant.dishes.map((item) => {
       return (
-        <Card key={item.dishId} onPress={this.onDishCardPress.bind(this, item.dishId)}>
-          <CardItem>
-            <Text>{item.name}</Text>
-          </CardItem>
-          <CardItem>
-            <TouchableWithoutFeedback onPress={this.onDishCardPress.bind(this, item.dishId)}>
-              <Image source={{uri: item.avatar || "http://via.placeholder.com/100x100"}} style={{height: 200, width: null, flex: 1}}/>
-            </TouchableWithoutFeedback>
-          </CardItem>
-        </Card>
+        <Dishes key={item.dishId} data={item}/>
       );
     });
 
@@ -157,9 +147,9 @@ class RestaurantPage extends Component {
         <Footer/>
         <Fab
             active={this.state.active}
-            direction="up"
-            containerStyle={{}}
-            style={{backgroundColor: '#5067FF',bottom:100}}
+            direction="left"
+            style={{backgroundColor: '#5067FF'}}
+            containerStyle={{bottom:100}}
             position="bottomRight"
             onPress={() => this.setState({active: !this.state.active})}>
           <Icon name="add"/>
