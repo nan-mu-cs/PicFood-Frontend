@@ -29,7 +29,7 @@ class CommentCard extends Component {
         // });
     }
     componentDidMount(){
-        network.account.getUserAccount({userId:this.props.data.commenterId})
+        network.social.getUserProfile(this.props.data.commenterId)
             .then((res)=>res.json())
             .then(data=>{
                 this.setState({

@@ -12,11 +12,11 @@ export default {
       return fetch(`${HOST}/register`, verb('post', body));
     },
 
-    getUserAccount() {
+    getMyProfile() {
       return fetch(HOST + '/api/users/me', verb('get'));
     },
 
-    postUserAccount(body) { // avatar, bio, email, name, password (all optional)
+    postUserProfile(body) { // avatar, bio, email, name, password (all optional)
       return fetch(HOST + '/api/users/me', verb('post', body)).then(handleResponse);
     },
   },
@@ -52,6 +52,14 @@ export default {
     getTimeline() {
       //console.log(verb('get'));
       return fetch(HOST + '/api/timeline', verb('get'));
+    },
+
+    getUserProfile(userId) {
+      return fetch(HOST + '/api/users/${userId}', verb('get'));
+    },
+
+    getAllUsers(userId) {
+      return fetch(HOST + '/api/users', verb('get'));
     },
 
     getActivitiesOfAnUser(id) { // TODO on backend
