@@ -14,6 +14,7 @@ import {
   Icon,
   Left,
   List,
+  Spinner,
   ListItem,
   Right,
   Text,
@@ -28,16 +29,17 @@ class UserPage extends Component {
     constructor(props, context){
         super(props);
         this.state={
+          loading: true,
           userId: this.props.match.params.id
         };
     }
 
     onFollowingsPress() {
-      this.props.history.push(`/followings/1`);
+      this.props.history.push(`/followings/${this.state.userId}`);
     }
 
     onFollowersPress() {
-      this.props.history.push(`/followers/1`);
+      this.props.history.push(`/followers/${this.state.userId}`);
     }
 
     componentDidMount() {
@@ -45,6 +47,7 @@ class UserPage extends Component {
         network.social.getUserProfile(this.state.userId) : network.account.getMyProfile();
       profile.then(res => {
           this.props.dispatch({type: 'GET_USER_PROFILE', data: res});
+          this.setState({userId: res.userId, loading: false});
         })
         .catch(err => {
         })
@@ -58,6 +61,7 @@ class UserPage extends Component {
                     <Title>{this.props.user.name}</Title>
                     </Body>
                 </Header>
+              {this.state.loading ? <Content><Spinner/></Content> :
                 <Content>
                   <CardItem cardBody>
                     <Image source={{uri:this.props.user.avatar || "http://via.placeholder.com/100x100"}} style={{height: 200, width: null, flex: 1}}/>
@@ -73,7 +77,7 @@ class UserPage extends Component {
                       <Text>{this.props.user.following} Following</Text>
                     </ListItem>
                   </List>
-                </Content>
+                </Content>}
                 <Footer/>
             </Container>
         )

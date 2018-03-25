@@ -38,7 +38,7 @@ class PostPhotoPage extends Component {
         }).then(res=>res.json())
             .then(data=>{
                 this.props.history.goBack();
-                // console.log(data);
+                console.log(data);
             }).catch(err=>{
                 console.log(err);
         });
@@ -87,7 +87,6 @@ class PostPhotoPage extends Component {
                             containerStyle={{alignSelf:"center"}}
                             fullStarColor={"#f5af4b"}
                             emptyStarColor={"#f5af4b"}
-                            halfStarEnabled
                             starSize={25}
                             selectedStar={(rate) => this.setState({rate})}
                         />

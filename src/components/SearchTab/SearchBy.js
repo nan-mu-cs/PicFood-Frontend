@@ -32,8 +32,8 @@ class SearchBy extends Component {
     }
 
     render() {
-        console.log("distance = " + this.props.distance);
-        console.log("sort_by = " + this.props.sort_by);
+        // console.log("distance = " + this.props.distance);
+        // console.log("sort_by = " + this.props.sort_by);
         return (
             <Container>
                 <Header>

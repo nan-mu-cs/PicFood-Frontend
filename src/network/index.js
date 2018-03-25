@@ -135,7 +135,7 @@ export default {
     },
 
     getDishImages(id) {
-      return fetch(HOST + `/api/dishes/${id}/images`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/dishes/${id}/images`, verb('get'));
     },
 
     getPostsOfDish(id) {

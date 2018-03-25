@@ -14,6 +14,7 @@ import {
   Text,
   Icon,
   Left,
+  Spinner,
   List,
   ListItem,
   Right,
@@ -31,7 +32,7 @@ class DishPage extends Component {
   constructor(props, context) {
     super(props);
     this.state = {
-        dishId: this.props.match.params.id
+      dishId: this.props.match.params.id
     };
     this.handleClickBack = this.handleClickBack.bind(this);
   }

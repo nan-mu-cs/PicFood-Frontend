@@ -16,6 +16,7 @@ import {
   Item,
   List,
   ListItem,
+  Spinner,
   Tab,
   Tabs,
   Title
@@ -28,21 +29,12 @@ import Footer from "../Footer";
 import {withRouter} from 'react-router-native';
 import network from '../../network';
 
-
-const BUTTONS = [
-  { text: "Option 0", icon: "american-football", iconColor: "#2c8ef4" },
-  { text: "Option 1", icon: "analytics", iconColor: "#f42ced" },
-  { text: "Option 2", icon: "aperture", iconColor: "#ea943b" },
-  { text: "Delete", icon: "trash", iconColor: "#fa213b" },
-  { text: "Cancel", icon: "close", iconColor: "#25de5b" }
-];
-const DESTRUCTIVE_INDEX = 3;
-const CANCEL_INDEX = 4;
-
 class SearchTab extends Component {
   constructor(props, context) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading: true
+    };
   }
 
   onSortPress = () => {
@@ -64,16 +56,20 @@ class SearchTab extends Component {
     if(this.props.searchedRestaurants.length === 0)
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
         .then(res => {
-          this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res});
+          this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res.splice(0, 8)});
+          this.setState({loading: false})
         })
         .catch(err => {
           console.log(err)
         })
+    else
+      this.setState({loading: false})
     // network.dish.searchDishes('rice', 'rate', this.props.location.lat, this.props.location.lon)
     if(this.props.searchedDishes.length === 0)
       network.dish.searchDishes('rice', 'rate', 41, -71)
         .then(res => {
-          this.props.dispatch({type:"GET_SEARCHED_DISHES", data: res});
+          console.log(res)
+          this.props.dispatch({type:"GET_SEARCHED_DISHES", data: res.splice(0, 8)});
         })
         .catch(err => {
           console.log(err)
@@ -110,7 +106,7 @@ class SearchTab extends Component {
           <Tab heading="Restaurants">
             <Content>
               <List>
-                {restaurantCards}
+                {this.state.loading ? <Spinner/> : restaurantCards}
               </List>
             </Content>
           </Tab>

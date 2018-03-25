@@ -24,7 +24,8 @@ export default (state = initialState, action) => {
         case "GET_POSTS_OF_DISH":
             return {...state, postsOfDish:action.data};
         case "GET_RESTAURANT_INFO":
-            return {...state, restaurant:action.data};
+            state.cachedRestaurants[action.restaurantId] = action.data;
+            return state;
         case "GET_POST_INFO":
             return {...state, post:action.data};
         case "GET_FOLLOWERS":
