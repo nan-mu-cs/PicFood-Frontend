@@ -162,7 +162,7 @@ export default {
     },
 
     postComment(postId, content) {
-      return fetch(HOST + '/comment', verb('post', {postId, content})).then(handleResponse);
+      return fetch(HOST + '/api/comment', verb('post', {postId, content}));
     },
 
     deleteComment(commentId) {
