@@ -113,7 +113,7 @@ class App extends React.Component {
               <Route exact path="/login" component={LoginPage}/>
               <Route exact path="/register" component={RegisterPage}/>
               <Route exact path="/post" component={PostPhotoPage}/>
-              <Route exact path="/viewpost" component={ViewPost}/>
+              <Route exact path="/viewpost/:postId" component={ViewPost}/>
               {/*<Route path="/person" component={PersonalPage}/>*/}
               {/*<Route path="/image-detail" component={ImageDetailPage}/>*/}
           </Switch>

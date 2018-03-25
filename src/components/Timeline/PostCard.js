@@ -27,6 +27,7 @@ class ImageCard extends Component {
         //         comments: this.props.data.comments
         //     }
         // });
+        this.props.history.push(`/viewpost/${this.props.data.postId}`)
     }
     componentDidMount(){
         network.social.getUserProfile(this.props.data.creatorId)
@@ -54,7 +55,7 @@ class ImageCard extends Component {
         if(!image)
             image = "http://via.placeholder.com/350x150";
         return (
-            <Card style={{borderColor:"transparent"}}>
+            <Card style={{borderColor:"transparent"}} >
                 <CardItem>
                     <Left>
                         <Thumbnail small source={{uri: avatar}} />

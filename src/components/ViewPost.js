@@ -16,11 +16,12 @@ class ViewPost extends Component {
     constructor(props, context){
         super(props);
         this.state={
-            postId: this.props.match.params.id
+            postId: this.props.match.params.postId
         };
     }
 
     componentDidMount() {
+        console.log(this.state.postId);
       network.social.getPostByPostId(this.state.postId)
         .then(res => {
           console.log(res);
