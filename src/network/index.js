@@ -58,8 +58,10 @@ export default {
       return fetch(HOST + `/api/users/${userId}`, verb('get'));
     },
 
-    getAllUsers(userId) {
-      return fetch(HOST + '/api/users', verb('get')).then(handleResponse);
+    searchUsers(name) {
+      let url = HOST + `/api/users/search?name=${name}`;
+      console.log('url', url);
+      return fetch(url, verb('get')).then(handleResponse);
     },
 
     getActivitiesOfAnUser(id) { // TODO on backend
@@ -139,7 +141,7 @@ export default {
     },
 
     getPostsOfDish(id) {
-      return fetch(HOST + `/api/dishes/${id}/post`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/dishes/${id}/post`, verb('get'));
     },
 
     postPhoto(body) { // {FormData} file

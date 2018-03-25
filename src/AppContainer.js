@@ -16,6 +16,7 @@ import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import FollowerList from "./components/User/FollowerList";
 import FollowingList from "./components/User/FollowingList";
+import UserList from "./components/User/UserList";
 import PostPhotoPage from "./components/PostPhotoPage";
 import ViewPost from "./components/ViewPost";
 import network from "./network";
@@ -37,9 +38,7 @@ class App extends React.Component {
   }
 
   getUserInformation(){
-      console.log("login!!!");
       AsyncStorage.multiGet(["email","password"],function (err,stores) {
-          console.log("err"+err);
           if(err){
               this.props.history.push("/login");
               console.log(err);
@@ -109,7 +108,7 @@ class App extends React.Component {
               <Route path="/dishes/:id" component={DishPage} />
               <Route path="/dishphoto/:id" component={DishPhoto} />
               <Route path="/searchby" component={SearchBy}/>
-              <Route path="/users" component={UserPage} />
+              <Route path="/users" component={PersonalPage} />
               <Route path="/users/:id" component={UserPage} />
               <Route path="/followers/:userId" component={FollowerList}/>
               <Route path="/followings/:userId" component={FollowingList}/>

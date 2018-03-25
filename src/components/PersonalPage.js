@@ -77,8 +77,8 @@ class PersonalPage extends Component {
                 </Header>
                 <Grid>
                     <Row size={15} style={{alignItems:"center"}}>
-                        <Col size={3}>
-                            <Thumbnail round size={150} source={{ uri: this.props.user.avatar }} />
+                        <Col size={6}>
+                            <Thumbnail round size={350} source={{ uri: this.props.user.avatar }} />
                         </Col>
                         <Col size={7}>
                             <Row style={{alignItems:"center"}}>
