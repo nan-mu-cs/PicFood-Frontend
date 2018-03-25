@@ -61,8 +61,10 @@ export default {
       return fetch(HOST + `/api/users/${userId}`, verb('get'));
     },
 
-    getAllUsers(userId) {
-      return fetch(HOST + '/api/users', verb('get')).then(handleResponse);
+    searchUsers(name) {
+      let url = HOST + `/api/users/search?name=${name}`;
+      console.log('url', url);
+      return fetch(url, verb('get')).then(handleResponse);
     },
 
     getActivitiesOfAnUser(id) { // TODO on backend
@@ -165,7 +167,7 @@ export default {
     },
 
     postComment(postId, content) {
-      return fetch(HOST + '/comment', verb('post', {postId, content})).then(handleResponse);
+      return fetch(HOST + '/api/comment', verb('post', {postId, content}));
     },
 
     deleteComment(commentId) {

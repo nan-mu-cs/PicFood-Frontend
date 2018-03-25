@@ -154,7 +154,6 @@ class PersonalPage extends Component {
 
 const styles = StyleSheet.create({
     avatarContainer:{
-        marginLeft:30
     },
     photoContainer:{
         flexDirection:"row",
