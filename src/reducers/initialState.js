@@ -8,6 +8,7 @@ export default {
         {id:"search",icon:"search",url:"/search"},
         //{id:"restaurants",icon:"cart",url:"/restaurants"},
         // {id:"camera",icon:"camera",url:"/camera"},
+        {id:"post",icon:"cart",url:"/post"}
         {id:"users",icon:"person",url:"/users"}
     ],
     // timelines:[
@@ -518,48 +519,48 @@ export default {
     },
     followers: [
       {
-        id: 1,
+        userId: 1,
         user:"Ashe",
         avatar:"http://via.placeholder.com/100x100",
       },
       {
-        id: 2,
+        userId: 2,
         user:"Brown",
         avatar:"http://via.placeholder.com/100x100",
       },{
-        id:3,
+        userId:3,
         user:"Chris",
         avatar:"http://via.placeholder.com/100x100",
       },{
-        id: 4,
-        user:"David",
+        userId: 4,
+        user:"DavuserId",
         avatar:"http://via.placeholder.com/100x100",
       },{
-        id: 5,
+        userId: 5,
         user:"Ed",
         avatar:"http://via.placeholder.com/100x100",
       },
     ],
-    followees: [
+    followings: [
       {
-        id: 5,
+        userId: 5,
         user:"Ashe",
         avatar:"http://via.placeholder.com/100x100",
       },
       {
-        id: 4,
+        userId: 4,
         user:"Brown",
         avatar:"http://via.placeholder.com/100x100",
       },{
-        id:3,
+        userId:3,
         user:"Chris",
         avatar:"http://via.placeholder.com/100x100",
       },{
-        id: 2,
+        userId: 2,
         user:"David",
         avatar:"http://via.placeholder.com/100x100",
       },{
-        id: 1,
+        userId: 1,
         user:"Ed",
         avatar:"http://via.placeholder.com/100x100",
       },
@@ -594,5 +595,40 @@ export default {
         ]
     },
     token:"",
-    location:{lat:1,lon:1}
+    location:{lat:1,lon:1},
+<<<<<<< HEAD
+    postsOfDish: [
+        {
+            postId: "11",
+            creatorId: "111",
+            creator: "Xiaoxin",
+            creatorAvatar: "222",
+            content: "",
+            imageUrl: "http://via.placeholder.com/100x100",
+            dishId: 5,
+            restaurantName: "KFC",
+            dishName: "Burger",
+            upvoteCount: 120,
+            time: "2018-03-21 22:58:43",
+        },
+        {
+            postId: "22",
+            creatorId: "222",
+            creator: "Xiaoxin123",
+            creatorAvatar: "333",
+            content: "",
+            imageUrl: "http://via.placeholder.com/100x100",
+            dishId: 6,
+            restaurantName: "KFC",
+            dishName: "Burger",
+            upvoteCount: 560,
+            time: "2018-02-24 05:15:26",
+        },
+    ],
+    dishID: 5,
+    post:{
+
+    }
+=======
+>>>>>>> 1826355abad73b4aad90c9d54c0811e7f15b9bb7
 };

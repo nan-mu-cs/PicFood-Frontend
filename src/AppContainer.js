@@ -1,29 +1,31 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Container, Content, FooterTab, Button, Text,Spinner} from 'native-base';
-import {Col, Row, Grid} from "react-native-easy-grid";
-import Footer from "./components/Footer";
-// import Header from "./components/Header";
+import {AsyncStorage, StyleSheet} from 'react-native';
+import {Button, Container, Content, FooterTab, Spinner} from 'native-base';
 import Timeline from "./components/Timeline/Timeline";
 import SearchTab from "./components/SearchTab/SearchTab";
-import SearchPage from "./components/SearchPage";
 import SearchBy from "./components/SearchTab/SearchBy";
-import UserPage from "./components/UserPage"
+import UserPage from "./components/User/UserPage"
 import DishPhoto from "./components/DishPhoto"
 import RestaurantPage from "./components/Restaurant/RestaurantPage"
 import DishPage from "./components/Restaurant/DishPage"
+<<<<<<< HEAD
+import PostPage from "./components/PostPage"
 import { connect } from 'react-redux';
 import {AsyncStorage} from "react-native";
 import { NativeRouter,Route,Switch } from 'react-router-native'
 import ImageDetailPage from "./components/ImageDetailPage";
 import PersonalPage from "./components/PersonalPage";
+=======
+import {connect} from 'react-redux';
+import {Route, Switch, withRouter} from 'react-router-native'
+>>>>>>> 1826355abad73b4aad90c9d54c0811e7f15b9bb7
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
-import FollowList from "./components/Users/FollowList";
+import FollowerList from "./components/User/FollowerList";
+import FollowingList from "./components/User/FollowingList";
 import PostPhotoPage from "./components/PostPhotoPage";
-import { withRouter } from 'react-router-native';
 import network from "./network";
-import { Constants, Location, Permissions } from 'expo';
+import {Location, Permissions} from 'expo';
 
 class App extends React.Component {
   constructor(props,context){
@@ -91,6 +93,15 @@ class App extends React.Component {
               })
           })
   }
+  initialRestaurantsDishes(lat, lon) {
+    console.log('initialRestaurantsDishes', lat, lon);
+    network.restaurant.getRestaurantsByLocation(lat, lon)
+      .then(res => {
+        console.log(res);
+        this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res});
+      })
+      .catch(err => {})
+  }
   render() {
       if(this.state.loading)
           return <Spinner />;
@@ -99,19 +110,13 @@ class App extends React.Component {
               <Route exact path="/" component={Timeline}/>
               <Route path="/search" component={SearchTab}/>
               <Route path="/restaurants/:id" component={RestaurantPage} />
-              <Route path="/dishes" component={DishPage}>
-                  <Route path=":id"/>
-              </Route>
-              <Route path="/dishphoto" component={DishPhoto}>
-                <Route path=":id"/>
-              </Route>
-              <Route exact path="/searchby" component={SearchBy}/>
-              <Route path="/users" component={UserPage}>
-                  <Route path=":id" component={UserPage}/>
-              </Route>
-              <Route path="/followers" component={FollowList}>
-                  <Route path=":id" component={FollowList}/>
-              </Route>
+              <Route path="/dishes/:id" component={DishPage} />
+              <Route path="/dishphoto/:id" component={DishPhoto} />
+              <Route path="/searchby" component={SearchBy}/>
+              <Route path="/users" component={UserPage} />
+              <Route path="/users/:id" component={UserPage} />
+              <Route path="/followers/:userId" component={FollowerList}/>
+              <Route path="/followings/:userId" component={FollowingList}/>
               <Route exact path="/login" component={LoginPage}/>
               <Route exact path="/register" component={RegisterPage}/>
               <Route exact path="/post" component={PostPhotoPage}/>
