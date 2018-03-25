@@ -62,8 +62,8 @@ class App extends React.Component {
                   this.setState({
                       loading:false
                   });
-                  console.log("token ");
-                  console.log(res);
+                  //console.log("token ");
+                  //console.log(res);
                   this.props.dispatch({type:"UPDATE_TOKEN",data:res.token});
                   this.props.history.push("/");
               })

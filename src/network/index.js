@@ -50,7 +50,7 @@ export default {
   },
   social: {
     getTimeline() {
-      console.log(verb('get'));
+      //console.log(verb('get'));
       return fetch(HOST + '/api/timeline', verb('get'));
     },
 
@@ -67,7 +67,7 @@ export default {
     },
 
     addPost(body) { // restaurantId, dishName, rate, category, content, imageId (optional)
-      return fetch(HOST + `/post`, verb('post', body)).then(handleResponse);
+      return fetch(HOST + `/post`, verb('post', body));
     },
 
     upvotePost(postId) {

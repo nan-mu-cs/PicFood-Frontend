@@ -50,7 +50,8 @@ class RestaurantPage extends Component {
         this.props.history.push({
           pathname: "/post",
           state: {
-            image: result.uri
+            image: result.uri,
+            restaurantId:this.state.restaurantId
           }
         });
       }
