@@ -17,18 +17,22 @@ import {
   List,
   ListItem,
   Right,
-  Title
+  Title,
+  Thumbnail
 } from 'native-base';
 import {Image, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Footer from "../Footer";
 import StarRating from 'react-native-star-rating';
 import network from '../../network';
+import moment from 'moment';
 
 class DishPage extends Component {
   constructor(props, context) {
     super(props);
-    this.state = {};
+    this.state = {
+        dishId: this.props.match.params.id
+    };
     this.handleClickBack = this.handleClickBack.bind(this);
   }
 
@@ -36,9 +40,9 @@ class DishPage extends Component {
     this.props.history.goBack();
   }
   componentDidMount(){
-    let dishId = "2c9ad7fa6255a250016255a26cf50000";
+    //let dishId = "2c9ad7fa6255a250016255a26cf50000";
     console.log(this.props.match.params.id);
-    network.dish.getPostsOfDish(dishId)
+    network.dish.getPostsOfDish(this.state.dishId)
         .then(res=>res.json())
     .then(res => {
       console.log("dish page!!!");
@@ -54,10 +58,18 @@ class DishPage extends Component {
   // }
 
   render() {
-    let photos = this.props.postsOfDish.map(item => {
+      let photos = this.props.postsOfDish.map(item => {
         let image = item.imageUrl;
         if(!image)
           image = "http://via.placeholder.com/100x100";
+        let poster = item.creator;
+        if(!poster)
+          poster = "Xiaoxin";
+        // let avatar = item.creatorAvatar;
+        // if(!avatar)
+        //   avatar = "http://via.placeholder.com/100x100";
+        let avatar = "http://via.placeholder.com/100x100";
+        console.log("avatar = " + avatar);
         return (
             <Card key={item.dishId}>
               <CardItem>
@@ -71,7 +83,10 @@ class DishPage extends Component {
                   </Button>
                 </Left>
                 <Right>
-                  <Text>posted by {item.creator}</Text>
+                  <CardItem>
+                  <Thumbnail small source={{uri: avatar}} style={styles.poster} />
+                  <Text style={{fontSize:16}}>{poster}</Text>
+                  </CardItem>
                 </Right>
               </CardItem>
             </Card>
@@ -93,18 +108,18 @@ class DishPage extends Component {
           <Right/>
         </Header>
         <Content>
-          <Text style={styles.dishName}>{this.props.dish.name}</Text>
+          <Text style={styles.dishName}>{this.props.postsOfDish[0].dishName}</Text>
           <StarRating
             disabled={true}
             maxStars={5}
-            rating={this.props.dish.rate}
+            rating={4.5}
             containerStyle={{marginTop: 3, alignSelf: "center"}}
             fullStarColor={"#f5af4b"}
             emptyStarColor={"#f5af4b"}
             halfStarEnabled
             starSize={15}
           />
-          <Text style={styles.restaurant}>{this.props.postsOfDish.restaurantName}</Text>
+          <Text style={styles.restaurant}>{this.props.postsOfDish[0].restaurantName}</Text>
           <List>
             {photos}
           </List>
@@ -124,6 +139,9 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     fontSize: 17,
     textAlign: 'center',
+  },
+  poster: {
+    marginRight: 10,
   }
 });
 
@@ -131,8 +149,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state, ownProps) => {
   return {
     dish: state.dish,
-    postsOfDish: state.postsOfDish,
-    dishid: state.dishID
+    postsOfDish: state.postsOfDish
   }
 };
 
