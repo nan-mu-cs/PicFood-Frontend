@@ -16,6 +16,7 @@ import {
   Left,
   List,
   ListItem,
+  Spinner,
   Right,
   Text,
   Title
@@ -31,6 +32,7 @@ class RestaurantPage extends Component {
   constructor(props, context) {
     super(props);
     this.state = {
+      loading: true,
       restaurantId: this.props.match.params.id
     };
     this.handleClickBack = this.handleClickBack.bind(this);
@@ -80,6 +82,7 @@ class RestaurantPage extends Component {
       let restaurantDishes = await network.restaurant.getRestaurantDishesById(this.state.restaurantId);
       restaurantInfo.dishes = restaurantDishes;
       this.props.dispatch({type: "GET_RESTAURANT_INFO", data: restaurantInfo});
+      this.setState({loading: false});
     } catch(e) {
     }
   }
@@ -114,6 +117,7 @@ class RestaurantPage extends Component {
           <Right/>
         </Header>
         <Content>
+          {this.state.loading ? <Spinner/> :
           <Card>
             <CardItem>
               <Left>
@@ -153,7 +157,7 @@ class RestaurantPage extends Component {
             <Button style={{backgroundColor: '#3B5998'}} onPress={this.handlePostImage.bind(this, "camera")}>
               <Icon name="ios-camera"/>
             </Button>
-          </Fab>
+          </Fab>}
         </Content>
         <Footer/>
       </Container>

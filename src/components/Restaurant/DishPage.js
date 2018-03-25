@@ -14,6 +14,7 @@ import {
   Text,
   Icon,
   Left,
+  Spinner,
   List,
   ListItem,
   Right,
@@ -28,7 +29,9 @@ import network from '../../network';
 class DishPage extends Component {
   constructor(props, context) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading: true
+    };
     this.handleClickBack = this.handleClickBack.bind(this);
   }
 
@@ -44,6 +47,7 @@ class DishPage extends Component {
       console.log("dish page!!!");
       console.log(res);
       this.props.dispatch({type:"GET_POSTS_OF_DISH", data: res});
+      this.setState({loading: false});
     })
     .catch(err => {
       console.log(err)
@@ -93,6 +97,7 @@ class DishPage extends Component {
           <Right/>
         </Header>
         <Content>
+          {this.state.loading && <Spinner/>}
           <Text style={styles.dishName}>{this.props.dish.name}</Text>
           <StarRating
             disabled={true}

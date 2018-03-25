@@ -16,6 +16,7 @@ import {
   Item,
   List,
   ListItem,
+  Spinner,
   Tab,
   Tabs,
   Title
@@ -28,21 +29,12 @@ import Footer from "../Footer";
 import {withRouter} from 'react-router-native';
 import network from '../../network';
 
-
-const BUTTONS = [
-  { text: "Option 0", icon: "american-football", iconColor: "#2c8ef4" },
-  { text: "Option 1", icon: "analytics", iconColor: "#f42ced" },
-  { text: "Option 2", icon: "aperture", iconColor: "#ea943b" },
-  { text: "Delete", icon: "trash", iconColor: "#fa213b" },
-  { text: "Cancel", icon: "close", iconColor: "#25de5b" }
-];
-const DESTRUCTIVE_INDEX = 3;
-const CANCEL_INDEX = 4;
-
 class SearchTab extends Component {
   constructor(props, context) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading: true
+    };
   }
 
   onSortPress = () => {
@@ -65,6 +57,7 @@ class SearchTab extends Component {
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
         .then(res => {
           this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res});
+          this.setState({loading: false})
         })
         .catch(err => {
           console.log(err)
@@ -110,6 +103,7 @@ class SearchTab extends Component {
           <Tab heading="Restaurants">
             <Content>
               <List>
+                {this.state.loading && <Spinner/>}
                 {restaurantCards}
               </List>
             </Content>
