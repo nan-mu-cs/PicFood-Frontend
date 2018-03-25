@@ -8,6 +8,7 @@ export default {
         {id:"search",icon:"search",url:"/search"},
         //{id:"restaurants",icon:"cart",url:"/restaurants"},
         // {id:"camera",icon:"camera",url:"/camera"},
+        {id:"post",icon:"cart",url:"/post"}
         {id:"users",icon:"person",url:"/users"}
     ],
     timelines:[
@@ -623,5 +624,8 @@ export default {
             time: "2018-02-24 05:15:26",
         },
     ],
-    dishID: 5
+    dishID: 5,
+    post:{
+
+    }
 };

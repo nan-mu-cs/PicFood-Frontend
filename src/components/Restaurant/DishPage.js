@@ -29,7 +29,6 @@ class DishPage extends Component {
   constructor(props, context) {
     super(props);
     this.state = {};
-
     this.handleClickBack = this.handleClickBack.bind(this);
   }
 

@@ -27,6 +27,8 @@ export default (state = initialState, action) => {
             return {...state, postsOfDish:action.data};
         case "GET_RESTAURANT_INFO":
             return {...state, restaurant:action.data};
+        case "GET_POST_INFO":
+            return {...state, post:action.data};
         default:
             return state;
     }
