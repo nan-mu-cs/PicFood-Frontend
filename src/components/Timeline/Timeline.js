@@ -20,13 +20,17 @@ class Timeline extends Component {
         this.state={
             data:[],
             refreshing:false,
-            loading:true
+            loading:false
         };
         this.handleRefresh = this.handleRefresh.bind(this);
         this.getData = this.getData.bind(this);
     }
     componentDidMount(){
         //console.log(this.props.token);
+        if(this.props.token&&!this.props.timelines){
+            this.setState({loading:true});
+            this.getData();
+        }
     }
     componentWillUpdate(nextProps){
         // console.log(this.props.token);
@@ -41,12 +45,13 @@ class Timeline extends Component {
         network.social.getTimeline()
             .then(res=>res.json())
             .then(data=>{
-                console.log(data)
+                console.log(data);
                 this.setState({
                     data,
                     refreshing:false,
                     loading:false
                 });
+                this.props.dispatch({type:"UPDATE_TIMELINE",data:data});
             }).catch(err=>{
             console.log(err);
         });
@@ -56,7 +61,7 @@ class Timeline extends Component {
         this.getData();
     }
     render() {
-        let cards = this.state.data.map((item)=>{
+        let cards = this.props.timelines.map((item)=>{
             let card;
             if(item.creatorId)
                 return (
@@ -141,7 +146,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
     return{
-        // timelines:state.timelines,
+        timelines:state.timelines,
         token:state.token
     }
 };
