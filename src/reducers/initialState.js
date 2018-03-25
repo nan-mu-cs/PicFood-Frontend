@@ -569,5 +569,6 @@ export default {
     dishID: 5,
     post:{
 
-    }
+    },
+    sort_criteria: {distance: "key3", sort_by: "key1"},
 };
