@@ -42,28 +42,28 @@ class RestaurantPage extends Component {
 
   handlePostImage(type) {
     let result;
-    if(type === "image"){
+    if (type === "image") {
       result = ImagePicker.launchImageLibraryAsync({
-          allowsEditing: true,
-          aspect: [4, 3],
+        allowsEditing: true,
+        aspect: [4, 3],
       });
     } else {
       result = ImagePicker.launchCameraAsync({
-          allowsEditing: true,
-          aspect: [4, 3],
+        allowsEditing: true,
+        aspect: [4, 3],
       });
     }
     result.then((result) => {
-        // console.log(result);
-        if (!result.cancelled) {
-            this.props.history.push({
-                pathname: "/post",
-                state: {
-                    image: result.uri,
-                    restaurantId:this.state.restaurantId
-                }
-            });
-        }
+      // console.log(result);
+      if (!result.cancelled) {
+        this.props.history.push({
+          pathname: "/post",
+          state: {
+            image: result.uri,
+            restaurantId: this.state.restaurantId
+          }
+        });
+      }
     }).catch(err => {
       console.log(err);
     });
@@ -85,16 +85,24 @@ class RestaurantPage extends Component {
   }
 
   render() {
-    let dish = this.props.restaurant.dishes.map((item) => {
-      let dishes;
-
-      dishes = <Dishes data={item}/>;
+    let dishes = this.props.restaurant.dishes.map((item) => {
       return (
-        <ListItem key={item.id} style={styles.listItem}>
-          {dishes}
+        <ListItem key={item.dishId} style={styles.listItem}>
+          <Card>
+            <CardItem>
+              {item.name}
+            </CardItem>
+            <CardItem cardBody>
+              <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, item.dishId)}>
+                <Image source={{uri: item.avatar || "http://via.placeholder.com/100x100"}}
+                       style={{height: 100, width: null, flex: 1}}/>
+              </TouchableWithoutFeedback>
+            </CardItem>
+          </Card>
         </ListItem>
       );
     });
+
     return (
       <Container>
         <Header>
@@ -108,65 +116,54 @@ class RestaurantPage extends Component {
           </Body>
           <Right/>
         </Header>
-        <Grid>
-          <Row size={9}>
-            <Col>
-              <ScrollView>
-                <Card>
-
-                  <CardItem>
-                    <Left>
-                      <Body>
-                      <Text style={styles.restaurant}>{this.props.restaurant.name}</Text>
-                      <StarRating
-                        disabled={true}
-                        maxStars={5}
-                        rating={this.props.restaurant.avgRate}
-                        containerStyle={{marginTop: 10, alignSelf: "center"}}
-                        fullStarColor={"#f5af4b"}
-                        emptyStarColor={"#f5af4b"}
-                        halfStarEnabled
-                        starSize={15}
-                      />
-                      <Text note>{this.props.restaurant.location}</Text>
-                      <Text note>{this.props.restaurant.address}</Text>
-                      <Text note>{this.props.restaurant.teleNumber}</Text>
-                      <Text note>{this.props.restaurant.category}</Text>
-                      </Body>
-                    </Left>
-                  </CardItem>
-                  {/*<CardItem cardBody>*/}
-                    {/*<Image source={{uri: this.props.restaurant.avatar}} style={{height: 200, width: null, flex: 1}}/>*/}
-                  {/*</CardItem>*/}
-
-                  <CardItem>
-                    <ScrollView>
-                      <List>
-                        {dish}
-                      </List>
-                    </ScrollView>
-                  </CardItem>
-
-                </Card>
-              </ScrollView>
-            </Col>
-          </Row>
-          <Fab
-            active={this.state.active}
-            direction="up"
-            containerStyle={{}}
-            style={{backgroundColor: '#5067FF'}}
-            position="bottomRight"
-            onPress={() => this.setState({active: !this.state.active})}>
-            <Icon name="add"/>
-            <Button style={{backgroundColor: '#34A34F'}} onPress={this.handlePostImage.bind(this,"image")}>
-              <Icon name="ios-images"/>
-            </Button>
-            <Button style={{backgroundColor: '#3B5998'}} onPress={this.handlePostImage.bind(this,"camera")}>
-              <Icon name="ios-camera"/>
-            </Button>
-          </Fab>
-        </Grid>
+        <Content>
+          <Card>
+            <CardItem>
+              <Left>
+                <Body>
+                <Text style={styles.restaurant}>{this.props.restaurant.name}</Text>
+                <StarRating
+                  disabled={true}
+                  maxStars={5}
+                  rating={this.props.restaurant.avgRate}
+                  containerStyle={{marginTop: 10, alignSelf: "center"}}
+                  fullStarColor={"#f5af4b"}
+                  emptyStarColor={"#f5af4b"}
+                  halfStarEnabled
+                  starSize={15}
+                />
+                <Text note>{this.props.restaurant.location}</Text>
+                <Text note>{this.props.restaurant.address}</Text>
+                <Text note>{this.props.restaurant.teleNumber}</Text>
+                <Text note>{this.props.restaurant.category}</Text>
+                </Body>
+              </Left>
+            </CardItem>
+            {/*<CardItem cardBody>*/}
+            {/*<Image source={{uri: this.props.restaurant.avatar}} style={{height: 200, width: null, flex: 1}}/>*/}
+            {/*</CardItem>*/}
+          </Card>
+          <ScrollView>
+            <List>
+              {dishes}
+            </List>
+          </ScrollView>
+        </Content>
+        <Fab
+          active={this.state.active}
+          direction="up"
+          containerStyle={{}}
+          style={{backgroundColor: '#5067FF'}}
+          position="bottomRight"
+          onPress={() => this.setState({active: !this.state.active})}>
+          <Icon name="add"/>
+          <Button style={{backgroundColor: '#34A34F'}} onPress={this.handlePostImage.bind(this, "image")}>
+            <Icon name="ios-images"/>
+          </Button>
+          <Button style={{backgroundColor: '#3B5998'}} onPress={this.handlePostImage.bind(this, "camera")}>
+            <Icon name="ios-camera"/>
+          </Button>
+        </Fab>
         <Footer/>
       </Container>
     )
