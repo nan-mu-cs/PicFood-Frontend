@@ -17,6 +17,7 @@ import RegisterPage from "./components/RegisterPage";
 import FollowerList from "./components/User/FollowerList";
 import FollowingList from "./components/User/FollowingList";
 import PostPhotoPage from "./components/PostPhotoPage";
+import ViewPost from "./components/ViewPost";
 import network from "./network";
 import {Location, Permissions} from 'expo';
 
@@ -113,6 +114,7 @@ class App extends React.Component {
               <Route exact path="/login" component={LoginPage}/>
               <Route exact path="/register" component={RegisterPage}/>
               <Route exact path="/post" component={PostPhotoPage}/>
+              <Route exact path="/viewpost" component={ViewPost}/>
               {/*<Route path="/person" component={PersonalPage}/>*/}
               {/*<Route path="/image-detail" component={ImageDetailPage}/>*/}
           </Switch>
