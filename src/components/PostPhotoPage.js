@@ -29,6 +29,19 @@ class PostPhotoPage extends Component {
     }
     handleClickPost(){
         // console.log(this.state);
+        network.social.addPost({
+            restaurantId:this.props.location.state.restaurantId,
+            dishName:this.state.dishname,
+            rate:this.state.rate,
+            content:this.state.comment,
+            imageUrl:this.state.avatar,
+            userId:"2c9abebe624f3d20016255574e6f0000"
+        }).then(res=>res.json())
+            .then(data=>{
+                console.log(data);
+            }).catch(err=>{
+                console.log(err);
+        });
     }
     componentDidMount(){
         network.storage.uploadFile(this.props.location.state.image)
@@ -42,7 +55,7 @@ class PostPhotoPage extends Component {
     render() {
         //console.log(this.props.location.state.image);
         //let {image} = this.props.location.state;
-        let data  = ["React","Native","Android","Java","Hello World"];
+        // let data  = ["React","Native","Android","Java","Hello World"];
         return (
             <Container>
             <Header>

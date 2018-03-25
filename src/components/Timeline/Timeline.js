@@ -2,8 +2,8 @@
  * Created by kai on 05/03/2018.
  */
 import React, { Component } from 'react';
-import { Container, Header, Content, FooterTab, Button, Text, Icon,Body,Title,List, ListItem } from 'native-base';
-import {StyleSheet,ScrollView} from 'react-native';
+import { Container, Header, Content, FooterTab, Button, Text, Icon,Body,Title,List, ListItem,Spinner } from 'native-base';
+import {StyleSheet,ScrollView,RefreshControl} from 'react-native';
 import { connect } from 'react-redux';
 import PostCard from "./PostCard";
 import LikeCard from "./LikeCard";
@@ -18,8 +18,12 @@ class Timeline extends Component {
     constructor(props, context){
         super(props);
         this.state={
-            data:[]
+            data:[],
+            refreshing:false,
+            loading:true
         };
+        this.handleRefresh = this.handleRefresh.bind(this);
+        this.getData = this.getData.bind(this);
     }
     componentDidMount(){
         //console.log(this.props.token);
@@ -29,15 +33,27 @@ class Timeline extends Component {
         //console.log(nextProps.token);
         if(this.props.token !== nextProps.token && nextProps.token){
             //console.log("call timeline");
-            network.social.getTimeline()
-                .then(res=>res.json())
-                .then(data=>{
-                    console.log(data)
-                    this.setState({data});
-                }).catch(err=>{
-                console.log(err);
-            });
+            this.setState({loading:true});
+            this.getData();
         }
+    }
+    getData(){
+        network.social.getTimeline()
+            .then(res=>res.json())
+            .then(data=>{
+                // console.log(data)
+                this.setState({
+                    data,
+                    refreshing:false,
+                    loading:false
+                });
+            }).catch(err=>{
+            console.log(err);
+        });
+    }
+    handleRefresh(){
+        this.setState({refreshing:true});
+        this.getData();
     }
     render() {
         let cards = this.state.data.map((item)=>{
@@ -79,7 +95,15 @@ class Timeline extends Component {
                 <Grid>
                     <Row>
                         <Col>
-                            <ScrollView>
+                            {this.state.loading&&<Spinner/>}
+                            <ScrollView
+                                refreshControl={
+                                    <RefreshControl
+                                        refreshing={this.state.refreshing}
+                                        onRefresh={this.handleRefresh}
+                                    />
+                                }
+                            >
                                 <List>
                                     {cards}
                                 </List>
