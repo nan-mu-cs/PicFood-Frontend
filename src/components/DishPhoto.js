@@ -2,15 +2,26 @@
  * Created by Xiaoxin on 24/03/2018.
  */
 
-import React, { Component } from 'react';
-import { Container, Header, Content, Button, Text, Icon, ListItem,Left, Body,
-     Card, CardItem, List, Title, Right } from 'native-base';
-import {StyleSheet, ScrollView, Image, TouchableWithoutFeedback} from 'react-native';
-import { connect } from 'react-redux';
-import FollowList from "./Users/FollowList"
-import { Col, Row, Grid } from "react-native-easy-grid";
+import React, {Component} from 'react';
+import {
+  Body,
+  Button,
+  Card,
+  CardItem,
+  Container,
+  Content,
+  Header,
+  Icon,
+  Left,
+  List,
+  ListItem,
+  Right,
+  Text,
+  Title
+} from 'native-base';
+import {Image, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {connect} from 'react-redux';
 import Footer from "./Footer"
-import StarRating from 'react-native-star-rating';
 
 class DishPhoto extends Component {
     constructor(props, context){

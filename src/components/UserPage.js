@@ -2,15 +2,27 @@
  * Created by Xiaoxin on 21/03/2018.
  */
 
-import React, { Component } from 'react';
-import { Container, Header, Content, Button, Text, Icon, ListItem,Left, Body,
-     Card, CardItem, List, Title, Right } from 'native-base';
-import {StyleSheet, ScrollView,Image} from 'react-native';
-import { connect } from 'react-redux';
-import FollowList from "./Users/FollowList"
-import { Col, Row, Grid } from "react-native-easy-grid";
+import React, {Component} from 'react';
+import {
+  Body,
+  Button,
+  Card,
+  CardItem,
+  Container,
+  Content,
+  Header,
+  Icon,
+  Left,
+  List,
+  ListItem,
+  Right,
+  Text,
+  Title
+} from 'native-base';
+import {Image, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
 import Footer from "./Footer"
-import StarRating from 'react-native-star-rating';
+import network from "../network";
 
 class UserPage extends Component {
     constructor(props, context){
@@ -20,8 +32,26 @@ class UserPage extends Component {
         };
     }
 
-    onForwardPress = () => {
-        this.props.history.push(`/followers`);
+    onForwardPress() {
+        this.props.history.push(`/followers/1`);
+    }
+
+    onFollowingsPress() {
+      this.props.history.push(`/followings/1`);
+    }
+
+    onFollowersPress() {
+      this.props.history.push(`/followers/1`);
+    }
+
+    componentDidMount() {
+      network.account.getUserAccount()
+        .then(res => {
+          console.log('getUserAccount', res);
+        })
+        .catch(err => {
+
+        })
     }
 
     render() {
@@ -54,15 +84,15 @@ class UserPage extends Component {
                       <Text>{this.props.user.posts} Posts</Text>
                     </ListItem>
                     
-                    <ListItem itemHeader>
+                    <ListItem itemHeader onPress={this.onFollowersPress.bind(this)}>
                       <Text>{this.props.user.followers} Followers</Text>
                       <Right>
-                      <Button small onPress={this.onForwardPress}>
+                      <Button small onPress={this.onForwardPress.bind(this)}>
                         <Icon name='arrow-forward' />
                       </Button>
                       </Right>
                     </ListItem>
-                    <ListItem>
+                    <ListItem onPress={this.onFollowingsPress.bind(this)}>
                       <Text>{this.props.user.following} Following</Text>
                     </ListItem>
                   </List>

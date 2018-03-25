@@ -594,5 +594,5 @@ export default {
         ]
     },
     token:"",
-    location:{lat:1,lon:1}
+    location:{lat:1,lon:1},
 };

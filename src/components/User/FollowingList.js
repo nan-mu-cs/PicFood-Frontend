@@ -29,28 +29,40 @@ import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Footer from "../Footer";
 import {withRouter} from 'react-router-native';
+import network from "../../network";
 
-class FollowList extends Component {
+class FollowingList extends Component {
   constructor(props, context) {
     super(props);
     this.state = {};
-    console.log('hello')
   }
 
-  onBackPress = () => {
-    this.props.history.push(`/users`);
+  onBackPress() {
+    this.props.history.goBack();
   }
 
+  onUnfollowPress() {
+
+  }
+
+  componentDidMount() {
+    network.social.getMyFollowings()
+      .then(res => {
+        // console.log('FollowingList', res);
+        this.props.dispatch({type: "GET_FOLLOWINGS", data: res});
+      })
+      .catch(err => {})
+  }
 
   render() {
-    let userList = this.props.followers.map(item =>
+    let userList = this.props.followings.map(item =>
       <ListItem key={item.id} style={styles.listItem}>
         <Left>
           <Thumbnail source={{uri: item.avatar}}/>
           <Text>{item.user}</Text>
         </Left>
         <Right>
-          <Button small>
+          <Button small onPress={this.onUnfollowPress.bind(this)}>
             <Text style={styles.buttonText}>Unfollow</Text>
           </Button>
         </Right>
@@ -61,14 +73,14 @@ class FollowList extends Component {
       <Container>
         <Header>
           <Left>
-            <Button transparent onPress={this.onBackPress}>
-              <Icon name='arrow-back' />
+            <Button transparent onPress={this.onBackPress.bind(this)}>
+              <Icon name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>Followers</Title>
+          <Title>Followings</Title>
           </Body>
-          <Right />
+          <Right/>
         </Header>
         <Content>
           <List>
@@ -92,10 +104,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    followers: state.followers,
+    followings: state.followings,
   }
 };
 
 export default withRouter(connect(
   mapStateToProps
-)(FollowList));
+)(FollowingList));

@@ -34,7 +34,6 @@ class RestaurantCard extends Component {
   }
 
   render() {
-    console.log('RestaurantCard', this.props.data.restaurantId)
     let avatar;
     if(!this.props.data.avatar)
       avatar = "http://via.placeholder.com/100x100";

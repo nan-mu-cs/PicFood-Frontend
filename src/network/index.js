@@ -1,5 +1,5 @@
 import {store} from "../../App";
-const HOST = 'http://172.26.62.62:8080';
+const HOST = 'http://172.27.92.158:8080';
 
 export default {
 
@@ -119,7 +119,6 @@ export default {
     searchRestaurants(keyword) {
       return fetch(HOST + `/search/restaurants?keyword=${keyword}`, verb('get')).then(handleResponse);
     }
-
   },
 
   dish: {
@@ -143,8 +142,9 @@ export default {
       return fetch(HOST + `/storage/deleteFile`, verb('delete', {fileUrl})).then(handleResponse);
     },
 
-    searchDishes(keyword) {
-      return fetch(HOST + `/search/dishes?keyword=${keyword}`, verb('get')).then(handleResponse);
+    searchDishes(keyword, sorting, lat, lon) {
+      let url = `${HOST}/search/dishes?keyword=${keyword}&sorting=${sorting}&lat=${lat}&lon=${lon}`;
+      return fetch(url, verb('get')).then(handleResponse);
     }
   },
 
