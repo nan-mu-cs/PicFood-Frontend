@@ -4,7 +4,7 @@ import {Button, Container, Content, FooterTab, Spinner} from 'native-base';
 import Timeline from "./components/Timeline/Timeline";
 import SearchTab from "./components/SearchTab/SearchTab";
 import SearchBy from "./components/SearchTab/SearchBy";
-import UserPage from "./components/UserPage"
+import UserPage from "./components/User/UserPage"
 import DishPhoto from "./components/DishPhoto"
 import RestaurantPage from "./components/Restaurant/RestaurantPage"
 import DishPage from "./components/Restaurant/DishPage"

@@ -54,9 +54,9 @@ class FollowerList extends Component {
 
   render() {
     let userList = this.props.followers.map(item =>
-      <ListItem key={item.id} style={styles.listItem}>
+      <ListItem key={item.userId} style={styles.listItem}>
         <Left>
-          <Thumbnail source={{uri: item.avatar}}/>
+          <Thumbnail source={{uri: item.avatar || "http://via.placeholder.com/100x100"}}/>
           <Text>{item.user}</Text>
         </Left>
         {/*<Right>*/}

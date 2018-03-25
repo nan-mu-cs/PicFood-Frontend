@@ -63,7 +63,7 @@ class FollowingList extends Component {
     let userList = this.props.followings.map(item =>
       <ListItem key={item.userId} style={styles.listItem}>
         <Left>
-          <Thumbnail source={{uri: item.avatar}}/>
+          <Thumbnail source={{uri: item.avatar || "http://via.placeholder.com/100x100"}}/>
           <Text>{item.user}</Text>
         </Left>
         <Right>

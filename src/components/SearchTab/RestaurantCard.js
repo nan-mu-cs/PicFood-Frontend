@@ -28,22 +28,16 @@ class RestaurantCard extends Component {
   }
 
   onCardPress(restaurantId) {
-    console.log('handleClickImage', restaurantId);
-    // this.props.dispatch({type: "NAVIGATE_TO_RESTAURANT_PAGE", data: restaurantId});
     this.props.history.push(`/restaurants/${restaurantId}`);
   }
 
   render() {
-    let avatar;
-    if(!this.props.data.avatar)
-      avatar = "http://via.placeholder.com/100x100";
-    else
-      avatar = this.props.data.avatar;
+    let avatar = this.props.data.avatar || "http://via.placeholder.com/100x100";
     return (
       <Card>
         <CardItem>
           <Left>
-            <Thumbnail source={{uri: this.props.data.avatar || "http://via.placeholder.com/100x100"}}/>
+            <Thumbnail source={{uri: avatar}}/>
             <Body>
             <Text>{this.props.data.name}</Text>
             <Text note>{this.props.data.location}</Text>

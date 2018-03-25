@@ -71,7 +71,8 @@ class SearchTab extends Component {
         .catch(err => {
           console.log(err)
         })
-    network.dish.searchDishes('a', 'distance', this.props.location.lat, this.props.location.lon)
+    // network.dish.searchDishes('rice', 'rate', this.props.location.lat, this.props.location.lon)
+    network.dish.searchDishes('rice', 'rate', -71, 41)
       .then(res => {
         console.log('searchDishes', res)
         this.props.dispatch({type:"GET_SEARCHED_DISHES", data: res});

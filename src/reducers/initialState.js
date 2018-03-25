@@ -518,48 +518,48 @@ export default {
     },
     followers: [
       {
-        id: 1,
+        userId: 1,
         user:"Ashe",
         avatar:"http://via.placeholder.com/100x100",
       },
       {
-        id: 2,
+        userId: 2,
         user:"Brown",
         avatar:"http://via.placeholder.com/100x100",
       },{
-        id:3,
+        userId:3,
         user:"Chris",
         avatar:"http://via.placeholder.com/100x100",
       },{
-        id: 4,
-        user:"David",
+        userId: 4,
+        user:"DavuserId",
         avatar:"http://via.placeholder.com/100x100",
       },{
-        id: 5,
+        userId: 5,
         user:"Ed",
         avatar:"http://via.placeholder.com/100x100",
       },
     ],
-    followees: [
+    followings: [
       {
-        id: 5,
+        userId: 5,
         user:"Ashe",
         avatar:"http://via.placeholder.com/100x100",
       },
       {
-        id: 4,
+        userId: 4,
         user:"Brown",
         avatar:"http://via.placeholder.com/100x100",
       },{
-        id:3,
+        userId:3,
         user:"Chris",
         avatar:"http://via.placeholder.com/100x100",
       },{
-        id: 2,
+        userId: 2,
         user:"David",
         avatar:"http://via.placeholder.com/100x100",
       },{
-        id: 1,
+        userId: 1,
         user:"Ed",
         avatar:"http://via.placeholder.com/100x100",
       },

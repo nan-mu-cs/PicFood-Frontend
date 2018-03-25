@@ -21,19 +21,14 @@ import {
 } from 'native-base';
 import {Image, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import Footer from "./Footer"
-import network from "../network";
+import Footer from "../Footer"
+import network from "../../network/index";
 
 class UserPage extends Component {
     constructor(props, context){
         super(props);
         this.state={
-
         };
-    }
-
-    onForwardPress() {
-        this.props.history.push(`/followers/1`);
     }
 
     onFollowingsPress() {
@@ -77,20 +72,11 @@ class UserPage extends Component {
                     <Image source={{uri:this.props.user.avatar}} style={{height: 200, width: null, flex: 1}}/>
                   </CardItem>
                   <List>
-                    <ListItem itemHeader first>
-                      <Text>{this.props.user.name}</Text>
-                    </ListItem>
                     <ListItem last>
                       <Text>{this.props.user.posts} Posts</Text>
                     </ListItem>
-                    
-                    <ListItem itemHeader onPress={this.onFollowersPress.bind(this)}>
+                    <ListItem onPress={this.onFollowersPress.bind(this)}>
                       <Text>{this.props.user.followers} Followers</Text>
-                      <Right>
-                      <Button small onPress={this.onForwardPress.bind(this)}>
-                        <Icon name='arrow-forward' />
-                      </Button>
-                      </Right>
                     </ListItem>
                     <ListItem onPress={this.onFollowingsPress.bind(this)}>
                       <Text>{this.props.user.following} Following</Text>
