@@ -20,6 +20,10 @@ class ViewPost extends Component {
         };
     }
 
+    onBackPress() {
+      this.props.history.goBack();
+    }
+
     componentDidMount() {
         console.log(this.state.postId);
       network.social.getPostByPostId(this.state.postId)
@@ -63,9 +67,15 @@ class ViewPost extends Component {
         return (
             <Container>
                 <Header>
+                    <Left>
+                      <Button transparent onPress={this.onBackPress.bind(this)}>
+                        <Icon name='arrow-back'/>
+                      </Button>
+                    </Left>
                     <Body>
                     <Title>{this.props.post.dishName}</Title>
                     </Body>
+                    <Right/>
                 </Header>
                 <Content>
                   <Card>
@@ -80,7 +90,7 @@ class ViewPost extends Component {
                       fullStarColor={"#f5af4b"}
                       emptyStarColor={"#f5af4b"}
                       halfStarEnabled
-                      starSize={15}
+                      starSize={30}
                     />
                     <CardItem>
                       <Left>
