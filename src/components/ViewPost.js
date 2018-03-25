@@ -11,6 +11,7 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import Footer from "./Footer"
 import StarRating from 'react-native-star-rating';
 import network from '../network';
+import moment from 'moment'
 
 class ViewPost extends Component {
     constructor(props, context){
@@ -65,7 +66,7 @@ class ViewPost extends Component {
                     <Text>{item.content}</Text>
                     </Left>
                     <Right>
-                    <Text>{item.time}</Text>
+                    <Text>{moment(item.time).fromNow()}</Text>
                     </Right>
                   </ListItem>
                 </Card>
