@@ -35,7 +35,9 @@ export default (state = initialState, action) => {
         case "GET_FOLLOWINGS":
             return {...state, followings: action.data};
         case "UPDATE_TIMELINE":
-            return {...state,timelines:action.data};
+            return {...state, timelines: action.data};
+        case "SORT_CRITERIA":
+            return {...state, sort_criteria: action.data};
         default:
             return state;
     }

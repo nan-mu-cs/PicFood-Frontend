@@ -109,7 +109,7 @@ class DishPage extends Component {
           <Right/>
         </Header>
         <Content>
-          <Text style={styles.dishName}>{this.props.postsOfDish[0].dishName}</Text>
+          <Text style={styles.dishName}>{(this.props.postsOfDish.length && this.props.postsOfDish[0].dishName)||"DishName"}</Text>
           <StarRating
             disabled={true}
             maxStars={5}
@@ -120,7 +120,7 @@ class DishPage extends Component {
             halfStarEnabled
             starSize={15}
           />
-          <Text style={styles.restaurant}>{this.props.postsOfDish[0].restaurantName}</Text>
+          <Text style={styles.restaurant}>{(this.props.postsOfDish.length && this.props.postsOfDish[0].restaurantName)||"restaurantName"}</Text>
           <List>
             {photos}
           </List>

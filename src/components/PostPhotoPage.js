@@ -36,7 +36,12 @@ class PostPhotoPage extends Component {
             content:this.state.comment,
             imageUrl:this.state.avatar
         }).then(res=>res.json())
-            .then(data=>{
+            .then( async (data)=>{
+                let restaurantInfo = await network.restaurant.getRestaurantInfoById(this.props.location.state.restaurantId);
+                let restaurantDishes = await network.restaurant.getRestaurantDishesById(this.props.location.state.restaurantId);
+                restaurantInfo.dishes = restaurantDishes;
+                console.log(restaurantInfo);
+                this.props.dispatch({type: "GET_RESTAURANT_INFO", restaurantId: restaurantInfo.restaurantId, data: restaurantInfo});
                 this.props.history.goBack();
                 console.log(data);
             }).catch(err=>{

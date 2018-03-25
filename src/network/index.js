@@ -141,7 +141,7 @@ export default {
     },
 
     getPostsOfDish(id) {
-      return fetch(HOST + `/api/dishes/${id}/post`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/dishes/${id}/post`, verb('get'));
     },
 
     postPhoto(body) { // {FormData} file
