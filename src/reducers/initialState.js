@@ -11,54 +11,7 @@ export default {
         {id:"post",icon:"cart",url:"/post"},
         {id:"users",icon:"person",url:"/users"}
     ],
-    // timelines:[
-    //     {
-    //         type:"post",
-    //         id:1,
-    //         user:"Kai",
-    //         avatar:"http://via.placeholder.com/100x100",
-    //         location:"this is a location",
-    //         image:"http://via.placeholder.com/350x150",
-    //         time:"11h ago"
-    //
-    //     },
-    //     {
-    //         type:"comment",
-    //         id:2,
-    //         user:"Kai",
-    //         avatar:"http://via.placeholder.com/100x100",
-    //         location:"this is a location",
-    //         image:"http://via.placeholder.com/350x150",
-    //         likes:12,
-    //         dish:"Spice Fish",
-    //         time:"11h ago",
-    //         comment:"this is very good"
-    //     },
-    //     {
-    //         type:"rate",
-    //         id:3,
-    //         user:"Kai",
-    //         avatar:"http://via.placeholder.com/100x100",
-    //         location:"this is a location",
-    //         image:"http://via.placeholder.com/350x150",
-    //         likes:12,
-    //         dish:"Spice Fish",
-    //         time:"11h ago",
-    //         rate:3.5
-    //     },
-    //     {
-    //         type:"like",
-    //         id:4,
-    //         user:"Kai",
-    //         avatar:"http://via.placeholder.com/100x100",
-    //         location:"this is a location",
-    //         image:"http://via.placeholder.com/350x150",
-    //         likes:12,
-    //         dish:"Spice Fish",
-    //         time:"11h ago"
-    //     },
-    //
-    // ],
+    timelines:[],
     user:{
         id:"kaiyang1261",
         name:"Kai Yang",
