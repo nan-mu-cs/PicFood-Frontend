@@ -28,8 +28,6 @@ class DishCard extends Component {
   }
 
   onCardPress(dishId) {
-    // console.log(this.props.data);
-    this.props.dispatch({type:"NAVIGATE_TO_DISH_PAGE", data: dishId});
     this.props.history.push(`/dishes/${dishId}`);
   }
 

@@ -29,7 +29,7 @@ class ImageCard extends Component {
         // });
     }
     componentDidMount(){
-        network.account.getUserAccount({userId:this.props.data.creatorId})
+        network.social.getUserProfile(this.props.data.creatorId)
             .then((res)=>res.json())
             .then(data=>{
                 this.setState({
