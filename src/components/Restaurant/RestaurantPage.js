@@ -37,26 +37,35 @@ class RestaurantPage extends Component {
     };
     // console.log('RestaurantPage', this.props.match.params.id);
     this.handleClickBack = this.handleClickBack.bind(this);
-    this.handlePostImage = this.handlePostImage.bind(this);
+    // this.handlePostImage = this.handlePostImage.bind(this);
   }
 
-  handlePostImage() {
-    ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-    }).then((result) => {
-      // console.log(result);
-      if (!result.cancelled) {
-        this.props.history.push({
-          pathname: "/post",
-          state: {
-            image: result.uri,
-            restaurantId:this.state.restaurantId
-          }
-        });
-      }
+  handlePostImage(type) {
+    let result;
+    if(type === "image"){
+      result = ImagePicker.launchImageLibraryAsync({
+          allowsEditing: true,
+          aspect: [4, 3],
+      });
+    } else {
+      result = ImagePicker.launchCameraAsync({
+          allowsEditing: true,
+          aspect: [4, 3],
+      });
+    }
+    result.then((result) => {
+        // console.log(result);
+        if (!result.cancelled) {
+            this.props.history.push({
+                pathname: "/post",
+                state: {
+                    image: result.uri,
+                    restaurantId:this.state.restaurantId
+                }
+            });
+        }
     }).catch(err => {
-
+      console.log(err);
     });
   }
 
@@ -150,10 +159,10 @@ class RestaurantPage extends Component {
             position="bottomRight"
             onPress={() => this.setState({active: !this.state.active})}>
             <Icon name="add"/>
-            <Button style={{backgroundColor: '#34A34F'}} onPress={this.handlePostImage}>
+            <Button style={{backgroundColor: '#34A34F'}} onPress={this.handlePostImage.bind(this,"image")}>
               <Icon name="ios-images"/>
             </Button>
-            <Button style={{backgroundColor: '#3B5998'}}>
+            <Button style={{backgroundColor: '#3B5998'}} onPress={this.handlePostImage.bind(this,"camera")}>
               <Icon name="ios-camera"/>
             </Button>
           </Fab>

@@ -28,6 +28,7 @@ class UserPage extends Component {
     constructor(props, context){
         super(props);
         this.state={
+          userId: this.props.match.params.id
         };
     }
 
@@ -40,9 +41,10 @@ class UserPage extends Component {
     }
 
     componentDidMount() {
-      network.account.getUserAccount()
-        .then(res => {
-          console.log('getUserAccount', res);
+      let profile = this.state.userId ?
+        network.social.getUserProfile(this.state.userId) : network.account.getMyProfile()
+      profile.then(res => {
+          console.log('Profile', res);
         })
         .catch(err => {
 

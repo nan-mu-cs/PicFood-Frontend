@@ -61,25 +61,23 @@ class SearchTab extends Component {
   }
 
   componentDidMount() {
-    // console.log('lat', this.props.searchedRestaurants.length);
     if(this.props.searchedRestaurants.length === 0)
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
         .then(res => {
-          // console.log(res)
           this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res});
         })
         .catch(err => {
           console.log(err)
         })
     // network.dish.searchDishes('rice', 'rate', this.props.location.lat, this.props.location.lon)
-    network.dish.searchDishes('rice', 'rate', -71, 41)
-      .then(res => {
-        console.log('searchDishes', res)
-        this.props.dispatch({type:"GET_SEARCHED_DISHES", data: res});
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    if(this.props.searchedDishes.length === 0)
+      network.dish.searchDishes('rice', 'rate', 41, -71)
+        .then(res => {
+          this.props.dispatch({type:"GET_SEARCHED_DISHES", data: res});
+        })
+        .catch(err => {
+          console.log(err)
+        })
   }
 
   render() {
