@@ -38,6 +38,8 @@ export default (state = initialState, action) => {
             return {...state, timelines: action.data};
         case "SORT_CRITERIA":
             return {...state, sort_criteria: action.data};
+        // case "UPVOTE_POST":
+        //     return {...state, upvoteCount: action.data};
         default:
             return state;
     }

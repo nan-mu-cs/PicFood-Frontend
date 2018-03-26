@@ -81,7 +81,7 @@ export default {
     },
 
     upvotePost(postId) {
-      return fetch(HOST + `/upvote`, verb('post', {postId})).then(handleResponse);
+      return fetch(HOST + `/api/upvote`, verb('post', {postId}));
     },
 
     deleteUpvoteOfPost(postId) {
@@ -163,8 +163,8 @@ export default {
       return fetch(HOST + `/api/comments/${postId}`, verb('get')).then(handleResponse);
     },
 
-    postComment(postId, content) {
-      return fetch(HOST + '/api/comment', verb('post', {postId, content}));
+    postComment(body) {
+      return fetch(HOST + '/api/comment', verb('post', body));
     },
 
     deleteComment(commentId) {

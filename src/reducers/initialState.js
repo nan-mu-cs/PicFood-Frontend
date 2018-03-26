@@ -595,5 +595,6 @@ export default {
 
     },
     sort_criteria: {distance: "key3", sort_by: "key1"},
-    cachedRestaurants: {}
+    cachedRestaurants: {},
+    //upvoteCount: 0,
 };

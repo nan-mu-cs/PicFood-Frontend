@@ -22,6 +22,7 @@ class ViewPost extends Component {
             error:false
         };
         this.postComment = this.postComment.bind(this);
+        this.upvote = this.upvote.bind(this);
     }
 
     onBackPress() {
@@ -40,23 +41,50 @@ class ViewPost extends Component {
             })
     }
 
+    upvote() {
+              //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
+        // network.comment.upvotePost(this.state.postId)
+        //   .then(response=>response.json())
+        //   .then((res) => {
+        //       //res = res.json();
+        //       console.log("response = " + res);
+        //       console.log("postID = " + this.state.postId);
+
+        //       network.social.getPostByPostId(this.state.postId)
+        //         .then(res => {
+        //           console.log(res);
+        //           this.props.dispatch({type: "GET_POST_INFO", data: res});
+        //         })
+        //         .catch(err => {
+
+        //         })
+        //   })
+        //   .catch((e) => {
+        //       this.setState({
+        //           error:true
+        //       });
+        //       console.log("ERR"+e.message);
+        //   });
+    }
+
     postComment() {
         console.log("66666" + this.state.com);
-        network.comment.postComment({postId: this.state.postId, content: this.state.content})
+        console.log(this.state.postId + " ====== " + this.state.com);
+        network.comment.postComment({postId: this.state.postId, content: this.state.com})
           .then(response=>response.json())
           .then((res) => {
               //res = res.json();
               console.log(res);
-
               console.log(this.state.postId);
-                network.social.getPostByPostId(this.state.postId)
-                  .then(res => {
-                    console.log(res);
-                    this.props.dispatch({type: "GET_POST_INFO", data: res});
-                  })
-                  .catch(err => {
 
-                  })
+              network.social.getPostByPostId(this.state.postId)
+                .then(res => {
+                  console.log(res);
+                  this.props.dispatch({type: "GET_POST_INFO", data: res});
+                })
+                .catch(err => {
+
+                })
           })
           .catch((e) => {
               this.setState({
@@ -64,6 +92,7 @@ class ViewPost extends Component {
               });
               console.log("ERR"+e.message);
           });
+        this.setState({com:""});
     }
 
     render() {
@@ -134,10 +163,16 @@ class ViewPost extends Component {
                     />
                     <CardItem>
                       <Left>
-                        <Button transparent>
+                        <Button transparent onPress={this.upvote}>
                           <Icon active name="thumbs-up" />
                           <Text>{this.props.post.upvoteCount} Likes</Text>
                         </Button>
+                        {this.state.error && Toast.show({
+                           text: 'Can\'t comment!',
+                           position: 'bottom',
+                           buttonText: 'Okay'
+                            })
+                        }
                       </Left>
                       <Right>
                         <Text>{this.props.post.restaurantName}</Text>
