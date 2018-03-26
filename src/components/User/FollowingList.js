@@ -21,6 +21,7 @@ import {
   List,
   ListItem,
   Right,
+  Spinner,
   Tab,
   Tabs,
   Title
@@ -34,7 +35,10 @@ import network from "../../network";
 class FollowingList extends Component {
   constructor(props, context) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading: true,
+      followings: []
+    };
   }
 
   onBackPress() {
@@ -44,30 +48,37 @@ class FollowingList extends Component {
   onUnfollowPress(userId) {
     network.social.unfollowUserById(userId)
       .then(res => {
-        console.log('onUnfollowPress', res);
+        let newFollowings = this.filterOutUnfollowedUser(this.state.followings, userId);
+        this.setState({followings: newFollowings});
       })
       .catch(res => {
       })
+  }
+
+  filterOutUnfollowedUser(userList, userId) {
+    return userList.filter(user => {
+      return user.userId !== userId;
+    });
   }
 
   componentDidMount() {
     network.social.getMyFollowings()
       .then(res => {
         console.log('FollowingList', res);
-        this.props.dispatch({type: "GET_FOLLOWINGS", data: res});
+        this.setState({loading: false, followings: res});
       })
       .catch(err => {})
   }
 
   render() {
-    let userList = this.props.followings.map(item =>
+    let userList = this.state.followings.map(item =>
       <ListItem key={item.userId} style={styles.listItem}>
         <Left>
           <Thumbnail source={{uri: item.avatar || "http://via.placeholder.com/100x100"}}/>
           <Text>{item.user}</Text>
         </Left>
         <Right>
-          <Button small onPress={this.onUnfollowPress.bind(this, item.userId)}>
+          <Button danger small onPress={this.onUnfollowPress.bind(this, item.userId)}>
             <Text style={styles.buttonText}>Unfollow</Text>
           </Button>
         </Right>
@@ -88,9 +99,10 @@ class FollowingList extends Component {
           <Right/>
         </Header>
         <Content>
+          {this.state.loading ? <Spinner/> :
           <List>
             {userList}
-          </List>
+          </List>}
         </Content>
         <Footer/>
       </Container>
@@ -109,7 +121,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    followings: state.followings,
+    // followings: state.followings,
   }
 };
 
