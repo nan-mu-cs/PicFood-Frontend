@@ -42,14 +42,21 @@ class SearchTab extends Component {
   }
 
   onSubmitEditing() {
-    network.restaurant.searchRestaurants(this.state.keyword)
+    network.restaurant.searchRestaurants(this.state.keyword, 'rate', 41, -71)
       .then(res => {
-        // console.log(res)
+        console.log('searchRestaurants', res);
         this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res});
       })
       .catch(err => {
         console.log(err)
-      })
+      });
+    // network.dish.searchDishes(this.state.keyword, 'rate', 41, -71)
+    //   .then(res => {
+    //     this.props.dispatch({type:"GET_SEARCHED_DISHES", data: res.splice(0, 8)});
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   });
   }
 
   componentDidMount() {

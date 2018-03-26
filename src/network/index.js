@@ -129,8 +129,8 @@ export default {
       return fetch(HOST + `/api/restaurants?lat=${lat}&lon=${lon}`, verb('get')).then(handleResponse);
     },
 
-    searchRestaurants(keyword) {
-      return fetch(HOST + `/search/restaurants?keyword=${keyword}`, verb('get')).then(handleResponse);
+    searchRestaurants(keyword, sorting, lat, lon) {
+      return fetch(HOST + `/search/restaurants?keyword=${keyword}&sorting=${sorting}&lat=${lat}&lon=${lon}`, verb('get')).then(handleResponse);
     }
   },
 
