@@ -19,6 +19,7 @@ import {
   List,
   ListItem,
   Right,
+  Spinner,
   Tab,
   Tabs,
   Text,
@@ -34,7 +35,10 @@ import network from "../../network";
 class UserList extends Component {
   constructor(props, context) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading: true,
+      users: []
+    };
   }
 
   onBackPress() {
@@ -42,18 +46,34 @@ class UserList extends Component {
   }
 
   onUnfollowPress(userId) {
+    console.log('onUnfollowPress')
     network.social.unfollowUserById(userId)
       .then(res => {
+        // console.log(this.state.users);
+        this.updateFollowStatus(this.state.users, userId, false);
+        console.log('new state', this.state.users);
+        this.setState({users: this.state.users});
         console.log('onUnfollowPress', res);
       })
       .catch(res => {
       })
   }
 
+  updateFollowStatus(userList, userId, status) {
+    userList.forEach(user => {
+      if(user.userId === userId) {
+        user.following = status;
+      }
+    });
+  }
+
   onFollowPress(userId) {
     network.social.followUserById(userId)
       .then(res => {
         console.log('onFollowPress', res);
+        this.updateFollowStatus(this.state.users, userId, true);
+        this.setState({users: this.state.users});
+        console.log('onUnfollowPress', this.state.users);
       })
       .catch(res => {
       })
@@ -62,7 +82,8 @@ class UserList extends Component {
   onSearch(keyword) {
     network.social.searchUsers(this.state.keyword)
       .then(res => {
-        this.props.dispatch({type:"GET_USERS", data: res});
+        this.setState({users: res});
+        // this.props.dispatch({type:"GET_USERS", data: res});
       })
       .catch(err => {})
   }
@@ -70,14 +91,14 @@ class UserList extends Component {
   componentDidMount() {
     network.social.searchUsers('')
       .then(res => {
-        console.log('searchUsers', res);
-        this.props.dispatch({type: "GET_USERS", data: res});
+        this.setState({users: res, loading: false});
+        // this.props.dispatch({type: "GET_USERS", data: res});
       })
       .catch(err => {})
   }
 
   render() {
-    let userList = this.props.users.map(item =>
+    let userList = this.state.users.map(item =>
       <ListItem key={item.userId} style={styles.listItem}>
         <Left>
           <Thumbnail source={{uri: item.avatar || "http://via.placeholder.com/100x100"}}/>
@@ -85,7 +106,7 @@ class UserList extends Component {
         </Left>
         <Right>
           {item.following ?
-            <Button danger onPress={this.onUnfollowPress.bind(this, item.userId)}>
+            <Button danger small onPress={this.onUnfollowPress.bind(this, item.userId)}>
               <Text style={styles.buttonText}>Unfollow</Text>
             </Button> :
             <Button small onPress={this.onFollowPress.bind(this, item.userId)}>
@@ -109,6 +130,7 @@ class UserList extends Component {
           </Body>
           <Right/>
         </Header>
+        {this.state.loading ? <Content><Spinner/></Content> :
         <Content>
           <Left>
             <Item>
@@ -120,7 +142,7 @@ class UserList extends Component {
           <List>
             {userList}
           </List>
-        </Content>
+        </Content>}
         <Footer/>
       </Container>
     );
@@ -138,7 +160,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    users: state.users,
+    // users: state.users,
   }
 };
 
