@@ -60,7 +60,7 @@ class FollowerList extends Component {
       <ListItem key={item.userId} style={styles.listItem}>
         <Left>
           <Thumbnail source={{uri: item.avatar || "http://via.placeholder.com/100x100"}}/>
-          <Text>{item.user}</Text>
+          <Text>{item.name}</Text>
         </Left>
         {/*<Right>*/}
           {/*<Button small onPress={this.onUnfollowPress.bind(this)}>*/}
