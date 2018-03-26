@@ -21,6 +21,7 @@ import {
   List,
   ListItem,
   Right,
+  Spinner,
   Tab,
   Tabs,
   Title
@@ -35,6 +36,7 @@ class FollowerList extends Component {
   constructor(props, context) {
     super(props);
     this.state = {
+      loading: true,
       userId: this.props.match.params.userId
     };
   }
@@ -47,6 +49,7 @@ class FollowerList extends Component {
     network.social.getMyFollowers()
       .then(res => {
         // console.log('FollowerList', res);
+        this.setState({loading: false})
         this.props.dispatch({type: "GET_FOLLOWERS", data: res});
       })
       .catch(err => {})
@@ -81,9 +84,10 @@ class FollowerList extends Component {
           <Right/>
         </Header>
         <Content>
+          {this.state.loading ? <Spinner/> :
           <List>
             {userList}
-          </List>
+          </List>}
         </Content>
         <Footer/>
       </Container>

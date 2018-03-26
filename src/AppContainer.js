@@ -104,6 +104,7 @@ class App extends React.Component {
           <Switch>
               <Route exact path="/" component={Timeline}/>
               <Route path="/search" component={SearchTab}/>
+              <Route path="/userlist" component={UserList}/>
               <Route path="/restaurants/:id" component={RestaurantPage} />
               <Route path="/dishes/:id" component={DishPage} />
               <Route path="/dishphoto/:id" component={DishPhoto} />

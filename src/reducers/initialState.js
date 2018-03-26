@@ -13,318 +13,319 @@ export default {
     ],
     timelines:[],
     user:{
-        id:"kaiyang1261",
-        name:"Kai Yang",
-        avatar:"http://via.placeholder.com/150x150",
-        posts:6,
-        followers:48,
-        following:76,
-        images:[
-            {
-                id:1,
-                user:"Kai",
-                avatar:"this is a url",
-                location:"this is a location",
-                image:"http://via.placeholder.com/350x150",
-                likes:12,
-                time:"11h ago",
-                comments:[
-                    {
-                        id:1,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:2,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:3,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:4,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:5,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:6,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:7,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:8,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                ]
-
-            },
-            {
-                id:2,
-                user:"Kai",
-                avatar:"this is a url",
-                location:"this is a location",
-                image:"http://via.placeholder.com/350x150",
-                likes:12,
-                time:"11h ago",
-                comments:[
-                    {
-                        id:1,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:2,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:3,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:4,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:5,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    }
-                ]
-
-            },
-            {
-                id:3,
-                user:"Kai",
-                avatar:"this is a url",
-                location:"this is a location",
-                image:"http://via.placeholder.com/350x150",
-                likes:12,
-                time:"11h ago",
-                comments:[
-                    {
-                        id:1,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:2,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:3,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:4,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:5,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    }
-                ]
-
-            },
-            {
-                id:3,
-                user:"Kai",
-                avatar:"this is a url",
-                location:"this is a location",
-                image:"http://via.placeholder.com/350x150",
-                likes:12,
-                time:"11h ago",
-                comments:[
-                    {
-                        id:1,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:2,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:3,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:4,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:5,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    }
-                ]
-
-            },
-            {
-                id:4,
-                user:"Kai",
-                avatar:"this is a url",
-                location:"this is a location",
-                image:"http://via.placeholder.com/350x150",
-                likes:12,
-                time:"11h ago",
-                comments:[
-                    {
-                        id:1,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:2,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:3,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:4,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:5,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    }
-                ]
-
-            },
-            {
-                id:5,
-                user:"Kai",
-                avatar:"this is a url",
-                location:"this is a location",
-                image:"http://via.placeholder.com/350x150",
-                likes:12,
-                time:"11h ago",
-                comments:[
-                    {
-                        id:1,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:2,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:3,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:4,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    },
-                    {
-                        id:5,
-                        user:"Kai",
-                        avatar:"this is a url",
-                        comment:"this is a comment.",
-                        time:"11h ago"
-                    }
-                ]
-
-            }
-        ]
+        // id:"kaiyang1261",
+        // name:"Kai Yang",
+        // avatar:"http://via.placeholder.com/150x150",
+        // posts:6,
+        // followers:48,
+        // following:76,
+        // images:[
+        //     {
+        //         id:1,
+        //         user:"Kai",
+        //         avatar:"this is a url",
+        //         location:"this is a location",
+        //         image:"http://via.placeholder.com/350x150",
+        //         likes:12,
+        //         time:"11h ago",
+        //         comments:[
+        //             {
+        //                 id:1,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:2,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:3,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:4,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:5,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:6,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:7,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:8,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //         ]
+        //
+        //     },
+        //     {
+        //         id:2,
+        //         user:"Kai",
+        //         avatar:"this is a url",
+        //         location:"this is a location",
+        //         image:"http://via.placeholder.com/350x150",
+        //         likes:12,
+        //         time:"11h ago",
+        //         comments:[
+        //             {
+        //                 id:1,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:2,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:3,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:4,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:5,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             }
+        //         ]
+        //
+        //     },
+        //     {
+        //         id:3,
+        //         user:"Kai",
+        //         avatar:"this is a url",
+        //         location:"this is a location",
+        //         image:"http://via.placeholder.com/350x150",
+        //         likes:12,
+        //         time:"11h ago",
+        //         comments:[
+        //             {
+        //                 id:1,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:2,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:3,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:4,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:5,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             }
+        //         ]
+        //
+        //     },
+        //     {
+        //         id:3,
+        //         user:"Kai",
+        //         avatar:"this is a url",
+        //         location:"this is a location",
+        //         image:"http://via.placeholder.com/350x150",
+        //         likes:12,
+        //         time:"11h ago",
+        //         comments:[
+        //             {
+        //                 id:1,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:2,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:3,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:4,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:5,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             }
+        //         ]
+        //
+        //     },
+        //     {
+        //         id:4,
+        //         user:"Kai",
+        //         avatar:"this is a url",
+        //         location:"this is a location",
+        //         image:"http://via.placeholder.com/350x150",
+        //         likes:12,
+        //         time:"11h ago",
+        //         comments:[
+        //             {
+        //                 id:1,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:2,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:3,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:4,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:5,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             }
+        //         ]
+        //
+        //     },
+        //     {
+        //         id:5,
+        //         user:"Kai",
+        //         avatar:"this is a url",
+        //         location:"this is a location",
+        //         image:"http://via.placeholder.com/350x150",
+        //         likes:12,
+        //         time:"11h ago",
+        //         comments:[
+        //             {
+        //                 id:1,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:2,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:3,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:4,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             },
+        //             {
+        //                 id:5,
+        //                 user:"Kai",
+        //                 avatar:"this is a url",
+        //                 comment:"this is a comment.",
+        //                 time:"11h ago"
+        //             }
+        //         ]
+        //
+        //     }
+        // ]
     },
+    userTimeline:[],
     restaurant:
         {
             // id:1,
@@ -460,52 +461,52 @@ export default {
         token:""
     },
     followers: [
-      {
-        userId: 1,
-        user:"Ashe",
-        avatar:"http://via.placeholder.com/100x100",
-      },
-      {
-        userId: 2,
-        user:"Brown",
-        avatar:"http://via.placeholder.com/100x100",
-      },{
-        userId:3,
-        user:"Chris",
-        avatar:"http://via.placeholder.com/100x100",
-      },{
-        userId: 4,
-        user:"DavuserId",
-        avatar:"http://via.placeholder.com/100x100",
-      },{
-        userId: 5,
-        user:"Ed",
-        avatar:"http://via.placeholder.com/100x100",
-      },
+      // {
+      //   userId: 1,
+      //   user:"Ashe",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },
+      // {
+      //   userId: 2,
+      //   user:"Brown",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },{
+      //   userId:3,
+      //   user:"Chris",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },{
+      //   userId: 4,
+      //   user:"DavuserId",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },{
+      //   userId: 5,
+      //   user:"Ed",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },
     ],
     followings: [
-      {
-        userId: 5,
-        user:"Ashe",
-        avatar:"http://via.placeholder.com/100x100",
-      },
-      {
-        userId: 4,
-        user:"Brown",
-        avatar:"http://via.placeholder.com/100x100",
-      },{
-        userId:3,
-        user:"Chris",
-        avatar:"http://via.placeholder.com/100x100",
-      },{
-        userId: 2,
-        user:"David",
-        avatar:"http://via.placeholder.com/100x100",
-      },{
-        userId: 1,
-        user:"Ed",
-        avatar:"http://via.placeholder.com/100x100",
-      },
+      // {
+      //   userId: 5,
+      //   user:"Ashe",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },
+      // {
+      //   userId: 4,
+      //   user:"Brown",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },{
+      //   userId:3,
+      //   user:"Chris",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },{
+      //   userId: 2,
+      //   user:"David",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },{
+      //   userId: 1,
+      //   user:"Ed",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },
     ],
   users: [
     // {

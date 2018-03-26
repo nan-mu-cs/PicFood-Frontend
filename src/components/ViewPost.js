@@ -42,7 +42,7 @@ class ViewPost extends Component {
     }
 
     upvote() {
-              //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
+                //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
         // network.comment.upvotePost(this.state.postId)
         //   .then(response=>response.json())
         //   .then((res) => {

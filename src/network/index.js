@@ -13,12 +13,15 @@ export default {
     },
 
     getMyProfile() {
-      return fetch(HOST + '/api/users/me', verb('get')).then(handleResponse);
+      return fetch(HOST + '/api/users/me', verb('get'));
     },
 
     postUserProfile(body) { // avatar, bio, email, name, password (all optional)
       return fetch(HOST + '/api/users/me', verb('post', body)).then(handleResponse);
     },
+    getUserTimeline(userId){
+      return fetch(`${HOST}/api/timeline/${userId}`,verb('get'));
+    }
   },
   storage:{
 
