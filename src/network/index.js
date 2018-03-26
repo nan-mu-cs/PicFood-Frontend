@@ -5,11 +5,11 @@ export default {
 
   account: {
     login(body) {
-      return fetch(`${HOST}/api/login`, verb('POST', body))
+      return fetch(`${HOST}/login`, verb('POST', body))
     },
 
     register(body) {
-      return fetch(`${HOST}/api/register`, verb('post', body));
+      return fetch(`${HOST}/register`, verb('post', body));
     },
 
     getMyProfile() {

@@ -35,9 +35,12 @@ class RegisterPage extends Component {
                 return;
             }
             network.storage.uploadFile(result.uri)
-                .then(res=>res.text())
+                .then(res=>{
+                    console.log(res);
+                    return res.text();
+                })
                 .then((res)=>{
-                    // console.log(res);
+                    console.log(res);
                     this.setState({
                         avatar:res
                     });
