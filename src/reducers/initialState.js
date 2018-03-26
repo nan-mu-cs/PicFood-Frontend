@@ -461,52 +461,52 @@ export default {
         token:""
     },
     followers: [
-      {
-        userId: 1,
-        user:"Ashe",
-        avatar:"http://via.placeholder.com/100x100",
-      },
-      {
-        userId: 2,
-        user:"Brown",
-        avatar:"http://via.placeholder.com/100x100",
-      },{
-        userId:3,
-        user:"Chris",
-        avatar:"http://via.placeholder.com/100x100",
-      },{
-        userId: 4,
-        user:"DavuserId",
-        avatar:"http://via.placeholder.com/100x100",
-      },{
-        userId: 5,
-        user:"Ed",
-        avatar:"http://via.placeholder.com/100x100",
-      },
+      // {
+      //   userId: 1,
+      //   user:"Ashe",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },
+      // {
+      //   userId: 2,
+      //   user:"Brown",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },{
+      //   userId:3,
+      //   user:"Chris",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },{
+      //   userId: 4,
+      //   user:"DavuserId",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },{
+      //   userId: 5,
+      //   user:"Ed",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },
     ],
     followings: [
-      {
-        userId: 5,
-        user:"Ashe",
-        avatar:"http://via.placeholder.com/100x100",
-      },
-      {
-        userId: 4,
-        user:"Brown",
-        avatar:"http://via.placeholder.com/100x100",
-      },{
-        userId:3,
-        user:"Chris",
-        avatar:"http://via.placeholder.com/100x100",
-      },{
-        userId: 2,
-        user:"David",
-        avatar:"http://via.placeholder.com/100x100",
-      },{
-        userId: 1,
-        user:"Ed",
-        avatar:"http://via.placeholder.com/100x100",
-      },
+      // {
+      //   userId: 5,
+      //   user:"Ashe",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },
+      // {
+      //   userId: 4,
+      //   user:"Brown",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },{
+      //   userId:3,
+      //   user:"Chris",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },{
+      //   userId: 2,
+      //   user:"David",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },{
+      //   userId: 1,
+      //   user:"Ed",
+      //   avatar:"http://via.placeholder.com/100x100",
+      // },
     ],
   users: [
     // {
