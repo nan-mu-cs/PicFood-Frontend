@@ -43,28 +43,31 @@ class ViewPost extends Component {
 
     upvote() {
                 //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
-        // network.comment.upvotePost(this.state.postId)
-        //   .then(response=>response.json())
-        //   .then((res) => {
-        //       //res = res.json();
-        //       console.log("response = " + res);
-        //       console.log("postID = " + this.state.postId);
+        network.social.upvotePost(this.state.postId)
+          .then(response=>response.json())
+          .then((res) => {
+              //res = res.json();
+              console.log(res);
+              console.log("postID = " + this.state.postId);
+              console.log("upvoteCount = " + this.props.post.upvoteCount);
 
-        //       network.social.getPostByPostId(this.state.postId)
-        //         .then(res => {
-        //           console.log(res);
-        //           this.props.dispatch({type: "GET_POST_INFO", data: res});
-        //         })
-        //         .catch(err => {
+              network.social.getPostByPostId(this.state.postId)
+                .then(res => {
+                  console.log(res);
+                  this.props.dispatch({type: "GET_POST_INFO", data: res});
+                })
+                .catch(err => {
 
-        //         })
-        //   })
-        //   .catch((e) => {
-        //       this.setState({
-        //           error:true
-        //       });
-        //       console.log("ERR"+e.message);
-        //   });
+                })
+
+              console.log("upvoteCount = " + this.props.post.upvoteCount);
+          })
+          .catch((e) => {
+              this.setState({
+                  error:true
+              });
+              console.log("ERR"+e.message);
+          });
     }
 
     postComment() {
