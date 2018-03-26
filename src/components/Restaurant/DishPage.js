@@ -35,6 +35,7 @@ class DishPage extends Component {
       dishId: this.props.match.params.id
     };
     this.handleClickBack = this.handleClickBack.bind(this);
+    this.upvote = this.upvote.bind(this);
   }
 
   handleClickBack() {
@@ -54,9 +55,39 @@ class DishPage extends Component {
       console.log(err)
     })
   }
+
   // onDishPhotoPress(imageUrl) {
   //   this.props.history.push(`/dishphoto/${imageUrl}`);
   // }
+
+  upvote() {
+        //         //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
+        // network.social.upvotePost(this.state.postId)
+        //   .then(response=>response.json())
+        //   .then((res) => {
+        //       //res = res.json();
+        //       console.log(res);
+        //       console.log("postID = " + this.state.postId);
+        //       console.log("upvoteCount = " + this.props.post.upvoteCount);
+
+        //       network.social.getPostByPostId(this.state.postId)
+        //         .then(res => {
+        //           console.log(res);
+        //           this.props.dispatch({type: "GET_POST_INFO", data: res});
+        //         })
+        //         .catch(err => {
+
+        //         })
+
+        //       console.log("upvoteCount = " + this.props.post.upvoteCount);
+        //   })
+        //   .catch((e) => {
+        //       this.setState({
+        //           error:true
+        //       });
+        //       console.log("ERR"+e.message);
+        //   });
+    }
 
   render() {
       let photos = this.props.postsOfDish.map(item => {
@@ -78,7 +109,7 @@ class DishPage extends Component {
               </CardItem>
               <CardItem>
                 <Left>
-                  <Button transparent>
+                  <Button transparent onPress={this.upvote}>
                     <Icon active name="thumbs-up" />
                     <Text>{item.upvoteCount} Likes</Text>
                   </Button>
