@@ -74,16 +74,16 @@ class PersonalPage extends Component {
             if(i+1<post.length)
                 card2 = (
                     <Col>
-                        <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this,post[i].postId)}>
-                            <Thumbnail square  source={{ uri: post[i].imageUrl || "http://via.placeholder.com/350x150" }}  style={styles.photoItem} />
+                        <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this,post[i+1].postId)}>
+                            <Thumbnail square  source={{ uri: post[i+1].imageUrl || "http://via.placeholder.com/350x150" }}  style={styles.photoItem} />
                         </TouchableWithoutFeedback>
                     </Col>
                 );
             if(i+2<post.length)
                 card3 = (
                     <Col>
-                        <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this,post[i].postId)}>
-                            <Thumbnail square  source={{ uri: post[i].imageUrl || "http://via.placeholder.com/350x150" }}  style={styles.photoItem} />
+                        <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this,post[i+2].postId)}>
+                            <Thumbnail square  source={{ uri: post[i+1].imageUrl || "http://via.placeholder.com/350x150" }}  style={styles.photoItem} />
                         </TouchableWithoutFeedback>
                     </Col>
                 );
