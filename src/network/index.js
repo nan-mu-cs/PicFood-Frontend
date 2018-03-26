@@ -5,11 +5,11 @@ export default {
 
   account: {
     login(body) {
-      return fetch(`${HOST}/login`, verb('POST', body))
+      return fetch(`${HOST}/api/login`, verb('POST', body))
     },
 
     register(body) {
-      return fetch(`${HOST}/register`, verb('post', body));
+      return fetch(`${HOST}/api/register`, verb('post', body));
     },
 
     getMyProfile() {
@@ -43,7 +43,7 @@ export default {
                 'Authorization': store.getState().token
             },
         };
-      return fetch(`${HOST}/storage/uploadFile`,options);
+      return fetch(`${HOST}/api/storage/uploadFile`,options);
     }
   },
   post:{
@@ -76,7 +76,7 @@ export default {
     },
 
     deletePost(postId) {
-      return fetch(HOST + `/delete/post`, verb('post', {postId})).then(handleResponse);
+      return fetch(HOST + `/api/delete/post`, verb('post', {postId})).then(handleResponse);
     },
 
     addPost(body) { // restaurantId, dishName, rate, category, content, imageId (optional)
@@ -88,7 +88,7 @@ export default {
     },
 
     deleteUpvoteOfPost(postId) {
-      return fetch(HOST + `/delete/upvote`, verb('post', {postId})).then(handleResponse);
+      return fetch(HOST + `/api/delete/upvote`, verb('post', {postId})).then(handleResponse);
     },
 
     getMyFollowers() {
@@ -130,7 +130,7 @@ export default {
     },
 
     searchRestaurants(keyword, sorting, lat, lon) {
-      return fetch(HOST + `/search/restaurants?keyword=${keyword}&sorting=${sorting}&lat=${lat}&lon=${lon}`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/search/restaurants?keyword=${keyword}&sorting=${sorting}&lat=${lat}&lon=${lon}`, verb('get')).then(handleResponse);
     }
   },
 
@@ -148,15 +148,15 @@ export default {
     },
 
     postPhoto(body) { // {FormData} file
-      return fetch(HOST + `/storage/uploadFile`, verb('post', body)).then(handleResponse);
+      return fetch(HOST + `/api/storage/uploadFile`, verb('post', body)).then(handleResponse);
     },
 
     deletePhoto(fileUrl) {
-      return fetch(HOST + `/storage/deleteFile`, verb('delete', {fileUrl})).then(handleResponse);
+      return fetch(HOST + `/api/storage/deleteFile`, verb('delete', {fileUrl})).then(handleResponse);
     },
 
     searchDishes(keyword, sorting, lat, lon) {
-      let url = `${HOST}/search/dishes?keyword=${keyword}&sorting=${sorting}&lat=${lat}&lon=${lon}`;
+      let url = `${HOST}/api/search/dishes?keyword=${keyword}&sorting=${sorting}&lat=${lat}&lon=${lon}`;
       return fetch(url, verb('get')).then(handleResponse);
     }
   },
@@ -171,7 +171,7 @@ export default {
     },
 
     deleteComment(commentId) {
-      return fetch(HOST + '/delete/comment', verb('post', {commentId})).then(handleResponse);
+      return fetch(HOST + '/api/delete/comment', verb('post', {commentId})).then(handleResponse);
     }
   }
 }
