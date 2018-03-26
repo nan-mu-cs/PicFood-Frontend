@@ -103,7 +103,8 @@ class App extends React.Component {
       return (
           <Switch>
               <Route exact path="/" component={Timeline}/>
-              <Route path="/search" component={UserList}/>
+              <Route path="/search" component={SearchTab}/>
+              <Route path="/userlist" component={UserList}/>
               <Route path="/restaurants/:id" component={RestaurantPage} />
               <Route path="/dishes/:id" component={DishPage} />
               <Route path="/dishphoto/:id" component={DishPhoto} />

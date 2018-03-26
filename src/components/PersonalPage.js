@@ -17,6 +17,7 @@ class PersonalPage extends Component {
 
         };
         this.handleClickImage = this.handleClickImage.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
     componentDidMount(){
@@ -37,6 +38,9 @@ class PersonalPage extends Component {
             }).then(err=>{
                 console.log(err);
         });
+    }
+    handleLogout(){
+        this.props.history.push("/login");
     }
     handleClickImage(postId){
         // console.log("click");
@@ -125,6 +129,20 @@ class PersonalPage extends Component {
                                     </TouchableWithoutFeedback>
                                 </Col>
                             </Row>
+                        </Col>
+                    </Row>
+                    <Row size={7}>
+                        <Col>
+                            <Button primary block style={{flex:1,marginLeft:5,marginRight:5}} onPress={()=>this.props.history.push("/userlist")}>
+                                <Text>Add User</Text>
+                            </Button>
+                        </Col>
+                    </Row>
+                    <Row size={7} style={{marginTop:10,marginBottom:10}}>
+                        <Col>
+                            <Button success block style={{flex:1,marginLeft:5,marginRight:5}} onPress={()=>this.handleLogout()}>
+                                <Text>Logout</Text>
+                            </Button>
                         </Col>
                     </Row>
                     <Row size={85}>
