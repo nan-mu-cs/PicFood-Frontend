@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react';
-import { Container, Header, Content, Button, Text, Icon, ListItem,Left, Body, Thumbnail,
+import { Container, Header, Content, Button, Text, Icon, Item, Input, ListItem,Left, Body, Toast, Thumbnail,
      Card, CardItem, List, Title, Right } from 'native-base';
 import {StyleSheet, ScrollView,Image} from 'react-native';
 import { connect } from 'react-redux';
@@ -17,8 +17,11 @@ class ViewPost extends Component {
     constructor(props, context){
         super(props);
         this.state={
-            postId: this.props.match.params.postId
+            postId: this.props.match.params.postId,
+            com: "",
+            error:false
         };
+        this.postComment = this.postComment.bind(this);
     }
 
     onBackPress() {
@@ -27,14 +30,40 @@ class ViewPost extends Component {
 
     componentDidMount() {
         console.log(this.state.postId);
-      network.social.getPostByPostId(this.state.postId)
-        .then(res => {
-          console.log(res);
-          this.props.dispatch({type: "GET_POST_INFO", data: res});
-        })
-        .catch(err => {
+          network.social.getPostByPostId(this.state.postId)
+            .then(res => {
+              console.log(res);
+              this.props.dispatch({type: "GET_POST_INFO", data: res});
+            })
+            .catch(err => {
 
-        })
+            })
+    }
+
+    postComment() {
+        console.log("66666" + this.state.com);
+        network.comment.postComment({postId: this.state.postId, content: this.state.content})
+          .then(response=>response.json())
+          .then((res) => {
+              //res = res.json();
+              console.log(res);
+
+              console.log(this.state.postId);
+                network.social.getPostByPostId(this.state.postId)
+                  .then(res => {
+                    console.log(res);
+                    this.props.dispatch({type: "GET_POST_INFO", data: res});
+                  })
+                  .catch(err => {
+
+                  })
+          })
+          .catch((e) => {
+              this.setState({
+                  error:true
+              });
+              console.log("ERR"+e.message);
+          });
     }
 
     render() {
@@ -53,6 +82,7 @@ class ViewPost extends Component {
               name = "Xiaoxin"
             return (
                 <Card key={item.commentId}>
+                  <ScrollView>
                   <CardItem>
                     <Left>
                         <Thumbnail small source={{uri: avatar}} />
@@ -69,6 +99,7 @@ class ViewPost extends Component {
                     <Text>{moment(item.time).fromNow()}</Text>
                     </Right>
                   </ListItem>
+                </ScrollView>
                 </Card>
               )
         }
@@ -112,7 +143,24 @@ class ViewPost extends Component {
                         <Text>{this.props.post.restaurantName}</Text>
                       </Right>
                     </CardItem>
+                    <CardItem>
+                        <Item rounded style = {styles.comment}>
+                          <Input placeholder='Comment...' value={this.state.com} onChangeText={(val)=>this.setState({com:val})}/>
+                        </Item>
+                      <Right>
+                        <Button onPress={this.postComment}>
+                          <Text>Post</Text>
+                        </Button>
+                        {this.state.error && Toast.show({
+                           text: 'Can\'t comment!',
+                           position: 'bottom',
+                           buttonText: 'Okay'
+                            })
+                        }
+                      </Right>
+                    </CardItem>
                   </Card>
+                  
                   <List>
                     {reviews}
                   </List>
@@ -125,7 +173,12 @@ class ViewPost extends Component {
 
 const styles = StyleSheet.create({
     star: {
-        marginBottom:20,
+        marginBottom:15,
+    },
+    comment: {
+        marginTop:10,
+        marginBottom:10,
+        marginRight:80,
     }
 });
 
