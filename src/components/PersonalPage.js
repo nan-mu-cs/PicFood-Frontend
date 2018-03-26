@@ -25,7 +25,7 @@ class PersonalPage extends Component {
             .then(res=>res.json())
             .then(data=>{
                 this.props.dispatch({type:"UPDATE_USER_PROFILE",data:data});
-                console.log(data.userId);
+                console.log(data);
                 network.account.getUserTimeline(data.userId)
                     .then(res=>res.json())
                     .then(data=>{
@@ -134,7 +134,7 @@ class PersonalPage extends Component {
                     <Row size={7}>
                         <Col>
                             <Button primary block style={{flex:1,marginLeft:5,marginRight:5}} onPress={()=>this.props.history.push("/userlist")}>
-                                <Text>Add User</Text>
+                                <Text>Add Friends</Text>
                             </Button>
                         </Col>
                     </Row>
