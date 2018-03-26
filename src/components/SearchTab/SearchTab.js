@@ -88,6 +88,7 @@ class SearchTab extends Component {
         <RestaurantCard data={item}/>
       </ListItem>
     );
+    console.log(this.props.searchedDishes);
     let dishCards = this.props.searchedDishes.map(item =>
       <ListItem key={item.dishId} style={styles.listItem}>
         <DishCard data={item}/>

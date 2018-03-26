@@ -20,13 +20,29 @@ import {
 import {withRouter} from 'react-router-native';
 import {connect} from "react-redux";
 import StarRating from 'react-native-star-rating';
+import network from "../../network";
 
 class DishCard extends Component {
   constructor(props, context) {
     super(props);
-    this.state = {};
+    this.state = {
+      imageUrl:"",
+      avatar: ""
+    };
   }
-
+  componentDidMount(){
+      network.dish.getDishImages(this.props.data.dishId)
+          .then(res=>res.json())
+          .then(data=>{
+              console.log(data);
+              if(data && data.length > 0)
+                  this.setState({
+                      imageUrl:data[0]
+                  });
+          }).catch(err=>{
+          console.log(err);
+      });
+  }
   onCardPress(dishId) {
     this.props.history.push(`/dishes/${dishId}`);
   }
@@ -37,7 +53,7 @@ class DishCard extends Component {
       <Card onPress={this.onCardPress.bind(this, this.props.data.dishId)}>
         <CardItem>
           <Left>
-            <Thumbnail source={{uri: avatar}}/>
+            {/*<Thumbnail source={{uri: avatar}}/>*/}
             <Body>
             <Text>{this.props.data.name}</Text>
             <Text note>{this.props.data.restaurant}</Text>
@@ -56,7 +72,7 @@ class DishCard extends Component {
         </CardItem>
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.dishId)}>
-            <Image source={{uri: avatar}} style={{height: 200, width: null, flex: 1}}/>
+            <Image source={{uri: this.state.imageUrl}} style={{height: 200, width: null, flex: 1}}/>
           </TouchableWithoutFeedback>
         </CardItem>
       </Card>
