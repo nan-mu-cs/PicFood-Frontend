@@ -1,5 +1,5 @@
 import {store} from "../../App";
-const HOST = 'http://172.26.62.62:8080';
+const HOST = 'http://api.pic-food.com';
 
 export default {
 
