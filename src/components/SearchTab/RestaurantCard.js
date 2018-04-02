@@ -34,32 +34,32 @@ class RestaurantCard extends Component {
   render() {
     let avatar = this.props.data.avatar || "http://via.placeholder.com/100x100";
     return (
-      <Card>
-        <CardItem>
-          <Left>
-            <Thumbnail source={{uri: avatar}}/>
-            <Body>
-            <Text>{this.props.data.name}</Text>
-            <Text note>{this.props.data.location}</Text>
-            <StarRating
-              disabled={true}
-              maxStars={5}
-              rating={this.props.data.avgRate}
-              containerStyle={{marginTop: 3, alignSelf: "flex-start"}}
-              fullStarColor={"#f5af4b"}
-              emptyStarColor={"#f5af4b"}
-              halfStarEnabled
-              starSize={15}
-            />
-            </Body>
-          </Left>
-        </CardItem>
-        <CardItem cardBody>
-          <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.restaurantId)}>
+      <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.restaurantId)}>
+        <Card>
+          <CardItem>
+            <Left>
+              <Thumbnail source={{uri: avatar}}/>
+              <Body>
+              <Text>{this.props.data.name}</Text>
+              <Text note>{this.props.data.location}</Text>
+              <StarRating
+                disabled={true}
+                maxStars={5}
+                rating={this.props.data.avgRate}
+                containerStyle={{marginTop: 3, alignSelf: "flex-start"}}
+                fullStarColor={"#f5af4b"}
+                emptyStarColor={"#f5af4b"}
+                halfStarEnabled
+                starSize={15}
+              />
+              </Body>
+            </Left>
+          </CardItem>
+          <CardItem cardBody>
             <Image source={{uri: avatar}} style={{height: 200, width: null, flex: 1}}/>
-          </TouchableWithoutFeedback>
-        </CardItem>
-      </Card>
+          </CardItem>
+        </Card>
+      </TouchableWithoutFeedback>
     );
   }
 }

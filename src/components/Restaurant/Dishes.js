@@ -34,16 +34,16 @@ class Dishes extends Component {
     render() {
 
         return (
+          <TouchableWithoutFeedback onPress={this.onDishCardPress.bind(this, this.props.data.dishId)}>
             <Card >
                 <CardItem>
                     <Text>{this.props.data.name}</Text>
                 </CardItem>
                 <CardItem>
-                    <TouchableWithoutFeedback onPress={this.onDishCardPress.bind(this, this.props.data.dishId)}>
-                        <Image source={{uri: this.state.imageUrl || "http://via.placeholder.com/100x100"}} style={{height: 200, width: null, flex: 1}}/>
-                    </TouchableWithoutFeedback>
+                    <Image source={{uri: this.state.imageUrl || "http://via.placeholder.com/100x100"}} style={{height: 200, width: null, flex: 1}}/>
                 </CardItem>
             </Card>
+          </TouchableWithoutFeedback>
         );
     }
 }
