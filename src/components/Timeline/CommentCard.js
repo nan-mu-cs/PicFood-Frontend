@@ -30,21 +30,15 @@ class CommentCard extends Component {
       dishId: ""
     };
     this.handleClickImage = this.handleClickImage.bind(this);
+    this.handleClickUser = this.handleClickUser.bind(this);
   }
 
   handleClickImage() {
     this.props.history.push(`/dishes/${this.props.data.dishId}`)
-    //console.log("click");
-    // this.props.history.push({
-    //     pathname: "/image-detail",
-    //     state:{
-    //         avatar:this.props.data.avatar,
-    //         user:this.props.data.user,
-    //         location:this.props.data.location,
-    //         image:this.props.data.image,
-    //         comments: this.props.data.comments
-    //     }
-    // });
+  }
+
+  handleClickUser() {
+    this.props.history.push(`/user/${this.props.data.commenterId}`)
   }
 
   componentDidMount() {
@@ -70,13 +64,6 @@ class CommentCard extends Component {
       }).catch(err => {
       console.log(err);
     });
-    // network.dish.getDishInfoById({id:this.props.data.dishId})
-    //     .then(res=>res.json())
-    //     .then(data=>{
-    //         console.log(data);
-    //     }).catch(err=>{
-    //     console.log(err);
-    // })
   }
 
   render() {
@@ -91,13 +78,15 @@ class CommentCard extends Component {
     return (
       <Card style={{padding: 5}}>
         <CardItem>
-          <Left>
-            <Thumbnail small source={{uri: avatar}}/>
-            <Body>
-            <Text style={{fontSize: 16}}>{name}</Text>
-            {/*<Text note style={{fontSize:14}}>{this.props.data.location}</Text>*/}
-            </Body>
-          </Left>
+          <TouchableWithoutFeedback onPress={this.handleClickUser}>
+            <Left>
+              <Thumbnail small source={{uri: avatar}}/>
+              <Body>
+              <Text style={{fontSize: 16}}>{name}</Text>
+              {/*<Text note style={{fontSize:14}}>{this.props.data.location}</Text>*/}
+              </Body>
+            </Left>
+          </TouchableWithoutFeedback>
         </CardItem>
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.handleClickImage}>
@@ -108,23 +97,6 @@ class CommentCard extends Component {
             </Body>
           </TouchableWithoutFeedback>
         </CardItem>
-        {/*<CardItem>*/}
-        {/*<Left>*/}
-        {/*<Button transparent>*/}
-        {/*<Icon active name="thumbs-up" />*/}
-        {/*<Text>{this.props.data.likes}</Text>*/}
-        {/*</Button>*/}
-        {/*</Left>*/}
-        {/*<Body>*/}
-        {/*<Button transparent>*/}
-        {/*<Icon active name="chatbubbles" />*/}
-        {/*<Text>{this.props.data.comments.length}</Text>*/}
-        {/*</Button>*/}
-        {/*</Body>*/}
-        {/*<Right>*/}
-        {/*<Text>{this.props.data.time}</Text>*/}
-        {/*</Right>*/}
-        {/*</CardItem>*/}
       </Card>
     );
   }

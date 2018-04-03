@@ -28,21 +28,15 @@ class ImageCard extends Component {
       name: ""
     };
     this.handleClickImage = this.handleClickImage.bind(this);
+    this.handleClickUser = this.handleClickUser.bind(this);
   }
 
   handleClickImage() {
-    //console.log("click");
-    // this.props.history.push({
-    //     pathname: "/image-detail",
-    //     state:{
-    //         avatar:this.props.data.avatar,
-    //         user:this.props.data.user,
-    //         location:this.props.data.location,
-    //         image:this.props.data.image,
-    //         comments: this.props.data.comments
-    //     }
-    // });
     this.props.history.push(`/viewpost/${this.props.data.postId}`)
+  }
+
+  handleClickUser() {
+    this.props.history.push(`/user/${this.props.data.creatorId}`)
   }
 
   componentDidMount() {
@@ -53,7 +47,7 @@ class ImageCard extends Component {
           avatar: data.avatar,
           name: data.name
         });
-        //console.log(data);
+        console.log(data);
       }).catch(err => {
       //console.log(err);
     });
@@ -75,36 +69,21 @@ class ImageCard extends Component {
       <Card style={{paddingVertical: 10, paddingHorizontal: 10, marginBottom: 5}}>
         {/*<Card style={{borderColor: "transparent", shadowColor: "transparent"}}>*/}
         <CardItem>
-          <Left>
-            <Thumbnail small source={{uri: avatar}}/>
-            <Body>
-            <Text style={{fontSize: 16}}>{name}</Text>
-            {/*<Text note style={{fontSize:14}}>{this.props.data.location}</Text>*/}
-            </Body>
-          </Left>
+          <TouchableWithoutFeedback onPress={this.handleClickUser}>
+            <Left>
+              <Thumbnail small source={{uri: avatar}}/>
+              <Body>
+              <Text style={{fontSize: 16}}>{name}</Text>
+              </Body>
+            </Left>
+          </TouchableWithoutFeedback>
         </CardItem>
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.handleClickImage}>
             <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}}/>
           </TouchableWithoutFeedback>
         </CardItem>
-        {/*<CardItem>*/}
-        {/*<Left>*/}
-        {/*<Button transparent>*/}
-        {/*<Icon active name="thumbs-up" />*/}
-        {/*<Text>{this.props.data.likes}</Text>*/}
-        {/*</Button>*/}
-        {/*</Left>*/}
-        {/*<Body>*/}
-        {/*<Button transparent>*/}
-        {/*<Icon active name="chatbubbles" />*/}
-        {/*<Text>{this.props.data.comments.length}</Text>*/}
-        {/*</Button>*/}
-        {/*</Body>*/}
-        {/*<Right>*/}
-        {/*<Text>{this.props.data.time}</Text>*/}
-        {/*</Right>*/}
-        {/*</CardItem>*/}
+
       </Card>
     );
   }

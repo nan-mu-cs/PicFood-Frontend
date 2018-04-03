@@ -84,12 +84,16 @@ export default {
       return fetch(HOST + `/api/post`, verb('post', body));
     },
 
+    hasUpvoted(postId, userId) {
+      return fetch(HOST + `/api/hasUpvoted?UserId=${userId}&PostId=${postId}`, verb('get'));
+    },
+
     upvotePost(postId) {
       return fetch(HOST + `/api/upvote`, verb('post', {postId}));
     },
 
     deleteUpvoteOfPost(postId) {
-      return fetch(HOST + `/api/delete/upvote`, verb('post', {postId})).then(handleResponse);
+      return fetch(HOST + `/api/delete/upvote`, verb('post', {postId}));
     },
 
     getMyFollowers() {

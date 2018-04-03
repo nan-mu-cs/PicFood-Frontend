@@ -19,7 +19,8 @@ class ViewPost extends Component {
         this.state={
             postId: this.props.match.params.postId,
             com: "",
-            error:false
+            error:false,
+            up:false
         };
         this.postComment = this.postComment.bind(this);
         this.upvote = this.upvote.bind(this);
@@ -42,32 +43,77 @@ class ViewPost extends Component {
     }
 
     upvote() {
-                //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
-        network.social.upvotePost(this.state.postId)
-          .then(response=>response.json())
-          .then((res) => {
-              //res = res.json();
-              console.log(res);
-              console.log("postID = " + this.state.postId);
-              console.log("upvoteCount = " + this.props.post.upvoteCount);
+        //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
+      console.log("user = " + this.props.user);
+      network.social.hasUpvoted(this.state.postId, this.props.user.userId)
+      .then(res => {
+        console.log(res);
+        console.log("=========== hasUpvoted ===========");
+        console.log("postId = " + this.state.postId);
+        console.log("userId = " + this.props.user.userId);
+        console.log(res["_bodyText"]);
+        if (res["_bodyText"] == "Not Upvoted")
+          network.social.upvotePost(this.state.postId)
+            .then(response=>response.json())
+            .then((res) => {
+                //res = res.json();
+                console.log(res);
+                console.log("=========== UPVOTE ===========");
+                console.log("postID = " + this.state.postId);
 
-              network.social.getPostByPostId(this.state.postId)
-                .then(res => {
-                  console.log(res);
-                  this.props.dispatch({type: "GET_POST_INFO", data: res});
-                })
-                .catch(err => {
+                // this.setState({
+                //     up:true
+                // });
+            })
+            .catch((e) => {
+                this.setState({
+                    error:true
+                });
+                console.log("ERR"+e.message);
+            });
 
-                })
+          else
+            network.social.deleteUpvoteOfPost(this.state.postId)
+            // .then(response=>response.json())
+            // .then((res) => {
+            //     //res = res.json();
+            //     console.log(res);
+            //     console.log("=========== DOWNVOTE ===========");
+            //     console.log("postID = " + this.state.postId);
+            //     console.log("upvoteCount = " + this.props.post.upvoteCount);
 
-              console.log("upvoteCount = " + this.props.post.upvoteCount);
+            //     // this.setState({
+            //     //     up:false
+            //     // });
+                
+            //     network.social.getPostByPostId(this.state.postId)
+            //       .then(res => {
+            //         console.log(res);
+            //         this.props.dispatch({type: "GET_POST_INFO", data: res});
+            //       })
+            //       .catch(err => {
+
+            //       })
+
+            //     console.log("upvoteCount = " + this.props.post.upvoteCount);
+            // })
+            .catch((e) => {
+                this.setState({
+                    error:true
+                });
+                console.log("ERR"+e.message);
+            });
+
+          network.social.getPostByPostId(this.state.postId)
+          .then(res => {
+            console.log(res);
+            this.props.dispatch({type: "GET_POST_INFO", data: res});
           })
-          .catch((e) => {
-              this.setState({
-                  error:true
-              });
-              console.log("ERR"+e.message);
+          .catch(err => {
+
           });
+          console.log("upvoteCount = " + this.props.post.upvoteCount);
+        });
     }
 
     postComment() {
@@ -171,7 +217,7 @@ class ViewPost extends Component {
                           <Text>{this.props.post.upvoteCount} Likes</Text>
                         </Button>
                         {this.state.error && Toast.show({
-                           text: 'Can\'t comment!',
+                           text: 'Can\'t upvote!',
                            position: 'bottom',
                            buttonText: 'Okay'
                             })
@@ -224,7 +270,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state, ownProps) => {
     return{
         dish:state.dish,
-        post:state.post
+        post:state.post,
+        user:state.user
     }
 };
 
