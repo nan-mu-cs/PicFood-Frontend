@@ -56,14 +56,9 @@ class ViewPost extends Component {
           network.social.upvotePost(this.state.postId)
             .then(response=>response.json())
             .then((res) => {
-                //res = res.json();
                 console.log(res);
                 console.log("=========== UPVOTE ===========");
                 console.log("postID = " + this.state.postId);
-
-                // this.setState({
-                //     up:true
-                // });
             })
             .catch((e) => {
                 this.setState({
@@ -73,30 +68,7 @@ class ViewPost extends Component {
             });
 
           else
-            network.social.deleteUpvoteOfPost(this.state.postId)
-            // .then(response=>response.json())
-            // .then((res) => {
-            //     //res = res.json();
-            //     console.log(res);
-            //     console.log("=========== DOWNVOTE ===========");
-            //     console.log("postID = " + this.state.postId);
-            //     console.log("upvoteCount = " + this.props.post.upvoteCount);
-
-            //     // this.setState({
-            //     //     up:false
-            //     // });
-                
-            //     network.social.getPostByPostId(this.state.postId)
-            //       .then(res => {
-            //         console.log(res);
-            //         this.props.dispatch({type: "GET_POST_INFO", data: res});
-            //       })
-            //       .catch(err => {
-
-            //       })
-
-            //     console.log("upvoteCount = " + this.props.post.upvoteCount);
-            // })
+            network.social.deleteUpvoteOfPost(this.state.postId, res["_bodyText"])
             .catch((e) => {
                 this.setState({
                     error:true
@@ -119,6 +91,7 @@ class ViewPost extends Component {
     postComment() {
         console.log("66666" + this.state.com);
         console.log(this.state.postId + " ====== " + this.state.com);
+        if (!this.state.com) return;
         network.comment.postComment({postId: this.state.postId, content: this.state.com})
           .then(response=>response.json())
           .then((res) => {
