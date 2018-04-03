@@ -41,7 +41,7 @@ class Timeline extends Component {
 
   componentDidMount() {
     //console.log(this.props.token);
-    if (this.props.token && !this.props.timelines) {
+    if (this.props.timelines.length === 0) {
       this.setState({loading: true});
       this.getData();
     }
@@ -163,7 +163,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state, ownProps) => {
   return {
     timelines: state.timelines,
-    token: state.token
+    token: state.token,
+    user: state.user
   }
 };
 
