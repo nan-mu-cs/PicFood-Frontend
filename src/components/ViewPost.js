@@ -17,6 +17,7 @@ class ViewPost extends Component {
     constructor(props, context){
         super(props);
         this.state={
+            creatorId:0,
             postId: this.props.match.params.postId,
             com: "",
             error:false,
@@ -24,6 +25,7 @@ class ViewPost extends Component {
         };
         this.postComment = this.postComment.bind(this);
         this.upvote = this.upvote.bind(this);
+        this.deletePost = this.deletePost.bind(this);
     }
 
     onBackPress() {
@@ -35,6 +37,7 @@ class ViewPost extends Component {
           network.social.getPostByPostId(this.state.postId)
             .then(res => {
               console.log(res);
+              this.state.creatorId = res.creatorId;
               this.props.dispatch({type: "GET_POST_INFO", data: res});
             })
             .catch(err => {
@@ -143,6 +146,25 @@ class ViewPost extends Component {
           });
         this.setState({com:""});
     }
+    deletePost() {
+      if (this.props.user.userId == this.state.creatorId) {
+        network.social.deletePost(this.state.postId)
+          .then((res) => {
+
+            console.log(res);
+            console.log("=========== Delete ===========");
+            console.log("postID = " + this.state.postId);
+
+            this.onBackPress();
+          })
+          .catch((e) => {
+            this.setState({
+              error:true
+            });
+            console.log("ERR"+e.message);
+          });
+      }
+    }
 
     render() {
         let image = this.props.post.imageUrl;
@@ -193,7 +215,18 @@ class ViewPost extends Component {
                     <Body>
                     <Title>{this.props.post.dishName}</Title>
                     </Body>
-                    <Right/>
+                    <Right>
+                      <Button transparent onPress={this.deletePost}>
+                        <Icon name='trash'/>
+                        {/*icon name here was attached prefix 'ios-' automatically */}
+                      </Button>
+                      {this.state.error && Toast.show({
+                        text: 'Can\'t delete!',
+                        position: 'bottom',
+                        buttonText: 'Okay'
+                      })
+                      }
+                    </Right>
                 </Header>
                 <Content>
                   <Card>

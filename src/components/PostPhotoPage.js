@@ -7,6 +7,7 @@ import {
   Header,
   Content,
   FooterTab,
+  Keyboard,
   Button,
   Text,
   Icon,
