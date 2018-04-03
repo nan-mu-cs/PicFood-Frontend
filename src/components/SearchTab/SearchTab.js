@@ -53,16 +53,16 @@ class SearchTab extends Component {
     let restaurants = this.state.keyword ? network.restaurant.searchRestaurants(this.state.keyword, 'rate', 41, -71) :
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon);
     restaurants.then(res => {
-        // console.log('searchRestaurants', res);
-        this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res});
-        this.setState({refreshing: false});
-      })
+      // console.log('searchRestaurants', res);
+      this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res.splice(0, 18)});
+      this.setState({refreshing: false});
+    })
       .catch(err => {
         console.log(err)
       });
     network.dish.searchDishes(this.state.keyword || '', 'rate', 41, -71)
       .then(res => {
-        this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 8)});
+        this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 18)});
         this.setState({refreshing: false});
       })
       .catch(err => {
@@ -74,7 +74,7 @@ class SearchTab extends Component {
     if (this.props.searchedRestaurants.length === 0)
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
         .then(res => {
-          this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res.splice(0, 8)});
+          this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res.splice(0, 18)});
           this.setState({loading: false})
         })
         .catch(err => {
@@ -86,57 +86,59 @@ class SearchTab extends Component {
     if (this.props.searchedDishes.length === 0)
       network.dish.searchDishes('', 'rate', 41, -71)
         .then(res => {
-          this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 8)});
+          this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 18)});
         })
         .catch(err => {
           console.log(err)
         })
   }
 
-  renderRestaurantCard() {
+  renderRestaurantCards() {
+    if (this.state.loading) {
+      return <Spinner/>;
+    }
     if (this.props.searchedRestaurants.length === 0) {
       return (<View style={styles.notFoundText}><Text>Restaurants Not Found</Text></View>);
     }
-    let restaurantCards = this.props.searchedRestaurants.map(item => (
-      <ListItem key={item.restaurantId} style={styles.listItem}>
-        <RestaurantCard data={item}/>
-      </ListItem>)
+    return (
+      <List dataArray={this.props.searchedRestaurants}
+            renderRow={(item) =>
+              <ListItem key={item.dishId} style={styles.listItem}>
+                <RestaurantCard data={item}/>
+              </ListItem>
+            }
+      >
+      </List>
     );
-    return restaurantCards;
   }
 
-  renderDishCard() {
+  renderDishCards() {
+    if (this.state.loading) {
+      return <Spinner/>;
+    }
     if (this.props.searchedDishes.length === 0) {
       return (<View style={styles.notFoundText}><Text>Dishes Not Found</Text></View>);
     }
-    let dishCards = this.props.searchedDishes.map(item =>
-      <ListItem key={item.dishId} style={styles.listItem}>
-        <DishCard data={item}/>
-      </ListItem>
+    return (
+      <List dataArray={this.props.searchedDishes}
+            renderRow={(item) =>
+              <ListItem key={item.dishId} style={styles.listItem}>
+                <DishCard data={item}/>
+              </ListItem>
+            }
+      >
+      </List>
     );
-    return dishCards;
   }
 
   render() {
-    let restaurantCards = this.props.searchedRestaurants.map(item =>
-      <ListItem key={item.restaurantId} style={styles.listItem}>
-        <RestaurantCard data={item}/>
-      </ListItem>
-    );
-    // console.log(this.props.searchedDishes);
-    let dishCards = this.props.searchedDishes.map(item =>
-      <ListItem key={item.dishId} style={styles.listItem}>
-        <DishCard data={item}/>
-      </ListItem>
-    );
-
     return (
       <Container>
         <Header searchBar hasTabs rounded>
           <Item>
             <Icon name="ios-search"/>
             <Input
-              placeholder="Search"
+              placeholder="Search by names"
               onChangeText={(value) => this.setState({keyword: value})}
               onSubmitEditing={this.onSubmitEditing.bind(this)}/>
           </Item>
@@ -154,9 +156,7 @@ class SearchTab extends Component {
                 />
               }
             >
-              <List>
-                {this.state.loading ? <Spinner/> : this.renderRestaurantCard()}
-              </List>
+            {this.renderRestaurantCards()}
             </Content>
           </Tab>
           <Tab heading="Dishes">
@@ -168,9 +168,7 @@ class SearchTab extends Component {
                 />
               }
             >
-              <List>
-                {this.state.loading ? <Spinner/> : this.renderDishCard()}
-              </List>
+              {this.renderDishCards()}
             </Content>
           </Tab>
         </Tabs>
