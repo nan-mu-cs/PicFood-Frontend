@@ -24,15 +24,8 @@ import network from "./network";
 import {Location, Permissions} from 'expo';
 
 class App extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      loading: true
-    };
-  }
 
   render() {
-
     return (
       <Switch>
         <Route exact path="/" component={LandingPage}/>
@@ -56,23 +49,4 @@ class App extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    currentTab: state.currentTab,
-    token: state.token
-  }
-};
-
-export default withRouter(connect(
-  mapStateToProps
-)(App));
-
+export default App;

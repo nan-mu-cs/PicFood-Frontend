@@ -191,11 +191,14 @@ class ViewPost extends Component {
                       </Button>
                     </Left>
                     <Body>
-                    <Title>{this.props.post.dishName}</Title>
+                    <Title>Post</Title>
                     </Body>
                     <Right/>
                 </Header>
                 <Content>
+                  <Body>
+                    <Text style={{paddingVertical: 12, fontSize: 15}}>{this.props.post.dishName}</Text>
+                  </Body>
                   <Card>
                     <CardItem cardBody style = {styles.star}>
                       <Image source={{uri:image}} style={{height: 200, width: null, flex: 1}}/>

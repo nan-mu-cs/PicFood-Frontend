@@ -138,7 +138,7 @@ class SearchTab extends Component {
           <Item>
             <Icon name="ios-search"/>
             <Input
-              placeholder="Search by names"
+              placeholder="Search by name"
               onChangeText={(value) => this.setState({keyword: value})}
               onSubmitEditing={this.onSubmitEditing.bind(this)}/>
           </Item>

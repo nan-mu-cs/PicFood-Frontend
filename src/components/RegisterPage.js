@@ -24,7 +24,7 @@ import {
   Toast,
   Thumbnail
 } from 'native-base';
-import {StyleSheet, ScrollView} from 'react-native';
+import {StyleSheet, ScrollView, AsyncStorage} from 'react-native';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-native';
 import {Col, Row, Grid} from "react-native-easy-grid";
@@ -81,8 +81,9 @@ class RegisterPage extends Component {
     })
       .then(response => response.json())
       .then(res => {
+        AsyncStorage.multiSet([["email", this.state.email], ["password", this.state.password]], (err) => {});
         this.props.dispatch({type: "UPDATE_TOKEN", data: res.token});
-        this.props.history.push("/timeline");
+        this.props.history.push("/");
       }).catch(error => {
       this.setState({
         error: true,

@@ -49,9 +49,9 @@ class LikeCard extends Component {
           avatar: data.avatar,
           name: data.name
         });
-        console.log(data);
+        // console.log(data);
       }).catch(err => {
-      //console.log(err);
+      console.log(err);
     });
     network.post.getPostInfo(this.props.data.postId)
       .then(res => res.json())
@@ -62,7 +62,7 @@ class LikeCard extends Component {
         });
         //console.log(data);
       }).catch(err => {
-      //console.log(err);
+      console.log(err);
     });
   }
 
@@ -76,7 +76,7 @@ class LikeCard extends Component {
     // console.log(this.props);
     return (
       <Card style={{marginBottom: 5}}>
-      {/*<Card style={{borderColor: "transparent", shadowColor: "transparent"}}>*/}
+        {/*<Card style={{borderColor: "transparent", shadowColor: "transparent"}}>*/}
         <CardItem>
           <TouchableWithoutFeedback onPress={this.handleClickUser}>
             <Left>

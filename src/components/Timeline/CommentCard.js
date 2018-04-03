@@ -60,7 +60,7 @@ class CommentCard extends Component {
           dishname: data.dishName,
           dishId: data.dishId
         });
-        console.log(data);
+        // console.log(data);
       }).catch(err => {
       console.log(err);
     });

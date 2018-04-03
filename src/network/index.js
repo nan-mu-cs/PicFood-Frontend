@@ -2,6 +2,7 @@ import {store} from "../../App";
 
 const HOST = 'http://api.pic-food.com';
 
+
 export default {
 
   account: {
@@ -41,7 +42,7 @@ export default {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
-          'Authorization': store.getState().token
+          'Authorization': TOKEN
         },
       };
       return fetch(`${HOST}/api/storage/uploadFile`, options);
@@ -141,7 +142,7 @@ export default {
 
   dish: {
     getDishInfoById(id) {
-      return fetch(HOST + `/api/dishes/${id}/info`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/dishes/${id}/info`, verb('get'));
     },
 
     getDishImages(id) {
@@ -181,6 +182,7 @@ export default {
   }
 }
 
+const TOKEN = `Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MjYzMzc0NjMsInVzZXJJZCI6IjJjOWY5NDVjNjI4OWZlYzQwMTYyOGExMzQ1YzIwMDAyIn0.XzHl57hLJFPwPrdqZeRlYrluAWLolSHzJf8D--i7KTA_WIDXIXzbWZfKMpNg1xd7PSsOiOa_00VViOzJvJ1BiQ`;
 
 function verb(method, body) {
   // console.log("token"+store.getState().token);
