@@ -93,7 +93,7 @@ class LandingPage extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>Pic Food</Text>
         <Text style={styles.description}>Welcome!</Text>
-        <Spinner/>
+        <Spinner color='black'/>
       </View>
     );
   }

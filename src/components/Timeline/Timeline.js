@@ -118,7 +118,7 @@ class Timeline extends Component {
         <Grid>
           <Row>
             <Col>
-              {this.state.loading && <Spinner/>}
+              {this.state.loading && <Spinner color='black'/>}
               <ScrollView
                 refreshControl={
                   <RefreshControl
@@ -127,7 +127,7 @@ class Timeline extends Component {
                   />
                 }
               >
-                <List>
+                <List style={styles.listStyle}>
                   {cards}
                 </List>
               </ScrollView>
@@ -151,12 +151,16 @@ class Timeline extends Component {
 const styles = StyleSheet.create({
   listItem: {
     borderColor: "transparent",
-    marginBottom: -20,
+    marginBottom: -10,
     marginTop: -17,
     marginLeft: -3,
     marginRight: -17,
   },
-  listItemLast: {}
+  listItemLast: {},
+  listStyle: {
+    paddingTop: 10,
+    paddingHorizontal: 8
+  }
 });
 
 

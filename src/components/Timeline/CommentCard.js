@@ -74,8 +74,9 @@ class CommentCard extends Component {
     if (!name)
       name = "PlaceHolder Name";
     // console.log(this.props);
+    {/*<Card style={{borderColor: "transparent", shadowColor: "transparent"}}>*/}
     return (
-      <Card style={{borderColor: "transparent", shadowColor: "transparent"}}>
+      <Card style={{padding: 5}}>
         <CardItem>
           <TouchableWithoutFeedback onPress={this.handleClickUser}>
             <Left>
@@ -90,7 +91,7 @@ class CommentCard extends Component {
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.handleClickImage}>
             <Body style={{paddingTop: 5, paddingBottom: 20, paddingLeft: 20, paddingRight: 20}}>
-            <Text note><Icon ios="ios-quote" android="quote" style={{fontSize: 35}}/> Comment on dish <Text
+            <Text note><Icon ios="ios-quote" android="quote" style={{fontSize: 15, color: 'blue'}}/> Comment on dish <Text
               style={{marginLeft: 10}}>{this.state.dishname}</Text>:</Text>
             <Text style={{marginTop: 5, marginLeft: 10}}>{this.props.data.content}</Text>
             </Body>
