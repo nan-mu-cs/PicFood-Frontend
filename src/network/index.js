@@ -92,8 +92,8 @@ export default {
       return fetch(HOST + `/api/upvote`, verb('post', {postId}));
     },
 
-    deleteUpvoteOfPost(postId) {
-      return fetch(HOST + `/api/delete/upvote`, verb('post', {postId}));
+    deleteUpvoteOfPost(postId, upvoteId) {
+      return fetch(HOST + `/api/delete/upvote`, verb('post', {postId, upvoteId}));
     },
 
     getMyFollowers() {
