@@ -110,7 +110,7 @@ class App extends React.Component {
               <Route path="/dishphoto/:id" component={DishPhoto} />
               <Route path="/searchby" component={SearchBy}/>
               <Route path="/users" component={PersonalPage} />
-              <Route path="/users/:id" component={UserPage} />
+              <Route path="/user/:id" component={UserPage} />
               <Route path="/followers/:userId" component={FollowerList}/>
               <Route path="/followings/:userId" component={FollowingList}/>
               <Route exact path="/login" component={LoginPage}/>

@@ -17,21 +17,16 @@ class LikeCard extends Component {
             dishId:""
         };
         this.handleClickImage = this.handleClickImage.bind(this);
+        this.handleClickUser = this.handleClickUser.bind(this);
     }
     handleClickImage(){
         this.props.history.push(`/dishes/${this.state.dishId}`)
-        //console.log("click");
-        // this.props.history.push({
-        //     pathname: "/image-detail",
-        //     state:{
-        //         avatar:this.props.data.avatar,
-        //         user:this.props.data.user,
-        //         location:this.props.data.location,
-        //         image:this.props.data.image,
-        //         comments: this.props.data.comments
-        //     }
-        // });
     }
+
+    handleClickUser(){
+        this.props.history.push(`/user/${this.props.data.userId}`)
+    }
+
     componentDidMount(){
         network.social.getUserProfile(this.props.data.userId)
             .then((res)=>res.json())
@@ -55,13 +50,6 @@ class LikeCard extends Component {
             }).catch(err=>{
                 //console.log(err);
         });
-        // network.dish.getDishInfoById({id:this.props.data.dishId})
-        //     .then(res=>res.json())
-        //     .then(data=>{
-        //         console.log(data);
-        //     }).catch(err=>{
-        //     console.log(err);
-        // })
     }
     render() {
         let avatar = this.state.avatar;
@@ -74,6 +62,7 @@ class LikeCard extends Component {
         return (
             <Card style={{borderColor:"transparent",shadowColor:"transparent"}}>
                 <CardItem>
+                    <TouchableWithoutFeedback onPress={this.handleClickUser}>
                     <Left>
                         <Thumbnail small source={{uri: avatar}} />
                         <Body>
@@ -81,6 +70,7 @@ class LikeCard extends Component {
                             {/*<Text note style={{fontSize:14}}>{this.props.data.location}</Text>*/}
                         </Body>
                     </Left>
+                    </TouchableWithoutFeedback>
                 </CardItem>
                 <CardItem cardBody >
                     <TouchableWithoutFeedback onPress={this.handleClickImage}>
@@ -89,23 +79,7 @@ class LikeCard extends Component {
                         </Body>
                     </TouchableWithoutFeedback>
                 </CardItem>
-                {/*<CardItem>*/}
-                {/*<Left>*/}
-                {/*<Button transparent>*/}
-                {/*<Icon active name="thumbs-up" />*/}
-                {/*<Text>{this.props.data.likes}</Text>*/}
-                {/*</Button>*/}
-                {/*</Left>*/}
-                {/*<Body>*/}
-                {/*<Button transparent>*/}
-                {/*<Icon active name="chatbubbles" />*/}
-                {/*<Text>{this.props.data.comments.length}</Text>*/}
-                {/*</Button>*/}
-                {/*</Body>*/}
-                {/*<Right>*/}
-                {/*<Text>{this.props.data.time}</Text>*/}
-                {/*</Right>*/}
-                {/*</CardItem>*/}
+
             </Card>
         );
     }
