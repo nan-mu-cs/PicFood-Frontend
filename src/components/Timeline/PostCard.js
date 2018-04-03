@@ -78,6 +78,9 @@ class PostCard extends Component {
           </TouchableWithoutFeedback>
         </CardItem>
         <CardItem cardBody>
+          <Text style={{paddingLeft:20,paddingBottom:10}}>{this.props.content||"this is a content"}</Text>
+        </CardItem>
+        <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.handleClickImage}>
             <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}}/>
           </TouchableWithoutFeedback>
