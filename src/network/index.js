@@ -80,7 +80,7 @@ export default {
       return fetch(HOST + `/api/delete/post`, verb('post', {postId})).then(handleResponse);
     },
 
-    addPost(body) {  // restaurantId, dishName, rate, category, content, imageId (optional)
+    addPost(body) { // restaurantId, dishName, rate, category, content, imageId (optional)
       return fetch(HOST + `/api/post`, verb('post', body));
     },
 

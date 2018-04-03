@@ -43,7 +43,7 @@ class ViewPost extends Component {
     }
 
     upvote() {
-            //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
+        //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
       console.log("user = " + this.props.user);
       network.social.hasUpvoted(this.state.postId, this.props.user.id)
       .then(res => {
