@@ -33,23 +33,15 @@ class PersonalPage extends Component {
   }
 
   componentDidMount() {
-    network.account.getMyProfile()
+    network.account.getUserTimeline(this.props.user.userId)
       .then(res => res.json())
       .then(data => {
-        this.props.dispatch({type: "UPDATE_USER_PROFILE", data: data});
-        console.log(data);
-        network.account.getUserTimeline(data.userId)
-          .then(res => res.json())
-          .then(data => {
-            this.props.dispatch({type: "UPDATE_USER_TIMELINE", data: data});
-            // console.log("get time line");
-            // console.log(data);
-          }).catch(err => {
-          console.log(err);
-        })
-      }).then(err => {
+        this.props.dispatch({type: "UPDATE_USER_TIMELINE", data: data});
+        // console.log("get time line");
+        // console.log(data);
+      }).catch(err => {
       console.log(err);
-    });
+    })
   }
 
   handleLogout() {

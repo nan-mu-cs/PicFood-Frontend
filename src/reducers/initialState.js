@@ -4,7 +4,7 @@
 export default {
     currentTab:"timeline",
     tabs:[
-        {id:"timeline",icon:"home",url:"/"},
+        {id:"timeline",icon:"home",url:"/timeline"},
         {id:"search",icon:"search",url:"/search"},
         //{id:"restaurants",icon:"cart",url:"/restaurants"},
         // {id:"camera",icon:"camera",url:"/camera"},

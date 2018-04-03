@@ -62,7 +62,7 @@ class LoginPage extends Component {
           // console.log(res);
           // console.log(res._bodyInit);
           this.props.dispatch({type: "UPDATE_TOKEN", data: res.token});
-          this.props.history.push("/");
+          this.props.history.push("/timeline");
         })
         .catch((e) => {
           this.setState({

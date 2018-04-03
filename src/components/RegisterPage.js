@@ -82,7 +82,7 @@ class RegisterPage extends Component {
       .then(response => response.json())
       .then(res => {
         this.props.dispatch({type: "UPDATE_TOKEN", data: res.token});
-        this.props.history.push("/");
+        this.props.history.push("/timeline");
       }).catch(error => {
       this.setState({
         error: true,
