@@ -19,9 +19,11 @@ import {
   Spinner,
   Tab,
   Tabs,
-  Title
+  Text,
+  Title,
+  View
 } from 'native-base';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, RefreshControl} from 'react-native';
 import {connect} from 'react-redux';
 import RestaurantCard from "./RestaurantCard";
 import DishCard from "./DishCard";
@@ -33,7 +35,8 @@ class SearchTab extends Component {
   constructor(props, context) {
     super(props);
     this.state = {
-      loading: true
+      loading: true,
+      refreshing: false
     };
   }
 
@@ -41,29 +44,37 @@ class SearchTab extends Component {
     this.props.history.push(`/searchby`);
   }
 
+  handleRefresh() {
+    this.setState({refreshing: true});
+    this.onSubmitEditing();
+  }
+
   onSubmitEditing() {
-    network.restaurant.searchRestaurants(this.state.keyword, 'rate', 41, -71)
-      .then(res => {
-        console.log('searchRestaurants', res);
-        this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res});
+    let restaurants = this.state.keyword ? network.restaurant.searchRestaurants(this.state.keyword, 'rate', 41, -71) :
+      network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon);
+    restaurants.then(res => {
+        // console.log('searchRestaurants', res);
+        this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res});
+        this.setState({refreshing: false});
       })
       .catch(err => {
         console.log(err)
       });
-    // network.dish.searchDishes(this.state.keyword, 'rate', 41, -71)
-    //   .then(res => {
-    //     this.props.dispatch({type:"GET_SEARCHED_DISHES", data: res.splice(0, 8)});
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   });
+    network.dish.searchDishes(this.state.keyword || '', 'rate', 41, -71)
+      .then(res => {
+        this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 8)});
+        this.setState({refreshing: false});
+      })
+      .catch(err => {
+        console.log(err)
+      });
   }
 
   componentDidMount() {
-    if(this.props.searchedRestaurants.length === 0)
+    if (this.props.searchedRestaurants.length === 0)
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
         .then(res => {
-          this.props.dispatch({type:"GET_SEARCHED_RESTAURANTS", data: res.splice(0, 8)});
+          this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res.splice(0, 8)});
           this.setState({loading: false})
         })
         .catch(err => {
@@ -72,14 +83,38 @@ class SearchTab extends Component {
     else
       this.setState({loading: false});
     // network.dish.searchDishes('rice', 'rate', this.props.location.lat, this.props.location.lon)
-    if(this.props.searchedDishes.length === 0)
+    if (this.props.searchedDishes.length === 0)
       network.dish.searchDishes('', 'rate', 41, -71)
         .then(res => {
-          this.props.dispatch({type:"GET_SEARCHED_DISHES", data: res.splice(0, 8)});
+          this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 8)});
         })
         .catch(err => {
           console.log(err)
         })
+  }
+
+  renderRestaurantCard() {
+    if (this.props.searchedRestaurants.length === 0) {
+      return (<View style={styles.notFoundText}><Text>Restaurants Not Found</Text></View>);
+    }
+    let restaurantCards = this.props.searchedRestaurants.map(item => (
+      <ListItem key={item.restaurantId} style={styles.listItem}>
+        <RestaurantCard data={item}/>
+      </ListItem>)
+    );
+    return restaurantCards;
+  }
+
+  renderDishCard() {
+    if (this.props.searchedDishes.length === 0) {
+      return (<View style={styles.notFoundText}><Text>Dishes Not Found</Text></View>);
+    }
+    let dishCards = this.props.searchedDishes.map(item =>
+      <ListItem key={item.dishId} style={styles.listItem}>
+        <DishCard data={item}/>
+      </ListItem>
+    );
+    return dishCards;
   }
 
   render() {
@@ -88,7 +123,7 @@ class SearchTab extends Component {
         <RestaurantCard data={item}/>
       </ListItem>
     );
-    console.log(this.props.searchedDishes);
+    // console.log(this.props.searchedDishes);
     let dishCards = this.props.searchedDishes.map(item =>
       <ListItem key={item.dishId} style={styles.listItem}>
         <DishCard data={item}/>
@@ -111,16 +146,30 @@ class SearchTab extends Component {
         </Header>
         <Tabs initialPage={0}>
           <Tab heading="Restaurants">
-            <Content>
+            <Content
+              refreshControl={
+                <RefreshControl
+                  refreshing={this.state.refreshing}
+                  onRefresh={this.handleRefresh.bind(this)}
+                />
+              }
+            >
               <List>
-                {this.state.loading ? <Spinner/> : restaurantCards}
+                {this.state.loading ? <Spinner/> : this.renderRestaurantCard()}
               </List>
             </Content>
           </Tab>
           <Tab heading="Dishes">
-            <Content>
+            <Content
+              refreshControl={
+                <RefreshControl
+                  refreshing={this.state.refreshing}
+                  onRefresh={this.handleRefresh.bind(this)}
+                />
+              }
+            >
               <List>
-                {dishCards}
+                {this.state.loading ? <Spinner/> : this.renderDishCard()}
               </List>
             </Content>
           </Tab>
@@ -134,6 +183,11 @@ class SearchTab extends Component {
 const styles = StyleSheet.create({
   listItem: {
     borderBottomWidth: 0
+  },
+  notFoundText: {
+    paddingTop: 100,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 
