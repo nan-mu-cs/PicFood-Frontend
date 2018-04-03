@@ -130,7 +130,7 @@ class UserList extends Component {
           </Body>
           <Right/>
         </Header>
-        {this.state.loading ? <Content><Spinner/></Content> :
+        {this.state.loading ? <Content><Spinner color='black' /></Content> :
         <Content>
           <Left>
             <Item>

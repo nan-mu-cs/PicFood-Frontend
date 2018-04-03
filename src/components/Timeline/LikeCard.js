@@ -88,7 +88,8 @@ class LikeCard extends Component {
       name = "PlaceHolder Name";
     // console.log(this.props);
     return (
-      <Card style={{borderColor: "transparent", shadowColor: "transparent"}}>
+      <Card style={{marginBottom: 5}}>
+      {/*<Card style={{borderColor: "transparent", shadowColor: "transparent"}}>*/}
         <CardItem>
           <Left>
             <Thumbnail small source={{uri: avatar}}/>
@@ -101,7 +102,7 @@ class LikeCard extends Component {
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.handleClickImage}>
             <Body style={{paddingTop: 5, paddingBottom: 20, paddingLeft: 20, paddingRight: 20}}>
-            <Text note><Icon name="md-heart" style={{fontSize: 35}}/> Liked dish <Text
+            <Text note><Icon name="md-heart" style={{fontSize: 15, color: 'red'}}/> Liked dish <Text
               style={{marginLeft: 5}}>{this.state.dishname}</Text></Text>
             </Body>
           </TouchableWithoutFeedback>

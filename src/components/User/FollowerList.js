@@ -84,7 +84,7 @@ class FollowerList extends Component {
           <Right/>
         </Header>
         <Content>
-          {this.state.loading ? <Spinner/> :
+          {this.state.loading ? <Spinner color='black'/> :
           <List>
             {userList}
           </List>}

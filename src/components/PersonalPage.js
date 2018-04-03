@@ -46,6 +46,7 @@ class PersonalPage extends Component {
 
   handleLogout() {
     this.props.history.push("/login");
+    this.props.dispatch({type: "LOGOUT"});
   }
 
   handleClickImage(postId) {

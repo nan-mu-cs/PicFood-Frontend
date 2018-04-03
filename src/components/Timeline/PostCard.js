@@ -72,7 +72,8 @@ class ImageCard extends Component {
     if (!image)
       image = "http://via.placeholder.com/350x150";
     return (
-      <Card style={{borderColor: "transparent"}}>
+      <Card style={{paddingVertical: 10, paddingHorizontal: 10, marginBottom: 5}}>
+        {/*<Card style={{borderColor: "transparent", shadowColor: "transparent"}}>*/}
         <CardItem>
           <Left>
             <Thumbnail small source={{uri: avatar}}/>

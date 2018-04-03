@@ -67,7 +67,7 @@ class UserPage extends Component {
           <Title>Profile</Title>
           </Body>
         </Header>
-        {this.state.loading ? <Content><Spinner/></Content> :
+        {this.state.loading ? <Content><Spinner color='black'/></Content> :
           <Content>
             <Card>
               <CardItem>

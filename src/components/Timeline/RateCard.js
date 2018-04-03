@@ -57,7 +57,7 @@ class RateCard extends Component {
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.handleClickImage}>
             <Body style={{paddingTop: 5, paddingBottom: 20, paddingLeft: 20, paddingRight: 20}}>
-            <Text note><Icon name="md-star" style={{fontSize: 35}}/> Rate on dish <Text
+            <Text note><Icon name="md-star" style={{fontSize: 15}}/> Rate on dish <Text
               style={{marginLeft: 5}}>{this.props.data.dish}</Text>:</Text>
             <StarRating
               disabled={true}
