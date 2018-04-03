@@ -16,7 +16,9 @@ class UserPage extends Component {
     super(props);
     this.state = {
       loading: true,
-      userId: this.props.match.params.id
+      userId: this.props.match.params.id,
+      name: '',
+      avatar: "http://via.placeholder.com/100x100",
     };
     this.handleClickBack = this.handleClickBack.bind(this);
   }
@@ -28,7 +30,8 @@ class UserPage extends Component {
         network.social.getUserProfile(this.state.userId)
             .then(res=>res.json())
             .then(data=>{
-                this.props.dispatch({type:"UPDATE_USER_PROFILE",data:data});
+                this.setState(data);
+                // this.props.dispatch({type:"UPDATE_USER_PROFILE",data:data});
                 network.account.getUserTimeline(data.userId)
                     .then(res=>res.json())
                     .then(data=>{
@@ -94,25 +97,25 @@ class UserPage extends Component {
                         </Button>
                     </Left>
                     <Body>
-                    <Title>{(this.props.user && this.props.user.name)||"username"}</Title>
+                    <Title>{this.state.name}</Title>
                     </Body>
                     <Right />
                 </Header>
                 <Grid>
                     <Row size={15} style={{alignItems:"center"}}>
                         <Col size={3}>
-                            <Thumbnail round size={150} source={{ uri: (this.props.user && this.props.user.avatar)||"http://via.placeholder.com/100x100" }} style={{marginLeft:30}}/>
+                            <Thumbnail round size={150} source={{ uri: (this.state.avatar)||"http://via.placeholder.com/100x100" }} style={{marginLeft:30}}/>
                         </Col>
                         <Col size={7}>
                             <Row style={{alignItems:"center"}}>
                                 <Col size={3}>
-                                    <TouchableWithoutFeedback onPress={()=>this.props.history.push(`/followers/${this.props.user.userId}`)}>
-                                        <Text>{this.props.user.fanCount||0} followers</Text>
+                                    <TouchableWithoutFeedback onPress={()=>this.props.history.push(`/followers/${this.state.userId}`)}>
+                                        <Text>{this.state.fanCount||0} followers</Text>
                                     </TouchableWithoutFeedback>
                                 </Col>
                                 <Col size={3}>
-                                    <TouchableWithoutFeedback onPress={()=>this.props.history.push(`/followings/${this.props.user.userId}`)}>
-                                        <Text>{this.props.user.followCount||0} following</Text>
+                                    <TouchableWithoutFeedback onPress={()=>this.props.history.push(`/followings/${this.state.userId}`)}>
+                                        <Text>{this.state.followCount||0} following</Text>
                                     </TouchableWithoutFeedback>
                                 </Col>
                             </Row>

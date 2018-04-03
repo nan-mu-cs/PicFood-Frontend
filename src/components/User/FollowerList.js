@@ -26,7 +26,7 @@ import {
   Tabs,
   Title
 } from 'native-base';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
 import Footer from "../Footer";
 import {withRouter} from 'react-router-native';
@@ -45,6 +45,10 @@ class FollowerList extends Component {
     this.props.history.goBack();
   }
 
+  onUserPress(userId) {
+    this.props.history.push(`/user/${userId}`);
+  }
+
   componentDidMount() {
     network.social.getMyFollowers()
       .then(res => {
@@ -52,20 +56,23 @@ class FollowerList extends Component {
         this.setState({loading: false})
         this.props.dispatch({type: "GET_FOLLOWERS", data: res});
       })
-      .catch(err => {})
+      .catch(err => {
+      })
   }
 
   render() {
     let userList = this.props.followers.map(item =>
       <ListItem key={item.userId} style={styles.listItem}>
-        <Left>
-          <Thumbnail source={{uri: item.avatar || "http://via.placeholder.com/100x100"}}/>
-          <Text>{item.name}</Text>
-        </Left>
+        <TouchableWithoutFeedback onPress={this.onUserPress.bind(this, item.userId)}>
+          <Left>
+            <Thumbnail source={{uri: item.avatar || "http://via.placeholder.com/100x100"}}/>
+            <Text>{item.name}</Text>
+          </Left>
+        </TouchableWithoutFeedback>
         {/*<Right>*/}
-          {/*<Button small onPress={this.onUnfollowPress.bind(this)}>*/}
-            {/*<Text style={styles.buttonText}>Unfollow</Text>*/}
-          {/*</Button>*/}
+        {/*<Button small onPress={this.onUnfollowPress.bind(this)}>*/}
+        {/*<Text style={styles.buttonText}>Unfollow</Text>*/}
+        {/*</Button>*/}
         {/*</Right>*/}
       </ListItem>
     );
@@ -84,10 +91,10 @@ class FollowerList extends Component {
           <Right/>
         </Header>
         <Content>
-          {this.state.loading ? <Spinner/> :
-          <List>
-            {userList}
-          </List>}
+          {this.state.loading ? <Spinner color='black'/> :
+            <List>
+              {userList}
+            </List>}
         </Content>
         <Footer/>
       </Container>

@@ -95,7 +95,7 @@ class SearchTab extends Component {
 
   renderRestaurantCards() {
     if (this.state.loading) {
-      return <Spinner/>;
+      return <Spinner color='black'/>;
     }
     if (this.props.searchedRestaurants.length === 0) {
       return (<View style={styles.notFoundText}><Text>Restaurants Not Found</Text></View>);
@@ -114,7 +114,7 @@ class SearchTab extends Component {
 
   renderDishCards() {
     if (this.state.loading) {
-      return <Spinner/>;
+      return <Spinner color='black'/>;
     }
     if (this.props.searchedDishes.length === 0) {
       return (<View style={styles.notFoundText}><Text>Dishes Not Found</Text></View>);
@@ -138,7 +138,7 @@ class SearchTab extends Component {
           <Item>
             <Icon name="ios-search"/>
             <Input
-              placeholder="Search by names"
+              placeholder="Search by name"
               onChangeText={(value) => this.setState({keyword: value})}
               onSubmitEditing={this.onSubmitEditing.bind(this)}/>
           </Item>

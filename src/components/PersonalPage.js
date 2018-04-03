@@ -16,7 +16,7 @@ import {
   ListItem,
   Thumbnail
 } from 'native-base';
-import {StyleSheet, ScrollView, Dimensions, Image, View, TouchableWithoutFeedback} from 'react-native';
+import {StyleSheet, ScrollView, Dimensions, Image, View, AsyncStorage, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
 import ImageCard from "./Timeline/PostCard";
 import Footer from "./Footer";
@@ -38,7 +38,7 @@ class PersonalPage extends Component {
       .then(data => {
         this.props.dispatch({type: "UPDATE_USER_TIMELINE", data: data});
         // console.log("get time line");
-        // console.log(data);
+        console.log(data);
       }).catch(err => {
       console.log(err);
     })
@@ -46,6 +46,8 @@ class PersonalPage extends Component {
 
   handleLogout() {
     this.props.history.push("/login");
+    AsyncStorage.clear();
+    this.props.dispatch({type: "LOGOUT"});
   }
 
   handleClickImage(postId) {

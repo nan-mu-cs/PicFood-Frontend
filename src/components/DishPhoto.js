@@ -44,7 +44,7 @@ class DishPhoto extends Component {
           <CardItem cardBody>
             <TouchableWithoutFeedback onPress={this.handleClickImage}>
               <Body style={{paddingTop: 5, paddingBottom: 20, paddingLeft: 20, paddingRight: 20}}>
-              <Text note><Icon name="md-heart" style={{fontSize: 35}}/> Liked dish <Text
+              <Text note><Icon name="md-heart" style={{fontSize: 15}}/> Liked dish <Text
                 style={{marginLeft: 5}}>{this.props.restaurant.name}</Text></Text>
               </Body>
             </TouchableWithoutFeedback>

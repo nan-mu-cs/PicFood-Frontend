@@ -20,7 +20,7 @@ import {
 import {withRouter} from 'react-router-native';
 import network from "../../network";
 
-class ImageCard extends Component {
+class PostCard extends Component {
   constructor(props, context) {
     super(props);
     this.state = {
@@ -47,11 +47,10 @@ class ImageCard extends Component {
           avatar: data.avatar,
           name: data.name
         });
-        console.log(data);
+        // console.log(data);
       }).catch(err => {
-      //console.log(err);
+      console.log(err);
     });
-
   }
 
   render() {
@@ -66,7 +65,8 @@ class ImageCard extends Component {
     if (!image)
       image = "http://via.placeholder.com/350x150";
     return (
-      <Card style={{borderColor: "transparent"}}>
+      <Card style={{paddingVertical: 10, paddingHorizontal: 10, marginBottom: 5}}>
+        {/*<Card style={{borderColor: "transparent", shadowColor: "transparent"}}>*/}
         <CardItem>
           <TouchableWithoutFeedback onPress={this.handleClickUser}>
             <Left>
@@ -88,4 +88,4 @@ class ImageCard extends Component {
   }
 }
 
-export default withRouter(ImageCard);
+export default withRouter(PostCard);

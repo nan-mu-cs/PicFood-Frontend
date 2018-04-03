@@ -26,7 +26,7 @@ import {
   Thumbnail,
   Title
 } from 'native-base';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
 import Footer from "../Footer";
 import {withRouter} from 'react-router-native';
@@ -53,7 +53,11 @@ class UserList extends Component {
         this.updateFollowStatus(this.state.users, userId, false);
         console.log('new state', this.state.users);
         this.setState({users: this.state.users});
-        console.log('onUnfollowPress', res);
+        network.account.getMyProfile()
+          .then(res => res.json())
+          .then(res => {
+            this.props.dispatch({type: 'GET_USER_PROFILE', data: res});
+          });
       })
       .catch(res => {
       })
@@ -61,7 +65,7 @@ class UserList extends Component {
 
   updateFollowStatus(userList, userId, status) {
     userList.forEach(user => {
-      if(user.userId === userId) {
+      if (user.userId === userId) {
         user.following = status;
       }
     });
@@ -74,6 +78,12 @@ class UserList extends Component {
         this.updateFollowStatus(this.state.users, userId, true);
         this.setState({users: this.state.users});
         console.log('onUnfollowPress', this.state.users);
+        network.account.getMyProfile()
+          .then(res => res.json())
+          .then(res => {
+            console.log(res)
+            this.props.dispatch({type: 'GET_USER_PROFILE', data: res});
+          });
       })
       .catch(res => {
       })
@@ -85,7 +95,12 @@ class UserList extends Component {
         this.setState({users: res});
         // this.props.dispatch({type:"GET_USERS", data: res});
       })
-      .catch(err => {})
+      .catch(err => {
+      })
+  }
+
+  onUserPress(userId) {
+    this.props.history.push(`/user/${userId}`);
   }
 
   componentDidMount() {
@@ -94,16 +109,19 @@ class UserList extends Component {
         this.setState({users: res, loading: false});
         // this.props.dispatch({type: "GET_USERS", data: res});
       })
-      .catch(err => {})
+      .catch(err => {
+      })
   }
 
   render() {
     let userList = this.state.users.map(item =>
       <ListItem key={item.userId} style={styles.listItem}>
-        <Left>
-          <Thumbnail source={{uri: item.avatar || "http://via.placeholder.com/100x100"}}/>
-          <Text>{item.name}</Text>
-        </Left>
+        <TouchableWithoutFeedback onPress={this.onUserPress.bind(this, item.userId)}>
+          <Left>
+            <Thumbnail source={{uri: item.avatar || "http://via.placeholder.com/100x100"}}/>
+            <Text>{item.name}</Text>
+          </Left>
+        </TouchableWithoutFeedback>
         <Right>
           {item.following ?
             <Button danger small onPress={this.onUnfollowPress.bind(this, item.userId)}>
@@ -114,6 +132,7 @@ class UserList extends Component {
             </Button>
           }
         </Right>
+
       </ListItem>
     );
 
@@ -130,19 +149,19 @@ class UserList extends Component {
           </Body>
           <Right/>
         </Header>
-        {this.state.loading ? <Content><Spinner/></Content> :
-        <Content>
-          <Left>
-            <Item>
-              <Input placeholder='Search Users'
-                     onChangeText={(value) => this.setState({keyword: value})}
-                     onSubmitEditing={this.onSearch.bind(this)}/>
-            </Item>
-          </Left>
-          <List>
-            {userList}
-          </List>
-        </Content>}
+        {this.state.loading ? <Content><Spinner color='black'/></Content> :
+          <Content>
+            <Left>
+              <Item>
+                <Input placeholder='Search Users'
+                       onChangeText={(value) => this.setState({keyword: value})}
+                       onSubmitEditing={this.onSearch.bind(this)}/>
+              </Item>
+            </Left>
+            <List>
+              {userList}
+            </List>
+          </Content>}
         <Footer/>
       </Container>
     );

@@ -43,8 +43,7 @@ class DishPage extends Component {
   }
 
   componentDidMount() {
-    //let dishId = "2c9ad7fa6255a250016255a26cf50000";
-    console.log(this.props.match.params.id);
+    console.log('DishPage', this.state.dishId);
     network.dish.getPostsOfDish(this.state.dishId)
       .then(res => res.json())
       .then(res => {

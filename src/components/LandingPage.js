@@ -23,10 +23,6 @@ class LandingPage extends Component {
     this.getLocation();
   }
 
-  loadingFinished() {
-    this.props.onLoadingFinish();
-  }
-
   getUserInformation() {
     AsyncStorage.multiGet(["email", "password"], function (err, stores) {
       if (err) {
@@ -50,8 +46,7 @@ class LandingPage extends Component {
           this.setState({
             loading: false
           });
-          console.log("token ");
-          console.log(res);
+          console.log("token", res);
           this.props.dispatch({type: "UPDATE_TOKEN", data: res.token});
           network.account.getMyProfile()
             .then(res => res.json())
@@ -93,7 +88,7 @@ class LandingPage extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>Pic Food</Text>
         <Text style={styles.description}>Welcome!</Text>
-        <Spinner/>
+        <Spinner color='black'/>
       </View>
     );
   }

@@ -42,6 +42,8 @@ export default (state = initialState, action) => {
     //     return {...state, upvoteCount: action.data};
     case "UPDATE_USER_PROFILE":
       return {...state, user: action.data};
+    case "LOGOUT":
+      return initialState;
     case "UPDATE_USER_TIMELINE":
       return {...state, userTimeline: action.data};
     default:
