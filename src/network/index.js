@@ -1,4 +1,5 @@
 import {store} from "../../App";
+
 const HOST = 'http://api.pic-food.com';
 
 export default {
@@ -19,36 +20,36 @@ export default {
     postUserProfile(body) { // avatar, bio, email, name, password (all optional)
       return fetch(HOST + '/api/users/me', verb('post', body)).then(handleResponse);
     },
-    getUserTimeline(userId){
-      return fetch(`${HOST}/api/timeline/${userId}`,verb('get'));
+    getUserTimeline(userId) {
+      return fetch(`${HOST}/api/timeline/${userId}`, verb('get'));
     }
   },
-  storage:{
+  storage: {
 
-    uploadFile(uri){
-        let uriParts = uri.split('.');
-        let fileType = uriParts[uriParts.length - 1];
-        let formData = new FormData();
-        formData.append('file', {
-            uri,
-            name: `photo.${fileType}`,
-            type: `image/${fileType}`,
-        });
-        let options = {
-            method: 'POST',
-            body: formData,
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'multipart/form-data',
-                'Authorization': store.getState().token
-            },
-        };
-      return fetch(`${HOST}/api/storage/uploadFile`,options);
+    uploadFile(uri) {
+      let uriParts = uri.split('.');
+      let fileType = uriParts[uriParts.length - 1];
+      let formData = new FormData();
+      formData.append('file', {
+        uri,
+        name: `photo.${fileType}`,
+        type: `image/${fileType}`,
+      });
+      let options = {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+          'Authorization': store.getState().token
+        },
+      };
+      return fetch(`${HOST}/api/storage/uploadFile`, options);
     }
   },
-  post:{
-    getPostInfo(id){
-      return fetch(`${HOST}/api/post/${id}`,verb('get'));
+  post: {
+    getPostInfo(id) {
+      return fetch(`${HOST}/api/post/${id}`, verb('get'));
     }
   },
   social: {
@@ -184,15 +185,15 @@ export default {
 function verb(method, body) {
   // console.log("token"+store.getState().token);
   //   console.log(method);
-  let data ={
+  let data = {
     method: method,
     headers: {
-      'Content-Type':'application/json; charset=UTF-8',
+      'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': `${store.getState().token}`
     },
   };
-  if(method === "post" || method === "POST"){
-      data.body = JSON.stringify(body);
+  if (method === "post" || method === "POST") {
+    data.body = JSON.stringify(body);
   }
   // console.log(data);
   return data;

@@ -41,19 +41,20 @@ class DishPage extends Component {
   handleClickBack() {
     this.props.history.goBack();
   }
-  componentDidMount(){
+
+  componentDidMount() {
     //let dishId = "2c9ad7fa6255a250016255a26cf50000";
     console.log(this.props.match.params.id);
     network.dish.getPostsOfDish(this.state.dishId)
-        .then(res=>res.json())
-    .then(res => {
-      console.log("dish page!!!");
-      console.log(res);
-      this.props.dispatch({type:"GET_POSTS_OF_DISH", data: res});
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      .then(res => res.json())
+      .then(res => {
+        console.log("dish page!!!");
+        console.log(res);
+        this.props.dispatch({type: "GET_POSTS_OF_DISH", data: res});
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   // onDishPhotoPress(imageUrl) {
@@ -61,41 +62,41 @@ class DishPage extends Component {
   // }
 
   upvote() {
-        //         //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
-        // network.social.upvotePost(this.state.postId)
-        //   .then(response=>response.json())
-        //   .then((res) => {
-        //       //res = res.json();
-        //       console.log(res);
-        //       console.log("postID = " + this.state.postId);
-        //       console.log("upvoteCount = " + this.props.post.upvoteCount);
+    //         //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
+    // network.social.upvotePost(this.state.postId)
+    //   .then(response=>response.json())
+    //   .then((res) => {
+    //       //res = res.json();
+    //       console.log(res);
+    //       console.log("postID = " + this.state.postId);
+    //       console.log("upvoteCount = " + this.props.post.upvoteCount);
 
-        //       network.social.getPostByPostId(this.state.postId)
-        //         .then(res => {
-        //           console.log(res);
-        //           this.props.dispatch({type: "GET_POST_INFO", data: res});
-        //         })
-        //         .catch(err => {
+    //       network.social.getPostByPostId(this.state.postId)
+    //         .then(res => {
+    //           console.log(res);
+    //           this.props.dispatch({type: "GET_POST_INFO", data: res});
+    //         })
+    //         .catch(err => {
 
-        //         })
+    //         })
 
-        //       console.log("upvoteCount = " + this.props.post.upvoteCount);
-        //   })
-        //   .catch((e) => {
-        //       this.setState({
-        //           error:true
-        //       });
-        //       console.log("ERR"+e.message);
-        //   });
-    }
+    //       console.log("upvoteCount = " + this.props.post.upvoteCount);
+    //   })
+    //   .catch((e) => {
+    //       this.setState({
+    //           error:true
+    //       });
+    //       console.log("ERR"+e.message);
+    //   });
+  }
 
   render() {
-      let photos = this.props.postsOfDish.map(item => {
+    let photos = this.props.postsOfDish.map(item => {
         let image = item.imageUrl;
-        if(!image)
+        if (!image)
           image = "http://via.placeholder.com/100x100";
         let poster = item.creator;
-        if(!poster)
+        if (!poster)
           poster = "Xiaoxin";
         // let avatar = item.creatorAvatar;
         // if(!avatar)
@@ -103,27 +104,27 @@ class DishPage extends Component {
         let avatar = "http://via.placeholder.com/100x100";
         console.log("avatar = " + avatar);
         return (
-            <Card key={item.dishId}>
-              <CardItem>
-                <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}}/>
-              </CardItem>
-              <CardItem>
-                <Left>
-                  <Button transparent onPress={this.upvote}>
-                    <Icon active name="thumbs-up" />
-                    <Text>{item.upvoteCount} Likes</Text>
-                  </Button>
-                </Left>
-                <Right>
-                  <CardItem>
-                  <Thumbnail small source={{uri: avatar}} style={styles.poster} />
-                  <Text style={{fontSize:16}}>{poster}</Text>
-                  </CardItem>
-                </Right>
-              </CardItem>
-            </Card>
-          )
-    }
+          <Card key={item.dishId}>
+            <CardItem>
+              <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}}/>
+            </CardItem>
+            <CardItem>
+              <Left>
+                <Button transparent onPress={this.upvote}>
+                  <Icon active name="thumbs-up"/>
+                  <Text>{item.upvoteCount} Likes</Text>
+                </Button>
+              </Left>
+              <Right>
+                <CardItem>
+                  <Thumbnail small source={{uri: avatar}} style={styles.poster}/>
+                  <Text style={{fontSize: 16}}>{poster}</Text>
+                </CardItem>
+              </Right>
+            </CardItem>
+          </Card>
+        )
+      }
     );
     //console.log(this.props);
     return (
@@ -140,7 +141,8 @@ class DishPage extends Component {
           <Right/>
         </Header>
         <Content>
-          <Text style={styles.dishName}>{(this.props.postsOfDish.length && this.props.postsOfDish[0].dishName)||"DishName"}</Text>
+          <Text
+            style={styles.dishName}>{(this.props.postsOfDish.length && this.props.postsOfDish[0].dishName) || "DishName"}</Text>
           <StarRating
             disabled={true}
             maxStars={5}
@@ -151,7 +153,8 @@ class DishPage extends Component {
             halfStarEnabled
             starSize={15}
           />
-          <Text style={styles.restaurant}>{(this.props.postsOfDish.length && this.props.postsOfDish[0].restaurantName)||"restaurantName"}</Text>
+          <Text
+            style={styles.restaurant}>{(this.props.postsOfDish.length && this.props.postsOfDish[0].restaurantName) || "restaurantName"}</Text>
           <List>
             {photos}
           </List>

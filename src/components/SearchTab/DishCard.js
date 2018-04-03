@@ -35,7 +35,6 @@ class DishCard extends Component {
     network.dish.getDishImages(this.props.data.dishId)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (data && data.length > 0)
           this.setState({
             imageUrl: data[0]
@@ -56,7 +55,6 @@ class DishCard extends Component {
         <Card onPress={this.onCardPress.bind(this, this.props.data.dishId)}>
           <CardItem>
             <Left>
-              {/*<Thumbnail source={{uri: avatar}}/>*/}
               <Body>
               <Text>{this.props.data.name}</Text>
               <Text note>{this.props.data.restaurant}</Text>
@@ -74,7 +72,8 @@ class DishCard extends Component {
             </Left>
           </CardItem>
           <CardItem cardBody>
-            <Image source={{uri: this.state.imageUrl}} style={{height: 200, width: null, flex: 1}}/>
+            <Image source={{uri: this.state.imageUrl || "http://via.placeholder.com/100x100"}}
+                   style={{height: 200, width: null, flex: 1}}/>
           </CardItem>
         </Card>
       </TouchableWithoutFeedback>
