@@ -188,6 +188,7 @@ class ViewPost extends Component {
                     <Body>
                     <Title>Post</Title>
                     </Body>
+                  {this.props.user.userId == this.state.creatorId &&
                     <Right>
                       <Button transparent onPress={this.deletePost}>
                         <Icon name='trash'/>
@@ -199,7 +200,9 @@ class ViewPost extends Component {
                         buttonText: 'Okay'
                       })
                       }
-                    </Right>
+                    </Right>}
+                  {this.props.user.userId != this.state.creatorId &&
+                  <Right/>}
                 </Header>
                 <Content>
                   <Body>
