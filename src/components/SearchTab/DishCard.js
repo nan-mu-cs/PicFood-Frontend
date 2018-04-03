@@ -72,7 +72,8 @@ class DishCard extends Component {
             </Left>
           </CardItem>
           <CardItem cardBody>
-            <Image source={{uri: this.state.imageUrl || "http://via.placeholder.com/100x100"}} style={{height: 200, width: null, flex: 1}}/>
+            <Image source={{uri: this.state.imageUrl || "http://via.placeholder.com/100x100"}}
+                   style={{height: 200, width: null, flex: 1}}/>
           </CardItem>
         </Card>
       </TouchableWithoutFeedback>

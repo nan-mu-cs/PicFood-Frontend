@@ -156,7 +156,7 @@ class SearchTab extends Component {
                 />
               }
             >
-            {this.renderRestaurantCards()}
+              {this.renderRestaurantCards()}
             </Content>
           </Tab>
           <Tab heading="Dishes">
