@@ -12,6 +12,7 @@ import Footer from "./Footer"
 import StarRating from 'react-native-star-rating';
 import network from '../network';
 import moment from 'moment';
+import {ImagePicker} from "expo";
 
 class ViewPost extends Component {
     constructor(props, context){
@@ -124,25 +125,40 @@ class ViewPost extends Component {
 
         network.social.deletePost(this.state.postId)
           .then((res) => {
-
             console.log(res);
             console.log("=========== Delete ===========");
             console.log("postID = " + this.state.postId);
-
-            this.onBackPress();
           })
           .catch((e) => {
             this.setState({
               error:true
             });
-            console.log("ERR"+e.message);
+            console.log("ERR "+e.message);
           });
+        this.onBackPress();
       }
     }
 
     editPost(postId) {
       if (this.props.user.userId == this.state.creatorId) {
-          this.props.history.push(`/editpost/${postId}`)
+        let result;
+        result = ImagePicker.launchImageLibraryAsync({
+          allowsEditing: true,
+          aspect: [4, 3],
+        });
+        result.then((result) => {
+          // console.log(result);
+          if (!result.cancelled) {
+            this.props.history.push({
+              pathname: `/editpost/${postId}`,
+              state: {
+                image: result.uri,
+              }
+            });
+          }
+        }).catch(err => {
+          console.log(err);
+        });
       }
     }
 

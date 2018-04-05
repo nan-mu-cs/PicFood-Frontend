@@ -39,7 +39,6 @@ class EditPostPage extends Component {
       image:"",
       restaurantId:"",
       content:"",
-      avatar: "",
       dishname: "",
       rate: 0
     };
@@ -53,13 +52,21 @@ class EditPostPage extends Component {
         this.setState({rate: res.rate});
         this.setState({dishname: res.dishName});
         this.setState({content: res.content});
-        this.setState({image: res.imageUrl});
         this.setState({restaurantId: res.restaurantId});
-
       })
       .catch(err => {
         console.log(err);
       })
+  }
+
+  componentDidMount() {
+    network.storage.uploadFile(this.props.location.state.image)
+      .then((response) => response.text())
+      .then(url => {
+        this.setState({image: url});
+      }).catch(err => {
+      console.log(err);
+    });
   }
   handleClickBack() {
     this.props.history.goBack();
@@ -72,7 +79,7 @@ class EditPostPage extends Component {
       dishName: this.state.dishname,
       rate: this.state.rate,
       content: this.state.content,
-      imageUrl: this.state.avatar
+      imageUrl: this.state.image
     }).then(res => res.json())
       .then(async (data) => {
 
@@ -82,7 +89,7 @@ class EditPostPage extends Component {
             console.log(res);
             console.log("=========== Delete ===========");
             console.log("postID = " + this.state.postId);
-            this.props.history.push(`/users`)
+
           })
           .catch((e) => {
             this.setState({
@@ -93,6 +100,7 @@ class EditPostPage extends Component {
       }).catch(err => {
       console.log(err);
     });
+    this.props.history.push(`/users`)
   }
 
   render() {
