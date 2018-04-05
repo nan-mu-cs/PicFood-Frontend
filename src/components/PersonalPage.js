@@ -165,18 +165,7 @@ class PersonalPage extends Component {
           </Row>
           <Row size={85}>
             <Col>
-              <ScrollView style={styles.photoContainer}>
-                {/*<Row style={{height:150}}>*/}
-                {/*<Col>*/}
-                {/*<Thumbnail square  source={{ uri: this.props.user.avatar }}  style={styles.photoItem}/>*/}
-                {/*</Col>*/}
-                {/*<Col>*/}
-                {/*<Thumbnail square  source={{ uri: this.props.user.avatar }}  style={styles.photoItem}/>*/}
-                {/*</Col>*/}
-                {/*<Col>*/}
-                {/*<Thumbnail square  source={{ uri: this.props.user.avatar }}  style={styles.photoItem}/>*/}
-                {/*</Col>*/}
-                {/*</Row>*/}
+              <ScrollView>
                 {images}
               </ScrollView>
             </Col>
