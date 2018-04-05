@@ -116,7 +116,7 @@ class RestaurantPage extends Component {
         </Header>
         {this.state.loading ? <Content><Spinner color='black'/></Content> :
         <Content>
-          <Card>
+          <Card style={styles.card}>
             <CardItem>
               <Left>
                 <Body>
@@ -167,6 +167,11 @@ class RestaurantPage extends Component {
 
 
 const styles = StyleSheet.create({
+  card: {
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+  },
   titleForDishes: {
     paddingTop: 10,
     paddingBottom: 10,

@@ -53,13 +53,13 @@ class Dishes extends Component {
 
     return (
       <TouchableWithoutFeedback onPress={this.onDishCardPress.bind(this, this.props.data.dishId)}>
-        <Card>
+        <Card style={styles.card}>
           <CardItem>
-            <Text>{this.props.data.name}</Text>
-          </CardItem>
-          <CardItem>
-            <Image source={{uri: this.state.imageUrl || "http://via.placeholder.com/100x100"}}
-                   style={{height: 200, width: null, flex: 1}}/>
+            <Left>
+              <Image source={{uri: this.state.imageUrl || "http://via.placeholder.com/100x100"}}
+                     style={{height: 60, width: 60}}/>
+              <Text>{this.props.data.name}</Text>
+            </Left>
           </CardItem>
         </Card>
       </TouchableWithoutFeedback>
@@ -68,6 +68,10 @@ class Dishes extends Component {
 }
 
 const styles = StyleSheet.create({
+  card: {
+    marginLeft: 10,
+    marginRight: 10,
+  },
   listItem: {
     borderColor: "transparent"
   },

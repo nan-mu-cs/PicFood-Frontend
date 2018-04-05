@@ -21,7 +21,7 @@ import {
   Title,
   Thumbnail
 } from 'native-base';
-import {Image, StyleSheet} from 'react-native';
+import {Image, StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
 import Footer from "../Footer";
 import StarRating from 'react-native-star-rating';
@@ -47,14 +47,17 @@ class DishPage extends Component {
     network.dish.getPostsOfDish(this.state.dishId)
       .then(res => res.json())
       .then(res => {
-        console.log("dish page!!!");
-        console.log(res);
         this.props.dispatch({type: "GET_POSTS_OF_DISH", data: res});
       })
       .catch(err => {
         console.log(err)
       })
   }
+
+  onDishCreatorPress(userId) {
+    this.props.history.push(`/user/${userId}`);
+  }
+
 
   // onDishPhotoPress(imageUrl) {
   //   this.props.history.push(`/dishphoto/${imageUrl}`);
@@ -91,23 +94,15 @@ class DishPage extends Component {
 
   render() {
     let photos = this.props.postsOfDish.map(item => {
-        let image = item.imageUrl;
-        if (!image)
-          image = "http://via.placeholder.com/100x100";
+        let image = item.imageUrl || "http://via.placeholder.com/100x100";
         let poster = item.creator;
-        if (!poster)
-          poster = "Xiaoxin";
-        // let avatar = item.creatorAvatar;
-        // if(!avatar)
-        //   avatar = "http://via.placeholder.com/100x100";
-        let avatar = "http://via.placeholder.com/100x100";
-        console.log("avatar = " + avatar);
+        let avatar = item.creatorAvater || "http://via.placeholder.com/100x100";
         return (
-          <Card key={item.dishId}>
-            <CardItem>
+          <Card key={item.dishId} style={styles.card}>
+            <CardItem style={styles.image}>
               <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}}/>
             </CardItem>
-            <CardItem>
+            <CardItem style={styles.cardItem}>
               <Left>
                 <Button transparent onPress={this.upvote}>
                   <Icon active name="thumbs-up"/>
@@ -115,10 +110,12 @@ class DishPage extends Component {
                 </Button>
               </Left>
               <Right>
-                <CardItem>
-                  <Thumbnail small source={{uri: avatar}} style={styles.poster}/>
-                  <Text style={{fontSize: 16}}>{poster}</Text>
-                </CardItem>
+                <TouchableWithoutFeedback onPress={this.onDishCreatorPress.bind(this, item.creatorId)}>
+                  <CardItem style={styles.cardItem}>
+                    <Thumbnail small source={{uri: avatar}} style={styles.poster}/>
+                    <Text style={{fontSize: 16}}>{poster}</Text>
+                  </CardItem>
+                </TouchableWithoutFeedback>
               </Right>
             </CardItem>
           </Card>
@@ -165,13 +162,31 @@ class DishPage extends Component {
 }
 
 const styles = StyleSheet.create({
+  card: {
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  image: {
+    paddingLeft: 0,
+    paddingRight: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
+  cardItem: {
+    paddingLeft: 10,
+    paddingRight: 5,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
   dishName: {
     paddingTop: 10,
+    fontSize: 19,
+    marginBottom: 5,
     textAlign: 'center',
   },
   restaurant: {
     paddingTop: 10,
-    fontSize: 17,
+    marginBottom: 18,
     textAlign: 'center',
   },
   poster: {
