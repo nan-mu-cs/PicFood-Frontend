@@ -24,8 +24,6 @@ class PostCard extends Component {
   constructor(props, context) {
     super(props);
     this.state = {
-      avatar: "",
-      name: ""
     };
     this.handleClickImage = this.handleClickImage.bind(this);
     this.handleClickUser = this.handleClickUser.bind(this);
@@ -39,40 +37,17 @@ class PostCard extends Component {
     this.props.history.push(`/user/${this.props.data.creatorId}`)
   }
 
-  componentDidMount() {
-    network.social.getUserProfile(this.props.data.creatorId)
-      .then((res) => res.json())
-      .then(data => {
-        this.setState({
-          avatar: data.avatar,
-          name: data.name
-        });
-        // console.log(data);
-      }).catch(err => {
-      console.log(err);
-    });
-  }
-
   render() {
-    // console.log(this.props);
-    let avatar = this.state.avatar;
-    if (!avatar)
-      avatar = "http://via.placeholder.com/100x100";
-    let name = this.state.name;
-    if (!name)
-      name = "PlaceHolder Name";
-    let image = this.props.data.imageUrl;
-    if (!image)
-      image = "http://via.placeholder.com/350x150";
+    let image = this.props.data.imageUrl || "http://via.placeholder.com/350x150";
     return (
       <Card style={{paddingVertical: 10, paddingHorizontal: 10, marginBottom: 5}}>
         {/*<Card style={{borderColor: "transparent", shadowColor: "transparent"}}>*/}
         <CardItem>
           <TouchableWithoutFeedback onPress={this.handleClickUser}>
             <Left>
-              <Thumbnail small source={{uri: avatar}}/>
+              <Thumbnail small source={{uri: this.props.data.userAvatar || "http://via.placeholder.com/100x100"}}/>
               <Body>
-              <Text style={{fontSize: 16}}>{name}</Text>
+              <Text style={{fontSize: 16}}>{this.props.data.userName}</Text>
               </Body>
             </Left>
           </TouchableWithoutFeedback>

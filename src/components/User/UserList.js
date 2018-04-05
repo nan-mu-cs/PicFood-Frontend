@@ -56,6 +56,7 @@ class UserList extends Component {
         network.account.getMyProfile()
           .then(res => res.json())
           .then(res => {
+            console.log(res.userId)
             this.props.dispatch({type: 'GET_USER_PROFILE', data: res});
           });
       })

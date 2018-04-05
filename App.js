@@ -17,7 +17,7 @@ import {Root} from "native-base";
 // middleware that logs actions
 // const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__  });
 
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 function configureStore(initialState) {
   const enhancer = compose(
     applyMiddleware(
