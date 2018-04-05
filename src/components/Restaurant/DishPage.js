@@ -100,7 +100,7 @@ class DishPage extends Component {
         return (
           <Card key={item.dishId} style={styles.card}>
             <CardItem style={styles.image}>
-              <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}}/>
+              <Image source={{cache: 'force-cache', uri: image}} style={{height: 200, width: null, flex: 1}}/>
             </CardItem>
             <CardItem style={styles.cardItem}>
               <Left>
@@ -112,7 +112,7 @@ class DishPage extends Component {
               <Right>
                 <TouchableWithoutFeedback onPress={this.onDishCreatorPress.bind(this, item.creatorId)}>
                   <CardItem style={styles.cardItem}>
-                    <Thumbnail small source={{uri: avatar}} style={styles.poster}/>
+                    <Thumbnail small source={{cache: 'force-cache', uri: avatar}} style={styles.poster}/>
                     <Text style={{fontSize: 16}}>{poster}</Text>
                   </CardItem>
                 </TouchableWithoutFeedback>

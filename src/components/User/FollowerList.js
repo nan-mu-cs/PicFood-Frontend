@@ -65,7 +65,7 @@ class FollowerList extends Component {
       <ListItem key={item.userId} style={styles.listItem}>
         <TouchableWithoutFeedback onPress={this.onUserPress.bind(this, item.userId)}>
           <Left>
-            <Thumbnail source={{uri: item.avatar || "http://via.placeholder.com/100x100"}}/>
+            <Thumbnail source={{cache: 'force-cache', uri: item.avatar || "http://via.placeholder.com/100x100"}}/>
             <Text>{item.name}</Text>
           </Left>
         </TouchableWithoutFeedback>

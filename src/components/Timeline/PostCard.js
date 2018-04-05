@@ -45,7 +45,7 @@ class PostCard extends Component {
         <CardItem>
           <TouchableWithoutFeedback onPress={this.handleClickUser}>
             <Left>
-              <Thumbnail small source={{uri: this.props.data.userAvatar || "http://via.placeholder.com/100x100"}}/>
+              <Thumbnail small source={{cache: 'force-cache', uri: this.props.data.userAvatar || "http://via.placeholder.com/100x100"}}/>
               <Body>
               <Text style={{fontSize: 16}}>{this.props.data.userName}</Text>
               </Body>
@@ -57,7 +57,7 @@ class PostCard extends Component {
         </CardItem>
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.handleClickImage}>
-            <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}}/>
+            <Image source={{cache: 'force-cache', uri: image}} style={{height: 200, width: null, flex: 1}}/>
           </TouchableWithoutFeedback>
         </CardItem>
 

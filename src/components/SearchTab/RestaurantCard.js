@@ -38,7 +38,7 @@ class RestaurantCard extends Component {
         <Card>
           <CardItem>
             <Left>
-              <Thumbnail source={{uri: avatar}}/>
+              <Thumbnail source={{cache: 'force-cache', uri: avatar}}/>
               <Body>
               <Text>{this.props.data.name}</Text>
               <Text note>{this.props.data.location}</Text>
@@ -56,7 +56,7 @@ class RestaurantCard extends Component {
             </Left>
           </CardItem>
           <CardItem cardBody>
-            <Image source={{uri: avatar}} style={{height: 200, width: null, flex: 1}}/>
+            <Image source={{cache: 'force-cache', uri: avatar}} style={{height: 200, width: null, flex: 1}}/>
           </CardItem>
         </Card>
       </TouchableWithoutFeedback>

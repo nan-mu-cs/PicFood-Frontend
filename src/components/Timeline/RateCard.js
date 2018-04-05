@@ -47,7 +47,7 @@ class RateCard extends Component {
       <Card style={{borderColor: "transparent", shadowColor: "transparent"}}>
         <CardItem>
           <Left>
-            <Thumbnail small source={{uri: this.props.data.avatar}}/>
+            <Thumbnail small source={{cache: 'force-cache', uri: this.props.data.avatar}}/>
             <Body>
             <Text style={{fontSize: 16}}>{this.props.data.user}</Text>
             <Text note style={{fontSize: 14}}>{this.props.data.location}</Text>

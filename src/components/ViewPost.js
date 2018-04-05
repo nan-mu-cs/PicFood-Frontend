@@ -158,7 +158,7 @@ class ViewPost extends Component {
                   <ScrollView>
                   <CardItem>
                     <Left>
-                        <Thumbnail small source={{uri: avatar}} />
+                        <Thumbnail small source={{cache: 'force-cache', uri: avatar}} />
                         <Body>
                         <Text style={{fontSize:16}}>{name}</Text>
                         </Body>

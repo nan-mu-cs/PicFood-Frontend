@@ -59,7 +59,7 @@ class UserPage extends Component {
             let card1 = (
                 <Col>
                     <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this,post[i].postId)}>
-                        <Thumbnail square  source={{ uri: post[i].imageUrl || "http://via.placeholder.com/350x150" }}  style={styles.photoItem} />
+                        <Thumbnail square  source={{ cache: 'force-cache', uri: post[i].imageUrl || "http://via.placeholder.com/350x150" }}  style={styles.photoItem} />
                     </TouchableWithoutFeedback>
                 </Col>
             );
@@ -68,7 +68,7 @@ class UserPage extends Component {
                 card2 = (
                     <Col>
                         <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this,post[i+1].postId)}>
-                            <Thumbnail square  source={{ uri: post[i+1].imageUrl || "http://via.placeholder.com/350x150" }}  style={styles.photoItem} />
+                            <Thumbnail square  source={{ cache: 'force-cache', uri: post[i+1].imageUrl || "http://via.placeholder.com/350x150" }}  style={styles.photoItem} />
                         </TouchableWithoutFeedback>
                     </Col>
                 );
@@ -76,7 +76,7 @@ class UserPage extends Component {
                 card3 = (
                     <Col>
                         <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this,post[i+2].postId)}>
-                            <Thumbnail square  source={{ uri: post[i+1].imageUrl || "http://via.placeholder.com/350x150" }}  style={styles.photoItem} />
+                            <Thumbnail square  source={{ cache: 'force-cache', uri: post[i+1].imageUrl || "http://via.placeholder.com/350x150" }}  style={styles.photoItem} />
                         </TouchableWithoutFeedback>
                     </Col>
                 );
@@ -104,7 +104,7 @@ class UserPage extends Component {
                 <Grid>
                     <Row size={15} style={{alignItems:"center"}}>
                         <Col size={3}>
-                            <Thumbnail round size={150} source={{ uri: (this.state.avatar)||"http://via.placeholder.com/100x100" }} style={{marginLeft:30}}/>
+                            <Thumbnail round size={150} source={{ cache: 'force-cache', uri: (this.state.avatar)||"http://via.placeholder.com/100x100" }} style={{marginLeft:30}}/>
                         </Col>
                         <Col size={7}>
                             <Row style={{alignItems:"center"}}>

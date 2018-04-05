@@ -56,7 +56,7 @@ class Dishes extends Component {
         <Card style={styles.card}>
           <CardItem>
             <Left>
-              <Image source={{uri: this.state.imageUrl || "http://via.placeholder.com/100x100"}}
+              <Image source={{cache: 'force-cache', uri: this.state.imageUrl || "http://via.placeholder.com/100x100"}}
                      style={{height: 60, width: 60}}/>
               <Text>{this.props.data.name}</Text>
             </Left>

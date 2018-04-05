@@ -59,7 +59,7 @@ class ImageDetailPage extends Component {
               <Card>
                 <CardItem>
                   <Left>
-                    <Thumbnail source={{uri: avatar}}/>
+                    <Thumbnail source={{cache: 'force-cache', uri: avatar}}/>
                     <Body>
                     <Text>{user}</Text>
                     <Text note>{location}</Text>
@@ -67,7 +67,7 @@ class ImageDetailPage extends Component {
                   </Left>
                 </CardItem>
                 <CardItem cardBody>
-                  <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}}/>
+                  <Image source={{cache: 'force-cache', uri: image}} style={{height: 200, width: null, flex: 1}}/>
                 </CardItem>
                 {/*<CardItem>*/}
                 {/*<Left>*/}

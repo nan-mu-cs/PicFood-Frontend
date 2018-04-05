@@ -3,29 +3,24 @@
  */
 import React, {Component} from 'react';
 import {
+  Body,
+  Button,
   Container,
   Header,
-  Content,
-  FooterTab,
-  Keyboard,
-  Button,
-  Text,
   Icon,
-  Body,
-  Title,
-  List,
-  ListItem,
-  Fab,
+  Input,
+  Item,
+  Keyboard,
+  Label,
   Left,
   Right,
-  Item,
-  Input,
-  Label
+  Text,
+  Title
 } from 'native-base';
-import {StyleSheet, Image} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-native';
-import {Col, Row, Grid} from "react-native-easy-grid";
+import {Col, Grid, Row} from "react-native-easy-grid";
 import StarRating from 'react-native-star-rating';
 import network from "../network";
 
@@ -136,7 +131,7 @@ class PostPhotoPage extends Component {
           <Row size={8}>
             <Col>
               {this.props.location.state.image &&
-              <Image source={{uri: this.props.location.state.image}} style={{height: 300}}/>}
+              <Image source={{cache: 'force-cache', uri: this.props.location.state.image}} style={{height: 300}}/>}
             </Col>
           </Row>
           <Row size={2}>

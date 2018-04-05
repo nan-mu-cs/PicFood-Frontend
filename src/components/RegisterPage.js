@@ -96,7 +96,7 @@ class RegisterPage extends Component {
   render() {
     let avatar;
     if (this.state.avatar)
-      avatar = <Thumbnail large source={{uri: this.state.avatar}} style={{alignSelf: "center", marginTop: 20}}/>;
+      avatar = <Thumbnail large source={{cache: 'force-cache', uri: this.state.avatar}} style={{alignSelf: "center", marginTop: 20}}/>;
     return (
       <Container>
         <Header>
