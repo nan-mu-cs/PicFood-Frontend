@@ -1,5 +1,5 @@
 /**
- * Created by kai on 23/03/2018.
+ * Created by jin on 05/04/2018.
  */
 import React, {Component} from 'react';
 import {
@@ -31,64 +31,71 @@ import network from "../network";
 
 // import Autocomplete from "react-native-autocomplete-input";
 
-class PostPhotoPage extends Component {
+class EditPostPage extends Component {
   constructor(props, context) {
     super(props);
     this.state = {
+      postId: this.props.match.params.postId,
+      image:"",
+      restaurantId:"",
+      content:"",
       avatar: "",
       dishname: "",
-      rate: 0,
-      comment: "",
-      category: ""
+      rate: 0
     };
     this.handleClickBack = this.handleClickBack.bind(this);
     this.handleClickPost = this.handleClickPost.bind(this);
   }
+  componentWillMount() {
+    network.social.getPostByPostId(this.state.postId)
+      .then(res => {
 
+        this.setState({rate: res.rate});
+        this.setState({dishname: res.dishName});
+        this.setState({content: res.content});
+        this.setState({image: res.imageUrl});
+        this.setState({restaurantId: res.restaurantId});
+
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
   handleClickBack() {
     this.props.history.goBack();
   }
 
   handleClickPost() {
-    // console.log(this.state);
+    console.log(this.state);
     network.social.addPost({
-      restaurantId: this.props.location.state.restaurantId,
+      restaurantId: this.state.restaurantId,
       dishName: this.state.dishname,
       rate: this.state.rate,
-      content: this.state.comment,
+      content: this.state.content,
       imageUrl: this.state.avatar
     }).then(res => res.json())
       .then(async (data) => {
-        let restaurantInfo = await network.restaurant.getRestaurantInfoById(this.props.location.state.restaurantId);
-        let restaurantDishes = await network.restaurant.getRestaurantDishesById(this.props.location.state.restaurantId);
-        restaurantInfo.dishes = restaurantDishes;
-        console.log(restaurantInfo);
-        this.props.dispatch({
-          type: "GET_RESTAURANT_INFO",
-          restaurantId: restaurantInfo.restaurantId,
-          data: restaurantInfo
-        });
-        this.props.history.goBack();
-        console.log(data);
-      }).catch(err => {
-      console.log(err);
-    });
-  }
 
-  componentDidMount() {
-    network.storage.uploadFile(this.props.location.state.image)
-      .then((response) => response.text())
-      .then(url => {
-        this.setState({avatar: url});
+        network.social.deletePost(this.state.postId)
+          .then((res) => {
+
+            console.log(res);
+            console.log("=========== Delete ===========");
+            console.log("postID = " + this.state.postId);
+            this.props.history.push(`/users`)
+          })
+          .catch((e) => {
+            this.setState({
+              error:true
+            });
+            console.log("ERR"+e.message);
+          });
       }).catch(err => {
       console.log(err);
     });
   }
 
   render() {
-    //console.log(this.props.location.state.image);
-    //let {image} = this.props.location.state;
-    // let data  = ["React","Native","Android","Java","Hello World"];
     return (
       <Container>
         <Header>
@@ -98,7 +105,7 @@ class PostPhotoPage extends Component {
             </Button>
           </Left>
           <Body>
-          <Title>Post Photo</Title>
+          <Title>Edit Post</Title>
           </Body>
           <Right/>
         </Header>
@@ -106,7 +113,7 @@ class PostPhotoPage extends Component {
           <Row size={1}>
             <Col>
               <Item floatingLabel>
-                <Label>Dish name</Label>
+                <Label>Dish Name</Label>
                 <Input value={this.state.dishname} onChangeText={(val) => this.setState({dishname: val})}/>
               </Item>
             </Col>
@@ -129,14 +136,13 @@ class PostPhotoPage extends Component {
             <Col>
               <Item floatingLabel>
                 <Label>Content</Label>
-                <Input value={this.state.comment} onChangeText={(val) => this.setState({comment: val})}/>
+                <Input value={this.state.content} onChangeText={(val) => this.setState({content: val})}/>
               </Item>
             </Col>
           </Row>
           <Row size={8}>
             <Col>
-              {this.props.location.state.image &&
-              <Image source={{uri: this.props.location.state.image}} style={{height: 300}}/>}
+              <Image source={{uri: this.state.image}} style={{height: 300}}/>
             </Col>
           </Row>
           <Row size={2}>
@@ -161,4 +167,4 @@ const mapStateToProps = (state, ownProps) => {
 
 export default withRouter(connect(
   mapStateToProps
-)(PostPhotoPage));
+)(EditPostPage));

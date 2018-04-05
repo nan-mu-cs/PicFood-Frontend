@@ -22,6 +22,7 @@ import PostPhotoPage from "./components/PostPhotoPage";
 import ViewPost from "./components/ViewPost";
 import network from "./network";
 import {Location, Permissions} from 'expo';
+import EditPostPage from "./components/EditPostPage";
 
 class App extends React.Component {
 
@@ -43,6 +44,7 @@ class App extends React.Component {
         <Route exact path="/login" component={LoginPage}/>
         <Route exact path="/register" component={RegisterPage}/>
         <Route exact path="/post" component={PostPhotoPage}/>
+        <Route exact path="/editpost/:postId" component={EditPostPage}/>
         <Route exact path="/viewpost/:postId" component={ViewPost}/>
       </Switch>
     )

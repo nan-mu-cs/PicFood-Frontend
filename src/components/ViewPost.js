@@ -26,6 +26,7 @@ class ViewPost extends Component {
         this.postComment = this.postComment.bind(this);
         this.upvote = this.upvote.bind(this);
         this.deletePost = this.deletePost.bind(this);
+        this.editPost = this.editPost.bind(this);
     }
 
     onBackPress() {
@@ -36,7 +37,6 @@ class ViewPost extends Component {
         console.log(this.state.postId);
           network.social.getPostByPostId(this.state.postId)
             .then(res => {
-              console.log(res);
               this.state.creatorId = res.creatorId;
               this.props.dispatch({type: "GET_POST_INFO", data: res});
             })
@@ -121,6 +121,7 @@ class ViewPost extends Component {
     }
     deletePost() {
       if (this.props.user.userId == this.state.creatorId) {
+
         network.social.deletePost(this.state.postId)
           .then((res) => {
 
@@ -139,11 +140,17 @@ class ViewPost extends Component {
       }
     }
 
+    editPost(postId) {
+      if (this.props.user.userId == this.state.creatorId) {
+          this.props.history.push(`/editpost/${postId}`)
+      }
+    }
+
     render() {
         let image = this.props.post.imageUrl;
         if(!image)
           image = "http://via.placeholder.com/100x100";
-        console.log(this.props.post);
+        console.log(this.props);
         let reviews;
         if(this.props.post.comments)
           reviews = this.props.post.comments.map(item => {
@@ -190,6 +197,18 @@ class ViewPost extends Component {
                     </Body>
                   {this.props.user.userId == this.state.creatorId &&
                     <Right>
+
+                      <Button transparent onPress={this.editPost.bind(this, this.state.postId)}>
+                        <Icon name='cut'/>
+                        {/*icon name here was attached prefix 'ios-' automatically */}
+                      </Button>
+                      {this.state.error && Toast.show({
+                        text: 'Can\'t edit!',
+                        position: 'bottom',
+                        buttonText: 'Okay'
+                      })
+                      }
+
                       <Button transparent onPress={this.deletePost}>
                         <Icon name='trash'/>
                         {/*icon name here was attached prefix 'ios-' automatically */}
@@ -200,6 +219,7 @@ class ViewPost extends Component {
                         buttonText: 'Okay'
                       })
                       }
+
                     </Right>}
                   {this.props.user.userId != this.state.creatorId &&
                   <Right/>}
@@ -238,6 +258,11 @@ class ViewPost extends Component {
                       <Right>
                         <Text>{this.props.post.restaurantName}</Text>
                       </Right>
+                    </CardItem>
+                    <CardItem>
+                      <Left>
+                        <Text>{this.props.post.content}</Text>
+                      </Left>
                     </CardItem>
                     <CardItem>
                         <Item rounded style = {styles.comment}>
