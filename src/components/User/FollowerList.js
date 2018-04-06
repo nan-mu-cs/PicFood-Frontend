@@ -50,9 +50,9 @@ class FollowerList extends Component {
   }
 
   componentDidMount() {
-    network.social.getMyFollowers()
+    network.social.getFollowersById(this.state.userId)
       .then(res => {
-        // console.log('FollowerList', res);
+        console.log('FollowerList', res);
         this.setState({loading: false})
         this.props.dispatch({type: "GET_FOLLOWERS", data: res});
       })

@@ -12,6 +12,7 @@ import Footer from "./Footer"
 import StarRating from 'react-native-star-rating';
 import network from '../network';
 import moment from 'moment';
+import {ImagePicker} from "expo";
 
 class ViewPost extends Component {
     constructor(props, context){
@@ -26,6 +27,7 @@ class ViewPost extends Component {
         this.postComment = this.postComment.bind(this);
         this.upvote = this.upvote.bind(this);
         this.deletePost = this.deletePost.bind(this);
+        this.editPost = this.editPost.bind(this);
     }
 
     onBackPress() {
@@ -36,7 +38,6 @@ class ViewPost extends Component {
         console.log(this.state.postId);
           network.social.getPostByPostId(this.state.postId)
             .then(res => {
-              console.log(res);
               this.state.creatorId = res.creatorId;
               this.props.dispatch({type: "GET_POST_INFO", data: res});
             })
@@ -121,21 +122,43 @@ class ViewPost extends Component {
     }
     deletePost() {
       if (this.props.user.userId == this.state.creatorId) {
+
         network.social.deletePost(this.state.postId)
           .then((res) => {
-
             console.log(res);
             console.log("=========== Delete ===========");
             console.log("postID = " + this.state.postId);
-
-            this.onBackPress();
           })
           .catch((e) => {
             this.setState({
               error:true
             });
-            console.log("ERR"+e.message);
+            console.log("ERR "+e.message);
           });
+        this.onBackPress();
+      }
+    }
+
+    editPost(postId) {
+      if (this.props.user.userId == this.state.creatorId) {
+        let result;
+        result = ImagePicker.launchImageLibraryAsync({
+          allowsEditing: true,
+          aspect: [4, 3],
+        });
+        result.then((result) => {
+          // console.log(result);
+          if (!result.cancelled) {
+            this.props.history.push({
+              pathname: `/editpost/${postId}`,
+              state: {
+                image: result.uri,
+              }
+            });
+          }
+        }).catch(err => {
+          console.log(err);
+        });
       }
     }
 
@@ -143,7 +166,7 @@ class ViewPost extends Component {
         let image = this.props.post.imageUrl;
         if(!image)
           image = "http://via.placeholder.com/100x100";
-        console.log(this.props.post);
+        console.log(this.props);
         let reviews;
         if(this.props.post.comments)
           reviews = this.props.post.comments.map(item => {
@@ -190,6 +213,18 @@ class ViewPost extends Component {
                     </Body>
                   {this.props.user.userId == this.state.creatorId &&
                     <Right>
+
+                      <Button transparent onPress={this.editPost.bind(this, this.state.postId)}>
+                        <Icon name='cut'/>
+                        {/*icon name here was attached prefix 'ios-' automatically */}
+                      </Button>
+                      {this.state.error && Toast.show({
+                        text: 'Can\'t edit!',
+                        position: 'bottom',
+                        buttonText: 'Okay'
+                      })
+                      }
+
                       <Button transparent onPress={this.deletePost}>
                         <Icon name='trash'/>
                         {/*icon name here was attached prefix 'ios-' automatically */}
@@ -200,6 +235,7 @@ class ViewPost extends Component {
                         buttonText: 'Okay'
                       })
                       }
+
                     </Right>}
                   {this.props.user.userId != this.state.creatorId &&
                   <Right/>}
@@ -238,6 +274,11 @@ class ViewPost extends Component {
                       <Right>
                         <Text>{this.props.post.restaurantName}</Text>
                       </Right>
+                    </CardItem>
+                    <CardItem>
+                      <Left>
+                        <Text>{this.props.post.content}</Text>
+                      </Left>
                     </CardItem>
                     <CardItem>
                         <Item rounded style = {styles.comment}>

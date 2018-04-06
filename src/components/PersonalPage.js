@@ -122,16 +122,14 @@ class PersonalPage extends Component {
         <Grid>
           <Row size={15} style={{alignItems: "center"}}>
             <Col size={3}>
+
               <Thumbnail round size={150}
                          source={{cache: 'force-cache', uri: (this.props.user && this.props.user.avatar) || "http://via.placeholder.com/100x100"}}
                          style={{marginLeft: 30}}/>
+
             </Col>
             <Col size={7}>
               <Row style={{alignItems: "center"}}>
-                {/*<Col size={3}>*/}
-                {/*<Text>{(this.props.user && this.props.user.posts)||0}</Text>*/}
-                {/*<Text>posts</Text>*/}
-                {/*</Col>*/}
                 <Col size={3}>
                   <TouchableWithoutFeedback
                     onPress={() => this.props.history.push(`/followings/${this.props.user.userId}`)}>
@@ -155,6 +153,14 @@ class PersonalPage extends Component {
               </Button>
             </Col>
           </Row>
+          <Row size={7} style={{marginTop: 10}}>
+            <Col>
+              <Button primary block style={{flex: 1, marginLeft: 5, marginRight: 5}}
+                      onPress={() => this.props.history.push("/editprofile")}>
+                <Text>Edit Profile</Text>
+              </Button>
+            </Col>
+          </Row>
           <Row size={7} style={{marginTop: 10, marginBottom: 10}}>
             <Col>
               <Button success block style={{flex: 1, marginLeft: 5, marginRight: 5}}
@@ -165,18 +171,7 @@ class PersonalPage extends Component {
           </Row>
           <Row size={85}>
             <Col>
-              <ScrollView style={styles.photoContainer}>
-                {/*<Row style={{height:150}}>*/}
-                {/*<Col>*/}
-                {/*<Thumbnail square  source={{ cache: 'force-cache', uri: this.props.user.avatar }}  style={styles.photoItem}/>*/}
-                {/*</Col>*/}
-                {/*<Col>*/}
-                {/*<Thumbnail square  source={{ cache: 'force-cache', uri: this.props.user.avatar }}  style={styles.photoItem}/>*/}
-                {/*</Col>*/}
-                {/*<Col>*/}
-                {/*<Thumbnail square  source={{ cache: 'force-cache', uri: this.props.user.avatar }}  style={styles.photoItem}/>*/}
-                {/*</Col>*/}
-                {/*</Row>*/}
+              <ScrollView>
                 {images}
               </ScrollView>
             </Col>

@@ -1,89 +1,109 @@
 /**
- * Created by kai on 23/03/2018.
+ * Created by jin on 05/04/2018.
  */
 import React, {Component} from 'react';
 import {
-  Body,
-  Button,
   Container,
   Header,
-  Icon,
-  Input,
-  Item,
+  Content,
+  FooterTab,
   Keyboard,
-  Label,
+  Button,
+  Text,
+  Icon,
+  Body,
+  Title,
+  List,
+  ListItem,
+  Fab,
   Left,
   Right,
-  Text,
-  Title
+  Item,
+  Input,
+  Label
 } from 'native-base';
-import {Image, StyleSheet} from 'react-native';
+import {StyleSheet, Image} from 'react-native';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-native';
-import {Col, Grid, Row} from "react-native-easy-grid";
+import {Col, Row, Grid} from "react-native-easy-grid";
 import StarRating from 'react-native-star-rating';
 import network from "../network";
 
 // import Autocomplete from "react-native-autocomplete-input";
 
-class PostPhotoPage extends Component {
+class EditPostPage extends Component {
   constructor(props, context) {
     super(props);
     this.state = {
-      avatar: "",
+      postId: this.props.match.params.postId,
+      image:"",
+      restaurantId:"",
+      content:"",
       dishname: "",
-      rate: 0,
-      comment: "",
-      category: ""
+      rate: 0
     };
     this.handleClickBack = this.handleClickBack.bind(this);
     this.handleClickPost = this.handleClickPost.bind(this);
   }
+  componentWillMount() {
+    network.social.getPostByPostId(this.state.postId)
+      .then(res => {
 
-  handleClickBack() {
-    this.props.history.goBack();
-  }
-
-  handleClickPost() {
-    // console.log(this.state);
-    network.social.addPost({
-      restaurantId: this.props.location.state.restaurantId,
-      dishName: this.state.dishname,
-      rate: this.state.rate,
-      content: this.state.comment,
-      imageUrl: this.state.avatar
-    }).then(res => res.json())
-      .then(async (data) => {
-        let restaurantInfo = await network.restaurant.getRestaurantInfoById(this.props.location.state.restaurantId);
-        let restaurantDishes = await network.restaurant.getRestaurantDishesById(this.props.location.state.restaurantId);
-        restaurantInfo.dishes = restaurantDishes;
-        console.log(restaurantInfo);
-        this.props.dispatch({
-          type: "GET_RESTAURANT_INFO",
-          restaurantId: restaurantInfo.restaurantId,
-          data: restaurantInfo
-        });
-        this.props.history.goBack();
-        console.log(data);
-      }).catch(err => {
-      console.log(err);
-    });
+        this.setState({rate: res.rate});
+        this.setState({dishname: res.dishName});
+        this.setState({content: res.content});
+        this.setState({restaurantId: res.restaurantId});
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   componentDidMount() {
     network.storage.uploadFile(this.props.location.state.image)
       .then((response) => response.text())
       .then(url => {
-        this.setState({avatar: url});
+        this.setState({image: url});
       }).catch(err => {
       console.log(err);
     });
   }
+  handleClickBack() {
+    this.props.history.goBack();
+  }
+
+  handleClickPost() {
+    console.log(this.state);
+    network.social.addPost({
+      restaurantId: this.state.restaurantId,
+      dishName: this.state.dishname,
+      rate: this.state.rate,
+      content: this.state.content,
+      imageUrl: this.state.image
+    }).then(res => res.json())
+      .then(async (data) => {
+
+        network.social.deletePost(this.state.postId)
+          .then((res) => {
+
+            console.log(res);
+            console.log("=========== Delete ===========");
+            console.log("postID = " + this.state.postId);
+
+          })
+          .catch((e) => {
+            this.setState({
+              error:true
+            });
+            console.log("ERR"+e.message);
+          });
+      }).catch(err => {
+      console.log(err);
+    });
+    this.props.history.push(`/users`)
+  }
 
   render() {
-    //console.log(this.props.location.state.image);
-    //let {image} = this.props.location.state;
-    // let data  = ["React","Native","Android","Java","Hello World"];
     return (
       <Container>
         <Header>
@@ -93,7 +113,7 @@ class PostPhotoPage extends Component {
             </Button>
           </Left>
           <Body>
-          <Title>Post Photo</Title>
+          <Title>Edit Post</Title>
           </Body>
           <Right/>
         </Header>
@@ -101,7 +121,7 @@ class PostPhotoPage extends Component {
           <Row size={1}>
             <Col>
               <Item floatingLabel>
-                <Label>Dish name</Label>
+                <Label>Dish Name</Label>
                 <Input value={this.state.dishname} onChangeText={(val) => this.setState({dishname: val})}/>
               </Item>
             </Col>
@@ -124,14 +144,13 @@ class PostPhotoPage extends Component {
             <Col>
               <Item floatingLabel>
                 <Label>Content</Label>
-                <Input value={this.state.comment} onChangeText={(val) => this.setState({comment: val})}/>
+                <Input value={this.state.content} onChangeText={(val) => this.setState({content: val})}/>
               </Item>
             </Col>
           </Row>
           <Row size={8}>
             <Col>
-              {this.props.location.state.image &&
-              <Image source={{cache: 'force-cache', uri: this.props.location.state.image}} style={{height: 300}}/>}
+              <Image source={{uri: this.state.image}} style={{height: 300}}/>
             </Col>
           </Row>
           <Row size={2}>
@@ -156,4 +175,4 @@ const mapStateToProps = (state, ownProps) => {
 
 export default withRouter(connect(
   mapStateToProps
-)(PostPhotoPage));
+)(EditPostPage));
