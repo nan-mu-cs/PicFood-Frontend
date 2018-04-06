@@ -1,6 +1,7 @@
 /**
  * Created by kai on 2018/4/5.
  */
+import React, {Component} from 'react';
 import {TabNavigator, StackNavigator, SwitchNavigator} from 'react-navigation';
 import Timeline from "./components/Timeline/Timeline";
 import SearchTab from "./components/SearchTab/SearchTab";
@@ -9,8 +10,6 @@ import UserPage from "./components/User/UserPage"
 import DishPhoto from "./components/DishPhoto"
 import RestaurantPage from "./components/Restaurant/RestaurantPage"
 import DishPage from "./components/Restaurant/DishPage"
-import {connect} from 'react-redux';
-import ImageDetailPage from "./components/ImageDetailPage";
 import PersonalPage from "./components/PersonalPage";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
@@ -20,27 +19,33 @@ import LandingPage from "./components/LandingPage";
 import UserList from "./components/User/UserList";
 import PostPhotoPage from "./components/PostPhotoPage";
 import ViewPost from "./components/ViewPost";
-import network from "./network";
-import {Location, Permissions} from 'expo';
 import EditPostPage from "./components/EditPostPage";
 import EditProfilePage from "./components/EditProfilePage";
-
+import {Icon} from 'native-base';
 const Tabs = TabNavigator({
   TimeLine:{
     screen:Timeline,
+    navigationOptions:{
+      tabBarIcon:<Icon name={"home"}/>
+    }
   },
   Search:{
-    screen:SearchTab
+    screen:SearchTab,
+    navigationOptions:{
+      tabBarIcon:<Icon name={"search"}/>
+    }
   },
   Profile:{
-    screen:PersonalPage
+    screen:PersonalPage,
+    navigationOptions:{
+      tabBarIcon:<Icon name={"person"}/>
+    }
   }
 },{
   initialRouteName: 'TimeLine',
   tabBarOptions:{
-    activeBackgroundColor:"grey",
   },
-  animationEnabled: true,
+  // animationEnabled: true,
   swipeEnabled: false,
   tabBarPosition: 'bottom',
 });

@@ -9,7 +9,6 @@ import DishPhoto from "./components/DishPhoto"
 import RestaurantPage from "./components/Restaurant/RestaurantPage"
 import DishPage from "./components/Restaurant/DishPage"
 import {connect} from 'react-redux';
-import {NativeRouter, Route, Switch, withRouter} from 'react-router-native'
 import ImageDetailPage from "./components/ImageDetailPage";
 import PersonalPage from "./components/PersonalPage";
 import LoginPage from "./components/LoginPage";
@@ -34,24 +33,4 @@ class App extends React.Component {
     )
   }
 }
-{/*<Switch>*/}
-  {/*<Route exact path="/" component={LandingPage}/>*/}
-  {/*<Route exact path="/timeline" component={Timeline}/>*/}
-  {/*<Route path="/search" component={SearchTab}/>*/}
-  {/*<Route path="/userlist" component={UserList}/>*/}
-  {/*<Route path="/restaurants/:id" component={RestaurantPage}/>*/}
-  {/*<Route path="/dishes/:id" component={DishPage}/>*/}
-  {/*<Route path="/dishphoto/:id" component={DishPhoto}/>*/}
-  {/*<Route path="/searchby" component={SearchBy}/>*/}
-  {/*<Route path="/users" component={PersonalPage}/>*/}
-  {/*<Route path="/user/:id" component={UserPage}/>*/}
-  {/*<Route path="/editprofile" component={EditProfilePage}/>*/}
-  {/*<Route path="/followers/:userId" component={FollowerList}/>*/}
-  {/*<Route path="/followings/:userId" component={FollowingList}/>*/}
-  {/*<Route exact path="/login" component={LoginPage}/>*/}
-  {/*<Route exact path="/register" component={RegisterPage}/>*/}
-  {/*<Route exact path="/post" component={PostPhotoPage}/>*/}
-  {/*<Route exact path="/editpost/:postId" component={EditPostPage}/>*/}
-  {/*<Route exact path="/viewpost/:postId" component={ViewPost}/>*/}
-{/*</Switch>*/}
 export default App;

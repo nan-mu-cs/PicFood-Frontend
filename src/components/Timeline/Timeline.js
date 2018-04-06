@@ -23,7 +23,6 @@ import LikeCard from "./LikeCard";
 import RateCard from "./RateCard";
 import CommentCard from "./CommentCard";
 import Footer from "../Footer";
-import {withRouter} from 'react-router-native';
 import {Col, Row, Grid} from "react-native-easy-grid";
 import network from "../../network";
 
@@ -173,11 +172,11 @@ const
     }
   };
 
-export default withRouter(connect
+export default connect
 
 (
   mapStateToProps
 )(
   Timeline
-))
+)
 ;

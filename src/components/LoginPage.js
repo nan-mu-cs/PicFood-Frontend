@@ -23,7 +23,6 @@ import {
 } from 'native-base';
 import {StyleSheet, ScrollView, AsyncStorage} from 'react-native';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-native';
 import {Col, Row, Grid} from "react-native-easy-grid";
 import network from "../network";
 
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({});
 //     }
 // };
 //
-export default withRouter(connect(
-)(LoginPage));
+export default connect(
+)(LoginPage);
 
 // export default withRouter(LoginPage);

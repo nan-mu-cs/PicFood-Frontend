@@ -20,7 +20,6 @@ import {
   List,
   ListItem
 } from 'native-base';
-import {withRouter} from "react-router-native";
 import network from "../../network";
 import { withNavigation } from 'react-navigation';
 

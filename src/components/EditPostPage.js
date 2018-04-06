@@ -24,7 +24,6 @@ import {
 } from 'native-base';
 import {StyleSheet, Image} from 'react-native';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-native';
 import {Col, Row, Grid} from "react-native-easy-grid";
 import StarRating from 'react-native-star-rating';
 import network from "../network";

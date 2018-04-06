@@ -5,7 +5,6 @@ import React, {Component} from 'react';
 import {Container, Header, Content, Footer, FooterTab, Button, Text, Icon} from 'native-base';
 import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-native';
 
 class OurFooter extends Component {
   constructor(props, context) {
@@ -60,6 +59,6 @@ const mapStateToProps = (state, ownProps) => {
   }
 };
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps
-)(OurFooter));
+)(OurFooter);
