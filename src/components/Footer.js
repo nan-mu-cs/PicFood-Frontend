@@ -22,8 +22,11 @@ class OurFooter extends Component {
     let tabs = this.props.tabs.map((item) => {
       return (
         <Button key={item.id} active={this.props.currentTab == item.id}
-                onPress={this.handleChangeTab.bind(this, item.id, item.url)}>
+                onPress={this.handleChangeTab.bind(this, item.id, item.url)}
+                style={styles.button}
+        >
           <Icon name={item.icon}/>
+          <Text style={styles.text}>{item.name}</Text>
         </Button>
       );
     });
@@ -41,7 +44,12 @@ const styles = StyleSheet.create({
   footerTab: {
     backgroundColor: "white"
   },
-  link: {}
+  button: {
+    borderRadius: 0
+  },
+  text: {
+    fontSize: 12
+  }
 });
 
 

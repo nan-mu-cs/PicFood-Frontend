@@ -54,7 +54,7 @@ class Dishes extends Component {
     return (
       <TouchableWithoutFeedback onPress={this.onDishCardPress.bind(this, this.props.data.dishId)}>
         <Card style={styles.card}>
-          <CardItem>
+          <CardItem style={styles.zeroPadding}>
             <Left>
               <Image source={{cache: 'force-cache', uri: this.state.imageUrl || "http://via.placeholder.com/100x100"}}
                      style={{height: 60, width: 60}}/>
@@ -68,6 +68,12 @@ class Dishes extends Component {
 }
 
 const styles = StyleSheet.create({
+  zeroPadding: {
+    paddingLeft: 0,
+    paddingRight: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
   card: {
     marginLeft: 10,
     marginRight: 10,

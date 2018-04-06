@@ -45,7 +45,12 @@ class DishCard extends Component {
   }
 
   onCardPress(dishId) {
-    this.props.history.push(`/dishes/${dishId}`);
+    this.props.history.push({
+      pathname: `/dishes/${dishId}`,
+      state: {
+        restaurantId: this.props.data.restaurantId
+      }
+    });
   }
 
   render() {
@@ -56,12 +61,11 @@ class DishCard extends Component {
           <CardItem>
             <Left>
               <Body>
-              <Text>{this.props.data.name}</Text>
-              <Text note>{this.props.data.restaurant}</Text>
+              <Text>{this.props.data.name} <Text style={{color: 'gray'}}>{this.props.data.restaurantName || ' Restaurant Name'}</Text></Text>
               <StarRating
                 disabled={true}
                 maxStars={5}
-                rating={this.props.data.rate}
+                rating={this.props.data.avgRate}
                 containerStyle={{marginTop: 3, alignSelf: "flex-start"}}
                 fullStarColor={"#f5af4b"}
                 emptyStarColor={"#f5af4b"}

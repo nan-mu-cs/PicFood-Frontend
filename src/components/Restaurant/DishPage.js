@@ -32,6 +32,7 @@ class DishPage extends Component {
   constructor(props, context) {
     super(props);
     this.state = {
+      loading: true,
       dishId: this.props.match.params.id
     };
     this.handleClickBack = this.handleClickBack.bind(this);
@@ -43,11 +44,12 @@ class DishPage extends Component {
   }
 
   componentDidMount() {
-    console.log('DishPage', this.state.dishId);
     network.dish.getPostsOfDish(this.state.dishId)
       .then(res => res.json())
       .then(res => {
+        // console.log(res)
         this.props.dispatch({type: "GET_POSTS_OF_DISH", data: res});
+        this.setState({loading: false});
       })
       .catch(err => {
         console.log(err)
@@ -136,25 +138,28 @@ class DishPage extends Component {
           </Body>
           <Right/>
         </Header>
-        <Content>
-          <Text
-            style={styles.dishName}>{(this.props.postsOfDish.length && this.props.postsOfDish[0].dishName) || "DishName"}</Text>
-          <StarRating
-            disabled={true}
-            maxStars={5}
-            rating={4.5}
-            containerStyle={{marginTop: 3, alignSelf: "center"}}
-            fullStarColor={"#f5af4b"}
-            emptyStarColor={"#f5af4b"}
-            halfStarEnabled
-            starSize={15}
-          />
-          <Text
-            style={styles.restaurant}>{(this.props.postsOfDish.length && this.props.postsOfDish[0].restaurantName) || "restaurantName"}</Text>
-          <List>
-            {photos}
-          </List>
-        </Content>
+        {this.state.loading ? <Content><Spinner color='black'/></Content> :
+          <Content>
+            <Card style={styles.card}>
+              <Text
+                style={styles.dishName}>{(this.props.postsOfDish.length && this.props.postsOfDish[0].dishName) || "DishName"}</Text>
+              <StarRating
+                disabled={true}
+                maxStars={5}
+                rating={4.5}
+                containerStyle={{marginTop: 3, alignSelf: "center"}}
+                fullStarColor={"#f5af4b"}
+                emptyStarColor={"#f5af4b"}
+                halfStarEnabled
+                starSize={15}
+              />
+              <Text
+                style={styles.restaurant}>{(this.props.postsOfDish.length && this.props.postsOfDish[0].restaurantName) || "restaurantName"}</Text>
+            </Card>
+            <List>
+              {photos}
+            </List>
+          </Content>}
         <Footer/>
       </Container>
     )
@@ -180,7 +185,7 @@ const styles = StyleSheet.create({
   },
   dishName: {
     paddingTop: 10,
-    fontSize: 19,
+    fontSize: 24,
     marginBottom: 5,
     textAlign: 'center',
   },
