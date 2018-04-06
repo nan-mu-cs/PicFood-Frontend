@@ -59,7 +59,10 @@ class Timeline extends Component {
 
   getData() {
     network.social.getTimeline()
-      .then(res => res.json())
+      .then(res => {
+        if(res.ok) return res.json();
+        throw res;
+      })
       .then(data => {
         this.setState({
           data,
@@ -68,7 +71,7 @@ class Timeline extends Component {
         });
         this.props.dispatch({type: "UPDATE_TIMELINE", data: data});
       }).catch(err => {
-      console.log(err);
+      console.log('ERROR', err);
     });
   }
 

@@ -19,7 +19,7 @@ export default {
     },
 
     postUserProfile(body) { // avatar, bio, email, name, password (all optional)
-      return fetch(HOST + '/api/users/me', verb('post', body)).then(handleResponse);
+      return fetch(HOST + '/api/users/me', verb('post', body)).then(handleStatusError);
     },
     getUserTimeline(userId) {
       return fetch(`${HOST}/api/timeline/${userId}`, verb('get'));
@@ -66,19 +66,19 @@ export default {
     searchUsers(name) {
       let url = HOST + `/api/users/search?name=${name}`;
       console.log('url', url);
-      return fetch(url, verb('get')).then(handleResponse);
+      return fetch(url, verb('get')).then(handleStatusError);
     },
 
     getActivitiesOfAnUser(id) { // TODO on backend
-      return fetch(HOST + `/api/activities/${id}`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/activities/${id}`, verb('get')).then(handleStatusError);
     },
 
     getPostByPostId(id) {
-      return fetch(HOST + `/api/post/${id}`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/post/${id}`, verb('get')).then(handleStatusError);
     },
 
     deletePost(postId) {
-      return fetch(HOST + `/api/delete/post`, verb('post', {postId})).then(handleResponse);
+      return fetch(HOST + `/api/delete/post`, verb('post', {postId})).then(handleStatusError);
     },
 
     addPost(body) { // restaurantId, dishName, rate, category, content, imageId (optional)
@@ -98,45 +98,45 @@ export default {
     },
 
     getMyFollowers() {
-      return fetch(HOST + `/api/followers`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/followers`, verb('get')).then(handleStatusError);
     },
 
     getMyFollowings() {
-      return fetch(HOST + `/api/followings`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/followings`, verb('get')).then(handleStatusError);
     },
 
     getFollowersById(id) {
-      return fetch(HOST + `/api/followers/${id}`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/followers/${id}`, verb('get')).then(handleStatusError);
     },
 
     getFollowingsById(id) {
-      return fetch(HOST + `/api/followings/${id}`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/followings/${id}`, verb('get')).then(handleStatusError);
     },
 
     followUserById(id) {
-      return fetch(HOST + `/api/follow/?id=${id}`, verb('post', {})).then(handleResponse);
+      return fetch(HOST + `/api/follow/?id=${id}`, verb('post', {})).then(handleStatusError);
     },
 
     unfollowUserById(id) {
-      return fetch(HOST + `/api/unfollow/?id=${id}`, verb('post', {})).then(handleResponse);
+      return fetch(HOST + `/api/unfollow/?id=${id}`, verb('post', {})).then(handleStatusError);
     },
   },
 
   restaurant: {
     getRestaurantInfoById(id) {
-      return fetch(HOST + `/api/restaurants/${id}/info`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/restaurants/${id}/info`, verb('get')).then(handleStatusError);
     },
 
     getRestaurantDishesById(id) {
-      return fetch(HOST + `/api/restaurants/${id}/dishes`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/restaurants/${id}/dishes`, verb('get')).then(handleStatusError);
     },
 
     getRestaurantsByLocation(lat, lon) {
-      return fetch(HOST + `/api/restaurants?lat=${lat}&lon=${lon}`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/restaurants?lat=${lat}&lon=${lon}`, verb('get')).then(handleStatusError);
     },
 
     searchRestaurants(keyword, sorting, lat, lon) {
-      return fetch(HOST + `/api/search/restaurants?keyword=${keyword}&sorting=${sorting}&lat=${lat}&lon=${lon}`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/search/restaurants?keyword=${keyword}&sorting=${sorting}&lat=${lat}&lon=${lon}`, verb('get')).then(handleStatusError);
     }
   },
 
@@ -154,22 +154,22 @@ export default {
     },
 
     postPhoto(body) { // {FormData} file
-      return fetch(HOST + `/api/storage/uploadFile`, verb('post', body)).then(handleResponse);
+      return fetch(HOST + `/api/storage/uploadFile`, verb('post', body)).then(handleStatusError);
     },
 
     deletePhoto(fileUrl) {
-      return fetch(HOST + `/api/storage/deleteFile`, verb('delete', {fileUrl})).then(handleResponse);
+      return fetch(HOST + `/api/storage/deleteFile`, verb('delete', {fileUrl})).then(handleStatusError);
     },
 
     searchDishes(keyword, sorting, lat, lon) {
       let url = `${HOST}/api/search/dishes?keyword=${keyword}&sorting=${sorting}&lat=${lat}&lon=${lon}`;
-      return fetch(url, verb('get')).then(handleResponse);
+      return fetch(url, verb('get')).then(handleStatusError);
     }
   },
 
   comment: {
     getCommentsOfPost(postId) {
-      return fetch(HOST + `/api/comments/${postId}`, verb('get')).then(handleResponse);
+      return fetch(HOST + `/api/comments/${postId}`, verb('get')).then(handleStatusError);
     },
 
     postComment(body) {
@@ -177,7 +177,7 @@ export default {
     },
 
     deleteComment(commentId) {
-      return fetch(HOST + '/api/delete/comment', verb('post', {commentId})).then(handleResponse);
+      return fetch(HOST + '/api/delete/comment', verb('post', {commentId})).then(handleStatusError);
     }
   }
 }
@@ -201,6 +201,8 @@ function verb(method, body) {
   return data;
 }
 
-function handleResponse(res) {
+function handleStatusError(res) {
+  if(!res.ok)
+    throw res;
   return res.json();
 }
