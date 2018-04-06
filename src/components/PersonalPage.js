@@ -177,7 +177,7 @@ class PersonalPage extends Component {
             </Col>
           </Row>
         </Grid>
-        <Footer/>
+        {/*<Footer/>*/}
       </Container>
     );
   }

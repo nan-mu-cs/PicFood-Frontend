@@ -141,7 +141,7 @@ class Timeline extends Component {
         {/*</ListItem>*/}
         {/*}>*/}
         {/*</List>*/}
-        <Footer/>
+        {/*<Footer/>*/}
       </Container>
     );
   }

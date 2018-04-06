@@ -172,7 +172,7 @@ class SearchTab extends Component {
             </Content>
           </Tab>
         </Tabs>
-        <Footer/>
+        {/*<Footer/>*/}
       </Container>
     );
   }

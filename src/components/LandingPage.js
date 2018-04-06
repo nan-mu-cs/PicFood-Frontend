@@ -26,7 +26,8 @@ class LandingPage extends Component {
   getUserInformation() {
     AsyncStorage.multiGet(["email", "password"], function (err, stores) {
       if (err) {
-        this.props.history.push("/login");
+        // this.props.history.push("/login");
+        this.props.navigation.navigate('Login');
         console.log(err);
         return;
       }
@@ -36,7 +37,8 @@ class LandingPage extends Component {
         this.setState({
           loading: false
         });
-        this.props.history.push("/login");
+        // this.props.history.push("/login");
+        this.props.navigation.navigate('Login');
         console.log(err);
         return;
       }
@@ -52,7 +54,8 @@ class LandingPage extends Component {
             .then(res => res.json())
             .then(res => {
               this.props.dispatch({type: 'GET_USER_PROFILE', data: res});
-              this.props.history.push("/timeline");
+              // this.props.history.push("/timeline");
+              this.props.navigation.navigate('Timeline');
             })
             .catch(err => {
             });
@@ -61,7 +64,8 @@ class LandingPage extends Component {
           this.setState({
             loading: false
           });
-          this.props.history.push("/login");
+          // this.props.history.push("/login");
+          this.props.navigation.navigate('Login');
           console.log("ERR" + e.message);
         });
     }.bind(this));

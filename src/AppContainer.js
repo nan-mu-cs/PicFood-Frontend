@@ -24,33 +24,39 @@ import network from "./network";
 import {Location, Permissions} from 'expo';
 import EditPostPage from "./components/EditPostPage";
 import EditProfilePage from "./components/EditProfilePage";
-
+import { StackNavigator } from 'react-navigation';
+import Router from "./router";
+const RootStack = StackNavigator({
+    Home: {
+        screen: Timeline,
+    },
+});
 class App extends React.Component {
 
   render() {
     return (
-      <Switch>
-        <Route exact path="/" component={LandingPage}/>
-        <Route exact path="/timeline" component={Timeline}/>
-        <Route path="/search" component={SearchTab}/>
-        <Route path="/userlist" component={UserList}/>
-        <Route path="/restaurants/:id" component={RestaurantPage}/>
-        <Route path="/dishes/:id" component={DishPage}/>
-        <Route path="/dishphoto/:id" component={DishPhoto}/>
-        <Route path="/searchby" component={SearchBy}/>
-        <Route path="/users" component={PersonalPage}/>
-        <Route path="/user/:id" component={UserPage}/>
-        <Route path="/editprofile" component={EditProfilePage}/>
-        <Route path="/followers/:userId" component={FollowerList}/>
-        <Route path="/followings/:userId" component={FollowingList}/>
-        <Route exact path="/login" component={LoginPage}/>
-        <Route exact path="/register" component={RegisterPage}/>
-        <Route exact path="/post" component={PostPhotoPage}/>
-        <Route exact path="/editpost/:postId" component={EditPostPage}/>
-        <Route exact path="/viewpost/:postId" component={ViewPost}/>
-      </Switch>
+     <Router/>
     )
   }
 }
-
+{/*<Switch>*/}
+  {/*<Route exact path="/" component={LandingPage}/>*/}
+  {/*<Route exact path="/timeline" component={Timeline}/>*/}
+  {/*<Route path="/search" component={SearchTab}/>*/}
+  {/*<Route path="/userlist" component={UserList}/>*/}
+  {/*<Route path="/restaurants/:id" component={RestaurantPage}/>*/}
+  {/*<Route path="/dishes/:id" component={DishPage}/>*/}
+  {/*<Route path="/dishphoto/:id" component={DishPhoto}/>*/}
+  {/*<Route path="/searchby" component={SearchBy}/>*/}
+  {/*<Route path="/users" component={PersonalPage}/>*/}
+  {/*<Route path="/user/:id" component={UserPage}/>*/}
+  {/*<Route path="/editprofile" component={EditProfilePage}/>*/}
+  {/*<Route path="/followers/:userId" component={FollowerList}/>*/}
+  {/*<Route path="/followings/:userId" component={FollowingList}/>*/}
+  {/*<Route exact path="/login" component={LoginPage}/>*/}
+  {/*<Route exact path="/register" component={RegisterPage}/>*/}
+  {/*<Route exact path="/post" component={PostPhotoPage}/>*/}
+  {/*<Route exact path="/editpost/:postId" component={EditPostPage}/>*/}
+  {/*<Route exact path="/viewpost/:postId" component={ViewPost}/>*/}
+{/*</Switch>*/}
 export default App;
