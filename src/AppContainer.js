@@ -23,6 +23,7 @@ import ViewPost from "./components/ViewPost";
 import network from "./network";
 import {Location, Permissions} from 'expo';
 import EditPostPage from "./components/EditPostPage";
+import EditProfilePage from "./components/EditProfilePage";
 
 class App extends React.Component {
 
@@ -39,6 +40,7 @@ class App extends React.Component {
         <Route path="/searchby" component={SearchBy}/>
         <Route path="/users" component={PersonalPage}/>
         <Route path="/user/:id" component={UserPage}/>
+        <Route path="/editprofile" component={EditProfilePage}/>
         <Route path="/followers/:userId" component={FollowerList}/>
         <Route path="/followings/:userId" component={FollowingList}/>
         <Route exact path="/login" component={LoginPage}/>

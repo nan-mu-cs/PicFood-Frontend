@@ -122,16 +122,14 @@ class PersonalPage extends Component {
         <Grid>
           <Row size={15} style={{alignItems: "center"}}>
             <Col size={3}>
+
               <Thumbnail round size={150}
                          source={{uri: (this.props.user && this.props.user.avatar) || "http://via.placeholder.com/100x100"}}
                          style={{marginLeft: 30}}/>
+
             </Col>
             <Col size={7}>
               <Row style={{alignItems: "center"}}>
-                {/*<Col size={3}>*/}
-                {/*<Text>{(this.props.user && this.props.user.posts)||0}</Text>*/}
-                {/*<Text>posts</Text>*/}
-                {/*</Col>*/}
                 <Col size={3}>
                   <TouchableWithoutFeedback
                     onPress={() => this.props.history.push(`/followings/${this.props.user.userId}`)}>
@@ -152,6 +150,14 @@ class PersonalPage extends Component {
               <Button primary block style={{flex: 1, marginLeft: 5, marginRight: 5}}
                       onPress={() => this.props.history.push("/userlist")}>
                 <Text>Add Friends</Text>
+              </Button>
+            </Col>
+          </Row>
+          <Row size={7} style={{marginTop: 10}}>
+            <Col>
+              <Button primary block style={{flex: 1, marginLeft: 5, marginRight: 5}}
+                      onPress={() => this.props.history.push("/editprofile")}>
+                <Text>Edit Profile</Text>
               </Button>
             </Col>
           </Row>
