@@ -152,7 +152,7 @@ class RestaurantPage extends Component {
                 {dishes}
             </List>
         </Content>}
-        <Footer/>
+        {/*<Footer/>*/}
         <Fab
             active={this.state.active}
             direction="left"

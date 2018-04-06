@@ -163,7 +163,7 @@ class DishPage extends Component {
               {photos}
             </List>
           </Content>}
-        <Footer/>
+        {/*<Footer/>*/}
       </Container>
     )
   }

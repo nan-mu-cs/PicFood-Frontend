@@ -97,7 +97,7 @@ class FollowerList extends Component {
               {userList}
             </List>}
         </Content>
-        <Footer/>
+        {/*<Footer/>*/}
       </Container>
     );
   }

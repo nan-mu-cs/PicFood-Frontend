@@ -164,7 +164,7 @@ class UserList extends Component {
               {userList}
             </List>
           </Content>}
-        <Footer/>
+        {/*<Footer/>*/}
       </Container>
     );
   }

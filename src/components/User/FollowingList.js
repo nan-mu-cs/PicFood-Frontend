@@ -117,7 +117,7 @@ class FollowingList extends Component {
               {userList}
             </List>}
         </Content>
-        <Footer/>
+        {/*<Footer/>*/}
       </Container>
     );
   }

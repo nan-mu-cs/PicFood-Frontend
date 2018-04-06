@@ -303,7 +303,7 @@ class ViewPost extends Component {
                     {reviews}
                   </List>
                 </Content>
-                <Footer/>
+                {/*<Footer/>*/}
             </Container>
         )
     }
