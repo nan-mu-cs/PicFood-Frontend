@@ -111,7 +111,7 @@ class PostPhotoPage extends Component {
               </Item>
             </Col>
           </Row>
-          <Row size={1} style={{justifyContent: "center"}}>
+          <Row size={1} style={{justifyContent: "center", marginTop:20}}>
             <Col>
               <StarRating
                 disabled={false}

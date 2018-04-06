@@ -135,7 +135,7 @@ class ViewPost extends Component {
             });
             console.log("ERR "+e.message);
           });
-        this.onBackPress();
+        this.props.history.push("/users");
       }
     }
 
