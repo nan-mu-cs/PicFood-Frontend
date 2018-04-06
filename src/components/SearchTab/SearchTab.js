@@ -42,7 +42,7 @@ class SearchTab extends Component {
 
   onSortPress = () => {
     this.props.history.push(`/searchby`);
-  }
+  };
 
   handleRefresh() {
     this.setState({refreshing: true});
@@ -53,7 +53,7 @@ class SearchTab extends Component {
     let restaurants = this.state.keyword ? network.restaurant.searchRestaurants(this.state.keyword, 'rate', 41, -71) :
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon);
     restaurants.then(res => {
-      // console.log('searchRestaurants', res);
+      console.log('searchRestaurants', res);
       this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res.splice(0, 18)});
       this.setState({refreshing: false});
     })
@@ -143,7 +143,7 @@ class SearchTab extends Component {
               onSubmitEditing={this.onSubmitEditing.bind(this)}/>
           </Item>
           <Button transparent onPress={this.onSortPress}>
-            <Icon name='ios-menu'/>
+            <Icon name='ios-menu' style={{marginLeft: 4, marginRight: 7}}/>
           </Button>
         </Header>
         <Tabs initialPage={0}>
@@ -180,7 +180,9 @@ class SearchTab extends Component {
 
 const styles = StyleSheet.create({
   listItem: {
-    borderBottomWidth: 0
+    borderBottomWidth: 0,
+    paddingTop: 3,
+    paddingBottom: 0,
   },
   notFoundText: {
     paddingTop: 100,

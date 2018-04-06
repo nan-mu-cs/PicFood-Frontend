@@ -4,9 +4,9 @@
 export default {
   currentTab: "timeline",
   tabs: [
-    {id: "timeline", icon: "home", url: "/timeline"},
-    {id: "search", icon: "search", url: "/search"},
-    {id: "users", icon: "person", url: "/users"}
+    {id: "timeline", icon: "home", name: "Timeline", url: "/timeline"},
+    {id: "search", icon: "search", name: "Search", url: "/search"},
+    {id: "users", icon: "person", name: "Profile", url: "/users"}
   ],
   timelines: [],
   user: {},

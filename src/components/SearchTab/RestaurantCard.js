@@ -2,7 +2,7 @@
  * Created by Chaofeng on 18/03/2018.
  */
 import React, {Component} from 'react';
-import {Image, TouchableWithoutFeedback} from 'react-native';
+import {Image, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {
   Container,
   Header,
@@ -15,7 +15,7 @@ import {
   Icon,
   Left,
   Body,
-  Right
+  Right, View
 } from 'native-base';
 import {withRouter} from 'react-router-native';
 import {connect} from "react-redux";
@@ -36,33 +36,36 @@ class RestaurantCard extends Component {
     return (
       <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.restaurantId)}>
         <Card>
-          <CardItem>
-            <Left>
-              <Thumbnail source={{uri: avatar}}/>
-              <Body>
-              <Text>{this.props.data.name}</Text>
-              <Text note>{this.props.data.location}</Text>
-              <StarRating
-                disabled={true}
-                maxStars={5}
-                rating={this.props.data.avgRate}
-                containerStyle={{marginTop: 3, alignSelf: "flex-start"}}
-                fullStarColor={"#f5af4b"}
-                emptyStarColor={"#f5af4b"}
-                halfStarEnabled
-                starSize={15}
-              />
-              </Body>
-            </Left>
-          </CardItem>
-          <CardItem cardBody>
-            <Image source={{uri: avatar}} style={{height: 200, width: null, flex: 1}}/>
+          <CardItem style={styles.cardItem}>
+            <Thumbnail source={{cache: 'force-cache', uri: avatar}} style={{height: 100, width: 100}}/>
+            <View style={{flex: 1, paddingLeft: 10, justifyContent: 'flex-start',}}>
+            <Text>{this.props.data.name}</Text>
+            <Text note style={{fontSize: 13}}>{this.props.data.address}</Text>
+            <Text note style={{color: 'gray'}}>{this.props.data.category}</Text>
+            <StarRating
+              disabled={true}
+              maxStars={5}
+              rating={this.props.data.avgRate}
+              containerStyle={{marginTop: 3, alignSelf: "flex-start"}}
+              fullStarColor={"#f5af4b"}
+              emptyStarColor={"#f5af4b"}
+              halfStarEnabled
+              starSize={15}
+            />
+            </View>
           </CardItem>
         </Card>
       </TouchableWithoutFeedback>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  cardItem: {
+    paddingLeft: 10,
+    paddingRight: 10,
+  }
+});
 
 const mapStateToProps = (state, ownProps) => {
   return {}

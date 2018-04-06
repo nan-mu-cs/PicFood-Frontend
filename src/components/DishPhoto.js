@@ -39,7 +39,7 @@ class DishPhoto extends Component {
         </Header>
         <Content>
           <CardItem cardBody>
-            <Image source={{uri: this.props.restaurant.avatar}} style={{height: 200, width: null, flex: 1}}/>
+            <Image source={{cache: 'force-cache', uri: this.props.restaurant.avatar}} style={{height: 200, width: null, flex: 1}}/>
           </CardItem>
           <CardItem cardBody>
             <TouchableWithoutFeedback onPress={this.handleClickImage}>

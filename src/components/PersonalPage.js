@@ -79,7 +79,7 @@ class PersonalPage extends Component {
       let card1 = (
         <Col>
           <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this, post[i].postId)}>
-            <Thumbnail square source={{uri: post[i].imageUrl || "http://via.placeholder.com/350x150"}}
+            <Thumbnail square source={{cache: 'force-cache', uri: post[i].imageUrl || "http://via.placeholder.com/350x150"}}
                        style={styles.photoItem}/>
           </TouchableWithoutFeedback>
         </Col>
@@ -89,7 +89,7 @@ class PersonalPage extends Component {
         card2 = (
           <Col>
             <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this, post[i + 1].postId)}>
-              <Thumbnail square source={{uri: post[i + 1].imageUrl || "http://via.placeholder.com/350x150"}}
+              <Thumbnail square source={{cache: 'force-cache', uri: post[i + 1].imageUrl || "http://via.placeholder.com/350x150"}}
                          style={styles.photoItem}/>
             </TouchableWithoutFeedback>
           </Col>
@@ -98,7 +98,7 @@ class PersonalPage extends Component {
         card3 = (
           <Col>
             <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this, post[i + 2].postId)}>
-              <Thumbnail square source={{uri: post[i + 1].imageUrl || "http://via.placeholder.com/350x150"}}
+              <Thumbnail square source={{cache: 'force-cache', uri: post[i + 1].imageUrl || "http://via.placeholder.com/350x150"}}
                          style={styles.photoItem}/>
             </TouchableWithoutFeedback>
           </Col>
@@ -124,7 +124,7 @@ class PersonalPage extends Component {
             <Col size={3}>
 
               <Thumbnail round size={150}
-                         source={{uri: (this.props.user && this.props.user.avatar) || "http://via.placeholder.com/100x100"}}
+                         source={{cache: 'force-cache', uri: (this.props.user && this.props.user.avatar) || "http://via.placeholder.com/100x100"}}
                          style={{marginLeft: 30}}/>
 
             </Col>
