@@ -10,6 +10,7 @@ import Footer from "../Footer";
 import { withRouter } from 'react-router-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import network from "../../network";
+import ImagePreview from 'react-native-image-preview';
 
 class UserPage extends Component {
   constructor(props, context) {
@@ -19,6 +20,7 @@ class UserPage extends Component {
       userId: this.props.match.params.id,
       name: '',
       avatar: "http://via.placeholder.com/100x100",
+      pictureModalShow:false
     };
     this.handleClickBack = this.handleClickBack.bind(this);
   }
@@ -104,7 +106,10 @@ class UserPage extends Component {
                 <Grid>
                     <Row size={15} style={{alignItems:"center"}}>
                         <Col size={3}>
-                            <Thumbnail round size={150} source={{ cache: 'force-cache', uri: (this.state.avatar)||"http://via.placeholder.com/100x100" }} style={{marginLeft:30}}/>
+                          <TouchableWithoutFeedback onPress={() => (this.setState({pictureModalShow: true}))}>
+                            <Thumbnail round size={150} source={{ cache: 'force-cache', uri: (this.state.avatar)||"http://via.placeholder.com/100x100" }} style={{marginLeft:30}} />
+                          </TouchableWithoutFeedback>
+                          <ImagePreview visible={this.state.pictureModalShow} source={{uri: (this.state.avatar)}} close={() => (this.setState({pictureModalShow: false}))} />
                         </Col>
                         <Col size={7}>
                             <Row style={{alignItems:"center"}}>

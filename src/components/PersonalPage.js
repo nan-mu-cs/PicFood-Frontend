@@ -23,11 +23,14 @@ import Footer from "./Footer";
 import {withRouter} from 'react-router-native';
 import {Col, Row, Grid} from "react-native-easy-grid";
 import network from "../network";
+import ImagePreview from 'react-native-image-preview';
 
 class PersonalPage extends Component {
   constructor(props, context) {
     super(props);
-    this.state = {};
+    this.state = {
+      pictureModalShow:false
+    };
     this.handleClickImage = this.handleClickImage.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
@@ -122,10 +125,12 @@ class PersonalPage extends Component {
         <Grid>
           <Row size={15} style={{alignItems: "center"}}>
             <Col size={3}>
-
-              <Thumbnail round size={150}
-                         source={{cache: 'force-cache', uri: (this.props.user && this.props.user.avatar) || "http://via.placeholder.com/100x100"}}
-                         style={{marginLeft: 30}}/>
+              <TouchableWithoutFeedback onPress={() => (this.setState({pictureModalShow: true}))}>
+                <Thumbnail round size={150}
+                           source={{cache: 'force-cache', uri: (this.props.user && this.props.user.avatar) || "http://via.placeholder.com/100x100"}}
+                           style={{marginLeft: 30}}/>
+              </TouchableWithoutFeedback>
+              <ImagePreview visible={this.state.pictureModalShow} source={{uri: (this.props.user.avatar)}} close={() => (this.setState({pictureModalShow: false}))} />
 
             </Col>
             <Col size={7}>
