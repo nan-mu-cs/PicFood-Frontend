@@ -28,7 +28,7 @@ import {connect} from 'react-redux';
 import RestaurantCard from "./RestaurantCard";
 import DishCard from "./DishCard";
 import Footer from "../Footer";
-import {withRouter} from 'react-router-native';
+import { withNavigation } from 'react-navigation';
 import network from '../../network';
 
 class SearchTab extends Component {
@@ -41,7 +41,8 @@ class SearchTab extends Component {
   }
 
   onSortPress = () => {
-    this.props.history.push(`/searchby`);
+    // this.props.history.push(`/searchby`);
+    this.props.navigation.navigate("SearchBy");
   };
 
   handleRefresh() {
@@ -199,6 +200,6 @@ const mapStateToProps = (state, ownProps) => {
   }
 };
 
-export default withRouter(connect(
+export default withNavigation(connect(
   mapStateToProps
 )(SearchTab));

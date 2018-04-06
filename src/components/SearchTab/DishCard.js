@@ -17,7 +17,7 @@ import {
   Body,
   Right
 } from 'native-base';
-import {withRouter} from 'react-router-native';
+import { withNavigation } from 'react-navigation';
 import {connect} from "react-redux";
 import StarRating from 'react-native-star-rating';
 import network from "../../network";
@@ -45,12 +45,16 @@ class DishCard extends Component {
   }
 
   onCardPress(dishId) {
-    this.props.history.push({
-      pathname: `/dishes/${dishId}`,
-      state: {
-        restaurantId: this.props.data.restaurantId
-      }
+    this.props.navigation.navigate("Dish",{
+      restaurantId:this.props.data.restaurantId,
+      dishId
     });
+    // this.props.history.push({
+    //   pathname: `/dishes/${dishId}`,
+    //   state: {
+    //     restaurantId: this.props.data.restaurantId
+    //   }
+    // });
   }
 
   render() {
@@ -89,6 +93,6 @@ const mapStateToProps = (state, ownProps) => {
   return {}
 };
 
-export default withRouter(connect(
+export default withNavigation(connect(
   mapStateToProps
 )(DishCard));

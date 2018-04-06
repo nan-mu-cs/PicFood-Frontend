@@ -17,7 +17,7 @@ import {
   Body,
   Right, View
 } from 'native-base';
-import {withRouter} from 'react-router-native';
+import { withNavigation } from 'react-navigation';
 import {connect} from "react-redux";
 import StarRating from 'react-native-star-rating';
 
@@ -28,7 +28,10 @@ class RestaurantCard extends Component {
   }
 
   onCardPress(restaurantId) {
-    this.props.history.push(`/restaurants/${restaurantId}`);
+    // this.props.history.push(`/restaurants/${restaurantId}`);
+    this.props.navigation.navigate("Restaurant",{
+      restaurantId
+    });
   }
 
   render() {
@@ -71,6 +74,6 @@ const mapStateToProps = (state, ownProps) => {
   return {}
 };
 
-export default withRouter(connect(
+export default withNavigation(connect(
   mapStateToProps
 )(RestaurantCard));

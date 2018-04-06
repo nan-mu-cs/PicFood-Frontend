@@ -16,14 +16,15 @@ class UserPage extends Component {
     super(props);
     this.state = {
       loading: true,
-      userId: this.props.match.params.id,
+      userId:  this.props.navigation.state.params.userId,
       name: '',
       avatar: "http://via.placeholder.com/100x100",
     };
     this.handleClickBack = this.handleClickBack.bind(this);
   }
   handleClickBack(){
-    this.props.history.goBack();
+    // this.props.history.goBack();
+    this.props.navigation.goBack();
   }
 
     componentDidMount(){
@@ -45,7 +46,8 @@ class UserPage extends Component {
     }
 
     handleClickImage(postId){
-        this.props.history.push(`/viewpost/${postId}`)
+        // this.props.history.push(`/viewpost/${postId}`)
+      this.props.navigation.navigate('ViewPost',{postId});
     }
 
     render() {
@@ -130,7 +132,7 @@ class UserPage extends Component {
                         </Col>
                     </Row>
                 </Grid>
-                <Footer/>
+                {/*<Footer/>*/}
             </Container>
         );
     }

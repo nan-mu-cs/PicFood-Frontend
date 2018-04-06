@@ -62,7 +62,8 @@ class LoginPage extends Component {
           // console.log(res);
           // console.log(res._bodyInit);
           this.props.dispatch({type: "UPDATE_TOKEN", data: res.token});
-          this.props.history.push("/");
+          // this.props.history.push("/");
+          this.props.navigation.navigate('App');
         })
         .catch((e) => {
           this.setState({
@@ -102,7 +103,7 @@ class LoginPage extends Component {
               <Text>Login</Text>
             </Button>
             <Button success block style={{flex: 1, marginLeft: 5, marginRight: 5}} onPress={() => {
-              this.props.history.push("/register")
+              this.props.navigation.navigate('Register');
             }}>
               <Text>Register</Text>
             </Button>

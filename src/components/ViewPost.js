@@ -19,7 +19,7 @@ class ViewPost extends Component {
         super(props);
         this.state={
             creatorId:0,
-            postId: this.props.match.params.postId,
+            postId: this.props.navigation.state.params.postId,
             com: "",
             error:false,
             up:false
@@ -31,7 +31,8 @@ class ViewPost extends Component {
     }
 
     onBackPress() {
-      this.props.history.goBack();
+      // this.props.history.goBack();
+      this.props.navigation.goBack();
     }
 
     componentDidMount() {

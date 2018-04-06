@@ -26,7 +26,7 @@ import EditPostPage from "./components/EditPostPage";
 import EditProfilePage from "./components/EditProfilePage";
 
 const Tabs = TabNavigator({
-  Timeline:{
+  TimeLine:{
     screen:Timeline,
   },
   Search:{
@@ -36,6 +36,7 @@ const Tabs = TabNavigator({
     screen:PersonalPage
   }
 },{
+  initialRouteName: 'TimeLine',
   tabBarOptions:{
     activeBackgroundColor:"grey",
   },
@@ -43,9 +44,7 @@ const Tabs = TabNavigator({
   swipeEnabled: false,
   tabBarPosition: 'bottom',
 });
-
-const Stack = StackNavigator({
-
+const AuthStack = StackNavigator({
   Login: {
     screen: LoginPage,
     navigationOptions: {
@@ -57,19 +56,69 @@ const Stack = StackNavigator({
     navigationOptions: {
       title: "Register",
     }
-  },
-}, {
-  initialRouteName: 'Landing',
+  }
 });
 
-export default SwitchNavigator(
-  {
-    Landing:{
-      screen: LandingPage
-    },
-    Tabs:Tabs
+const AppStack = StackNavigator({
+  Tabs:Tabs,
+  UserList:{
+    screen:UserList
   },
-  {
-    initialRouteName: 'Landing',
+  Restaurant:{
+    screen:RestaurantPage
+  },
+  Dishes:{
+    screen:DishPage
+  },
+  DishPhoto:{
+    screen:DishPhoto
+  },
+  SearchBy:{
+    screen:SearchBy
+  },
+  User:{
+    screen:UserPage
+  },
+  EditProfile:{
+    screen:EditProfilePage
+  },
+  Followers:{
+    screen:FollowerList
+  },
+  Followings:{
+    screen:FollowingList
+  },
+  Post:{
+    screen:PostPhotoPage
+  },
+  EditPost:{
+    screen:EditPostPage
+  },
+  ViewPost:{
+    screen:ViewPost
   }
-);
+},{
+  headerMode:"none",
+});
+export default RootRouter = SwitchNavigator({
+  App:AppStack,
+  Auth:AuthStack,
+  Landing:{
+    screen: LandingPage
+  },
+},{
+  headerMode:"none",
+    initialRouteName: 'Landing',
+});
+// export default SwitchNavigator(
+//   {
+//     Landing:{
+//       screen: LandingPage
+//     },
+//     Tabs:Tabs,
+//     Stacks:Stack
+//   },
+//   {
+//     initialRouteName: 'Landing',
+//   }
+// );

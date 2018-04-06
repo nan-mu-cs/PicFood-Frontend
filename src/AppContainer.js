@@ -26,11 +26,6 @@ import EditPostPage from "./components/EditPostPage";
 import EditProfilePage from "./components/EditProfilePage";
 import { StackNavigator } from 'react-navigation';
 import Router from "./router";
-const RootStack = StackNavigator({
-    Home: {
-        screen: Timeline,
-    },
-});
 class App extends React.Component {
 
   render() {

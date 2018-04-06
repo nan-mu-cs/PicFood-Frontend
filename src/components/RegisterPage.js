@@ -26,7 +26,6 @@ import {
 } from 'native-base';
 import {StyleSheet, ScrollView, AsyncStorage} from 'react-native';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-native';
 import {Col, Row, Grid} from "react-native-easy-grid";
 import {ImagePicker} from 'expo';
 import network from "../network";
@@ -102,7 +101,7 @@ class RegisterPage extends Component {
         <Header>
           <Left>
             <Button transparent onPress={() => {
-              this.props.history.goBack()
+              this.props.navigation.goBack()
             }}>
               <Icon name='arrow-back'/>
             </Button>
@@ -160,8 +159,8 @@ const mapStateToProps = (state, ownProps) => {
   return {}
 };
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps
-)(RegisterPage));
+)(RegisterPage);
 
 // export default RegisterPage;

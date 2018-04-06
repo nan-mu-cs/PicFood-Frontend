@@ -34,7 +34,7 @@ class RestaurantPage extends Component {
     super(props);
     this.state = {
       loading: true,
-      restaurantId: this.props.match.params.id,
+      restaurantId: this.props.navigation.state.params.restaurantId,
       restaurant: {
         dishes: []
       }
@@ -57,14 +57,19 @@ class RestaurantPage extends Component {
       });
     }
     result.then((result) => {
-      console.log('ImagePicker', result);
+      // console.log('ImagePicker', result);
       if (!result.cancelled) {
-        this.props.history.push({
-          pathname: "/post",
-          state: {
-            image: result.uri,
-            restaurantId: this.state.restaurantId
-          }
+        // this.props.history.push({
+        //   pathname: "/post",
+        //   state: {
+        //     image: result.uri,
+        //     restaurantId: this.state.restaurantId
+        //   }
+        // });
+        // console.log(result.uri);
+        this.props.navigation.navigate("Post",{
+          image:result.uri,
+          restaurantId:this.state.restaurantId
         });
       }
     }).catch(err => {
@@ -73,7 +78,8 @@ class RestaurantPage extends Component {
   }
 
   handleClickBack() {
-    this.props.history.goBack();
+    // this.props.history.goBack();
+    this.props.navigation.goBack();
   }
 
 

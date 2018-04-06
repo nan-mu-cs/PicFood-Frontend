@@ -29,7 +29,6 @@ import {
 import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
 import Footer from "../Footer";
-import {withRouter} from 'react-router-native';
 import network from "../../network";
 
 class FollowerList extends Component {
@@ -42,11 +41,13 @@ class FollowerList extends Component {
   }
 
   onBackPress() {
-    this.props.history.goBack();
+    // this.props.history.goBack();
+    this.props.navigation.goBack();
   }
 
   onUserPress(userId) {
-    this.props.history.push(`/user/${userId}`);
+    // this.props.history.push(`/user/${userId}`);
+    this.props.navigation.navigate('User',{userId});
   }
 
   componentDidMount() {
@@ -117,6 +118,6 @@ const mapStateToProps = (state, ownProps) => {
   }
 };
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps
-)(FollowerList));
+)(FollowerList);

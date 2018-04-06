@@ -33,17 +33,19 @@ class DishPage extends Component {
     super(props);
     this.state = {
       loading: true,
-      dishId: this.props.match.params.id
+      dishId: this.props.navigation.state.params.dishId
     };
     this.handleClickBack = this.handleClickBack.bind(this);
     this.upvote = this.upvote.bind(this);
   }
 
   handleClickBack() {
-    this.props.history.goBack();
+    // this.props.history.goBack();
+    this.props.navigation.goBack();
   }
 
   componentDidMount() {
+    console.log(this.state.dishId);
     network.dish.getPostsOfDish(this.state.dishId)
       .then(res => res.json())
       .then(res => {
@@ -57,7 +59,8 @@ class DishPage extends Component {
   }
 
   onDishCreatorPress(userId) {
-    this.props.history.push(`/user/${userId}`);
+    // this.props.history.push(`/user/${userId}`);
+    this.props.navigation.navigate('User',{userId});
   }
 
 

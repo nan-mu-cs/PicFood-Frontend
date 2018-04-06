@@ -20,7 +20,6 @@ import {StyleSheet, ScrollView, Dimensions, Image, View, AsyncStorage, Touchable
 import {connect} from 'react-redux';
 import ImageCard from "./Timeline/PostCard";
 import Footer from "./Footer";
-import {withRouter} from 'react-router-native';
 import {Col, Row, Grid} from "react-native-easy-grid";
 import network from "../network";
 
@@ -45,7 +44,8 @@ class PersonalPage extends Component {
   }
 
   handleLogout() {
-    this.props.history.push("/login");
+    // this.props.history.push("/login");
+    this.props.navigation.navigate('Auth');
     AsyncStorage.clear();
     this.props.dispatch({type: "LOGOUT"});
   }
@@ -62,7 +62,8 @@ class PersonalPage extends Component {
     //         comments: item.comments
     //     }
     // });
-    this.props.history.push(`/viewpost/${postId}`)
+    // this.props.history.push(`/viewpost/${postId}`)
+    this.props.navigation.navigate('ViewPost',{postId});
   }
 
   render() {
@@ -132,13 +133,17 @@ class PersonalPage extends Component {
               <Row style={{alignItems: "center"}}>
                 <Col size={3}>
                   <TouchableWithoutFeedback
-                    onPress={() => this.props.history.push(`/followings/${this.props.user.userId}`)}>
+                    onPress={() => this.props.navigation.navigate('Followings',{
+                      userId:this.props.user.userId
+                    })}>
                     <Text>{this.props.user.followCount || 0} following</Text>
                   </TouchableWithoutFeedback>
                 </Col>
                 <Col size={3}>
                   <TouchableWithoutFeedback
-                    onPress={() => this.props.history.push(`/followers/${this.props.user.userId}`)}>
+                    onPress={() =>  this.props.navigation.navigate('Follower',{
+                      userId:this.props.user.userId
+                    })}>
                     <Text>{this.props.user.fanCount || 0} followers</Text>
                   </TouchableWithoutFeedback>
                 </Col>
@@ -148,7 +153,7 @@ class PersonalPage extends Component {
           <Row size={7}>
             <Col>
               <Button primary block style={{flex: 1, marginLeft: 5, marginRight: 5}}
-                      onPress={() => this.props.history.push("/userlist")}>
+                      onPress={() => this.props.navigation.navigate('UserList')}>
                 <Text>Add Friends</Text>
               </Button>
             </Col>
@@ -156,7 +161,7 @@ class PersonalPage extends Component {
           <Row size={7} style={{marginTop: 10}}>
             <Col>
               <Button primary block style={{flex: 1, marginLeft: 5, marginRight: 5}}
-                      onPress={() => this.props.history.push("/editprofile")}>
+                      onPress={() => this.props.navigation.navigate('EditProfile',{userId:this.props.user.userId})}>
                 <Text>Edit Profile</Text>
               </Button>
             </Col>
@@ -206,6 +211,6 @@ const mapStateToProps = (state, ownProps) => {
   }
 };
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps
-)(PersonalPage));
+)(PersonalPage);
