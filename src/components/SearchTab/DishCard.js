@@ -45,20 +45,12 @@ class DishCard extends Component {
   }
 
   onCardPress(dishId) {
-    this.props.navigation.navigate("Dish",{
-      restaurantId:this.props.data.restaurantId,
+    this.props.navigation.navigate("Dish", {
       dishId
     });
-    // this.props.history.push({
-    //   pathname: `/dishes/${dishId}`,
-    //   state: {
-    //     restaurantId: this.props.data.restaurantId
-    //   }
-    // });
   }
 
   render() {
-    let avatar = this.props.data.avatar || "http://via.placeholder.com/100x100";
     return (
       <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.dishId)}>
         <Card onPress={this.onCardPress.bind(this, this.props.data.dishId)}>

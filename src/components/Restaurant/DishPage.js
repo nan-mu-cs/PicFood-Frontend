@@ -60,9 +60,12 @@ class DishPage extends Component {
 
   onDishCreatorPress(userId) {
     // this.props.history.push(`/user/${userId}`);
-    this.props.navigation.navigate('User',{userId});
+    this.props.navigation.navigate('User', {userId});
   }
 
+  onRestaurantPress(restaurantId) {
+    this.props.navigation.navigate('Restaurant', {restaurantId});
+  }
 
   // onDishPhotoPress(imageUrl) {
   //   this.props.history.push(`/dishphoto/${imageUrl}`);
@@ -103,7 +106,7 @@ class DishPage extends Component {
         let poster = item.creator;
         let avatar = item.creatorAvater || "http://via.placeholder.com/100x100";
         return (
-          <Card key={item.dishId} style={styles.card}>
+          <Card key={item.postId} style={styles.card}>
             <CardItem style={styles.image}>
               <Image source={{cache: 'force-cache', uri: image}} style={{height: 200, width: null, flex: 1}}/>
             </CardItem>
@@ -156,9 +159,13 @@ class DishPage extends Component {
                 halfStarEnabled
                 starSize={15}
               />
-              <Text
-                style={styles.restaurant}>{(this.props.postsOfDish.length && this.props.postsOfDish[0].restaurantName) || "restaurantName"}</Text>
+              <TouchableWithoutFeedback
+                onPress={this.onRestaurantPress.bind(this, this.props.postsOfDish[0].restaurantId)}>
+                <Text
+                  style={styles.restaurant}>{(this.props.postsOfDish.length && this.props.postsOfDish[0].restaurantName) || "restaurantName"}</Text>
+              </TouchableWithoutFeedback>
             </Card>
+
             <List>
               {photos}
             </List>

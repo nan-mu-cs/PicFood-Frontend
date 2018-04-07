@@ -83,6 +83,7 @@ class SearchTab extends Component {
         });
     else
       this.setState({loading: false});
+
     // network.dish.searchDishes('rice', 'rate', this.props.location.lat, this.props.location.lon)
     if (this.props.searchedDishes.length === 0)
       network.dish.searchDishes('', 'rate', 41, -71)
