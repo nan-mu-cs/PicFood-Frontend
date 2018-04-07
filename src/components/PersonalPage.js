@@ -124,7 +124,7 @@ class PersonalPage extends Component {
           </Body>
         </Header>
         <Grid>
-          <Row size={15} style={{alignItems: "center"}}>
+          <Row size={25} style={{alignItems: "center"}}>
             <Col size={3}>
               <TouchableWithoutFeedback onPress={() => (this.setState({pictureModalShow: true}))}>
                 <Thumbnail round size={150}
@@ -134,7 +134,7 @@ class PersonalPage extends Component {
               <ImagePreview visible={this.state.pictureModalShow} source={{uri: (this.props.user.avatar)}} close={() => (this.setState({pictureModalShow: false}))} />
 
             </Col>
-            <Col size={7}>
+            <Col size={10}>
               <Row style={{alignItems: "center"}}>
                 <Col size={3}>
                   <TouchableWithoutFeedback
@@ -146,7 +146,7 @@ class PersonalPage extends Component {
                 </Col>
                 <Col size={3}>
                   <TouchableWithoutFeedback
-                    onPress={() =>  this.props.navigation.navigate('Follower',{
+                    onPress={() =>  this.props.navigation.navigate('Followers',{
                       userId:this.props.user.userId
                     })}>
                     <Text>{this.props.user.fanCount || 0} followers</Text>
@@ -155,25 +155,25 @@ class PersonalPage extends Component {
               </Row>
             </Col>
           </Row>
-          <Row size={7}>
+          <Row size={10}>
             <Col>
-              <Button primary block style={{flex: 1, marginLeft: 5, marginRight: 5}}
+              <Button primary block style={{flex: 1, marginLeft: 15, marginRight: 15}}
                       onPress={() => this.props.navigation.navigate('UserList')}>
                 <Text>Add Friends</Text>
               </Button>
             </Col>
           </Row>
-          <Row size={7} style={{marginTop: 10}}>
+          <Row size={10} style={{marginTop: 12}}>
             <Col>
-              <Button primary block style={{flex: 1, marginLeft: 5, marginRight: 5}}
+              <Button primary block style={{flex: 1, marginLeft: 15, marginRight: 15}}
                       onPress={() => this.props.navigation.navigate('EditProfile',{userId:this.props.user.userId})}>
                 <Text>Edit Profile</Text>
               </Button>
             </Col>
           </Row>
-          <Row size={7} style={{marginTop: 10, marginBottom: 10}}>
+          <Row size={10} style={{marginTop: 12, marginBottom: 10}}>
             <Col>
-              <Button success block style={{flex: 1, marginLeft: 5, marginRight: 5}}
+              <Button danger block style={{flex: 1, marginLeft: 15, marginRight: 15}}
                       onPress={() => this.handleLogout()}>
                 <Text>Logout</Text>
               </Button>

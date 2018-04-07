@@ -76,7 +76,7 @@ const AppStack = StackNavigator({
   Restaurant:{
     screen:RestaurantPage
   },
-  Dishes:{
+  Dish:{
     screen:DishPage
   },
   DishPhoto:{
@@ -118,7 +118,7 @@ export default RootRouter = SwitchNavigator({
   },
 },{
   headerMode:"none",
-  initialRouteName: 'Auth',
+  initialRouteName: 'Landing',
 });
 
 // export default SwitchNavigator(

@@ -175,7 +175,9 @@ const styles = StyleSheet.create({
     // borderBottomWidth: 0
   },
   buttonText: {
-    fontSize: 10
+    fontSize: 13,
+    paddingLeft: 10,
+    paddingRight: 10,
   }
 });
 
