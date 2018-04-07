@@ -106,9 +106,9 @@ class LoginPage extends Component {
           <View style={styles.bottomDiv}>
             <Text style={styles.signupHint}>Not yet have an account?
             </Text>
-            <Button style={styles.signupBtn} onPress={() => {
-              this.props.navigation.navigate('Register');
-            }}><Text style={{color: 'white'}}>Register!</Text></Button>
+            <Button style={styles.registerBtn}
+                    onPress={() => {this.props.navigation.navigate('Register')}}>
+              <Text style={{color: 'white', fontSize: 16}}>Register</Text></Button>
           </View>
         </Container>
         <ImageBackground source={require('../../assets/landing1.jpg')}
@@ -132,9 +132,9 @@ const styles = StyleSheet.create({
     shadowColor: 'white',
     shadowOpacity: 0.5,
   },
-  signupBtn: {
-    marginLeft: 10, paddingHorizontal: 10, height: 30,
-    fontSize: 16, color: 'white', shadowOffset: {width: 1, height: 1,},
+  registerBtn: {
+    marginLeft: 10, paddingHorizontal: 14, height: 30,
+    color: 'white', shadowOffset: {width: 1, height: 1,},
     shadowColor: 'white',
     shadowOpacity: 0.3,
   },

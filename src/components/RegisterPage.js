@@ -136,7 +136,7 @@ class RegisterPage extends Component {
             </Text>
             <Button success style={styles.signinBtn} onPress={() => {
               this.props.navigation.pop();
-            }}><Text style={{color: 'white', fontSize: 15, paddingLeft: 10, paddingRight: 10}}>Sign In</Text></Button>
+            }}><Text style={{color: 'white', fontSize: 16, paddingLeft: 10, paddingRight: 10}}>Sign In</Text></Button>
           </View>
         </Container>
         <ImageBackground source={require('../../assets/landing1.jpg')}
@@ -161,8 +161,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
   },
   signinBtn: {
-    marginLeft: 10, paddingHorizontal: 0, height: 30,
-    fontSize: 16, color: 'white', shadowOffset: {width: 1, height: 1,},
+    marginLeft: 10, paddingHorizontal: 5, height: 30,
+    color: 'white', shadowOffset: {width: 1, height: 1,},
     shadowColor: 'white',
     shadowOpacity: 0.3,
   },
