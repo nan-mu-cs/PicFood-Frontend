@@ -58,7 +58,10 @@ class Timeline extends Component {
 
   getData() {
     network.social.getTimeline()
-      .then(res => res.json())
+      .then(res => {
+        if(res.ok) return res.json();
+        throw res;
+      })
       .then(data => {
         this.setState({
           data,

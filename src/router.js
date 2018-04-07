@@ -1,8 +1,8 @@
 /**
  * Created by kai on 2018/4/5.
  */
-import React, {Component} from 'react';
-import {TabNavigator, StackNavigator, SwitchNavigator} from 'react-navigation';
+import React from 'react';
+import {StackNavigator, SwitchNavigator, TabNavigator} from 'react-navigation';
 import Timeline from "./components/Timeline/Timeline";
 import SearchTab from "./components/SearchTab/SearchTab";
 import SearchBy from "./components/SearchTab/SearchBy";
@@ -22,6 +22,7 @@ import ViewPost from "./components/ViewPost";
 import EditPostPage from "./components/EditPostPage";
 import EditProfilePage from "./components/EditProfilePage";
 import {Icon} from 'native-base';
+
 const Tabs = TabNavigator({
   TimeLine:{
     screen:Timeline,
@@ -49,11 +50,12 @@ const Tabs = TabNavigator({
   swipeEnabled: false,
   tabBarPosition: 'bottom',
 });
+
 const AuthStack = StackNavigator({
   Login: {
     screen: LoginPage,
     navigationOptions: {
-      header: "Login",
+      title: "Login",
     },
   },
   Register: {
@@ -62,6 +64,8 @@ const AuthStack = StackNavigator({
       title: "Register",
     }
   }
+},{
+  initialRouteName: 'Login',
 });
 
 const AppStack = StackNavigator({
@@ -105,6 +109,7 @@ const AppStack = StackNavigator({
 },{
   headerMode:"none",
 });
+
 export default RootRouter = SwitchNavigator({
   App:AppStack,
   Auth:AuthStack,
@@ -113,8 +118,9 @@ export default RootRouter = SwitchNavigator({
   },
 },{
   headerMode:"none",
-    initialRouteName: 'Landing',
+  initialRouteName: 'Auth',
 });
+
 // export default SwitchNavigator(
 //   {
 //     Landing:{
