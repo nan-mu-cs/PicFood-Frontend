@@ -7,7 +7,6 @@ import { Container, Header, Content, FooterTab, Button, Text, Left, Right, Icon,
 import {StyleSheet,ScrollView,Dimensions,Image,View,TouchableWithoutFeedback} from 'react-native';
 import { connect } from 'react-redux';
 import Footer from "../Footer";
-import { withRouter } from 'react-router-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import network from "../../network";
 import ImagePreview from 'react-native-image-preview';
@@ -17,7 +16,7 @@ class UserPage extends Component {
     super(props);
     this.state = {
       loading: true,
-      userId: this.props.match.params.id,
+      userId:  this.props.navigation.state.params.userId,
       name: '',
       avatar: "http://via.placeholder.com/100x100",
       pictureModalShow:false
@@ -25,7 +24,8 @@ class UserPage extends Component {
     this.handleClickBack = this.handleClickBack.bind(this);
   }
   handleClickBack(){
-    this.props.history.goBack();
+    // this.props.history.goBack();
+    this.props.navigation.goBack();
   }
 
     componentDidMount(){
@@ -47,7 +47,8 @@ class UserPage extends Component {
     }
 
     handleClickImage(postId){
-        this.props.history.push(`/viewpost/${postId}`)
+        // this.props.history.push(`/viewpost/${postId}`)
+      this.props.navigation.navigate('ViewPost',{postId});
     }
 
     render() {
@@ -135,7 +136,7 @@ class UserPage extends Component {
                         </Col>
                     </Row>
                 </Grid>
-                <Footer/>
+                {/*<Footer/>*/}
             </Container>
         );
     }

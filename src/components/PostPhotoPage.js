@@ -19,7 +19,6 @@ import {
 } from 'native-base';
 import {Image, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-native';
 import {Col, Grid, Row} from "react-native-easy-grid";
 import StarRating from 'react-native-star-rating';
 import network from "../network";
@@ -34,7 +33,9 @@ class PostPhotoPage extends Component {
       dishname: "",
       rate: 0,
       comment: "",
-      category: ""
+      category: "",
+      image:this.props.navigation.state.params.image,
+      restaurantId:this.props.navigation.state.params.restaurantId
     };
     this.handleClickBack = this.handleClickBack.bind(this);
     this.handleClickPost = this.handleClickPost.bind(this);
@@ -47,15 +48,15 @@ class PostPhotoPage extends Component {
   handleClickPost() {
     // console.log(this.state);
     network.social.addPost({
-      restaurantId: this.props.location.state.restaurantId,
+      restaurantId: this.state.restaurantId,
       dishName: this.state.dishname,
       rate: this.state.rate,
       content: this.state.comment,
       imageUrl: this.state.avatar
     }).then(res => res.json())
       .then(async (data) => {
-        let restaurantInfo = await network.restaurant.getRestaurantInfoById(this.props.location.state.restaurantId);
-        let restaurantDishes = await network.restaurant.getRestaurantDishesById(this.props.location.state.restaurantId);
+        let restaurantInfo = await network.restaurant.getRestaurantInfoById(this.state.restaurantId);
+        let restaurantDishes = await network.restaurant.getRestaurantDishesById(this.state.restaurantId);
         restaurantInfo.dishes = restaurantDishes;
         console.log(restaurantInfo);
         this.props.dispatch({
@@ -71,7 +72,7 @@ class PostPhotoPage extends Component {
   }
 
   componentDidMount() {
-    network.storage.uploadFile(this.props.location.state.image)
+    network.storage.uploadFile(this.state.image)
       .then((response) => response.text())
       .then(url => {
         this.setState({avatar: url});
@@ -130,8 +131,8 @@ class PostPhotoPage extends Component {
           </Row>
           <Row size={8}>
             <Col>
-              {this.props.location.state.image &&
-              <Image source={{cache: 'force-cache', uri: this.props.location.state.image}} style={{height: 300}}/>}
+              {this.state.image &&
+              <Image source={{cache: 'force-cache', uri: this.state.image}} style={{height: 300}}/>}
             </Col>
           </Row>
           <Row size={2}>
@@ -154,6 +155,6 @@ const mapStateToProps = (state, ownProps) => {
   return {}
 };
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps
-)(PostPhotoPage));
+)(PostPhotoPage);

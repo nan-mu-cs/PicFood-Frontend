@@ -26,7 +26,6 @@ import {
 } from 'native-base';
 import {StyleSheet, ScrollView, AsyncStorage} from 'react-native';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-native';
 import {Col, Row, Grid} from "react-native-easy-grid";
 import {ImagePicker} from 'expo';
 import network from "../network";
@@ -81,7 +80,8 @@ class RegisterPage extends Component {
     })
       .then(response => response.json())
       .then(res => {
-        AsyncStorage.multiSet([["email", this.state.email], ["password", this.state.password]], (err) => {});
+        AsyncStorage.multiSet([["email", this.state.email], ["password", this.state.password]], (err) => {
+        });
         this.props.dispatch({type: "UPDATE_TOKEN", data: res.token});
         this.props.history.push("/");
       }).catch(error => {
@@ -96,57 +96,43 @@ class RegisterPage extends Component {
   render() {
     let avatar;
     if (this.state.avatar)
-      avatar = <Thumbnail large source={{cache: 'force-cache', uri: this.state.avatar}} style={{alignSelf: "center", marginTop: 20}}/>;
+      avatar = <Thumbnail large source={{cache: 'force-cache', uri: this.state.avatar}}
+                          style={{alignSelf: "center", marginTop: 20}}/>;
     return (
-      <Container>
-        <Header>
-          <Left>
-            <Button transparent onPress={() => {
-              this.props.history.goBack()
-            }}>
-              <Icon name='arrow-back'/>
-            </Button>
-          </Left>
-          <Body>
-          <Title>Register</Title>
-          </Body>
-          <Right/>
-        </Header>
-        <Container style={{flexDirection: "column", justifyContent: "center"}}>
-          <Form>
-            {!this.state.avatar && <Button style={{backgroundColor: '#5067FF', alignSelf: "center", marginTop: 30}}
-                                           onPress={this.handleUploadAvatar}>
-              <Text>Upload Avatar</Text>
-            </Button>}
-            {avatar}
-            <Item floatingLabel>
-              <Label>Username</Label>
-              <Input value={this.state.username} onChangeText={(val) => this.setState({username: val})}/>
-            </Item>
-            <Item floatingLabel>
-              <Label>Email</Label>
-              <Input value={this.state.email} onChangeText={(val) => this.setState({email: val})}/>
-            </Item>
-            <Item floatingLabel>
-              <Label>Password</Label>
-              <Input secureTextEntry value={this.state.password}
-                     onChangeText={(val) => this.setState({password: val})}/>
-            </Item>
-          </Form>
-          <Container style={{flexDirection: "row", marginTop: 30}}>
-            {/*<Button primary block style={{flex:1,marginLeft:5,marginRight:5}}>*/}
-            {/*<Text>Login</Text>*/}
-            {/*</Button>*/}
-            <Button success block style={{flex: 1, marginLeft: 5, marginRight: 5}} onPress={this.handleClickRegister}>
-              <Text>Register</Text>
-            </Button>
-            {this.state.error && Toast.show({
-              text: this.state.errorMessage,
-              position: 'bottom',
-              buttonText: 'Okay'
-            })
-            }
-          </Container>
+      <Container style={{flexDirection: "column", justifyContent: "center"}}>
+        <Form>
+          {!this.state.avatar && <Button style={{backgroundColor: '#5067FF', alignSelf: "center", marginTop: 30}}
+                                         onPress={this.handleUploadAvatar}>
+            <Text>Upload Avatar</Text>
+          </Button>}
+          {avatar}
+          <Item floatingLabel>
+            <Label>Username</Label>
+            <Input value={this.state.username} onChangeText={(val) => this.setState({username: val})}/>
+          </Item>
+          <Item floatingLabel>
+            <Label>Email</Label>
+            <Input value={this.state.email} onChangeText={(val) => this.setState({email: val})}/>
+          </Item>
+          <Item floatingLabel>
+            <Label>Password</Label>
+            <Input secureTextEntry value={this.state.password}
+                   onChangeText={(val) => this.setState({password: val})}/>
+          </Item>
+        </Form>
+        <Container style={{flexDirection: "row", marginTop: 30}}>
+          {/*<Button primary block style={{flex:1,marginLeft:5,marginRight:5}}>*/}
+          {/*<Text>Login</Text>*/}
+          {/*</Button>*/}
+          <Button success block style={{flex: 1, marginLeft: 5, marginRight: 5}} onPress={this.handleClickRegister}>
+            <Text>Register</Text>
+          </Button>
+          {this.state.error && Toast.show({
+            text: this.state.errorMessage,
+            position: 'bottom',
+            buttonText: 'Okay'
+          })
+          }
         </Container>
       </Container>
     );
@@ -160,8 +146,8 @@ const mapStateToProps = (state, ownProps) => {
   return {}
 };
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps
-)(RegisterPage));
+)(RegisterPage);
 
 // export default RegisterPage;

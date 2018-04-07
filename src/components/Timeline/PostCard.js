@@ -17,7 +17,7 @@ import {
   Body,
   Right
 } from 'native-base';
-import {withRouter} from 'react-router-native';
+import { withNavigation } from 'react-navigation';
 import network from "../../network";
 
 class PostCard extends Component {
@@ -30,11 +30,17 @@ class PostCard extends Component {
   }
 
   handleClickImage() {
-    this.props.history.push(`/viewpost/${this.props.data.postId}`)
+    // this.props.history.push(`/viewpost/${this.props.data.postId}`)
+    this.props.navigation.navigate('ViewPost',{
+      postId:this.props.data.postId
+    });
   }
 
   handleClickUser() {
-    this.props.history.push(`/user/${this.props.data.creatorId}`)
+    // this.props.history.push(`/user/${this.props.data.creatorId}`)
+    this.props.navigation.navigate('User',{
+      userId:this.props.data.creatorId
+    });
   }
 
   render() {
@@ -66,4 +72,4 @@ class PostCard extends Component {
   }
 }
 
-export default withRouter(PostCard);
+export default withNavigation(PostCard);

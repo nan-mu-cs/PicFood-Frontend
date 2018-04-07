@@ -24,7 +24,6 @@ import {
 } from 'native-base';
 import {StyleSheet, Image} from 'react-native';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-native';
 import {Col, Row, Grid} from "react-native-easy-grid";
 import StarRating from 'react-native-star-rating';
 import network from "../network";
@@ -35,12 +34,13 @@ class EditPostPage extends Component {
   constructor(props, context) {
     super(props);
     this.state = {
-      postId: this.props.match.params.postId,
+      postId: this.props.navigation.state.params.postId,
       image:"",
       restaurantId:"",
       content:"",
       dishname: "",
-      rate: 0
+      rate: 0,
+      image:this.props.navigation.state.params.image
     };
     this.handleClickBack = this.handleClickBack.bind(this);
     this.handleClickPost = this.handleClickPost.bind(this);
@@ -60,7 +60,7 @@ class EditPostPage extends Component {
   }
 
   componentDidMount() {
-    network.storage.uploadFile(this.props.location.state.image)
+    network.storage.uploadFile(this.state.image)
       .then((response) => response.text())
       .then(url => {
         this.setState({image: url});
@@ -69,7 +69,8 @@ class EditPostPage extends Component {
     });
   }
   handleClickBack() {
-    this.props.history.goBack();
+    // this.props.history.goBack();
+    this.props.navigation.goBack();
   }
 
   handleClickPost() {
@@ -173,6 +174,6 @@ const mapStateToProps = (state, ownProps) => {
   return {}
 };
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps
-)(EditPostPage));
+)(EditPostPage);

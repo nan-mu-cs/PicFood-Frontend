@@ -17,7 +17,7 @@ import {
   Body,
   Right
 } from 'native-base';
-import {withRouter} from 'react-router-native';
+import { withNavigation } from 'react-navigation';
 import network from "../../network";
 
 class CommentCard extends Component {
@@ -30,11 +30,18 @@ class CommentCard extends Component {
   }
 
   handleClickImage() {
-    this.props.history.push(`/dishes/${this.props.data.dishId}`)
+    console.log(this.props.data);
+    // this.props.history.push(`/dishes/${this.props.data.dishId}`)
+    this.props.navigation.navigate('Dishes',{
+      dishId:this.props.data.dishId
+    });
   }
 
   handleClickUser() {
-    this.props.history.push(`/user/${this.props.data.commenterId}`)
+    // this.props.history.push(`/user/${this.props.data.commenterId}`)
+    this.props.navigation.navigate('User',{
+      userId:this.props.data.commenterId
+    });
   }
 
   render() {
@@ -65,4 +72,4 @@ class CommentCard extends Component {
   }
 }
 
-export default withRouter(CommentCard);
+export default withNavigation(CommentCard);

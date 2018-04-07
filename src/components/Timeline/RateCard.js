@@ -17,7 +17,6 @@ import {
   Body,
   Right
 } from 'native-base';
-import {withRouter} from 'react-router-native';
 import StarRating from 'react-native-star-rating';
 
 class RateCard extends Component {
@@ -94,4 +93,4 @@ class RateCard extends Component {
   }
 }
 
-export default withRouter(RateCard);
+export default RateCard;

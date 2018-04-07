@@ -24,7 +24,6 @@ import {
 import {StyleSheet, Image} from 'react-native';
 import {connect} from 'react-redux';
 import Comments from "./Comments";
-import {withRouter} from 'react-router-native';
 import {Col, Row, Grid} from "react-native-easy-grid";
 
 class ImageDetailPage extends Component {
@@ -35,11 +34,12 @@ class ImageDetailPage extends Component {
   }
 
   handleClickBack() {
-    this.props.history.goBack();
+    // this.props.history.goBack();
+    this.props.navigation.goBack();
   }
 
   render() {
-    const {avatar, user, location, image, comments} = this.props.location.state;
+    const {avatar, user, location, image, comments} = this.props.navigation.state;
     return (
       <Container>
         <Header>
@@ -117,6 +117,6 @@ const mapStateToProps = (state, ownProps) => {
   return {}
 };
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps
-)(ImageDetailPage));
+)(ImageDetailPage);
