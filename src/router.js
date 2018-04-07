@@ -55,13 +55,15 @@ const AuthStack = StackNavigator({
   Login: {
     screen: LoginPage,
     navigationOptions: {
-      title: "Login",
+      header: null,
+    //   title: "Login",
     },
   },
   Register: {
     screen: RegisterPage,
     navigationOptions: {
-      title: "Register",
+      header: null,
+      // title: "Register",
     }
   }
 },{
