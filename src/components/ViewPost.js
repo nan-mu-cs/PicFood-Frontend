@@ -136,7 +136,8 @@ class ViewPost extends Component {
             });
             console.log("ERR "+e.message);
           });
-        this.props.history.push("/users");
+        // this.props.history.push("/users");
+        this.props.navigation.navigate('Profile');
       }
     }
 
@@ -150,11 +151,9 @@ class ViewPost extends Component {
         result.then((result) => {
           // console.log(result);
           if (!result.cancelled) {
-            this.props.history.push({
-              pathname: `/editpost/${postId}`,
-              state: {
-                image: result.uri,
-              }
+            this.props.navigation.navigate('EditPost', {
+              postId,
+              image: result.uri,
             });
           }
         }).catch(err => {

@@ -101,7 +101,7 @@ class EditPostPage extends Component {
       }).catch(err => {
       console.log(err);
     });
-    this.props.history.push(`/users`)
+    this.props.navigation.navigate('Profile');
   }
 
   render() {

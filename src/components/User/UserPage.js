@@ -115,13 +115,17 @@ class UserPage extends Component {
                         <Col size={7}>
                             <Row style={{alignItems:"center"}}>
                                 <Col size={3}>
-                                    <TouchableWithoutFeedback onPress={()=>this.props.history.push(`/followers/${this.state.userId}`)}>
+                                    <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate('Followers', {
+                                      userId: this.state.userId
+                                    })}>
                                         <Text>{this.state.fanCount||0} followers</Text>
                                     </TouchableWithoutFeedback>
                                 </Col>
                                 <Col size={3}>
-                                    <TouchableWithoutFeedback onPress={()=>this.props.history.push(`/followings/${this.state.userId}`)}>
-                                        <Text>{this.state.followCount||0} following</Text>
+                                    <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate('Followings', {
+                                      userId: this.state.userId
+                                    })}>
+                                        <Text>{this.state.followCount||0} followings</Text>
                                     </TouchableWithoutFeedback>
                                 </Col>
                             </Row>

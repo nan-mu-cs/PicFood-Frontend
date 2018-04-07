@@ -36,6 +36,7 @@ class FollowerList extends Component {
     super(props);
     this.state = {
       loading: true,
+      userId: this.props.navigation.state.params.userId,
     };
   }
 
@@ -50,7 +51,9 @@ class FollowerList extends Component {
   }
 
   componentDidMount() {
-    network.social.getMyFollowers()
+    const followersPro = this.state.userId ? network.social.getFollowersById(this.state.userId) :
+      network.social.getMyFollowers();
+    followersPro
       .then(res => {
         console.log('FollowerList', res);
         this.setState({loading: false})

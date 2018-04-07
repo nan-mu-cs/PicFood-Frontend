@@ -22,9 +22,9 @@ import {
   Left,
   Right,
   Toast,
-  Thumbnail
+  Thumbnail, View
 } from 'native-base';
-import {StyleSheet, ScrollView, AsyncStorage} from 'react-native';
+import {StyleSheet, ScrollView, AsyncStorage, ImageBackground} from 'react-native';
 import {connect} from 'react-redux';
 import {Col, Row, Grid} from "react-native-easy-grid";
 import {ImagePicker} from 'expo';
@@ -71,7 +71,7 @@ class RegisterPage extends Component {
   }
 
   handleClickRegister() {
-    // console.log(this.state);
+    console.log(this.state);
     network.account.register({
       email: this.state.email,
       password: this.state.password,
@@ -83,7 +83,8 @@ class RegisterPage extends Component {
         AsyncStorage.multiSet([["email", this.state.email], ["password", this.state.password]], (err) => {
         });
         this.props.dispatch({type: "UPDATE_TOKEN", data: res.token});
-        this.props.history.push("/");
+        console.log(res)
+        this.props.navigation.navigate('App')
       }).catch(error => {
       this.setState({
         error: true,
@@ -99,47 +100,88 @@ class RegisterPage extends Component {
       avatar = <Thumbnail large source={{cache: 'force-cache', uri: this.state.avatar}}
                           style={{alignSelf: "center", marginTop: 20}}/>;
     return (
-      <Container style={{flexDirection: "column", justifyContent: "center"}}>
-        <Form>
-          {!this.state.avatar && <Button style={{backgroundColor: '#5067FF', alignSelf: "center", marginTop: 30}}
-                                         onPress={this.handleUploadAvatar}>
-            <Text>Upload Avatar</Text>
-          </Button>}
-          {avatar}
-          <Item floatingLabel>
-            <Label>Username</Label>
-            <Input value={this.state.username} onChangeText={(val) => this.setState({username: val})}/>
-          </Item>
-          <Item floatingLabel>
-            <Label>Email</Label>
-            <Input value={this.state.email} onChangeText={(val) => this.setState({email: val})}/>
-          </Item>
-          <Item floatingLabel>
-            <Label>Password</Label>
-            <Input secureTextEntry value={this.state.password}
-                   onChangeText={(val) => this.setState({password: val})}/>
-          </Item>
-        </Form>
-        <Container style={{flexDirection: "row", marginTop: 30}}>
-          {/*<Button primary block style={{flex:1,marginLeft:5,marginRight:5}}>*/}
-          {/*<Text>Login</Text>*/}
-          {/*</Button>*/}
-          <Button success block style={{flex: 1, marginLeft: 5, marginRight: 5}} onPress={this.handleClickRegister}>
-            <Text>Register</Text>
-          </Button>
-          {this.state.error && Toast.show({
-            text: this.state.errorMessage,
-            position: 'bottom',
-            buttonText: 'Okay'
-          })
-          }
+      <View style={styles.container}>
+        <Container style={{justifyContent: "center"}}>
+          <Form style={{width: 300}}>
+            <Item regular style={styles.inputBox}>
+              <Input placeholder='Name' style={{borderWidth: 0,}} value={this.state.username}
+                     onChangeText={(val) => this.setState({username: val})}/>
+            </Item>
+            <Item regular style={styles.inputBox}>
+              <Input placeholder='Email' style={{borderWidth: 0,}} value={this.state.email}
+                     onChangeText={(val) => this.setState({email: val})}/>
+            </Item>
+
+            <Item regular style={styles.inputBox}>
+              <Input placeholder='Password' secureTextEntry style={{borderWidth: 0,}} value={this.state.password}
+                     onChangeText={(val) => this.setState({password: val})}/>
+            </Item>
+          </Form>
+          <View>
+            <Button block onPress={this.handleClickRegister} style={styles.shadow}>
+              <Text style={{fontSize: 18, color: 'white'}}>Register</Text>
+            </Button>
+            {this.state.error && Toast.show({
+              text: 'Wrong email or password!',
+              position: 'bottom',
+              buttonText: 'Okay'
+            })
+            }
+          </View>
+          <View style={styles.titleDiv}>
+            <Text style={styles.title}>Sign Up!</Text>
+          </View>
+          <View style={styles.bottomDiv}>
+            <Text style={styles.signupHint}>Already had an account?
+            </Text>
+            <Button success style={styles.signinBtn} onPress={() => {
+              this.props.navigation.pop();
+            }}><Text style={{color: 'white', fontSize: 15, paddingLeft: 10, paddingRight: 10}}>Sign In</Text></Button>
+          </View>
         </Container>
-      </Container>
+        <ImageBackground source={require('../../assets/landing1.jpg')}
+                         style={{...StyleSheet.absoluteFillObject, zIndex: -1}}/>
+        <View style={{...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,.45)', zIndex: -1}}/>
+      </View>
     );
   }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  titleDiv: {alignItems: 'center', position: 'absolute', left: 0, right: 0, top: 120,},
+  title: {
+    color: 'white', fontSize: 42,
+    shadowOffset: {width: 1, height: 1,},
+    shadowColor: 'white',
+    shadowOpacity: 0.3,
+  },
+  signupHint: {
+    fontSize: 15, color: 'white', shadowOffset: {width: 2, height: 2,},
+    shadowColor: 'white',
+    shadowOpacity: 0.5,
+  },
+  signinBtn: {
+    marginLeft: 10, paddingHorizontal: 0, height: 30,
+    fontSize: 16, color: 'white', shadowOffset: {width: 1, height: 1,},
+    shadowColor: 'white',
+    shadowOpacity: 0.3,
+  },
+  inputBox: {marginBottom: 20, borderRadius: 6, borderWidth: 0, height: 47, backgroundColor: '#fdfdf8'},
+  shadow: {
+    shadowOffset: {width: 2, height: 2,},
+    shadowColor: 'white',
+    shadowOpacity: .4,
+  },
+  bottomDiv: {
+    alignItems: 'center', position: 'absolute', left: 0, right: 0, bottom: 30,
+    flexDirection: 'row', justifyContent: "center", alignItems: 'center'
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 
 const mapStateToProps = (state, ownProps) => {

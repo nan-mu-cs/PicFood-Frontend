@@ -20,7 +20,10 @@ import {
   Item,
   Toast
 } from 'native-base';
-import {Text, StyleSheet, ScrollView, AsyncStorage, View, Image, ImageBackground} from 'react-native';
+import {
+  Text, StyleSheet, ScrollView, AsyncStorage, View, Image, ImageBackground,
+  TouchableNativeFeedback, TouchableHighlight, TouchableOpacity
+} from 'react-native';
 import {connect} from 'react-redux';
 import {Col, Row, Grid} from "react-native-easy-grid";
 import network from "../network";
@@ -72,30 +75,24 @@ class LoginPage extends Component {
     });
   }
 
-
   render() {
     return (
       <View style={styles.container}>
         <Container style={{justifyContent: "center"}}>
           <Form style={{width: 300}}>
-            <Item regular style={{marginBottom: 20}}>
-              {/*<Label>Email</Label>*/}
-              <Input placeholder='Email' value={this.state.email} onChangeText={(val) => this.setState({email: val})}/>
+            <Item regular style={styles.inputBox}>
+              <Input placeholder='Email' style={{borderWidth: 0,}} value={this.state.email}
+                     onChangeText={(val) => this.setState({email: val})}/>
             </Item>
-            <Item regular>
-              {/*<Label>Password</Label>*/}
-              <Input placeholder='Password' secureTextEntry value={this.state.password}
+            <Item regular style={styles.inputBox}>
+              <Input placeholder='Password' secureTextEntry style={{borderWidth: 0,}} value={this.state.password}
                      onChangeText={(val) => this.setState({password: val})}/>
             </Item>
           </Form>
-          <View style={{marginTop: 30}}>
-            <Button success block style={{marginLeft: 5, marginRight: 5}} onPress={this.handleLogin}>
+          <View>
+            <Button success block onPress={this.handleLogin} style={styles.shadow}>
               <Text style={{fontSize: 18, color: 'white'}}>Login</Text>
             </Button>
-            {/*<Button success block style={{flex: 1, marginLeft: 5, marginRight: 5}} onPress={() => {*/}
-            {/*this.props.navigation.navigate('Register');*/}
-            {/*}}>*/}
-            {/*</Button>*/}
             {this.state.error && Toast.show({
               text: 'Wrong email or password!',
               position: 'bottom',
@@ -103,8 +100,15 @@ class LoginPage extends Component {
             })
             }
           </View>
-          <View style={{alignItems: 'center', position: 'absolute', left: 0, right: 0, bottom: 30}}>
-            <Text style={{fontSize: 16, color: 'white'}}>Not yet have an account? Register!</Text>
+          <View style={styles.titleDiv}>
+            <Text style={styles.title}>PicFood</Text>
+          </View>
+          <View style={styles.bottomDiv}>
+            <Text style={styles.signupHint}>Not yet have an account?
+            </Text>
+            <Button style={styles.signupBtn} onPress={() => {
+              this.props.navigation.navigate('Register');
+            }}><Text style={{color: 'white'}}>Register!</Text></Button>
           </View>
         </Container>
         <ImageBackground source={require('../../assets/landing1.jpg')}
@@ -116,25 +120,39 @@ class LoginPage extends Component {
 }
 
 const styles = StyleSheet.create({
+  titleDiv: {alignItems: 'center', position: 'absolute', left: 0, right: 0, top: 120,},
+  title: {
+    color: 'white', fontSize: 42,
+    shadowOffset: {width: 1, height: 1,},
+    shadowColor: 'white',
+    shadowOpacity: 0.3,
+  },
+  signupHint: {
+    fontSize: 15, color: 'white', shadowOffset: {width: 2, height: 2,},
+    shadowColor: 'white',
+    shadowOpacity: 0.5,
+  },
+  signupBtn: {
+    marginLeft: 10, paddingHorizontal: 10, height: 30,
+    fontSize: 16, color: 'white', shadowOffset: {width: 1, height: 1,},
+    shadowColor: 'white',
+    shadowOpacity: 0.3,
+  },
+  inputBox: {marginBottom: 20, borderRadius: 6, borderWidth: 0, height: 47, backgroundColor: '#fdfdf8'},
+  shadow: {
+    shadowOffset: {width: 2, height: 2,},
+    shadowColor: 'white',
+    shadowOpacity: .4,
+  },
+  bottomDiv: {
+    alignItems: 'center', position: 'absolute', left: 0, right: 0, bottom: 30,
+    flexDirection: 'row', justifyContent: "center", alignItems: 'center'
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    zIndex: 1,
-  },
-  overlay: {
-    opacity: 0.5,
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-  }
 });
 
 

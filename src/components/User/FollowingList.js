@@ -35,6 +35,7 @@ class FollowingList extends Component {
   constructor(props, context) {
     super(props);
     this.state = {
+      userId: this.props.navigation.state.params.userId,
       loading: true,
       followings: []
     };
@@ -72,7 +73,9 @@ class FollowingList extends Component {
   }
 
   componentDidMount() {
-    network.social.getMyFollowings()
+    const followingsPro = this.state.userId ? network.social.getFollowingsById(this.state.userId) :
+      network.social.getMyFollowings();
+    followingsPro
       .then(res => {
         console.log('FollowingList', res);
         this.setState({loading: false, followings: res});
