@@ -25,7 +25,6 @@ import {
 } from 'native-base';
 import {StyleSheet, Image} from 'react-native';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-native';
 import {Col, Row, Grid} from "react-native-easy-grid";
 import network from "../network";
 import {ImagePicker} from "expo";
@@ -35,8 +34,9 @@ import {ImagePicker} from "expo";
 class EditProfilePage extends Component {
   constructor(props, context) {
     super(props);
+    // console.log(this.props.navigation.state);
     this.state = {
-      userId: this.props.match.params.userId,
+      userId: this.props.navigation.state.params.userId,
       avatar:"",
       email:"",
       bio: "",
@@ -60,7 +60,8 @@ class EditProfilePage extends Component {
   }
 
   handleClickBack() {
-    this.props.history.goBack();
+    this.props.navigation.goBack();
+    // this.props.history.goBack();
   }
 
   handleClickPost() {
@@ -72,7 +73,7 @@ class EditProfilePage extends Component {
       }).catch(err => {
       console.log(err);
     });
-    this.props.history.push(`/users`)
+    this.props.navigation.goBack();
   }
 
   handleUploadAvatar() {
@@ -152,6 +153,6 @@ const mapStateToProps = (state, ownProps) => {
   return {}
 };
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps
-)(EditProfilePage));
+)(EditProfilePage);

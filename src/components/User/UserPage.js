@@ -7,23 +7,25 @@ import { Container, Header, Content, FooterTab, Button, Text, Left, Right, Icon,
 import {StyleSheet,ScrollView,Dimensions,Image,View,TouchableWithoutFeedback} from 'react-native';
 import { connect } from 'react-redux';
 import Footer from "../Footer";
-import { withRouter } from 'react-router-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import network from "../../network";
+import ImagePreview from 'react-native-image-preview';
 
 class UserPage extends Component {
   constructor(props, context) {
     super(props);
     this.state = {
       loading: true,
-      userId: this.props.match.params.id,
+      userId:  this.props.navigation.state.params.userId,
       name: '',
       avatar: "http://via.placeholder.com/100x100",
+      pictureModalShow:false
     };
     this.handleClickBack = this.handleClickBack.bind(this);
   }
   handleClickBack(){
-    this.props.history.goBack();
+    // this.props.history.goBack();
+    this.props.navigation.goBack();
   }
 
     componentDidMount(){
@@ -45,7 +47,8 @@ class UserPage extends Component {
     }
 
     handleClickImage(postId){
-        this.props.history.push(`/viewpost/${postId}`)
+        // this.props.history.push(`/viewpost/${postId}`)
+      this.props.navigation.navigate('ViewPost',{postId});
     }
 
     render() {
@@ -104,7 +107,10 @@ class UserPage extends Component {
                 <Grid>
                     <Row size={15} style={{alignItems:"center"}}>
                         <Col size={3}>
-                            <Thumbnail round size={150} source={{ cache: 'force-cache', uri: (this.state.avatar)||"http://via.placeholder.com/100x100" }} style={{marginLeft:30}}/>
+                          <TouchableWithoutFeedback onPress={() => (this.setState({pictureModalShow: true}))}>
+                            <Thumbnail round size={150} source={{ cache: 'force-cache', uri: (this.state.avatar)||"http://via.placeholder.com/100x100" }} style={{marginLeft:30}} />
+                          </TouchableWithoutFeedback>
+                          <ImagePreview visible={this.state.pictureModalShow} source={{uri: (this.state.avatar)}} close={() => (this.setState({pictureModalShow: false}))} />
                         </Col>
                         <Col size={7}>
                             <Row style={{alignItems:"center"}}>
@@ -130,7 +136,7 @@ class UserPage extends Component {
                         </Col>
                     </Row>
                 </Grid>
-                <Footer/>
+                {/*<Footer/>*/}
             </Container>
         );
     }

@@ -20,8 +20,8 @@ import {
   List,
   ListItem
 } from 'native-base';
-import {withRouter} from "react-router-native";
 import network from "../../network";
+import { withNavigation } from 'react-navigation';
 
 class Dishes extends Component {
   constructor(props, context) {
@@ -46,7 +46,8 @@ class Dishes extends Component {
   }
 
   onDishCardPress(dishId) {
-    this.props.history.push(`/dishes/${dishId}`);
+    // this.props.history.push(`/dishes/${dishId}`);
+    this.props.navigation.navigate('Dishes',{dishId});
   }
 
   render() {
@@ -87,4 +88,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withRouter(Dishes);
+export default withNavigation(Dishes);

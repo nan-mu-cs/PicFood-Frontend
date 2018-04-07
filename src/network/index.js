@@ -78,7 +78,7 @@ export default {
     },
 
     deletePost(postId) {
-      return fetch(HOST + `/api/delete/post`, verb('post', {postId})).then(handleStatusError);
+      return fetch(HOST + `/api/delete/post`, verb('post', {postId}));
     },
 
     addPost(body) { // restaurantId, dishName, rate, category, content, imageId (optional)

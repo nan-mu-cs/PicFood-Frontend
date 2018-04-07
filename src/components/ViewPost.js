@@ -19,7 +19,7 @@ class ViewPost extends Component {
         super(props);
         this.state={
             creatorId:0,
-            postId: this.props.match.params.postId,
+            postId: this.props.navigation.state.params.postId,
             com: "",
             error:false,
             up:false
@@ -31,7 +31,8 @@ class ViewPost extends Component {
     }
 
     onBackPress() {
-      this.props.history.goBack();
+      // this.props.history.goBack();
+      this.props.navigation.goBack();
     }
 
     componentDidMount() {
@@ -135,7 +136,7 @@ class ViewPost extends Component {
             });
             console.log("ERR "+e.message);
           });
-        this.onBackPress();
+        this.props.history.push("/users");
       }
     }
 
@@ -302,7 +303,7 @@ class ViewPost extends Component {
                     {reviews}
                   </List>
                 </Content>
-                <Footer/>
+                {/*<Footer/>*/}
             </Container>
         )
     }

@@ -50,7 +50,7 @@ class DishPhoto extends Component {
             </TouchableWithoutFeedback>
           </CardItem>
         </Content>
-        <Footer/>
+        {/*<Footer/>*/}
       </Container>
     )
   }

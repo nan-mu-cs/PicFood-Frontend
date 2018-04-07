@@ -17,7 +17,7 @@ import {
   Body,
   Right
 } from 'native-base';
-import {withRouter} from 'react-router-native';
+import { withNavigation } from 'react-navigation';
 import network from "../../network";
 
 class LikeCard extends Component {
@@ -30,11 +30,17 @@ class LikeCard extends Component {
   }
 
   handleClickImage() {
-    this.props.history.push(`/dishes/${this.state.dishId}`)
+    // this.props.history.push(`/dishes/${this.state.dishId}`)
+    this.props.navigation.navigate('Dishes',{
+      dishId:this.props.data.dishId
+    });
   }
 
   handleClickUser() {
-    this.props.history.push(`/user/${this.props.data.userId}`)
+    // this.props.history.push(`/user/${this.props.data.userId}`)
+    this.props.navigation.navigate('User',{
+      userId:this.props.data.userId
+    });
   }
 
   render() {
@@ -66,4 +72,4 @@ class LikeCard extends Component {
   }
 }
 
-export default withRouter(LikeCard);
+export default withNavigation(LikeCard);

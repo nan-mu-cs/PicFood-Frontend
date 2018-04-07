@@ -7,7 +7,6 @@ import AppContainer from './src/AppContainer'
 import {Provider} from 'react-redux'
 import {createStore, applyMiddleware, combineReducers, compose} from 'redux'
 import thunkMiddleware from 'redux-thunk';
-import {NativeRouter, Route, Switch} from 'react-router-native'
 
 // import createLogger from 'redux-logger'
 import reducer from './src/reducers'
@@ -33,9 +32,7 @@ export const store = configureStore(initialState);
 export default () => (
   <Root>
     <Provider store={store}>
-      <NativeRouter>
-        <AppContainer/>
-      </NativeRouter>
+      <AppContainer/>
     </Provider>
   </Root>
 );
