@@ -64,7 +64,7 @@ class LoginPage extends Component {
           // console.log(res._bodyInit);
           this.props.dispatch({type: "UPDATE_TOKEN", data: res.token});
           // this.props.history.push("/");
-          this.props.navigation.navigate('App');
+          this.props.navigation.navigate('Landing');
         })
         .catch((e) => {
           this.setState({
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   },
   registerBtn: {
     marginLeft: 10, paddingHorizontal: 14, height: 30,
-    color: 'white', shadowOffset: {width: 1, height: 1,},
+    shadowOffset: {width: 1, height: 1,},
     shadowColor: 'white',
     shadowOpacity: 0.3,
   },

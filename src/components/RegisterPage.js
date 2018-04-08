@@ -84,7 +84,7 @@ class RegisterPage extends Component {
         });
         this.props.dispatch({type: "UPDATE_TOKEN", data: res.token});
         console.log(res)
-        this.props.navigation.navigate('App')
+        this.props.navigation.navigate('Landing')
       }).catch(error => {
       this.setState({
         error: true,
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
   signinBtn: {
     marginLeft: 10, paddingHorizontal: 5, height: 30,
-    color: 'white', shadowOffset: {width: 1, height: 1,},
+    shadowOffset: {width: 1, height: 1,},
     shadowColor: 'white',
     shadowOpacity: 0.3,
   },
