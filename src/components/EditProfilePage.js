@@ -65,14 +65,31 @@ class EditProfilePage extends Component {
   }
 
   handleClickPost() {
+    console.log("update name to " + this.state.name);
     network.account.postUserProfile({
-      name: this.state.name,
-      avatar: this.state.avatar
-    }).then((res) => {
-      console.log(res);
-      }).catch(err => {
-      console.log(err);
-    });
+        name: this.state.name,
+        avatar: this.state.avatar
+      }).then(res => res.json())
+        .then(res => {
+          console.log("====== update success ======")
+          console.log(res);
+          console.log("============== update profile =============")
+          this.props.dispatch({type: 'UPDATE_USER_PROFILE', data: res});
+        }).catch(err => {
+          console.log(err);
+      });
+
+    // network.account.getMyProfile()  // need to update profile
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     console.log("============== update profile =============")
+    //     this.props.dispatch({type: 'GET_USER_PROFILE', data: res});
+    //     // this.props.history.push("/timeline");
+    //     this.props.navigation.navigate('App');
+    //   })
+    //   .catch(err => {
+    //   });
+
     this.props.navigation.goBack();
   }
 

@@ -19,7 +19,7 @@ export default {
     },
 
     postUserProfile(body) { // avatar, bio, email, name, password (all optional)
-      return fetch(HOST + '/api/users/me', verb('post', body)).then(handleStatusError);
+      return fetch(HOST + '/api/users/me', verb('post', body));
     },
     getUserTimeline(userId) {
       return fetch(`${HOST}/api/timeline/${userId}`, verb('get'));
