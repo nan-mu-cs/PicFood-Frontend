@@ -64,11 +64,11 @@ class SearchBy extends Component {
               selectedValue={this.props.distance}
               onValueChange={this.onValueChange1.bind(this)}
             >
-              <Item label="<2 miles" value="key0"/>
-              <Item label="2-5 miles" value="key1"/>
-              <Item label="5-10 miles" value="key2"/>
-              <Item label="10-15 miles" value="key3"/>
-              <Item label=">15 miles" value="key4"/>
+              <Item label="<2 kilometers" value="key0"/>
+              <Item label="2-5 kilometers" value="key1"/>
+              <Item label="5-10 kilometers" value="key2"/>
+              <Item label="10-15 kilometers" value="key3"/>
+              <Item label=">15 kilometers" value="key4"/>
             </Picker>
           </Form>
 
@@ -86,8 +86,8 @@ class SearchBy extends Component {
               selectedValue={this.props.sort_by}
               onValueChange={this.onValueChange2.bind(this)}
             >
-              <Item label="Distance" value="key0"/>
-              <Item label="Rating" value="key1"/>
+              <Item label="Distance" value="distance"/>
+              <Item label="Rate" value="rate"/>
             </Picker>
           </Form>
         </Content>
