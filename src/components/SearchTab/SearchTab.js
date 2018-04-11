@@ -51,7 +51,7 @@ class SearchTab extends Component {
   }
 
   onSubmitEditing() {
-    let restaurants = this.state.keyword ? network.restaurant.searchRestaurants(this.state.keyword, this.props.sort_criteria.sort_by, 41, -71) :
+    let restaurants = this.state.keyword ? network.restaurant.searchRestaurants(this.state.keyword, this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon) :
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon);
     restaurants.then(res => {
       console.log('searchRestaurants', res);
@@ -61,7 +61,7 @@ class SearchTab extends Component {
       .catch(err => {
         console.log(err)
       });
-    network.dish.searchDishes(this.state.keyword || '', this.props.sort_criteria.sort_by, 41, -71)
+    network.dish.searchDishes(this.state.keyword || '', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon)
       .then(res => {
         this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 18)});
         this.setState({refreshing: false});
@@ -86,7 +86,7 @@ class SearchTab extends Component {
 
     // network.dish.searchDishes('rice', 'rate', this.props.location.lat, this.props.location.lon)
     if (this.props.searchedDishes.length === 0)
-      network.dish.searchDishes('', this.props.sort_criteria.sort_by, 41, -71)
+      network.dish.searchDishes('', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon)
         .then(res => {
           this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 18)});
         })
@@ -159,7 +159,7 @@ class SearchTab extends Component {
       if (item.distance >= low && item.distance <= high) return true
     }).map((item) => {
       return (
-          <ListItem key={item.dishId} style={styles.listItem}>
+          <ListItem key={item.restaurantId} style={styles.listItem}>
             <RestaurantCard data={item}/>
           </ListItem>
         )

@@ -84,7 +84,7 @@ export default {
   ],
   dishID: 5,
   post: {},
-  sort_criteria: {distance: "key3", sort_by: "rate"},
+  sort_criteria: {distance: "key0", sort_by: "rate"},
   cachedRestaurants: {},
   //upvoteCount: 0,
 };
