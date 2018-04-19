@@ -76,43 +76,40 @@ class UserPage extends Component {
     }
     for (let i = 0; i < post.length; i += 3) {
       let card1 = (
-        <Col>
           <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this, post[i].postId)}>
-            <Thumbnail square
-                       source={{cache: 'force-cache', uri: post[i].imageUrl || "http://via.placeholder.com/350x150"}}
+            <Image source={{cache: 'force-cache', uri: post[i].imageUrl || "http://via.placeholder.com/350x150"}}
                        style={styles.photoItem}/>
           </TouchableWithoutFeedback>
-        </Col>
+
       );
       let card2, card3;
       if (i + 1 < post.length)
         card2 = (
-          <Col>
+
             <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this, post[i + 1].postId)}>
-              <Thumbnail square source={{
+              <Image source={{
                 cache: 'force-cache',
                 uri: post[i + 1].imageUrl || "http://via.placeholder.com/350x150"
               }} style={styles.photoItem}/>
             </TouchableWithoutFeedback>
-          </Col>
+
         );
       if (i + 2 < post.length)
         card3 = (
-          <Col>
+
             <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this, post[i + 2].postId)}>
-              <Thumbnail square source={{
+              <Image source={{
                 cache: 'force-cache',
                 uri: post[i + 1].imageUrl || "http://via.placeholder.com/350x150"
               }} style={styles.photoItem}/>
             </TouchableWithoutFeedback>
-          </Col>
         );
       images.push(
-        <Row style={{height: 150}} key={post[i].postId}>
+        <View style={styles.photoContainer} key={post[i].postId}>
           {card1}
           {card2}
           {card3}
-        </Row>
+        </View>
       );
     }
     return (
@@ -183,8 +180,7 @@ const styles = StyleSheet.create({
   },
   photoItem: {
     width: Dimensions.get('window').width / 3.1,
-    height: 100,
-    flex: 1,
+    height: 150,
     margin: 1
   }
 });
