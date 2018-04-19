@@ -134,6 +134,8 @@ class PersonalPage extends Component {
               <ImagePreview visible={this.state.pictureModalShow} source={{uri: (this.props.user.avatar)}} close={() => (this.setState({pictureModalShow: false}))} />
 
             </Col>
+            <Col size={2}>
+            </Col>
             <Col size={10}>
               <Row style={{alignItems: "center"}}>
                 <Col size={3}>
