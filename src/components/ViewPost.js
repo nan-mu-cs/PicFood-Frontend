@@ -30,6 +30,7 @@ class ViewPost extends Component {
         this.upvote = this.upvote.bind(this);
         this.deletePost = this.deletePost.bind(this);
         this.editPost = this.editPost.bind(this);
+        this.handleClickUser = this.handleClickUser.bind(this);
     }
 
     onBackPress() {
@@ -163,12 +164,16 @@ class ViewPost extends Component {
         });
       }
     }
+    handleClickUser(commenterId) {
+      this.props.navigation.navigate('User',{
+        userId:commenterId
+      });
+    }
 
     render() {
         let image = this.props.post.imageUrl;
         if(!image)
           image = "http://via.placeholder.com/100x100";
-        console.log(this.props);
         let reviews;
         if(this.props.post.comments)
           reviews = this.props.post.comments.map(item => {
@@ -182,12 +187,14 @@ class ViewPost extends Component {
                 <Card key={item.commentId}>
                   <ScrollView>
                   <CardItem>
-                    <Left>
-                        <Thumbnail small source={{cache: 'force-cache', uri: avatar}} />
-                        <Body>
-                        <Text style={{fontSize:16}}>{name}</Text>
-                        </Body>
-                    </Left>
+                    <TouchableWithoutFeedback onPress={() =>this.handleClickUser(item.commenterId)}>
+                      <Left>
+                          <Thumbnail small source={{cache: 'force-cache', uri: avatar}} />
+                          <Body>
+                          <Text style={{fontSize:16}}>{name}</Text>
+                          </Body>
+                      </Left>
+                    </TouchableWithoutFeedback>
                   </CardItem>
                   <ListItem>
                     <Left>
