@@ -2,7 +2,7 @@
  * Created by kai on 10/03/2018.
  */
 import React, {Component} from 'react';
-import {Image, TouchableWithoutFeedback} from 'react-native';
+import {Image, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {
   Container,
   Header,
@@ -45,11 +45,9 @@ class LikeCard extends Component {
   }
 
   render() {
-    // console.log(this.props.data);
     return (
-      <Card style={{marginBottom: 5}}>
-        {/*<Card style={{bordeNrColor: "transparent", shadowColor: "transparent"}}>*/}
-        <CardItem>
+      <Card style={styles.card}>
+        <CardItem style={styles.noPaddingCard}>
           <TouchableWithoutFeedback onPress={this.handleClickUser}>
             <Left>
               <Thumbnail small source={{cache: 'force-cache', uri: this.props.data.userAvatar || "http://via.placeholder.com/100x100"}}/>
@@ -62,23 +60,34 @@ class LikeCard extends Component {
         </CardItem>
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.handleClickImage}>
-            <Body style={{paddingTop: 5, paddingBottom: 20, paddingLeft: 20, paddingRight: 20}}>
+            <Body style={{paddingTop: 10, paddingLeft: 5}}>
             <Text note><Icon name="md-heart" style={{fontSize: 15, color: 'red'}}/> Liked <Text> {this.props.data.posterName}</Text>'s post <Text
               style={{marginLeft: 5}}>{this.props.data.dishName}</Text></Text>
             </Body>
           </TouchableWithoutFeedback>
         </CardItem>
-        <CardItem>
-          <Left>
-            <Text style={{fontSize:10,color:'grey'}}>
-              {moment(this.props.data.time).fromNow()}
-            </Text>
-          </Left>
-        </CardItem>
-
+        <Text style={{fontSize: 13, marginTop: 10, textAlign: 'right', color: 'grey'}}>
+          {moment(this.props.data.time).fromNow()}
+        </Text>
       </Card>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  card: {
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 15,
+    paddingRight: 15,
+  },
+  noPaddingCard: {
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+  }
+});
+
 
 export default withNavigation(LikeCard);
