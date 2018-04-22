@@ -135,8 +135,8 @@ export default {
       return fetch(HOST + `/api/restaurants?lat=${lat}&lon=${lon}`, verb('get')).then(handleStatusError);
     },
 
-    searchRestaurants(keyword, sorting, lat, lon) {
-      return fetch(HOST + `/api/search/restaurants?keyword=${keyword}&sorting=${sorting}&lat=${lat}&lon=${lon}`, verb('get')).then(handleStatusError);
+    searchRestaurants(keyword, sorting, lat, lon, range) {
+      return fetch(HOST + `/api/search/restaurants?keyword=${keyword}&sorting=${sorting}&lat=${lat}&lon=${lon}&range=${range}`, verb('get')).then(handleStatusError);
     }
   },
 
@@ -161,8 +161,8 @@ export default {
       return fetch(HOST + `/api/storage/deleteFile`, verb('delete', {fileUrl})).then(handleStatusError);
     },
 
-    searchDishes(keyword, sorting, lat, lon) {
-      let url = `${HOST}/api/search/dishes?keyword=${keyword}&sorting=${sorting}&lat=${lat}&lon=${lon}`;
+    searchDishes(keyword, sorting, lat, lon, range) {
+      let url = `${HOST}/api/search/dishes?keyword=${keyword}&sorting=${sorting}&lat=${lat}&lon=${lon}&range=${range}`;
       return fetch(url, verb('get')).then(handleStatusError);
     }
   },
