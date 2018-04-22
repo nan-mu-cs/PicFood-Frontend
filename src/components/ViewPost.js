@@ -69,22 +69,34 @@ class ViewPost extends Component {
       })
   }
 
-  upvote() {
-    console.log("user = " + this.props.user);
-    network.social.hasUpvoted(this.state.postId, this.props.user.userId)
+    upvote() {
+        //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
+      console.log("user = " + this.props.user);
+      network.social.hasUpvoted(this.state.postId, this.props.user.userId)
+      .then(res => res.text())
       .then(res => {
         console.log(res);
-        console.log("=========== hasUpvoted ===========");
+        console.log("=========== hasUpvoted???? ===========");
         console.log("postId = " + this.state.postId);
         console.log("userId = " + this.props.user.userId);
-        console.log(res["_bodyText"]);
-        if (res["_bodyText"] == "Not Upvoted")
+        //console.log(res["_bodyText"]);
+        if (res == "Not Upvoted") {
           network.social.upvotePost(this.state.postId)
             .then(response => response.json())
             .then((res) => {
-              console.log(res);
-              console.log("=========== UPVOTE ===========");
-              console.log("postID = " + this.state.postId);
+                console.log(res);
+                console.log("=========== UPVOTE ===========");
+                console.log("postID = " + this.state.postId);
+                network.social.getPostByPostId(this.state.postId)
+                  .then(res => {
+                    console.log(res);
+                    this.props.dispatch({type: "GET_POST_INFO", data: res});
+                  })
+                  .catch(err => {
+
+                  });
+                  
+                console.log("upvoteCount = " + this.props.post.upvoteCount);
             })
             .catch((e) => {
               this.setState({
@@ -92,27 +104,35 @@ class ViewPost extends Component {
               });
               console.log("ERR" + e.message);
             });
+        }
 
-        else
-          network.social.deleteUpvoteOfPost(this.state.postId, res["_bodyText"])
+        else {
+          //console.log("=========== DOWNVOTE ===========");
+          network.social.deleteUpvoteOfPost(this.state.postId, res)
+            .then((res) => {
+                console.log(res);
+                console.log("=========== DOWNVOTE ===========");
+                //console.log("postID = " + this.state.postId);
+                network.social.getPostByPostId(this.state.postId)
+                  .then(res => {
+                    console.log(res);
+                    this.props.dispatch({type: "GET_POST_INFO", data: res});
+                  })
+                  .catch(err => {
+
+                  });
+                console.log("upvoteCount = " + this.props.post.upvoteCount);
+            })
             .catch((e) => {
               this.setState({
                 error: true
               });
               console.log("ERR" + e.message);
             });
+        }
+      })
+    }
 
-        network.social.getPostByPostId(this.state.postId)
-          .then(res => {
-            console.log(res);
-            this.props.dispatch({type: "GET_POST_INFO", data: res});
-          })
-          .catch(err => {
-
-          });
-        console.log("upvoteCount = " + this.props.post.upvoteCount);
-      });
-  }
 
   postComment() {
     console.log("66666" + this.state.com);
