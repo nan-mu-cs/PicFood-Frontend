@@ -42,7 +42,6 @@ class PostPhotoPage extends Component {
   }
 
   handleClickBack() {
-    // this.props.history.goBack();
     this.props.navigation.goBack();
   }
 
@@ -66,8 +65,6 @@ class PostPhotoPage extends Component {
           data: restaurantInfo
         });
         this.props.navigation.goBack();
-        // this.props.history.goBack();
-        console.log(data);
       }).catch(err => {
       console.log(err);
     });

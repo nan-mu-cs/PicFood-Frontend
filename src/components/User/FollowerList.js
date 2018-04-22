@@ -37,16 +37,15 @@ class FollowerList extends Component {
     this.state = {
       loading: true,
       userId: this.props.navigation.state.params.userId,
+      followers: []
     };
   }
 
   onBackPress() {
-    // this.props.history.goBack();
     this.props.navigation.goBack();
   }
 
   onUserPress(userId) {
-    // this.props.history.push(`/user/${userId}`);
     this.props.navigation.navigate('User',{userId});
   }
 
@@ -56,7 +55,7 @@ class FollowerList extends Component {
     followersPro
       .then(res => {
         console.log('FollowerList', res);
-        this.setState({loading: false})
+        this.setState({loading: false, followers: res})
         this.props.dispatch({type: "GET_FOLLOWERS", data: res});
       })
       .catch(err => {
@@ -64,7 +63,8 @@ class FollowerList extends Component {
   }
 
   render() {
-    let userList = this.props.followers.map(item =>
+    let followers = this.state.followers.filter(item => item.userId !== this.props.user.userId);
+    let userList = followers.map(item =>
       <ListItem key={item.userId} style={styles.listItem}>
         <TouchableWithoutFeedback onPress={this.onUserPress.bind(this, item.userId)}>
           <Left>
@@ -72,11 +72,6 @@ class FollowerList extends Component {
             <Text>{item.name}</Text>
           </Left>
         </TouchableWithoutFeedback>
-        {/*<Right>*/}
-        {/*<Button small onPress={this.onUnfollowPress.bind(this)}>*/}
-        {/*<Text style={styles.buttonText}>Unfollow</Text>*/}
-        {/*</Button>*/}
-        {/*</Right>*/}
       </ListItem>
     );
 
@@ -99,7 +94,6 @@ class FollowerList extends Component {
               {userList}
             </List>}
         </Content>
-        {/*<Footer/>*/}
       </Container>
     );
   }
@@ -116,7 +110,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    followers: state.followers,
+    user: state.user,
   }
 };
 

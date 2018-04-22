@@ -46,8 +46,7 @@ class Dishes extends Component {
   }
 
   onDishCardPress(dishId) {
-    // this.props.history.push(`/dishes/${dishId}`);
-    this.props.navigation.navigate('Dishes',{dishId});
+    this.props.navigation.navigate('Dish',{dishId});
   }
 
   render() {

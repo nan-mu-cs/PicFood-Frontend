@@ -116,7 +116,8 @@ class UserList extends Component {
   }
 
   render() {
-    let userList = this.state.users.map(item =>
+    let users = this.state.users.filter(item => item.userId !== this.props.user.userId);
+    let userList = users.map(item =>
       <ListItem key={item.userId} style={styles.listItem}>
         <TouchableWithoutFeedback onPress={this.onUserPress.bind(this, item.userId)}>
           <Left>
@@ -134,7 +135,6 @@ class UserList extends Component {
             </Button>
           }
         </Right>
-
       </ListItem>
     );
 
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    // users: state.users,
+    user: state.user,
   }
 };
 

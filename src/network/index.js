@@ -141,6 +141,10 @@ export default {
   },
 
   dish: {
+    getDishById(id) {
+      return fetch(HOST + `/api/dishes/${id}`, verb('get'));
+    },
+
     getDishInfoById(id) {
       return fetch(HOST + `/api/dishes/${id}/info`, verb('get'));
     },
