@@ -257,7 +257,7 @@ class SearchTab extends Component {
     return (
       <Container>
         <Header searchBar hasTabs rounded style={{backgroundColor: '#D8485D'}}>
-          <StatusBar backgroundColor="blue" barStyle="light-content"/>
+          <StatusBar barStyle="light-content"/>
           <Item>
             <Icon style={{color: 'white'}} name="ios-search"/>
             <Input

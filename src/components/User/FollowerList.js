@@ -69,7 +69,7 @@ class FollowerList extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
-          <StatusBar backgroundColor="blue" barStyle="light-content"/>
+          <StatusBar barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.onBackPress.bind(this)}>
               <Icon style={{color: 'white'}} name='arrow-back'/>
