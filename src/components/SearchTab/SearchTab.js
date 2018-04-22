@@ -112,7 +112,7 @@ class SearchTab extends Component {
 
     // network.dish.searchDishes('rice', 'rate', this.props.location.lat, this.props.location.lon)
     if (this.props.searchedDishes.length === 0)
-      network.dish.searchDishes('', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, 15)
+      network.dish.searchDishes('', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, 10000)
         .then(res => {
           this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 18)});
         })
