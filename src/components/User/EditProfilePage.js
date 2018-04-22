@@ -116,7 +116,7 @@ class EditProfilePage extends Component {
   }
 
   render() {
-    let avatar = this.state.avatar || "http://via.placeholder.com/150x150";
+    let avatar = this.state.avatar;
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
@@ -133,7 +133,8 @@ class EditProfilePage extends Component {
         </Header>
         <Content>
           <View style={{height: 100, marginTop: 10}}>
-            <Thumbnail large source={{uri: avatar}} style={{alignSelf: "center", marginTop: 10}}/>
+            {this.state.avatar ?
+            <Thumbnail large source={{uri: avatar}} style={{alignSelf: "center", marginTop: 10}}/> : null}
           </View>
           <Button small style={{backgroundColor: '#5067FF', alignSelf: "center", marginTop: 10}}
                   onPress={this.handleUploadAvatar}>
@@ -141,7 +142,7 @@ class EditProfilePage extends Component {
           </Button>
           <View style={{paddingHorizontal: 30}}>
           <Item floatingLabel style={{marginVertical: 30}}>
-            <Label>User Name</Label>
+            <Label>Name</Label>
             <Input value={this.state.name} onChangeText={(val) => this.setState({name: val})}/>
           </Item>
           <Button success block onPress={this.handleClickPost}>

@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {
   Body,
   Button,
-  Container,
+  Container, Content,
   Header,
   Icon,
   Input,
@@ -14,10 +14,10 @@ import {
   Label,
   Left,
   Right,
-  Text,
+  Text, Textarea,
   Title
 } from 'native-base';
-import {Image, StatusBar, StyleSheet} from 'react-native';
+import {Image, StatusBar, StyleSheet, View} from 'react-native';
 import {connect} from 'react-redux';
 import {Col, Grid, Row} from "react-native-easy-grid";
 import StarRating from 'react-native-star-rating';
@@ -34,8 +34,8 @@ class PostPhotoPage extends Component {
       rate: 0,
       comment: "",
       category: "",
-      image:this.props.navigation.state.params.image,
-      restaurantId:this.props.navigation.state.params.restaurantId
+      image: this.props.navigation.state.params.image,
+      restaurantId: this.props.navigation.state.params.restaurantId
     };
     this.handleClickBack = this.handleClickBack.bind(this);
     this.handleClickPost = this.handleClickPost.bind(this);
@@ -97,51 +97,38 @@ class PostPhotoPage extends Component {
           </Body>
           <Right/>
         </Header>
-        <Grid>
-          <Row size={1}>
-            <Col>
+        <Content>
+          <View style={{marginHorizontal: 50, marginTop: 30}}>
+            {this.state.image &&
+            <Image source={{cache: 'force-cache', uri: this.state.image}}
+                   style={{height: 270, width: 270, alignSelf: 'center'}}/>}
+            <View style={{marginTop: 15, marginBottom: 18}}>
               <Item floatingLabel>
-                <Label>Dish name</Label>
-                <Input value={this.state.dishname} onChangeText={(val) => this.setState({dishname: val})}/>
-              </Item>
-            </Col>
-          </Row>
-          <Row size={1} style={{justifyContent: "center", marginTop:20}}>
-            <Col>
+              <Label>Dish name</Label>
+              <Input value={this.state.dishname} onChangeText={(val) => this.setState({dishname: val})}/>
+            </Item>
+            </View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={{marginRight: 15, marginLeft: 3, color: '#666'}}>Rating</Text>
               <StarRating
                 disabled={false}
                 maxStars={5}
                 rating={this.state.rate}
-                containerStyle={{alignSelf: "center"}}
                 fullStarColor={"#f5af4b"}
                 emptyStarColor={"#f5af4b"}
                 starSize={25}
                 selectedStar={(rate) => this.setState({rate})}
               />
-            </Col>
-          </Row>
-          <Row size={1} style={{justifyContent: "center"}}>
-            <Col>
-              <Item floatingLabel>
-                <Label>Content</Label>
-                <Input value={this.state.comment} onChangeText={(val) => this.setState({comment: val})}/>
-              </Item>
-            </Col>
-          </Row>
-          <Row size={8}>
-            <Col>
-              {this.state.image &&
-              <Image source={{cache: 'force-cache', uri: this.state.image}} style={{height: 300}}/>}
-            </Col>
-          </Row>
-          <Row size={2}>
-            <Col size={2}>
-              <Button success block onPress={this.handleClickPost}>
-                <Text>Post</Text>
-              </Button>
-            </Col>
-          </Row>
-        </Grid>
+            </View>
+            <View style={{marginTop: 15, marginBottom: 30}}>
+              <Textarea rowSpan={3} bordered placeholder="Comment"
+                        value={this.state.comment} onChangeText={(val) => this.setState({comment: val})}/>
+            </View>
+            <Button success block onPress={this.handleClickPost}>
+              <Text>Post</Text>
+            </Button>
+          </View>
+        </Content>
       </Container>
     );
   }
