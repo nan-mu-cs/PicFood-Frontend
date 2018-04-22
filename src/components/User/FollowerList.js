@@ -3,32 +3,23 @@
  */
 import React, {Component} from 'react';
 import {
-  ActionSheet,
   Body,
   Button,
-  Card,
-  CardItem,
   Container,
   Content,
-  FooterTab,
   Header,
-  Text,
-  Thumbnail,
   Icon,
-  Input,
-  Item,
   Left,
   List,
   ListItem,
   Right,
   Spinner,
-  Tab,
-  Tabs,
+  Text,
+  Thumbnail,
   Title
 } from 'native-base';
-import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {StatusBar, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
-import Footer from "../Footer";
 import network from "../../network";
 
 class FollowerList extends Component {
@@ -77,14 +68,15 @@ class FollowerList extends Component {
 
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.onBackPress.bind(this)}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>Followers</Title>
+          <Title style={{color: 'white'}}>Followers</Title>
           </Body>
           <Right/>
         </Header>

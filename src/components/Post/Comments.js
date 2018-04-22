@@ -3,23 +3,8 @@
  */
 
 import React, {Component} from 'react';
-import {Image, StyleSheet} from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right,
-  List,
-  ListItem
-} from 'native-base';
+import {StyleSheet} from 'react-native';
+import {Content, List, ListItem, Text} from 'native-base';
 
 export default class Comments extends Component {
   render() {

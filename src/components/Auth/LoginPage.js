@@ -3,30 +3,10 @@
  */
 
 import React, {Component} from 'react';
-import {
-  Container,
-  Header,
-  Content,
-  FooterTab,
-  Button,
-  Icon,
-  Body,
-  Title,
-  List,
-  ListItem,
-  Form,
-  Input,
-  Label,
-  Item,
-  Toast
-} from 'native-base';
-import {
-  Text, StyleSheet, ScrollView, AsyncStorage, View, Image, ImageBackground,
-  TouchableNativeFeedback, TouchableHighlight, TouchableOpacity
-} from 'react-native';
+import {Button, Container, Form, Input, Item, Toast} from 'native-base';
+import {AsyncStorage, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
-import {Col, Row, Grid} from "react-native-easy-grid";
-import network from "../network";
+import network from "../../network/index";
 
 class LoginPage extends Component {
   constructor(props, context) {
@@ -111,7 +91,7 @@ class LoginPage extends Component {
               <Text style={{color: 'white', fontSize: 16}}>Register</Text></Button>
           </View>
         </Container>
-        <ImageBackground source={require('../../assets/landing1.jpg')}
+        <ImageBackground source={require('../../../assets/landing1.jpg')}
                          style={{...StyleSheet.absoluteFillObject, zIndex: -1}}/>
         <View style={{...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,.45)', zIndex: -1}}/>
       </View>

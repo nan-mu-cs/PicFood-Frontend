@@ -2,25 +2,13 @@
  * Created by kai on 07/03/2018.
  */
 import React, {Component} from 'react';
-import {
-  Container,
-  Header,
-  Button,
-  Text,
-  Body,
-  Title,
-  Thumbnail
-} from 'native-base';
-import {AsyncStorage, TouchableWithoutFeedback} from 'react-native';
-import {connect} from 'react-redux';
-import ImageCard from "./Timeline/PostCard";
-import Footer from "./Footer";
-import {Col, Row, Grid} from "react-native-easy-grid";
-import network from "../network";
-import ImageViewer from 'react-native-image-zoom-viewer';
-import {Modal} from "react-native";
-import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 
+import {Body, Button, Container, Header, Text, Thumbnail, Title} from 'native-base';
+import {AsyncStorage, Modal, StatusBar, TouchableWithoutFeedback} from 'react-native';
+import {connect} from 'react-redux';
+import {Col, Grid, Row} from "react-native-easy-grid";
+import ImageViewer from 'react-native-image-zoom-viewer';
+import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 
 class PersonalPage extends Component {
   constructor(props, context) {
@@ -43,9 +31,10 @@ class PersonalPage extends Component {
   render() {
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Body>
-          <Title>{(this.props.user && this.props.user.name) || "username"}</Title>
+          <Title style={{color: 'white'}}>{(this.props.user && this.props.user.name) || "username"}</Title>
           </Body>
         </Header>
         <Grid>

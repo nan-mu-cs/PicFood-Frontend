@@ -3,28 +3,25 @@
  */
 import React, {Component} from 'react';
 import {
-  Container,
-  Header,
-  Content,
-  Button,
-  Text,
-  Icon,
   Body,
-  Title,
-  List,
-  ListItem,
-  Left,
-  Right,
+  Button,
   Card,
   CardItem,
-  Thumbnail,
+  Container,
+  Header,
+  Icon,
+  Input,
   Item,
-  Input
+  Left,
+  Right,
+  Text,
+  Thumbnail,
+  Title
 } from 'native-base';
-import {StyleSheet, Image} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Comments from "./Comments";
-import {Col, Row, Grid} from "react-native-easy-grid";
+import {Col, Grid, Row} from "react-native-easy-grid";
 
 class ImageDetailPage extends Component {
   constructor(props, context) {
@@ -42,14 +39,14 @@ class ImageDetailPage extends Component {
     const {avatar, user, location, image, comments} = this.props.navigation.state;
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>Photo</Title>
+          <Title style={{color: 'white'}}>Photo</Title>
           </Body>
           <Right/>
         </Header>
@@ -88,7 +85,7 @@ class ImageDetailPage extends Component {
           <Row size={1}>
             <Col searchBar rounded>
               <Item>
-                <Icon name="ios-search"/>
+                <Icon style={{color: 'white'}} name="ios-search"/>
                 <Input placeholder="Search"/>
               </Item>
               <Button transparent>

@@ -3,29 +3,22 @@
  */
 
 import React, {Component} from 'react';
+import {Body, Button, Container, Header, Icon, Left, Right, Text, Thumbnail, Title} from 'native-base';
 import {
-  Container,
-  Header,
-  Content,
-  FooterTab,
-  Button,
-  Text,
-  Left,
-  Right,
-  Icon,
-  Body,
-  Title,
-  List,
-  ListItem,
-  Thumbnail
-} from 'native-base';
-import {StyleSheet, ScrollView, Dimensions, Image, View, TouchableWithoutFeedback} from 'react-native';
+  Dimensions,
+  Image,
+  Modal,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native';
 import {connect} from 'react-redux';
-import Footer from "../Footer";
-import {Col, Row, Grid} from "react-native-easy-grid";
+import {Col, Grid, Row} from "react-native-easy-grid";
 import network from "../../network";
 import ImageViewer from 'react-native-image-zoom-viewer';
-import {Modal} from "react-native";
+
 // import ImagePreview from 'react-native-image-preview';
 
 class UserPage extends Component {
@@ -119,14 +112,15 @@ class UserPage extends Component {
     }
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>{this.state.name}</Title>
+          <Title style={{color: 'white'}}>{this.state.name}</Title>
           </Body>
           <Right/>
         </Header>

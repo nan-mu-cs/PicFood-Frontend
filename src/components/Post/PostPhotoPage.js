@@ -1,120 +1,102 @@
 /**
- * Created by jin on 05/04/2018.
+ * Created by kai on 23/03/2018.
  */
 import React, {Component} from 'react';
 import {
+  Body,
+  Button,
   Container,
   Header,
-  Content,
-  FooterTab,
-  Keyboard,
-  Button,
-  Text,
   Icon,
-  Body,
-  Title,
-  List,
-  ListItem,
-  Fab,
+  Input,
+  Item,
+  Keyboard,
+  Label,
   Left,
   Right,
-  Item,
-  Input,
-  Label
+  Text,
+  Title
 } from 'native-base';
-import {StyleSheet, Image} from 'react-native';
+import {Image, StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import {Col, Row, Grid} from "react-native-easy-grid";
+import {Col, Grid, Row} from "react-native-easy-grid";
 import StarRating from 'react-native-star-rating';
-import network from "../network";
+import network from "../../network/index";
 
 // import Autocomplete from "react-native-autocomplete-input";
 
-class EditPostPage extends Component {
+class PostPhotoPage extends Component {
   constructor(props, context) {
     super(props);
     this.state = {
-      postId: this.props.navigation.state.params.postId,
-      image:"",
-      restaurantId:"",
-      content:"",
+      avatar: "",
       dishname: "",
       rate: 0,
-      image:this.props.navigation.state.params.image
+      comment: "",
+      category: "",
+      image:this.props.navigation.state.params.image,
+      restaurantId:this.props.navigation.state.params.restaurantId
     };
     this.handleClickBack = this.handleClickBack.bind(this);
     this.handleClickPost = this.handleClickPost.bind(this);
   }
-  componentWillMount() {
-    network.social.getPostByPostId(this.state.postId)
-      .then(res => {
 
-        this.setState({rate: res.rate});
-        this.setState({dishname: res.dishName});
-        this.setState({content: res.content});
-        this.setState({restaurantId: res.restaurantId});
-      })
-      .catch(err => {
-        console.log(err);
-      })
+  handleClickBack() {
+    // console.log(this.props.navigation.state.params);
+    this.props.navigation.goBack();
+  }
+
+  handleClickPost() {
+    // console.log(this.state);
+    network.social.addPost({
+      restaurantId: this.state.restaurantId,
+      dishName: this.state.dishname,
+      rate: this.state.rate,
+      content: this.state.comment,
+      imageUrl: this.state.avatar
+    }).then(res => res.json())
+      .then(async (data) => {
+        let restaurantInfo = await network.restaurant.getRestaurantInfoById(this.state.restaurantId);
+        let restaurantDishes = await network.restaurant.getRestaurantDishesById(this.state.restaurantId);
+        restaurantInfo.dishes = restaurantDishes;
+        console.log(restaurantInfo);
+        this.props.dispatch({
+          type: "GET_RESTAURANT_INFO",
+          restaurantId: restaurantInfo.restaurantId,
+          data: restaurantInfo
+        });
+        this.props.navigation.state.params.callback();
+        this.props.navigation.goBack();
+      }).catch(err => {
+      console.log(err);
+    });
   }
 
   componentDidMount() {
     network.storage.uploadFile(this.state.image)
       .then((response) => response.text())
       .then(url => {
-        this.setState({image: url});
+        this.setState({avatar: url});
       }).catch(err => {
       console.log(err);
     });
-  }
-  handleClickBack() {
-    // this.props.history.goBack();
-    this.props.navigation.goBack();
-  }
-
-  handleClickPost() {
-    console.log(this.state);
-    network.social.addPost({
-      restaurantId: this.state.restaurantId,
-      dishName: this.state.dishname,
-      rate: this.state.rate,
-      content: this.state.content,
-      imageUrl: this.state.image
-    }).then(res => res.json())
-      .then(async (data) => {
-
-        network.social.deletePost(this.state.postId)
-          .then((res) => {
-
-            console.log(res);
-            console.log("=========== Delete ===========");
-            console.log("postID = " + this.state.postId);
-
-          })
-          .catch((e) => {
-            this.setState({
-              error:true
-            });
-            console.log("ERR"+e.message);
-          });
-      }).catch(err => {
-      console.log(err);
-    });
-    this.props.navigation.navigate('Profile');
   }
 
   render() {
+    //console.log(this.props.location.state.image);
+    //let {image} = this.props.location.state;
+    // let data  = ["React","Native","Android","Java","Hello World"];
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>Edit Post</Title>
+          <Title style={{color: 'white'}}>Post Photo</Title>
           </Body>
           <Right/>
         </Header>
@@ -122,12 +104,12 @@ class EditPostPage extends Component {
           <Row size={1}>
             <Col>
               <Item floatingLabel>
-                <Label>Dish Name</Label>
+                <Label>Dish name</Label>
                 <Input value={this.state.dishname} onChangeText={(val) => this.setState({dishname: val})}/>
               </Item>
             </Col>
           </Row>
-          <Row size={1} style={{justifyContent: "center"}}>
+          <Row size={1} style={{justifyContent: "center", marginTop:20}}>
             <Col>
               <StarRating
                 disabled={false}
@@ -145,13 +127,14 @@ class EditPostPage extends Component {
             <Col>
               <Item floatingLabel>
                 <Label>Content</Label>
-                <Input value={this.state.content} onChangeText={(val) => this.setState({content: val})}/>
+                <Input value={this.state.comment} onChangeText={(val) => this.setState({comment: val})}/>
               </Item>
             </Col>
           </Row>
           <Row size={8}>
             <Col>
-              <Image source={{uri: this.state.image}} style={{height: 300}}/>
+              {this.state.image &&
+              <Image source={{cache: 'force-cache', uri: this.state.image}} style={{height: 300}}/>}
             </Col>
           </Row>
           <Row size={2}>
@@ -176,4 +159,4 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps
-)(EditPostPage);
+)(PostPhotoPage);
