@@ -71,12 +71,12 @@ class PersonalPage extends Component {
 
   render() {
     console.log("usertime line!!!");
-    console.log(this.props.userTimeline);
+    console.log(this.props.personTimeline);
     let images = [];
     let post = [];
-    for (let i = 0; i < this.props.userTimeline.length; i++) {
-      if (this.props.userTimeline[i].creatorId)
-        post.push(this.props.userTimeline[i]);
+    for (let i = 0; i < this.props.personTimeline.length; i++) {
+      if (this.props.personTimeline[i].creatorId)
+        post.push(this.props.personTimeline[i]);
     }
     console.log(post);
     for (let i = 0; i < post.length; i += 3) {
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state, ownProps) => {
   return {
     user: state.user,
-    userTimeline: state.userTimeline
+    personTimeline: state.userTimeline
   }
 };
 
