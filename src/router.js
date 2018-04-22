@@ -27,26 +27,44 @@ const Tabs = TabNavigator({
   TimeLine:{
     screen:Timeline,
     navigationOptions:{
-      tabBarIcon:<Icon name={"home"}/>
+      tabBarIcon:<Icon style={{color: 'white'}} name={"home"}/>
     }
   },
   Search:{
     screen:SearchTab,
     navigationOptions:{
-      tabBarIcon:<Icon name={"search"}/>
+      tabBarIcon:<Icon style={{color: 'white'}} name={"search"}/>
     }
   },
   Profile:{
     screen:PersonalPage,
     navigationOptions:{
-      tabBarIcon:<Icon name={"person"}/>
+      tabBarIcon:<Icon style={{color: 'white'}} name={"person"}/>
     }
   }
 },{
   initialRouteName: 'TimeLine',
+  headerTintColor: 'white',
   tabBarOptions:{
+    style: {
+      backgroundColor: '#D8485D',
+      color: 'white'
+    },
+    activeTintColor: 'blue',
+    inactiveTintColor: 'white',
+    activeBackgroundColor: '#526bce',
+    // inactiveBackgroundColor: 'white',
+    labelStyle: {
+      color: 'white',
+      marginTop: -5,
+      paddingBottom: 3,
+    },
+    indicatorStyle: {
+      borderBottomColor: 'blue',
+      borderBottomWidth: 3,
+    }
   },
-  // animationEnabled: true,
+  animationEnabled: true,
   swipeEnabled: false,
   tabBarPosition: 'bottom',
 });
@@ -110,6 +128,7 @@ const AppStack = StackNavigator({
   }
 },{
   headerMode:"none",
+  headerTintColor: 'white',
 });
 
 export default RootRouter = SwitchNavigator({

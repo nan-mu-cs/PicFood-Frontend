@@ -120,9 +120,9 @@ class PersonalPage extends Component {
     // console.log(this.props);
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
           <Body>
-          <Title>{(this.props.user && this.props.user.name) || "username"}</Title>
+          <Title style={{color: 'white'}}>{(this.props.user && this.props.user.name) || "username"}</Title>
           </Body>
         </Header>
         <Grid>

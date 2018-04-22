@@ -43,7 +43,8 @@ class DishCard extends Component {
       <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.dishId)}>
         <Card>
           <CardItem style={styles.cardItem}>
-            <View style={{flex: 1, height: 80, paddingRight: 10, justifyContent: 'space-between'}}>
+            <Thumbnail source={{cache: 'force-cache', uri: avatar}} style={{height: 100, width: 100}}/>
+            <View style={{flex: 1, height: 80, paddingLeft: 15, justifyContent: 'space-between'}}>
               <Text style={{fontSize: 17, paddingBottom: 5}}>{this.props.data.name}</Text>
               <Text note style={{fontSize: 14, paddingBottom: 5}}>{this.props.data.restaurantName || 'Restaurant Name'}</Text>
               <StarRating
@@ -57,7 +58,6 @@ class DishCard extends Component {
                 starSize={15}
               />
             </View>
-            <Thumbnail source={{cache: 'force-cache', uri: avatar}} style={{height: 100, width: 100}}/>
           </CardItem>
         </Card>
       </TouchableWithoutFeedback>
@@ -67,7 +67,6 @@ class DishCard extends Component {
 
 const styles = StyleSheet.create({
   cardItem: {
-    // paddingLeft: 10,
     paddingRight: 10,
   }
 });

@@ -38,14 +38,14 @@ class SearchBy extends Component {
     // console.log("sort_by = " + this.props.sort_by);
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
-              <Icon name="arrow-back"/>
+              <Icon style={{color: 'white'}} name="arrow-back"/>
             </Button>
           </Left>
           <Body>
-          <Title>Search Criteria</Title>
+          <Title style={{color: 'white'}}>Search Criteria</Title>
           </Body>
           <Right/>
         </Header>

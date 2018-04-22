@@ -34,21 +34,18 @@ class CommentCard extends Component {
     console.log("click");
     console.log(this.props.data);
     console.log(this.props.data.dishId);
-    // this.props.history.push(`/dishes/${this.props.data.dishId}`)
     this.props.navigation.navigate('Dish',{
       dishId:this.props.data.dishId
     });
   }
 
   handleClickUser() {
-    // this.props.history.push(`/user/${this.props.data.commenterId}`)
     this.props.navigation.navigate('User',{
       userId:this.props.data.commenterId
     });
   }
 
   render() {
-    // console.log(this.props.data);
     return (
       <Card style={{padding: 5}}>
         <CardItem>

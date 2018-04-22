@@ -42,7 +42,6 @@ class FollowingList extends Component {
   }
 
   onBackPress() {
-    // this.props.history.goBack();
     this.props.navigation.goBack();
   }
 
@@ -62,7 +61,6 @@ class FollowingList extends Component {
   }
 
   onUserPress(userId) {
-    // this.props.history.push(`/user/${userId}`);
     this.props.navigation.navigate('User',{userId});
   }
 
@@ -104,14 +102,14 @@ class FollowingList extends Component {
 
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
           <Left>
             <Button transparent onPress={this.onBackPress.bind(this)}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>Followings</Title>
+          <Title style={{color: 'white'}}>Followings</Title>
           </Body>
           <Right/>
         </Header>
@@ -129,7 +127,6 @@ class FollowingList extends Component {
 
 const styles = StyleSheet.create({
   listItem: {
-    // borderBottomWidth: 0
   },
   buttonText: {
     fontSize: 13,
@@ -140,7 +137,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    // followings: state.followings,
     user: state.user,
   }
 };

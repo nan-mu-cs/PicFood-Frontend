@@ -40,7 +40,6 @@ class RestaurantPage extends Component {
       }
     };
     this.handleClickBack = this.handleClickBack.bind(this);
-    // this.handlePostImage = this.handlePostImage.bind(this);
   }
 
   handlePostImage(type) {
@@ -97,14 +96,14 @@ class RestaurantPage extends Component {
 
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>Restaurant</Title>
+          <Title style={{color: 'white'}}>Restaurant</Title>
           </Body>
           <Right/>
         </Header>
@@ -145,12 +144,12 @@ class RestaurantPage extends Component {
             containerStyle={{bottom:100}}
             position="bottomRight"
             onPress={() => this.setState({active: !this.state.active})}>
-          <Icon name="add"/>
+          <Icon style={{color: 'white'}} name="add"/>
           <Button style={{backgroundColor: '#34A34F'}} onPress={this.handlePostImage.bind(this, "image")}>
-            <Icon name="ios-images"/>
+            <Icon style={{color: 'white'}} name="ios-images"/>
           </Button>
           <Button style={{backgroundColor: '#3B5998'}} onPress={this.handlePostImage.bind(this, "camera")}>
-            <Icon name="ios-camera"/>
+            <Icon style={{color: 'white'}} name="ios-camera"/>
           </Button>
         </Fab>
       </Container>

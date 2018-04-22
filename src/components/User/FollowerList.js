@@ -77,14 +77,14 @@ class FollowerList extends Component {
 
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
           <Left>
             <Button transparent onPress={this.onBackPress.bind(this)}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>Followers</Title>
+          <Title style={{color: 'white'}}>Followers</Title>
           </Body>
           <Right/>
         </Header>
