@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {
   Body,
   Button,
-  Container,
+  Container, Content,
   Header,
   Icon,
   Input,
@@ -18,7 +18,7 @@ import {
   Thumbnail,
   Title
 } from 'native-base';
-import {StatusBar, StyleSheet} from 'react-native';
+import {StatusBar, StyleSheet, View} from 'react-native';
 import {connect} from 'react-redux';
 import {Col, Grid, Row} from "react-native-easy-grid";
 import network from "../../network/index";
@@ -29,30 +29,30 @@ import {ImagePicker} from "expo";
 class EditProfilePage extends Component {
   constructor(props, context) {
     super(props);
-    // console.log(this.props.navigation.state);
     this.state = {
       userId: this.props.navigation.state.params.userId,
-      avatar:"",
-      email:"",
+      avatar: "",
+      email: "",
       bio: "",
       name: "",
-      fanCount:0,
-      followCount:0
+      fanCount: 0,
+      followCount: 0
     };
     this.handleClickBack = this.handleClickBack.bind(this);
     this.handleClickPost = this.handleClickPost.bind(this);
     this.handleUploadAvatar = this.handleUploadAvatar.bind(this);
   }
+
   componentWillMount() {
     network.account.getMyProfile()
-      .then(response=>response.json()).then((res) => {
-        this.setState({name: res.name});
-        this.setState({avatar: res.avatar});
-        this.setState({email: res.email});
-        this.setState({bio: res.bio});
-        this.setState({followCount: res.followCount});
-        this.setState({following: res.following});
-      })
+      .then(response => response.json()).then((res) => {
+      this.setState({name: res.name});
+      this.setState({avatar: res.avatar});
+      this.setState({email: res.email});
+      this.setState({bio: res.bio});
+      this.setState({followCount: res.followCount});
+      this.setState({following: res.following});
+    })
       .catch(err => {
         console.log(err);
       })
@@ -60,27 +60,26 @@ class EditProfilePage extends Component {
 
   handleClickBack() {
     this.props.navigation.goBack();
-    // this.props.history.goBack();
   }
 
   handleClickPost() {
     console.log("update name to " + this.state.name);
     network.account.postUserProfile({
-        userId: this.state.userId,
-        name: this.state.name,
-        email: this.state.email,
-        avatar: this.state.avatar,
-        followCount: this.state.followCount,
-        fanCount: this.state.fanCount
-      }).then(res => res.json())
-        .then(res => {
-          console.log("====== update success ======")
-          console.log(res);
-          console.log("============== update profile =============")
-          this.props.dispatch({type: 'UPDATE_USER_PROFILE', data: res});
-        }).catch(err => {
-          console.log(err);
-      });
+      userId: this.state.userId,
+      name: this.state.name,
+      email: this.state.email,
+      avatar: this.state.avatar,
+      followCount: this.state.followCount,
+      fanCount: this.state.fanCount
+    }).then(res => res.json())
+      .then(res => {
+        console.log("====== update success ======")
+        console.log(res);
+        console.log("============== update profile =============")
+        this.props.dispatch({type: 'UPDATE_USER_PROFILE', data: res});
+      }).catch(err => {
+      console.log(err);
+    });
 
     // network.account.getMyProfile()  // need to update profile
     //   .then(res => res.json())
@@ -117,10 +116,7 @@ class EditProfilePage extends Component {
   }
 
   render() {
-    let avatar;
-    if (this.state.avatar)
-      avatar = <Thumbnail large source={{uri: this.state.avatar}} style={{alignSelf: "center", marginTop: 10}}/>;
-
+    let avatar = this.state.avatar || "http://via.placeholder.com/150x150";
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
@@ -131,37 +127,28 @@ class EditProfilePage extends Component {
             </Button>
           </Left>
           <Body>
-          <Title style={{color: 'white'}}>Edit Post</Title>
+          <Title style={{color: 'white'}}>Edit Profile</Title>
           </Body>
           <Right/>
         </Header>
-        <Grid>
-            {avatar}
-          <Row size={1}>
-            <Col>
-              <Button style={{backgroundColor: '#5067FF', alignSelf: "center", marginTop: 30}}
-                                             onPress={this.handleUploadAvatar}>
-                <Text>Upload Avatar</Text>
-              </Button>
-            </Col>
-          </Row>
-          <Row size={1}>
-            <Col>
-              <Item floatingLabel>
-                <Label>User Name</Label>
-                <Input value={this.state.name} onChangeText={(val) => this.setState({name: val})}/>
-              </Item>
-            </Col>
-          </Row>
-
-          <Row size={2}>
-            <Col size={2}>
-              <Button success block onPress={this.handleClickPost}>
-                <Text>Change</Text>
-              </Button>
-            </Col>
-          </Row>
-        </Grid>
+        <Content>
+          <View style={{height: 100, marginTop: 10}}>
+            <Thumbnail large source={{uri: avatar}} style={{alignSelf: "center", marginTop: 10}}/>
+          </View>
+          <Button small style={{backgroundColor: '#5067FF', alignSelf: "center", marginTop: 10}}
+                  onPress={this.handleUploadAvatar}>
+            <Text>Change Avatar</Text>
+          </Button>
+          <View style={{paddingHorizontal: 30}}>
+          <Item floatingLabel style={{marginVertical: 30}}>
+            <Label>User Name</Label>
+            <Input value={this.state.name} onChangeText={(val) => this.setState({name: val})}/>
+          </Item>
+          <Button success block onPress={this.handleClickPost}>
+            <Text>Apply</Text>
+          </Button>
+          </View>
+        </Content>
       </Container>
     );
   }

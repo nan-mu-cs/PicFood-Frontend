@@ -10,6 +10,7 @@ import {ImagePicker} from 'expo';
 import network from "../../network/index";
 
 class RegisterPage extends Component {
+
   constructor(props, context) {
     super(props);
     this.state = {

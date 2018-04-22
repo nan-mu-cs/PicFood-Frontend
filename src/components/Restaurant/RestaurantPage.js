@@ -206,7 +206,7 @@ class RestaurantPage extends Component {
             active={this.state.active}
             direction="left"
             style={{backgroundColor: '#5067FF'}}
-            containerStyle={{bottom:100}}
+            containerStyle={{bottom:21}}
             position="bottomRight"
             onPress={() => this.setState({active: !this.state.active})}>
           <Icon style={{color: 'white'}} name="add"/>

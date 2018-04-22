@@ -94,6 +94,7 @@ class SearchTab extends Component {
     if (this.props.searchedRestaurants.length === 0)
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
         .then(res => {
+          console.log(res)
           this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res.splice(0, 18)});
           this.setState({loading: false})
         })

@@ -83,9 +83,6 @@ class PostPhotoPage extends Component {
   }
 
   render() {
-    //console.log(this.props.location.state.image);
-    //let {image} = this.props.location.state;
-    // let data  = ["React","Native","Android","Java","Hello World"];
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
