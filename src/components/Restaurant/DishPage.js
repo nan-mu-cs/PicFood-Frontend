@@ -37,6 +37,7 @@ class DishPage extends Component {
       dish: {},
       posts: []
     };
+    console.log(this.state.dishId);
     this.handleClickBack = this.handleClickBack.bind(this);
     this.upvote = this.upvote.bind(this);
   }
@@ -112,7 +113,7 @@ class DishPage extends Component {
             <CardItem style={styles.cardItem}>
               <Left>
                 <Button transparent onPress={this.upvote}>
-                  <Icon active name="thumbs-up"/>
+                  <Icon active name="heart"/>
                   <Text>{item.upvoteCount} Likes</Text>
                 </Button>
               </Left>

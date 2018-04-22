@@ -28,6 +28,8 @@ class PostCard extends Component {
     };
     this.handleClickImage = this.handleClickImage.bind(this);
     this.handleClickUser = this.handleClickUser.bind(this);
+    this.handleClickRestaurant = this.handleClickRestaurant.bind(this);
+
   }
 
   handleClickImage() {
@@ -44,8 +46,14 @@ class PostCard extends Component {
     });
   }
 
+  handleClickRestaurant(){
+    this.props.navigation.navigate('Restaurant',{
+      restaurantId:this.props.data.restaurantId
+    });
+  }
+
   render() {
-    console.log(this.props.data);
+    // console.log(this.props.data);
     let image = this.props.data.imageUrl || "http://via.placeholder.com/350x150";
     return (
       <Card style={{paddingVertical: 10, paddingHorizontal: 10, marginBottom: 5}}>
@@ -58,6 +66,11 @@ class PostCard extends Component {
               <Text style={{fontSize: 16}}>{this.props.data.userName}</Text>
               </Body>
             </Left>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={this.handleClickRestaurant}>
+            <Right>
+              <Text style={{fontSize:15,color:'grey'}}>At {this.props.data.restaurantName}</Text>
+            </Right>
           </TouchableWithoutFeedback>
         </CardItem>
         {
