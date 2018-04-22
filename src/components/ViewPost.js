@@ -5,10 +5,11 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Button, Text, Icon, Item, Input, ListItem,Left, Body, Toast, Thumbnail,
      Card, CardItem, List, Title, Right } from 'native-base';
-import {StyleSheet, ScrollView,Image} from 'react-native';
+import {StyleSheet, ScrollView,Image,TouchableWithoutFeedback} from 'react-native';
 import { connect } from 'react-redux';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Footer from "./Footer"
+import ImagePreview from 'react-native-image-preview';
 import StarRating from 'react-native-star-rating';
 import network from '../network';
 import moment from 'moment';
@@ -22,12 +23,14 @@ class ViewPost extends Component {
             postId: this.props.navigation.state.params.postId,
             com: "",
             error:false,
-            up:false
+            up:false,
+            pictureModalShow:false
         };
         this.postComment = this.postComment.bind(this);
         this.upvote = this.upvote.bind(this);
         this.deletePost = this.deletePost.bind(this);
         this.editPost = this.editPost.bind(this);
+        this.handleClickUser = this.handleClickUser.bind(this);
     }
 
     onBackPress() {
@@ -161,12 +164,16 @@ class ViewPost extends Component {
         });
       }
     }
+    handleClickUser(commenterId) {
+      this.props.navigation.navigate('User',{
+        userId:commenterId
+      });
+    }
 
     render() {
         let image = this.props.post.imageUrl;
         if(!image)
           image = "http://via.placeholder.com/100x100";
-        console.log(this.props);
         let reviews;
         if(this.props.post.comments)
           reviews = this.props.post.comments.map(item => {
@@ -180,12 +187,14 @@ class ViewPost extends Component {
                 <Card key={item.commentId}>
                   <ScrollView>
                   <CardItem>
-                    <Left>
-                        <Thumbnail small source={{cache: 'force-cache', uri: avatar}} />
-                        <Body>
-                        <Text style={{fontSize:16}}>{name}</Text>
-                        </Body>
-                    </Left>
+                    <TouchableWithoutFeedback onPress={() =>this.handleClickUser(item.commenterId)}>
+                      <Left>
+                          <Thumbnail small source={{cache: 'force-cache', uri: avatar}} />
+                          <Body>
+                          <Text style={{fontSize:16}}>{name}</Text>
+                          </Body>
+                      </Left>
+                    </TouchableWithoutFeedback>
                   </CardItem>
                   <ListItem>
                     <Left>
@@ -245,9 +254,12 @@ class ViewPost extends Component {
                     <Text style={{paddingVertical: 12, fontSize: 15}}>{this.props.post.dishName}</Text>
                   </Body>
                   <Card>
-                    <CardItem cardBody style = {styles.star}>
-                      <Image source={{uri:image}} style={{height: 200, width: null, flex: 1}}/>
-                    </CardItem>
+                    <TouchableWithoutFeedback onPress={() => (this.setState({pictureModalShow: true}))}>
+                      <CardItem cardBody style = {styles.star}>
+                        <Image source={{uri:image}} style={{height: 200, width: null, flex: 1}}/>
+                      </CardItem>
+                    </TouchableWithoutFeedback>
+                    <ImagePreview visible={this.state.pictureModalShow} source={{uri:image}} close={() => (this.setState({pictureModalShow: false}))} />
                     <StarRating
                       disabled={true}
                       maxStars={5}
