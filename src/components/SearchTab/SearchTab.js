@@ -170,13 +170,6 @@ class SearchTab extends Component {
     //   console.log("=========== Wrong Search Criteria!!! ==========");
     //   return;
     // }
-    // // let filtered_restaurants = this.props.searchedRestaurants.filter((item) => 
-    // //   (item.distance >= low && item.distance <= high)
-    // // ).map((item) => {
-    // //     <ListItem key={item.dishId} style={styles.listItem}>
-    // //       <RestaurantCard data={item}/>
-    // //     </ListItem>
-    // // });
     // let filtered_restaurants = this.props.searchedRestaurants.filter((item) => {
     //   //return {item.distance} >= low && {item.distance} <= high
     //   console.log("distance = " + item.distance + "   low = " + low + "   high = " + high);
