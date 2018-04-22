@@ -24,12 +24,12 @@ import {
   Title,
   Toast
 } from 'native-base';
-import {Image, Modal, ScrollView, StatusBar, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Image, Modal, ScrollView, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
 // import ImagePreview from 'react-native-image-preview';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import StarRating from 'react-native-star-rating';
-import network from '../../network/index';
+import network from '../network';
 import moment from 'moment';
 import {ImagePicker} from "expo";
 
@@ -72,7 +72,6 @@ class ViewPost extends Component {
 
     upvote() {
       if (this.state.pressed === false) {
-        //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
         this.setState({
           pressed: true
         });
@@ -263,7 +262,6 @@ class ViewPost extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
-          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.onBackPress.bind(this)}>
               <Icon style={{color: 'white'}} name='arrow-back'/>
