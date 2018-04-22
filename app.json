@@ -6,12 +6,12 @@
     "slug": "pic-food",
     "sdkVersion": "25.0.0",
     "ios": {
-      "bundleIdentifier": "com.pic-food.picfood",
+      "bundleIdentifier": "com.picfood.picfood",
       "publishBundlePath": "ios/picfood/Supporting/shell-app.bundle",
       "publishManifestPath": "ios/picfood/Supporting/shell-app-manifest.json"
     },
     "android": {
-      "package": "com.pic-food.picfood",
+      "package": "com.picfood.picfood",
       "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
       "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
     },
