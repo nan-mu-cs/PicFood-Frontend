@@ -50,13 +50,13 @@ class DishPage extends Component {
     network.dish.getPostsOfDish(this.state.dishId)
       .then(res => res.json())
       .then(res => {
-        // console.log(res)
+        console.log(res)
         this.props.dispatch({type: "GET_POSTS_OF_DISH", data: res});
         this.setState({loading: false});
       })
       .catch(err => {
         console.log(err)
-      })
+      });
   }
 
   onDishCreatorPress(userId) {
@@ -114,7 +114,7 @@ class DishPage extends Component {
             <CardItem style={styles.cardItem}>
               <Left>
                 <Button transparent onPress={this.upvote}>
-                  <Icon active name="thumbs-up"/>
+                  <Icon active name="heart"/>
                   <Text>{item.upvoteCount} Likes</Text>
                 </Button>
               </Left>

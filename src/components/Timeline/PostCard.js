@@ -53,7 +53,7 @@ class PostCard extends Component {
   }
 
   render() {
-    console.log(this.props.data);
+    // console.log(this.props.data);
     let image = this.props.data.imageUrl || "http://via.placeholder.com/350x150";
     return (
       <Card style={{paddingVertical: 10, paddingHorizontal: 10, marginBottom: 5}}>
