@@ -50,10 +50,11 @@ class UserPage extends Component {
       .then(data => {
         this.setState(data);
         // this.props.dispatch({type:"UPDATE_USER_PROFILE",data:data});
+
         network.account.getUserTimeline(data.userId)
           .then(res => res.json())
           .then(data => {
-            this.props.dispatch({type: "UPDATE_USER_TIMELINE", data: data});
+            this.props.dispatch({type: "UPDATE_OTHERUSER_TIMELINE", data: data});
           }).catch(err => {
           console.log(err);
         })
@@ -68,11 +69,13 @@ class UserPage extends Component {
   }
 
   render() {
+    console.log("usertime line!!!");
+    console.log(this.props);
     let images = [];
     let post = [];
-    for (let i = 0; i < this.props.userTimeline.length; i++) {
-      if (this.props.userTimeline[i].creatorId)
-        post.push(this.props.userTimeline[i]);
+    for (let i = 0; i < this.props.otherUserTimeline.length; i++) {
+      if (this.props.otherUserTimeline[i].creatorId)
+        post.push(this.props.otherUserTimeline[i]);
     }
     for (let i = 0; i < post.length; i += 3) {
       let card1 = (
@@ -189,7 +192,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state, ownProps) => {
   return {
     user: state.user,
-    userTimeline: state.userTimeline
+    otherUserTimeline: state.otherUserTimeline
   }
 };
 

@@ -11,6 +11,7 @@ export default {
   timelines: [],
   user: {},
   userTimeline: [],
+  otherUserTimeline: [],
   restaurant: {},
   searchedRestaurants: [],
   searchedDishes: [],
