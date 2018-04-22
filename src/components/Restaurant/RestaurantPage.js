@@ -94,14 +94,15 @@ class RestaurantPage extends Component {
     if (this.state.restaurant.dishes.length === 0) {
       return (
         <Container>
-          <Header>
+          <Header style={{backgroundColor: '#D8485D'}}>
+            <StatusBar backgroundColor="blue" barStyle="light-content"/>
             <Left>
               <Button transparent onPress={this.handleClickBack}>
-                <Icon name='arrow-back'/>
+                <Icon style={{color: 'white'}}  name='arrow-back'/>
               </Button>
             </Left>
             <Body>
-            <Title>Restaurant</Title>
+            <Title style={{color: 'white'}}>Restaurant</Title>
             </Body>
             <Right/>
           </Header>
