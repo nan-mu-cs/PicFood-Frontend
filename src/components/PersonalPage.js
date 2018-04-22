@@ -104,7 +104,7 @@ class PersonalPage extends Component {
         card3 = (
 
             <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this, post[i + 2].postId)}>
-              <Image source={{cache: 'force-cache', uri: post[i + 1].imageUrl || "http://via.placeholder.com/350x150"}}
+              <Image source={{cache: 'force-cache', uri: post[i + 2].imageUrl || "http://via.placeholder.com/350x150"}}
                          style={styles.photoItem}/>
             </TouchableWithoutFeedback>
 

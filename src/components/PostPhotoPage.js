@@ -42,7 +42,8 @@ class PostPhotoPage extends Component {
   }
 
   handleClickBack() {
-    this.props.history.goBack();
+    // this.props.history.goBack();
+    this.props.navigation.goBack();
   }
 
   handleClickPost() {
@@ -64,7 +65,8 @@ class PostPhotoPage extends Component {
           restaurantId: restaurantInfo.restaurantId,
           data: restaurantInfo
         });
-        this.props.history.goBack();
+        this.props.navigation.goBack();
+        // this.props.history.goBack();
         console.log(data);
       }).catch(err => {
       console.log(err);
