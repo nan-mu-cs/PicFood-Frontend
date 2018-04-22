@@ -19,6 +19,7 @@ import {
 } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import network from "../../network";
+import moment from 'moment';
 
 class PostCard extends Component {
   constructor(props, context) {
@@ -44,6 +45,7 @@ class PostCard extends Component {
   }
 
   render() {
+    console.log(this.props.data);
     let image = this.props.data.imageUrl || "http://via.placeholder.com/350x150";
     return (
       <Card style={{paddingVertical: 10, paddingHorizontal: 10, marginBottom: 5}}>
@@ -58,15 +60,24 @@ class PostCard extends Component {
             </Left>
           </TouchableWithoutFeedback>
         </CardItem>
-        <CardItem cardBody>
-          <Text style={{paddingLeft:20,paddingBottom:10}}>{this.props.content||"this is a content"}</Text>
-        </CardItem>
+        {
+          this.props.data.content !== "" &&
+          <CardItem cardBody>
+            <Text style={{paddingLeft:20,paddingBottom:10}}>{this.props.data.content||"this is a content"}</Text>
+          </CardItem>
+        }
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.handleClickImage}>
             <Image source={{cache: 'force-cache', uri: image}} style={{height: 200, width: null, flex: 1}}/>
           </TouchableWithoutFeedback>
         </CardItem>
-
+        <CardItem>
+          <Left>
+            <Text style={{fontSize:10,color:'grey'}}>
+              {moment(this.props.data.time).fromNow()}
+            </Text>
+          </Left>
+        </CardItem>
       </Card>
     );
   }
