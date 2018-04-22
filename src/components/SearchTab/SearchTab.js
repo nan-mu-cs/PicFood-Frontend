@@ -80,7 +80,7 @@ class SearchTab extends Component {
     let restaurants = this.state.keyword ? network.restaurant.searchRestaurants(this.state.keyword, this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, range) :
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon);
     restaurants.then(res => {
-      console.log('searchRestaurants', res);
+      // console.log('searchRestaurants', res);
       this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res.splice(0, 18)});
       this.setState({refreshing: false});
     })
@@ -89,6 +89,7 @@ class SearchTab extends Component {
       });
     network.dish.searchDishes(this.state.keyword || '', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, range)
       .then(res => {
+        console.log('searchDish', res);
         this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 18)});
         this.setState({refreshing: false});
       })
@@ -114,6 +115,7 @@ class SearchTab extends Component {
     if (this.props.searchedDishes.length === 0)
       network.dish.searchDishes('', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, 10000)
         .then(res => {
+          console.log(res)
           this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 18)});
         })
         .catch(err => {

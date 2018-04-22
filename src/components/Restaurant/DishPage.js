@@ -50,7 +50,8 @@ class DishPage extends Component {
     network.dish.getDishById(this.state.dishId)
       .then(res => res.json())
       .then(res => {
-        this.setState({...res, posts: res.posts, loading: false})
+        console.log(res)
+        this.setState({...res, posts: res.posts || [], loading: false})
       })
       .catch(err => {
         // console.log(err)
@@ -212,8 +213,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    dish: state.dish,
-    postsOfDish: state.postsOfDish
+    // dish: state.dish,
+    // postsOfDish: state.postsOfDish
   }
 };
 

@@ -57,16 +57,7 @@ class RestaurantPage extends Component {
       });
     }
     result.then((result) => {
-      // console.log('ImagePicker', result);
       if (!result.cancelled) {
-        // this.props.history.push({
-        //   pathname: "/post",
-        //   state: {
-        //     image: result.uri,
-        //     restaurantId: this.state.restaurantId
-        //   }
-        // });
-        // console.log(result.uri);
         this.props.navigation.navigate("Post",{
           image:result.uri,
           restaurantId:this.state.restaurantId
@@ -90,8 +81,6 @@ class RestaurantPage extends Component {
     try {
       let restaurantInfo = await network.restaurant.getRestaurantInfoById(this.state.restaurantId);
       let restaurantDishes = await network.restaurant.getRestaurantDishesById(this.state.restaurantId);
-      console.log(restaurantInfo)
-      console.log(restaurantDishes)
       restaurantInfo.dishes = restaurantDishes;
       this.props.dispatch({type: "GET_RESTAURANT_INFO", restaurantId: restaurantInfo.restaurantId, data: restaurantInfo});
       this.setState({loading: false, restaurant: restaurantInfo});
@@ -149,7 +138,6 @@ class RestaurantPage extends Component {
                 {dishes}
             </List>
         </Content>}
-        {/*<Footer/>*/}
         <Fab
             active={this.state.active}
             direction="left"
