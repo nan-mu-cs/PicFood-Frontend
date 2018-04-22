@@ -3,30 +3,25 @@
  */
 import React, {Component} from 'react';
 import {
+  Body,
+  Button,
   Container,
   Header,
-  Content,
-  FooterTab,
-  Keyboard,
-  Button,
-  Text,
   Icon,
-  Body,
-  Title,
-  List,
-  ListItem,
-  Fab,
+  Input,
+  Item,
+  Keyboard,
+  Label,
   Left,
   Right,
-  Item,
-  Input,
-  Label,
-  Thumbnail
+  Text,
+  Thumbnail,
+  Title
 } from 'native-base';
-import {StyleSheet, Image} from 'react-native';
+import {StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import {Col, Row, Grid} from "react-native-easy-grid";
-import network from "../network";
+import {Col, Grid, Row} from "react-native-easy-grid";
+import network from "../../network/index";
 import {ImagePicker} from "expo";
 
 // import Autocomplete from "react-native-autocomplete-input";
@@ -129,6 +124,7 @@ class EditProfilePage extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
               <Icon style={{color: 'white'}} name='arrow-back'/>

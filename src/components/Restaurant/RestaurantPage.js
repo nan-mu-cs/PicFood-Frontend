@@ -15,15 +15,13 @@ import {
   Icon,
   Left,
   List,
-  ListItem,
-  Spinner,
   Right,
+  Spinner,
   Text,
   Title
 } from 'native-base';
-import {Image, StyleSheet, ScrollView, TouchableWithoutFeedback} from 'react-native';
+import {StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import Footer from "../Footer";
 import StarRating from 'react-native-star-rating';
 import {ImagePicker} from 'expo';
 import network from '../../network';
@@ -93,8 +91,6 @@ class RestaurantPage extends Component {
   }
 
   render() {
-
-
     if (this.state.restaurant.dishes.length === 0) {
       return (
         <Container>
@@ -164,6 +160,7 @@ class RestaurantPage extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
               <Icon style={{color: 'white'}} name='arrow-back'/>

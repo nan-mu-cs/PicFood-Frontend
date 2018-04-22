@@ -2,21 +2,8 @@
  * Created by kai on 10/03/2018.
  */
 import React, {Component} from 'react';
-import {Image, TouchableWithoutFeedback} from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
-  Icon,
-  Text,
-  Button,
-  Left,
-  Body,
-  Right
-} from 'native-base';
+import {TouchableWithoutFeedback} from 'react-native';
+import {Body, Card, CardItem, Icon, Left, Text, Thumbnail} from 'native-base';
 import StarRating from 'react-native-star-rating';
 import moment from 'moment';
 

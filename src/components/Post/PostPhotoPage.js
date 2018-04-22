@@ -17,11 +17,11 @@ import {
   Text,
   Title
 } from 'native-base';
-import {Image, StyleSheet} from 'react-native';
+import {Image, StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {Col, Grid, Row} from "react-native-easy-grid";
 import StarRating from 'react-native-star-rating';
-import network from "../network";
+import network from "../../network/index";
 
 // import Autocomplete from "react-native-autocomplete-input";
 
@@ -89,6 +89,7 @@ class PostPhotoPage extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
               <Icon style={{color: 'white'}} name='arrow-back'/>

@@ -2,28 +2,13 @@
  * Created by kai on 05/03/2018.
  */
 import React, {Component} from 'react';
-import {
-  Container,
-  Header,
-  Content,
-  FooterTab,
-  Button,
-  Text,
-  Icon,
-  Body,
-  Title,
-  List,
-  ListItem,
-  Spinner
-} from 'native-base';
-import {StyleSheet, ScrollView, RefreshControl} from 'react-native';
+import {Body, Container, Header, List, ListItem, Spinner, Title} from 'native-base';
+import {RefreshControl, ScrollView, StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import PostCard from "./PostCard";
 import LikeCard from "./LikeCard";
-import RateCard from "./RateCard";
 import CommentCard from "./CommentCard";
-import Footer from "../Footer";
-import {Col, Row, Grid} from "react-native-easy-grid";
+import {Col, Grid, Row} from "react-native-easy-grid";
 import network from "../../network";
 
 class Timeline extends Component {
@@ -105,6 +90,7 @@ class Timeline extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Body>
           <Title style={{color: 'white'}}>PicFood</Title>
           </Body>

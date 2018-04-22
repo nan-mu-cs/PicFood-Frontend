@@ -29,7 +29,7 @@ import {connect} from 'react-redux';
 // import ImagePreview from 'react-native-image-preview';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import StarRating from 'react-native-star-rating';
-import network from '../network';
+import network from '../../network/index';
 import moment from 'moment';
 import {ImagePicker} from "expo";
 
@@ -263,6 +263,7 @@ class ViewPost extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.onBackPress.bind(this)}>
               <Icon style={{color: 'white'}} name='arrow-back'/>

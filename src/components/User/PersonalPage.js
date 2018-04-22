@@ -2,28 +2,11 @@
  * Created by kai on 07/03/2018.
  */
 import React, {Component} from 'react';
-import {
-  Container,
-  Header,
-  Content,
-  FooterTab,
-  Button,
-  Text,
-  Icon,
-  Body,
-  Title,
-  List,
-  ListItem,
-  Thumbnail
-} from 'native-base';
-import {StyleSheet, ScrollView, Dimensions, Image, View, AsyncStorage, TouchableWithoutFeedback} from 'react-native';
+import {Body, Button, Container, Header, Text, Thumbnail, Title} from 'native-base';
+import {AsyncStorage, Modal, StatusBar, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
-import ImageCard from "./Timeline/PostCard";
-import Footer from "./Footer";
-import {Col, Row, Grid} from "react-native-easy-grid";
-import network from "../network";
+import {Col, Grid, Row} from "react-native-easy-grid";
 import ImageViewer from 'react-native-image-zoom-viewer';
-import {Modal} from "react-native";
 
 class PersonalPage extends Component {
   constructor(props, context) {
@@ -47,6 +30,7 @@ class PersonalPage extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Body>
           <Title style={{color: 'white'}}>{(this.props.user && this.props.user.name) || "username"}</Title>
           </Body>

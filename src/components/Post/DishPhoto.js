@@ -3,25 +3,9 @@
  */
 
 import React, {Component} from 'react';
-import {
-  Body,
-  Button,
-  Card,
-  CardItem,
-  Container,
-  Content,
-  Header,
-  Icon,
-  Left,
-  List,
-  ListItem,
-  Right,
-  Text,
-  Title
-} from 'native-base';
-import {Image, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Body, CardItem, Container, Content, Header, Icon, Text, Title} from 'native-base';
+import {Image, StatusBar, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
-import Footer from "./Footer"
 
 class DishPhoto extends Component {
   constructor(props, context) {
@@ -33,6 +17,7 @@ class DishPhoto extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Body>
           <Title style={{color: 'white'}}>{this.props.restaurant.name}</Title>
           </Body>

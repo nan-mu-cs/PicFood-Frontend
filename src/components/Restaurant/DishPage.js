@@ -11,22 +11,19 @@ import {
   Container,
   Content,
   Header,
-  Text,
   Icon,
   Left,
-  Spinner,
   List,
-  ListItem,
   Right,
-  Title,
-  Thumbnail
+  Spinner,
+  Text,
+  Thumbnail,
+  Title
 } from 'native-base';
-import {Image, StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
+import {Image, StatusBar, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
-import Footer from "../Footer";
 import StarRating from 'react-native-star-rating';
 import network from '../../network';
-import moment from 'moment';
 
 class DishPage extends Component {
   constructor(props, context) {
@@ -58,7 +55,7 @@ class DishPage extends Component {
         this.setState({...res, posts: res.posts || [], loading: false})
       })
       .catch(err => {
-        // console.log(err)
+        console.log(err)
       });
   }
 
@@ -113,6 +110,7 @@ class DishPage extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
               <Icon style={{color: 'white'}} name='arrow-back'/>
