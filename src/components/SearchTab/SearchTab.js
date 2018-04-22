@@ -51,7 +51,33 @@ class SearchTab extends Component {
   }
 
   onSubmitEditing() {
-    let restaurants = this.state.keyword ? network.restaurant.searchRestaurants(this.state.keyword, this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon) :
+    let range = 0;
+    if (this.props.sort_criteria.distance == "key0") {
+      console.log("====== Searching Restaurants within 2 kilometers =======");
+      range = 2;
+    }
+    else if (this.props.sort_criteria.distance == "key1") {
+      console.log("====== Searching Restaurants within 5 kilometers =======");
+      range = 5;
+    }
+    else if (this.props.sort_criteria.distance == "key2") {
+      console.log("====== Searching Restaurants within 10 kilometers =======");
+      range = 10;
+    }
+    else if (this.props.sort_criteria.distance == "key3") {
+      console.log("====== Searching Restaurants within 15 kilometers =======");
+      range = 15;
+    }
+    else if (this.props.sort_criteria.distance == "key4") {
+      console.log("====== Searching Restaurants further than 15 kilometers =======");
+      range = 10000;
+    }
+    else {
+      console.log("=========== Wrong Search Criteria!!! ==========");
+      return;
+    }
+
+    let restaurants = this.state.keyword ? network.restaurant.searchRestaurants(this.state.keyword, this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, range) :
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon);
     restaurants.then(res => {
       console.log('searchRestaurants', res);
@@ -61,7 +87,7 @@ class SearchTab extends Component {
       .catch(err => {
         console.log(err)
       });
-    network.dish.searchDishes(this.state.keyword || '', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon)
+    network.dish.searchDishes(this.state.keyword || '', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, range)
       .then(res => {
         this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 18)});
         this.setState({refreshing: false});
@@ -86,7 +112,7 @@ class SearchTab extends Component {
 
     // network.dish.searchDishes('rice', 'rate', this.props.location.lat, this.props.location.lon)
     if (this.props.searchedDishes.length === 0)
-      network.dish.searchDishes('', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon)
+      network.dish.searchDishes('', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, 15)
         .then(res => {
           this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 18)});
         })
@@ -103,72 +129,72 @@ class SearchTab extends Component {
       return (<View style={styles.notFoundText}><Text>Restaurants Not Found</Text></View>);
     }
 
-    // return (
-    //   <List dataArray={this.props.searchedRestaurants}
-    //         renderRow={(item) =>
-    //           <ListItem key={item.dishId} style={styles.listItem}>
-    //             <RestaurantCard data={item}/>
-    //           </ListItem>
-    //         }
-    //   >
-    //   </List>
-    // );
-
-    let low = 0, high = 0;
-    if (this.props.sort_criteria.distance == "key0") {
-      console.log("====== Searching Restaurants within 2 kilometers =======");
-      low = 0;
-      high = 2;
-    }
-    else if (this.props.sort_criteria.distance == "key1") {
-      console.log("====== Searching Restaurants between 2 - 5 kilometers =======");
-      low = 2;
-      high = 5;
-    }
-    else if (this.props.sort_criteria.distance == "key2") {
-      console.log("====== Searching Restaurants between 5 - 10 kilometers =======");
-      low = 5;
-      high = 10;
-    }
-    else if (this.props.sort_criteria.distance == "key3") {
-      console.log("====== Searching Restaurants between 10 - 15 kilometers =======");
-      low = 10;
-      high = 15;
-    }
-    else if (this.props.sort_criteria.distance == "key4") {
-      console.log("====== Searching Restaurants further than 15 kilometers =======");
-      low = 15;
-      high = 10000;
-    }
-    else {
-      console.log("=========== Wrong Search Criteria!!! ==========");
-      return;
-    }
-    // let filtered_restaurants = this.props.searchedRestaurants.filter((item) => 
-    //   (item.distance >= low && item.distance <= high)
-    // ).map((item) => {
-    //     <ListItem key={item.dishId} style={styles.listItem}>
-    //       <RestaurantCard data={item}/>
-    //     </ListItem>
-    // });
-    let filtered_restaurants = this.props.searchedRestaurants.filter((item) => {
-      //return {item.distance} >= low && {item.distance} <= high
-      console.log("distance = " + item.distance + "   low = " + low + "   high = " + high);
-      console.log(item.distance >= low);
-      console.log(item.distance <= high);
-      if (item.distance >= low && item.distance <= high) return true
-    }).map((item) => {
-      return (
-          <ListItem key={item.restaurantId} style={styles.listItem}>
-            <RestaurantCard data={item}/>
-          </ListItem>
-        )
-    });
     return (
-      <List>
-        {filtered_restaurants}
+      <List dataArray={this.props.searchedRestaurants}
+            renderRow={(item) =>
+              <ListItem key={item.dishId} style={styles.listItem}>
+                <RestaurantCard data={item}/>
+              </ListItem>
+            }
+      >
       </List>
     );
+
+    // let low = 0, high = 0;
+    // if (this.props.sort_criteria.distance == "key0") {
+    //   console.log("====== Searching Restaurants within 2 kilometers =======");
+    //   low = 0;
+    //   high = 2;
+    // }
+    // else if (this.props.sort_criteria.distance == "key1") {
+    //   console.log("====== Searching Restaurants between 2 - 5 kilometers =======");
+    //   low = 2;
+    //   high = 5;
+    // }
+    // else if (this.props.sort_criteria.distance == "key2") {
+    //   console.log("====== Searching Restaurants between 5 - 10 kilometers =======");
+    //   low = 5;
+    //   high = 10;
+    // }
+    // else if (this.props.sort_criteria.distance == "key3") {
+    //   console.log("====== Searching Restaurants between 10 - 15 kilometers =======");
+    //   low = 10;
+    //   high = 15;
+    // }
+    // else if (this.props.sort_criteria.distance == "key4") {
+    //   console.log("====== Searching Restaurants further than 15 kilometers =======");
+    //   low = 15;
+    //   high = 10000;
+    // }
+    // else {
+    //   console.log("=========== Wrong Search Criteria!!! ==========");
+    //   return;
+    // }
+    // // let filtered_restaurants = this.props.searchedRestaurants.filter((item) => 
+    // //   (item.distance >= low && item.distance <= high)
+    // // ).map((item) => {
+    // //     <ListItem key={item.dishId} style={styles.listItem}>
+    // //       <RestaurantCard data={item}/>
+    // //     </ListItem>
+    // // });
+    // let filtered_restaurants = this.props.searchedRestaurants.filter((item) => {
+    //   //return {item.distance} >= low && {item.distance} <= high
+    //   console.log("distance = " + item.distance + "   low = " + low + "   high = " + high);
+    //   console.log(item.distance >= low);
+    //   console.log(item.distance <= high);
+    //   if (item.distance >= low && item.distance <= high) return true
+    // }).map((item) => {
+    //   return (
+    //       <ListItem key={item.restaurantId} style={styles.listItem}>
+    //         <RestaurantCard data={item}/>
+    //       </ListItem>
+    //     )
+    // });
+    // return (
+    //   <List>
+    //     {filtered_restaurants}
+    //   </List>
+    // );
   }
 
   renderDishCards() {
@@ -179,64 +205,64 @@ class SearchTab extends Component {
       return (<View style={styles.notFoundText}><Text>Dishes Not Found</Text></View>);
     }
 
-    // return (
-    //   <List dataArray={this.props.searchedDishes}
-    //         renderRow={(item) =>
-    //           <ListItem key={item.dishId} style={styles.listItem}>
-    //             <DishCard data={item}/>
-    //           </ListItem>
-    //         }
-    //   >
-    //   </List>
-    // );
-
-    let low = 0, high = 0;
-    if (this.props.sort_criteria.distance == "key0") {
-      console.log("====== Searching Dishes within 2 kilometers =======");
-      low = 0;
-      high = 2;
-    }
-    else if (this.props.sort_criteria.distance == "key1") {
-      console.log("====== Searching Dishes between 2 - 5 kilometers =======");
-      low = 2;
-      high = 5;
-    }
-    else if (this.props.sort_criteria.distance == "key2") {
-      console.log("====== Searching Dishes between 5 - 10 kilometers =======");
-      low = 5;
-      high = 10;
-    }
-    else if (this.props.sort_criteria.distance == "key3") {
-      console.log("====== Searching Dishes between 10 - 15 kilometers =======");
-      low = 10;
-      high = 15;
-    }
-    else if (this.props.sort_criteria.distance == "key4") {
-      console.log("====== Searching Dishes further than 15 kilometers =======");
-      low = 15;
-      high = 10000;
-    }
-    else {
-      console.log("=========== Wrong Search Criteria!!! ==========");
-      return;
-    }
-    let filtered_dishes = this.props.searchedDishes.filter((item) => {
-      console.log("distance = " + item.distance + "   low = " + low + "   high = " + high);
-      console.log(item.distance >= low);
-      console.log(item.distance <= high);
-      if (item.distance >= low && item.distance <= high) return true
-    }).map((item) => {
-      return (
-          <ListItem key={item.dishId} style={styles.listItem}>
-            <DishCard data={item}/>
-          </ListItem>
-        )
-    });
     return (
-      <List>
-        {filtered_dishes}
+      <List dataArray={this.props.searchedDishes}
+            renderRow={(item) =>
+              <ListItem key={item.dishId} style={styles.listItem}>
+                <DishCard data={item}/>
+              </ListItem>
+            }
+      >
       </List>
     );
+
+    // let low = 0, high = 0;
+    // if (this.props.sort_criteria.distance == "key0") {
+    //   console.log("====== Searching Dishes within 2 kilometers =======");
+    //   low = 0;
+    //   high = 2;
+    // }
+    // else if (this.props.sort_criteria.distance == "key1") {
+    //   console.log("====== Searching Dishes between 2 - 5 kilometers =======");
+    //   low = 2;
+    //   high = 5;
+    // }
+    // else if (this.props.sort_criteria.distance == "key2") {
+    //   console.log("====== Searching Dishes between 5 - 10 kilometers =======");
+    //   low = 5;
+    //   high = 10;
+    // }
+    // else if (this.props.sort_criteria.distance == "key3") {
+    //   console.log("====== Searching Dishes between 10 - 15 kilometers =======");
+    //   low = 10;
+    //   high = 15;
+    // }
+    // else if (this.props.sort_criteria.distance == "key4") {
+    //   console.log("====== Searching Dishes further than 15 kilometers =======");
+    //   low = 15;
+    //   high = 10000;
+    // }
+    // else {
+    //   console.log("=========== Wrong Search Criteria!!! ==========");
+    //   return;
+    // }
+    // let filtered_dishes = this.props.searchedDishes.filter((item) => {
+    //   console.log("distance = " + item.distance + "   low = " + low + "   high = " + high);
+    //   console.log(item.distance >= low);
+    //   console.log(item.distance <= high);
+    //   if (item.distance >= low && item.distance <= high) return true
+    // }).map((item) => {
+    //   return (
+    //       <ListItem key={item.dishId} style={styles.listItem}>
+    //         <DishCard data={item}/>
+    //       </ListItem>
+    //     )
+    // });
+    // return (
+    //   <List>
+    //     {filtered_dishes}
+    //   </List>
+    // );
   }
 
   render() {
