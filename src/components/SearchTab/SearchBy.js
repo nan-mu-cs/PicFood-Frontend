@@ -64,10 +64,10 @@ class SearchBy extends Component {
               selectedValue={this.props.distance}
               onValueChange={this.onValueChange1.bind(this)}
             >
-              <Item label="<2 kilometers" value="key0"/>
-              <Item label="2-5 kilometers" value="key1"/>
-              <Item label="5-10 kilometers" value="key2"/>
-              <Item label="10-15 kilometers" value="key3"/>
+              <Item label="within 2 kilometers" value="key0"/>
+              <Item label="within 5 kilometers" value="key1"/>
+              <Item label="within 10 kilometers" value="key2"/>
+              <Item label="within 15 kilometers" value="key3"/>
               <Item label=">15 kilometers" value="key4"/>
             </Picker>
           </Form>
