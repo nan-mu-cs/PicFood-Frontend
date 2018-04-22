@@ -17,7 +17,7 @@ class DishPhoto extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
-          <StatusBar backgroundColor="blue" barStyle="light-content"/>
+          <StatusBar barStyle="light-content"/>
           <Body>
           <Title style={{color: 'white'}}>{this.props.restaurant.name}</Title>
           </Body>

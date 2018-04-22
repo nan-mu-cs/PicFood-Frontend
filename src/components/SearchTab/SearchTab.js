@@ -94,6 +94,7 @@ class SearchTab extends Component {
     if (this.props.searchedRestaurants.length === 0)
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
         .then(res => {
+          console.log(res)
           this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res.splice(0, 18)});
           this.setState({loading: false})
         })
@@ -256,7 +257,7 @@ class SearchTab extends Component {
     return (
       <Container>
         <Header searchBar hasTabs rounded style={{backgroundColor: '#D8485D'}}>
-          <StatusBar backgroundColor="blue" barStyle="light-content"/>
+          <StatusBar barStyle="light-content"/>
           <Item>
             <Icon style={{color: 'white'}} name="ios-search"/>
             <Input
