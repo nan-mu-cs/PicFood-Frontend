@@ -112,7 +112,7 @@ class SearchTab extends Component {
 
     // network.dish.searchDishes('rice', 'rate', this.props.location.lat, this.props.location.lon)
     if (this.props.searchedDishes.length === 0)
-      network.dish.searchDishes('', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, 15)
+      network.dish.searchDishes('', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, 10000)
         .then(res => {
           this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 18)});
         })
@@ -170,13 +170,6 @@ class SearchTab extends Component {
     //   console.log("=========== Wrong Search Criteria!!! ==========");
     //   return;
     // }
-    // // let filtered_restaurants = this.props.searchedRestaurants.filter((item) => 
-    // //   (item.distance >= low && item.distance <= high)
-    // // ).map((item) => {
-    // //     <ListItem key={item.dishId} style={styles.listItem}>
-    // //       <RestaurantCard data={item}/>
-    // //     </ListItem>
-    // // });
     // let filtered_restaurants = this.props.searchedRestaurants.filter((item) => {
     //   //return {item.distance} >= low && {item.distance} <= high
     //   console.log("distance = " + item.distance + "   low = " + low + "   high = " + high);

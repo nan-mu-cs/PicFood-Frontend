@@ -41,6 +41,8 @@ class EditProfilePage extends Component {
       email:"",
       bio: "",
       name: "",
+      fanCount:0,
+      followCount:0
     };
     this.handleClickBack = this.handleClickBack.bind(this);
     this.handleClickPost = this.handleClickPost.bind(this);
@@ -53,6 +55,8 @@ class EditProfilePage extends Component {
         this.setState({avatar: res.avatar});
         this.setState({email: res.email});
         this.setState({bio: res.bio});
+        this.setState({followCount: res.followCount});
+        this.setState({following: res.following});
       })
       .catch(err => {
         console.log(err);
@@ -67,8 +71,12 @@ class EditProfilePage extends Component {
   handleClickPost() {
     console.log("update name to " + this.state.name);
     network.account.postUserProfile({
+        userId: this.state.userId,
         name: this.state.name,
-        avatar: this.state.avatar
+        email: this.state.email,
+        avatar: this.state.avatar,
+        followCount: this.state.followCount,
+        fanCount: this.state.fanCount
       }).then(res => res.json())
         .then(res => {
           console.log("====== update success ======")
