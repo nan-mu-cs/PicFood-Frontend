@@ -72,7 +72,6 @@ class ViewPost extends Component {
 
     upvote() {
       if (this.state.pressed === false) {
-        //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
         this.setState({
           pressed: true
         });
