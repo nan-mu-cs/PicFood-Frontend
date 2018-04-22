@@ -5,11 +5,12 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Button, Text, Icon, Item, Input, ListItem,Left, Body, Toast, Thumbnail,
      Card, CardItem, List, Title, Right } from 'native-base';
-import {StyleSheet, ScrollView,Image,TouchableWithoutFeedback} from 'react-native';
+import {StyleSheet, ScrollView,Image,TouchableWithoutFeedback,Modal} from 'react-native';
 import { connect } from 'react-redux';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Footer from "./Footer"
-import ImagePreview from 'react-native-image-preview';
+// import ImagePreview from 'react-native-image-preview';
+import ImageViewer from 'react-native-image-zoom-viewer';
 import StarRating from 'react-native-star-rating';
 import network from '../network';
 import moment from 'moment';
@@ -259,7 +260,10 @@ class ViewPost extends Component {
                         <Image source={{uri:image}} style={{height: 200, width: null, flex: 1}}/>
                       </CardItem>
                     </TouchableWithoutFeedback>
-                    <ImagePreview visible={this.state.pictureModalShow} source={{uri:image}} close={() => (this.setState({pictureModalShow: false}))} />
+                    <Modal visible={this.state.pictureModalShow} transparent={true} >
+                      <ImageViewer imageUrls={[{url:image}]} enableImageZoom={true} onCancel={() => (this.setState({pictureModalShow: false}))}  onClick={() => (this.setState({pictureModalShow: false}))} />
+                    </Modal>
+                    {/*<ImagePreview visible={this.state.pictureModalShow} source={{uri:image}} close={() => (this.setState({pictureModalShow: false}))} />*/}
                     <StarRating
                       disabled={true}
                       maxStars={5}

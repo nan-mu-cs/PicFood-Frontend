@@ -22,7 +22,9 @@ import ImageCard from "./Timeline/PostCard";
 import Footer from "./Footer";
 import {Col, Row, Grid} from "react-native-easy-grid";
 import network from "../network";
-import ImagePreview from 'react-native-image-preview';
+import ImageViewer from 'react-native-image-zoom-viewer';
+import {Modal} from "react-native";
+// import ImagePreview from 'react-native-image-preview';
 
 class PersonalPage extends Component {
   constructor(props, context) {
@@ -131,8 +133,10 @@ class PersonalPage extends Component {
                            source={{cache: 'force-cache', uri: (this.props.user && this.props.user.avatar) || "http://via.placeholder.com/100x100"}}
                            style={{marginLeft: 30}}/>
               </TouchableWithoutFeedback>
-              <ImagePreview visible={this.state.pictureModalShow} source={{uri: (this.props.user.avatar)}} close={() => (this.setState({pictureModalShow: false}))} />
-
+              {/*<ImagePreview visible={this.state.pictureModalShow} source={{uri: (this.props.user.avatar)}} close={() => (this.setState({pictureModalShow: false}))} />*/}
+              <Modal visible={this.state.pictureModalShow} transparent={true} >
+                <ImageViewer imageUrls={[{url:this.props.user.avatar}]} enableImageZoom={true} onCancel={() => (this.setState({pictureModalShow: false}))}  onClick={() => (this.setState({pictureModalShow: false}))} />
+              </Modal>
             </Col>
             <Col size={2}>
             </Col>

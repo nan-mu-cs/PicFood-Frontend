@@ -24,7 +24,9 @@ import {connect} from 'react-redux';
 import Footer from "../Footer";
 import {Col, Row, Grid} from "react-native-easy-grid";
 import network from "../../network";
-import ImagePreview from 'react-native-image-preview';
+import ImageViewer from 'react-native-image-zoom-viewer';
+import {Modal} from "react-native";
+// import ImagePreview from 'react-native-image-preview';
 
 class UserPage extends Component {
   constructor(props, context) {
@@ -137,8 +139,11 @@ class UserPage extends Component {
                   uri: (this.state.avatar) || "http://via.placeholder.com/100x100"
                 }} style={{marginLeft: 30}}/>
               </TouchableWithoutFeedback>
-              <ImagePreview visible={this.state.pictureModalShow} source={{uri: (this.state.avatar)}}
-                            close={() => (this.setState({pictureModalShow: false}))}/>
+              <Modal visible={this.state.pictureModalShow} transparent={true} >
+                <ImageViewer imageUrls={[{url:this.state.avatar}]} enableImageZoom={true} onCancel={() => (this.setState({pictureModalShow: false}))}  onClick={() => (this.setState({pictureModalShow: false}))} />
+              </Modal>
+              {/*<ImagePreview visible={this.state.pictureModalShow} source={{uri: (this.state.avatar)}}*/}
+                            {/*close={() => (this.setState({pictureModalShow: false}))}/>*/}
             </Col>
             <Col size={7}>
               <Row style={{alignItems: "center"}}>
