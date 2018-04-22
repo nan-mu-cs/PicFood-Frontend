@@ -15,15 +15,13 @@ import {
   Icon,
   Left,
   List,
-  ListItem,
-  Spinner,
   Right,
+  Spinner,
   Text,
   Title
 } from 'native-base';
-import {Image, StyleSheet, ScrollView, TouchableWithoutFeedback, StatusBar} from 'react-native';
+import {StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import Footer from "../Footer";
 import StarRating from 'react-native-star-rating';
 import {ImagePicker} from 'expo';
 import network from '../../network';

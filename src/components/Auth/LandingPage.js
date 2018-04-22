@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import {AsyncStorage, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
-import network from "../network";
+import network from "../../network/index";
 import {Location, Permissions} from "expo";
 
 class LandingPage extends Component {

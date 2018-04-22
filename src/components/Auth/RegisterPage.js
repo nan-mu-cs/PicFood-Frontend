@@ -7,7 +7,7 @@ import {Button, Container, Form, Input, Item, Text, Thumbnail, Toast, View} from
 import {AsyncStorage, ImageBackground, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {ImagePicker} from 'expo';
-import network from "../network";
+import network from "../../network/index";
 
 class RegisterPage extends Component {
   constructor(props, context) {
@@ -118,7 +118,7 @@ class RegisterPage extends Component {
             }}><Text style={{color: 'white', fontSize: 16, paddingLeft: 10, paddingRight: 10}}>Sign In</Text></Button>
           </View>
         </Container>
-        <ImageBackground source={require('../../assets/landing1.jpg')}
+        <ImageBackground source={require('../../../assets/landing1.jpg')}
                          style={{...StyleSheet.absoluteFillObject, zIndex: -1}}/>
         <View style={{...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,.45)', zIndex: -1}}/>
       </View>
@@ -174,5 +174,3 @@ const mapStateToProps = (state, ownProps) => {
 export default connect(
   mapStateToProps
 )(RegisterPage);
-
-// export default RegisterPage;

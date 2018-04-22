@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 import {Button, Container, Form, Input, Item, Toast} from 'native-base';
 import {AsyncStorage, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
-import network from "../network";
+import network from "../../network/index";
 
 class LoginPage extends Component {
   constructor(props, context) {
@@ -91,7 +91,7 @@ class LoginPage extends Component {
               <Text style={{color: 'white', fontSize: 16}}>Register</Text></Button>
           </View>
         </Container>
-        <ImageBackground source={require('../../assets/landing1.jpg')}
+        <ImageBackground source={require('../../../assets/landing1.jpg')}
                          style={{...StyleSheet.absoluteFillObject, zIndex: -1}}/>
         <View style={{...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,.45)', zIndex: -1}}/>
       </View>

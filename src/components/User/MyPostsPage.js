@@ -6,7 +6,7 @@ import {Body, Button, Container, Header, Icon, Left, Right, Title} from 'native-
 import {Dimensions, Image, ScrollView, StatusBar, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import {connect} from 'react-redux';
 import {Col, Grid, Row} from "react-native-easy-grid";
-import network from "../network";
+import network from "../../network/index";
 
 // import ImagePreview from 'react-native-image-preview';
 

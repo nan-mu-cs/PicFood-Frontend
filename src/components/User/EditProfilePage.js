@@ -21,7 +21,7 @@ import {
 import {StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {Col, Grid, Row} from "react-native-easy-grid";
-import network from "../network";
+import network from "../../network/index";
 import {ImagePicker} from "expo";
 
 // import Autocomplete from "react-native-autocomplete-input";
