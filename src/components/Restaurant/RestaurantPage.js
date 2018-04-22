@@ -40,6 +40,7 @@ class RestaurantPage extends Component {
       }
     };
     this.handleClickBack = this.handleClickBack.bind(this);
+    this.updateData = this.updateData.bind(this);
   }
 
   handlePostImage(type) {
@@ -59,7 +60,8 @@ class RestaurantPage extends Component {
       if (!result.cancelled) {
         this.props.navigation.navigate("Post",{
           image:result.uri,
-          restaurantId:this.state.restaurantId
+          restaurantId:this.state.restaurantId,
+          callback:this.updateData
         });
       }
     }).catch(err => {
@@ -71,7 +73,7 @@ class RestaurantPage extends Component {
     this.props.navigation.goBack();
   }
 
-  async componentDidMount() {
+  async updateData(){
     let cache = this.props.cachedRestaurants[this.state.restaurantId];
     if(cache) {
       this.setState({loading: false, restaurant: cache});
@@ -85,6 +87,9 @@ class RestaurantPage extends Component {
       this.setState({loading: false, restaurant: restaurantInfo});
     } catch(e) {
     }
+  }
+  componentDidMount() {
+      this.updateData();
   }
 
   render() {

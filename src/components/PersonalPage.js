@@ -24,7 +24,6 @@ import {Col, Row, Grid} from "react-native-easy-grid";
 import network from "../network";
 import ImageViewer from 'react-native-image-zoom-viewer';
 import {Modal} from "react-native";
-// import ImagePreview from 'react-native-image-preview';
 
 class PersonalPage extends Component {
   constructor(props, context) {
@@ -32,20 +31,8 @@ class PersonalPage extends Component {
     this.state = {
       pictureModalShow:false
     };
-    this.handleClickImage = this.handleClickImage.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
-  }
 
-  componentDidMount() {
-    network.account.getUserTimeline(this.props.user.userId)
-      .then(res => res.json())
-      .then(data => {
-        this.props.dispatch({type: "UPDATE_USER_TIMELINE", data: data});
-        // console.log("get time line");
-        console.log(data);
-      }).catch(err => {
-      console.log(err);
-    })
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleLogout() {
@@ -55,69 +42,8 @@ class PersonalPage extends Component {
     this.props.dispatch({type: "LOGOUT"});
   }
 
-  handleClickImage(postId) {
-    // console.log("click");
-    // this.props.history.push({
-    //     pathname: "/image-detail",
-    //     state:{
-    //         avatar:this.props.user.avatar,
-    //         user:this.props.user.name,
-    //         location:item.location,
-    //         image:item.image,
-    //         comments: item.comments
-    //     }
-    // });
-    // this.props.history.push(`/viewpost/${postId}`)
-    this.props.navigation.navigate('ViewPost',{postId});
-  }
 
   render() {
-    console.log("usertime line!!!");
-    console.log(this.props.personTimeline);
-    let images = [];
-    let post = [];
-    for (let i = 0; i < this.props.personTimeline.length; i++) {
-      if (this.props.personTimeline[i].creatorId)
-        post.push(this.props.personTimeline[i]);
-    }
-    console.log(post);
-    for (let i = 0; i < post.length; i += 3) {
-      let card1 = (
-
-          <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this, post[i].postId)}>
-            <Image source={{cache: 'force-cache', uri: post[i].imageUrl || "http://via.placeholder.com/350x150"}}
-                       style={styles.photoItem}/>
-          </TouchableWithoutFeedback>
-
-      );
-      let card2, card3;
-      if (i + 1 < post.length)
-        card2 = (
-
-            <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this, post[i + 1].postId)}>
-              <Image source={{cache: 'force-cache', uri: post[i + 1].imageUrl || "http://via.placeholder.com/350x150"}}
-                         style={styles.photoItem}/>
-            </TouchableWithoutFeedback>
-
-        );
-      if (i + 2 < post.length)
-        card3 = (
-
-            <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this, post[i + 2].postId)}>
-              <Image source={{cache: 'force-cache', uri: post[i + 2].imageUrl || "http://via.placeholder.com/350x150"}}
-                         style={styles.photoItem}/>
-            </TouchableWithoutFeedback>
-
-        );
-      images.push(
-        <View style={styles.photoContainer} key={post[i].postId}>
-          {card1}
-          {card2}
-          {card3}
-        </View>
-      );
-    }
-    // console.log(this.props);
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
@@ -177,19 +103,20 @@ class PersonalPage extends Component {
               </Button>
             </Col>
           </Row>
+          <Row size={10} style={{marginTop: 12}}>
+            <Col>
+              <Button primary block style={{flex: 1, marginLeft: 15, marginRight: 15}}
+                      onPress={() => this.props.navigation.navigate('MyPosts',{userId:this.props.user.userId})}>
+                <Text>My Posts</Text>
+              </Button>
+            </Col>
+          </Row>
           <Row size={10} style={{marginTop: 12, marginBottom: 10}}>
             <Col>
               <Button danger block style={{flex: 1, marginLeft: 15, marginRight: 15}}
                       onPress={() => this.handleLogout()}>
                 <Text>Logout</Text>
               </Button>
-            </Col>
-          </Row>
-          <Row size={85}>
-            <Col>
-              <ScrollView>
-                {images}
-              </ScrollView>
             </Col>
           </Row>
         </Grid>
@@ -199,25 +126,9 @@ class PersonalPage extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  avatarContainer: {},
-  photoContainer: {
-    flexDirection: "row",
-    flex: 1,
-    width: Dimensions.get('window').width
-  },
-  photoItem: {
-    width: Dimensions.get('window').width / 3.1,
-    height: 150,
-    margin: 1
-  }
-});
-
-
 const mapStateToProps = (state, ownProps) => {
   return {
-    user: state.user,
-    personTimeline: state.userTimeline
+    user: state.user
   }
 };
 
