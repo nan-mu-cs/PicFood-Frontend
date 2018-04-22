@@ -28,7 +28,6 @@ class RestaurantCard extends Component {
   }
 
   onCardPress(restaurantId) {
-    // this.props.history.push(`/restaurants/${restaurantId}`);
     this.props.navigation.navigate("Restaurant",{
       restaurantId
     });
@@ -40,8 +39,7 @@ class RestaurantCard extends Component {
       <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.restaurantId)}>
         <Card>
           <CardItem style={styles.cardItem}>
-            <Thumbnail source={{cache: 'force-cache', uri: avatar}} style={{height: 100, width: 100}}/>
-            <View style={{flex: 1, paddingLeft: 10, justifyContent: 'flex-start',}}>
+            <View style={{flex: 1, paddingLeft: 5, paddingRight: 10, justifyContent: 'flex-start',}}>
             <Text>{this.props.data.name}</Text>
             <Text note style={{fontSize: 13}}>{this.props.data.address}</Text>
             <Text note style={{color: 'gray'}}>{this.props.data.category}</Text>
@@ -56,6 +54,7 @@ class RestaurantCard extends Component {
               starSize={15}
             />
             </View>
+            <Thumbnail source={{cache: 'force-cache', uri: avatar}} style={{height: 100, width: 100}}/>
           </CardItem>
         </Card>
       </TouchableWithoutFeedback>

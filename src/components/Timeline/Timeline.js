@@ -39,7 +39,6 @@ class Timeline extends Component {
   }
 
   componentDidMount() {
-    //console.log(this.props.token);
     if (this.props.timelines.length === 0) {
       this.setState({loading: true});
       this.getData();
@@ -102,18 +101,12 @@ class Timeline extends Component {
             <CommentCard data={item}/>
           </ListItem>
         );
-      // card = <CommentCard data={item}/>;
-      // return (
-      //     <ListItem key={item.postId} style={styles.listItem}>
-      //         {card}
-      //     </ListItem>
-      // );
     });
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
           <Body>
-          <Title>PicFood</Title>
+          <Title style={{color: 'white'}}>PicFood</Title>
           </Body>
         </Header>
         <Grid>
@@ -134,16 +127,7 @@ class Timeline extends Component {
               </ScrollView>
             </Col>
           </Row>
-
         </Grid>
-        {/*<List dataArray={this.props.timelines}*/}
-        {/*renderRow={(item) =>*/}
-        {/*<ListItem style={styles.listItem}>*/}
-        {/*<ImageCard  data={item}/>*/}
-        {/*</ListItem>*/}
-        {/*}>*/}
-        {/*</List>*/}
-        {/*<Footer/>*/}
       </Container>
     );
   }
@@ -175,11 +159,6 @@ const
     }
   };
 
-export default connect
-
-(
+export default connect(
   mapStateToProps
-)(
-  Timeline
-)
-;
+)(Timeline);

@@ -23,12 +23,12 @@ import {
   Title,
   View
 } from 'native-base';
-import {StyleSheet, RefreshControl} from 'react-native';
+import {StyleSheet, RefreshControl, StatusBar} from 'react-native';
 import {connect} from 'react-redux';
 import RestaurantCard from "./RestaurantCard";
 import DishCard from "./DishCard";
 import Footer from "../Footer";
-import { withNavigation } from 'react-navigation';
+import {withNavigation} from 'react-navigation';
 import network from '../../network';
 
 class SearchTab extends Component {
@@ -41,7 +41,6 @@ class SearchTab extends Component {
   }
 
   onSortPress = () => {
-    // this.props.history.push(`/searchby`);
     this.props.navigation.navigate("SearchBy");
   };
 
@@ -80,7 +79,6 @@ class SearchTab extends Component {
     let restaurants = this.state.keyword ? network.restaurant.searchRestaurants(this.state.keyword, this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, range) :
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon);
     restaurants.then(res => {
-      // console.log('searchRestaurants', res);
       this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res.splice(0, 18)});
       this.setState({refreshing: false});
     })
@@ -263,20 +261,24 @@ class SearchTab extends Component {
   render() {
     return (
       <Container>
-        <Header searchBar hasTabs rounded>
+        <Header searchBar hasTabs rounded style={{backgroundColor: '#D8485D'}}>
           <Item>
-            <Icon name="ios-search"/>
+            <Icon style={{color: 'white'}} name="ios-search"/>
             <Input
               placeholder="Search by name"
               onChangeText={(value) => this.setState({keyword: value})}
               onSubmitEditing={this.onSubmitEditing.bind(this)}/>
           </Item>
           <Button transparent onPress={this.onSortPress}>
-            <Icon name='ios-menu' style={{marginLeft: 4, marginRight: 7}}/>
+            <Icon name='ios-menu' style={{color: 'white', marginLeft: 4, marginRight: 7}}/>
           </Button>
         </Header>
-        <Tabs initialPage={0}>
-          <Tab heading="Restaurants">
+        <Tabs initialPage={0} tabBarUnderlineStyle={{backgroundColor: '#526bce'}}>
+          <Tab heading="Restaurants" tabStyle={{backgroundColor: '#D8485D'}}
+               activeTabStyle={{backgroundColor: '#D8485D'}}
+               activeTextStyle={{color: '#fff', fontWeight: 'normal'}}
+               textStyle={{color: '#fff', fontWeight: 'normal'}}
+          >
             <Content
               refreshControl={
                 <RefreshControl
@@ -288,7 +290,9 @@ class SearchTab extends Component {
               {this.renderRestaurantCards()}
             </Content>
           </Tab>
-          <Tab heading="Dishes">
+          <Tab heading="Dishes" tabStyle={{backgroundColor: '#D8485D'}} activeTabStyle={{backgroundColor: '#D8485D'}}
+               activeTextStyle={{color: '#fff', fontWeight: 'normal'}}
+               textStyle={{color: '#fff', fontWeight: 'normal'}}>
             <Content
               refreshControl={
                 <RefreshControl

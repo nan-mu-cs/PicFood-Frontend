@@ -32,9 +32,9 @@ class DishPhoto extends Component {
   render() {
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
           <Body>
-          <Title>{this.props.restaurant.name}</Title>
+          <Title style={{color: 'white'}}>{this.props.restaurant.name}</Title>
           </Body>
         </Header>
         <Content>
@@ -44,7 +44,7 @@ class DishPhoto extends Component {
           <CardItem cardBody>
             <TouchableWithoutFeedback onPress={this.handleClickImage}>
               <Body style={{paddingTop: 5, paddingBottom: 20, paddingLeft: 20, paddingRight: 20}}>
-              <Text note><Icon name="md-heart" style={{fontSize: 15}}/> Liked dish <Text
+              <Text note><Icon style={{color: 'white'}} name="md-heart" style={{fontSize: 15}}/> Liked dish <Text
                 style={{marginLeft: 5}}>{this.props.restaurant.name}</Text></Text>
               </Body>
             </TouchableWithoutFeedback>

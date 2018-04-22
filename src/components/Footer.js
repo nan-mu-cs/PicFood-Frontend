@@ -24,7 +24,7 @@ class OurFooter extends Component {
                 onPress={this.handleChangeTab.bind(this, item.id, item.url)}
                 style={styles.button}
         >
-          <Icon name={item.icon}/>
+          <Icon style={{color: 'white'}} name={item.icon}/>
           <Text style={styles.text}>{item.name}</Text>
         </Button>
       );

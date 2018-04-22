@@ -42,6 +42,7 @@ class PostPhotoPage extends Component {
   }
 
   handleClickBack() {
+    // console.log(this.props.navigation.state.params);
     this.props.navigation.goBack();
   }
 
@@ -64,6 +65,7 @@ class PostPhotoPage extends Component {
           restaurantId: restaurantInfo.restaurantId,
           data: restaurantInfo
         });
+        this.props.navigation.state.params.callback();
         this.props.navigation.goBack();
       }).catch(err => {
       console.log(err);
@@ -86,14 +88,14 @@ class PostPhotoPage extends Component {
     // let data  = ["React","Native","Android","Java","Hello World"];
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>Post Photo</Title>
+          <Title style={{color: 'white'}}>Post Photo</Title>
           </Body>
           <Right/>
         </Header>

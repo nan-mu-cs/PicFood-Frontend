@@ -2,8 +2,7 @@
  * Created by Chaofeng on 30/03/2018.
  */
 import React, {Component} from 'react';
-import {Button, Container, Content, Footer, FooterTab, Header, Icon, Spinner} from 'native-base';
-import {View, Text, AsyncStorage, StyleSheet} from 'react-native';
+import {AsyncStorage, StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import network from "../network";
 import {Location, Permissions} from "expo";
@@ -17,7 +16,6 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
-    // console.log(this.props);
     this.getUserInformation();
     this.getLocation();
   }
@@ -25,7 +23,6 @@ class LandingPage extends Component {
   getUserInformation() {
     AsyncStorage.multiGet(["email", "password"], function (err, stores) {
       if (err) {
-        // this.props.history.push("/login");
         this.props.navigation.navigate('Auth');
         console.log(err);
         return;
@@ -36,7 +33,6 @@ class LandingPage extends Component {
         this.setState({
           loading: false
         });
-        // this.props.history.push("/login");
         this.props.navigation.navigate('Auth');
         console.log(err);
         return;
@@ -53,7 +49,6 @@ class LandingPage extends Component {
             .then(res => res.json())
             .then(res => {
               this.props.dispatch({type: 'GET_USER_PROFILE', data: res});
-              // this.props.history.push("/timeline");
               this.props.navigation.navigate('App');
             })
             .catch(err => {
@@ -63,7 +58,6 @@ class LandingPage extends Component {
           this.setState({
             loading: false
           });
-          // this.props.history.push("/login");
           this.props.navigation.navigate('Auth');
           console.log("ERR" + e.message);
         });
@@ -73,12 +67,10 @@ class LandingPage extends Component {
   getLocation() {
     Permissions.askAsync(Permissions.LOCATION)
       .then(res => {
-        //console.log(status);
         if (res.status !== 'granted')
           return;
         Location.getCurrentPositionAsync({})
           .then((res) => {
-            //console.log(res);
             this.props.dispatch({type: "GET_LOCATION", data: {lat: res.coords.latitude, lon: res.coords.longitude}});
           }).catch(err => {
           console.log(err);
@@ -91,7 +83,6 @@ class LandingPage extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>Pic Food</Text>
         <Text style={styles.description}>Welcome!</Text>
-        <Spinner color='black'/>
       </View>
     );
   }
@@ -101,15 +92,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#D8485D'
   },
   title: {
     fontSize: 24,
-    marginBottom: 18
+    marginBottom: 18,
+    color: 'white'
   },
   description: {
     fontSize: 18,
-    color: '#808080'
+    color: '#cccccc'
   }
 });
 

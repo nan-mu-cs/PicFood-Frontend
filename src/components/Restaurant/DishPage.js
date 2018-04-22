@@ -39,7 +39,6 @@ class DishPage extends Component {
     };
     console.log(this.state.dishId);
     this.handleClickBack = this.handleClickBack.bind(this);
-    this.upvote = this.upvote.bind(this);
     this.handleClickDish = this.handleClickDish.bind(this);
   }
 
@@ -74,35 +73,6 @@ class DishPage extends Component {
   // onDishPhotoPress(imageUrl) {
   //   this.props.history.push(`/dishphoto/${imageUrl}`);
   // }
-
-  upvote() {
-    //         //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
-    // network.social.upvotePost(this.state.postId)
-    //   .then(response=>response.json())
-    //   .then((res) => {
-    //       //res = res.json();
-    //       console.log(res);
-    //       console.log("postID = " + this.state.postId);
-    //       console.log("upvoteCount = " + this.props.post.upvoteCount);
-
-    //       network.social.getPostByPostId(this.state.postId)
-    //         .then(res => {
-    //           console.log(res);
-    //           this.props.dispatch({type: "GET_POST_INFO", data: res});
-    //         })
-    //         .catch(err => {
-
-    //         })
-
-    //       console.log("upvoteCount = " + this.props.post.upvoteCount);
-    //   })
-    //   .catch((e) => {
-    //       this.setState({
-    //           error:true
-    //       });
-    //       console.log("ERR"+e.message);
-    //   });
-  }
 
   renderPostsOfDish() {
     let photos = this.state.posts.map(item => {
@@ -142,14 +112,14 @@ class DishPage extends Component {
   render() {
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>Dish</Title>
+          <Title style={{color: 'white'}}>Dish</Title>
           </Body>
           <Right/>
         </Header>
@@ -187,6 +157,7 @@ const styles = StyleSheet.create({
   card: {
     marginLeft: 10,
     marginRight: 10,
+    padding: 10,
   },
   image: {
     paddingLeft: 0,
@@ -217,11 +188,8 @@ const styles = StyleSheet.create({
   }
 });
 
-
 const mapStateToProps = (state, ownProps) => {
   return {
-    // dish: state.dish,
-    // postsOfDish: state.postsOfDish
   }
 };
 

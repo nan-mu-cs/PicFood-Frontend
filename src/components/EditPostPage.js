@@ -107,14 +107,14 @@ class EditPostPage extends Component {
   render() {
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>Edit Post</Title>
+          <Title style={{color: 'white'}}>Edit Post</Title>
           </Body>
           <Right/>
         </Header>
