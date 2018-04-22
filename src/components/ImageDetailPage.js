@@ -3,28 +3,25 @@
  */
 import React, {Component} from 'react';
 import {
-  Container,
-  Header,
-  Content,
-  Button,
-  Text,
-  Icon,
   Body,
-  Title,
-  List,
-  ListItem,
-  Left,
-  Right,
+  Button,
   Card,
   CardItem,
-  Thumbnail,
+  Container,
+  Header,
+  Icon,
+  Input,
   Item,
-  Input
+  Left,
+  Right,
+  Text,
+  Thumbnail,
+  Title
 } from 'native-base';
-import {StyleSheet, Image} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Comments from "./Comments";
-import {Col, Row, Grid} from "react-native-easy-grid";
+import {Col, Grid, Row} from "react-native-easy-grid";
 
 class ImageDetailPage extends Component {
   constructor(props, context) {

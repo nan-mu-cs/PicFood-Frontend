@@ -3,29 +3,22 @@
  */
 
 import React, {Component} from 'react';
+import {Body, Button, Container, Header, Icon, Left, Right, Text, Thumbnail, Title} from 'native-base';
 import {
-  Container,
-  Header,
-  Content,
-  FooterTab,
-  Button,
-  Text,
-  Left,
-  Right,
-  Icon,
-  Body,
-  Title,
-  List,
-  ListItem,
-  Thumbnail
-} from 'native-base';
-import {StyleSheet, ScrollView, Dimensions, Image, View, TouchableWithoutFeedback, StatusBar} from 'react-native';
+  Dimensions,
+  Image,
+  Modal,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native';
 import {connect} from 'react-redux';
-import Footer from "../Footer";
-import {Col, Row, Grid} from "react-native-easy-grid";
+import {Col, Grid, Row} from "react-native-easy-grid";
 import network from "../../network";
 import ImageViewer from 'react-native-image-zoom-viewer';
-import {Modal} from "react-native";
+
 // import ImagePreview from 'react-native-image-preview';
 
 class UserPage extends Component {

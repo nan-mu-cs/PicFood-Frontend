@@ -2,23 +2,9 @@
  * Created by kai on 10/03/2018.
  */
 import React, {Component} from 'react';
-import {Image, StyleSheet, TouchableWithoutFeedback} from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  Text,
-  CardItem,
-  Thumbnail,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right
-} from 'native-base';
-import { withNavigation } from 'react-navigation';
-import network from "../../network";
+import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Body, Card, CardItem, Icon, Left, Text, Thumbnail} from 'native-base';
+import {withNavigation} from 'react-navigation';
 import moment from 'moment';
 
 class LikeCard extends Component {

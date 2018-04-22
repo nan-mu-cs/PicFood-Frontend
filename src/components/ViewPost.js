@@ -24,7 +24,7 @@ import {
   Title,
   Toast
 } from 'native-base';
-import {Image, Modal, ScrollView, StatusBar, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Image, Modal, ScrollView, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
 // import ImagePreview from 'react-native-image-preview';
 import ImageViewer from 'react-native-image-zoom-viewer';

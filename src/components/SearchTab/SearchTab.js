@@ -6,12 +6,8 @@ import {
   Button,
   Container,
   Content,
-  FooterTab,
   Header,
   Icon,
-  Left,
-  Right,
-  ActionSheet,
   Input,
   Item,
   List,
@@ -20,14 +16,12 @@ import {
   Tab,
   Tabs,
   Text,
-  Title,
   View
 } from 'native-base';
-import {StyleSheet, RefreshControl, StatusBar} from 'react-native';
+import {RefreshControl, StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import RestaurantCard from "./RestaurantCard";
 import DishCard from "./DishCard";
-import Footer from "../Footer";
 import {withNavigation} from 'react-navigation';
 import network from '../../network';
 

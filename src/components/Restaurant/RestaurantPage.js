@@ -93,8 +93,6 @@ class RestaurantPage extends Component {
   }
 
   render() {
-
-
     if (this.state.restaurant.dishes.length === 0) {
       return (
         <Container>

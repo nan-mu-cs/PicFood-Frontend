@@ -55,7 +55,7 @@ class DishPage extends Component {
         this.setState({...res, posts: res.posts || [], loading: false})
       })
       .catch(err => {
-        // console.log(err)
+        console.log(err)
       });
   }
 

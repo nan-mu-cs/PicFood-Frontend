@@ -2,29 +2,12 @@
  * Created by kai on 07/03/2018.
  */
 import React, {Component} from 'react';
-import {
-  Container,
-  Header,
-  Content,
-  FooterTab,
-  Button,
-  Text,
-  Icon,
-  Body,
-  Title,
-  Left,
-  Right,
-  Thumbnail
-} from 'native-base';
-import {
-  StyleSheet, ScrollView, Dimensions, Image, View, AsyncStorage, TouchableWithoutFeedback,
-  StatusBar
-} from 'react-native';
+import {Body, Button, Container, Header, Icon, Left, Right, Title} from 'native-base';
+import {Dimensions, Image, ScrollView, StatusBar, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import {connect} from 'react-redux';
-import {Col, Row, Grid} from "react-native-easy-grid";
+import {Col, Grid, Row} from "react-native-easy-grid";
 import network from "../network";
-import ImageViewer from 'react-native-image-zoom-viewer';
-import {Modal} from "react-native";
+
 // import ImagePreview from 'react-native-image-preview';
 
 class MyPostsPage extends Component {

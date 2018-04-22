@@ -3,30 +3,9 @@
  */
 
 import React, {Component} from 'react';
-import {
-  Container,
-  Header,
-  Content,
-  FooterTab,
-  Button,
-  Text,
-  Icon,
-  Body,
-  Title,
-  List,
-  ListItem,
-  Form,
-  Input,
-  Label,
-  Item,
-  Left,
-  Right,
-  Toast,
-  Thumbnail, View
-} from 'native-base';
-import {StyleSheet, ScrollView, AsyncStorage, ImageBackground} from 'react-native';
+import {Button, Container, Form, Input, Item, Text, Thumbnail, Toast, View} from 'native-base';
+import {AsyncStorage, ImageBackground, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import {Col, Row, Grid} from "react-native-easy-grid";
 import {ImagePicker} from 'expo';
 import network from "../network";
 

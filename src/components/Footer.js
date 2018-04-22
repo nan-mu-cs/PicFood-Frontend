@@ -2,7 +2,7 @@
  * Created by kai on 05/03/2018.
  */
 import React, {Component} from 'react';
-import {Container, Header, Content, Footer, FooterTab, Button, Text, Icon} from 'native-base';
+import {Button, Footer, FooterTab, Icon, Text} from 'native-base';
 import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 

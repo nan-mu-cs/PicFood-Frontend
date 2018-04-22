@@ -3,29 +3,9 @@
  */
 
 import React, {Component} from 'react';
-import {
-  Container,
-  Header,
-  Content,
-  FooterTab,
-  Button,
-  Icon,
-  Body,
-  Title,
-  List,
-  ListItem,
-  Form,
-  Input,
-  Label,
-  Item,
-  Toast
-} from 'native-base';
-import {
-  Text, StyleSheet, ScrollView, AsyncStorage, View, Image, ImageBackground,
-  TouchableNativeFeedback, TouchableHighlight, TouchableOpacity
-} from 'react-native';
+import {Button, Container, Form, Input, Item, Toast} from 'native-base';
+import {AsyncStorage, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
-import {Col, Row, Grid} from "react-native-easy-grid";
 import network from "../network";
 
 class LoginPage extends Component {

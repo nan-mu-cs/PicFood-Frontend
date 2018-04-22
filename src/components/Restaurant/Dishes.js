@@ -4,24 +4,9 @@
 
 import React, {Component} from 'react';
 import {Image, StyleSheet, TouchableWithoutFeedback} from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right,
-  List,
-  ListItem
-} from 'native-base';
+import {Card, CardItem, Left, Text} from 'native-base';
 import network from "../../network";
-import { withNavigation } from 'react-navigation';
+import {withNavigation} from 'react-navigation';
 
 class Dishes extends Component {
   constructor(props, context) {
