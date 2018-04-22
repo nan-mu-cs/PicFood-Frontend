@@ -21,6 +21,7 @@ import PostPhotoPage from "./components/PostPhotoPage";
 import ViewPost from "./components/ViewPost";
 import EditPostPage from "./components/EditPostPage";
 import EditProfilePage from "./components/EditProfilePage";
+import MyPostsPage from "./components/MyPostsPage";
 import {Icon} from 'native-base';
 
 const Tabs = TabNavigator({
@@ -107,6 +108,9 @@ const AppStack = StackNavigator({
   },
   ViewPost:{
     screen:ViewPost
+  },
+  MyPosts:{
+    screen:MyPostsPage
   }
 },{
   headerMode:"none",
