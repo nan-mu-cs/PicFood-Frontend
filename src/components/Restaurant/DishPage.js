@@ -35,6 +35,7 @@ class DishPage extends Component {
       loading: true,
       dishId: this.props.navigation.state.params.dishId
     };
+    console.log(this.state.dishId);
     this.handleClickBack = this.handleClickBack.bind(this);
     this.upvote = this.upvote.bind(this);
   }

@@ -31,9 +31,11 @@ class CommentCard extends Component {
   }
 
   handleClickImage() {
+    console.log("click");
     console.log(this.props.data);
+    console.log(this.props.data.dishId);
     // this.props.history.push(`/dishes/${this.props.data.dishId}`)
-    this.props.navigation.navigate('Dishes',{
+    this.props.navigation.navigate('Dish',{
       dishId:this.props.data.dishId
     });
   }
@@ -63,8 +65,9 @@ class CommentCard extends Component {
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.handleClickImage}>
             <Body style={{paddingTop: 5, paddingBottom: 20, paddingLeft: 20, paddingRight: 20}}>
-            <Text note><Icon ios="ios-quote" android="quote" style={{fontSize: 15, color: 'blue'}}/> Comment on dish <Text
-              style={{marginLeft: 10}}>{this.props.data.dishName}</Text>:</Text>
+            <Text note><Icon ios="ios-quote" android="quote" style={{fontSize: 15, color: 'blue'}}/> Comment on
+              <Text> {this.props.data.posterName}</Text>'s post <Text
+              style={{marginLeft: 10}}>{this.props.data.dishName}</Text> with:</Text>
             <Text style={{marginTop: 5, marginLeft: 10}}>{this.props.data.content}</Text>
             </Body>
           </TouchableWithoutFeedback>

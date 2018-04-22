@@ -32,7 +32,7 @@ class LikeCard extends Component {
 
   handleClickImage() {
     // this.props.history.push(`/dishes/${this.state.dishId}`)
-    this.props.navigation.navigate('Dishes',{
+    this.props.navigation.navigate('Dish',{
       dishId:this.props.data.dishId
     });
   }
@@ -63,7 +63,7 @@ class LikeCard extends Component {
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.handleClickImage}>
             <Body style={{paddingTop: 5, paddingBottom: 20, paddingLeft: 20, paddingRight: 20}}>
-            <Text note><Icon name="md-heart" style={{fontSize: 15, color: 'red'}}/> Liked dish <Text
+            <Text note><Icon name="md-heart" style={{fontSize: 15, color: 'red'}}/> Liked <Text> {this.props.data.posterName}</Text>'s post <Text
               style={{marginLeft: 5}}>{this.props.data.dishName}</Text></Text>
             </Body>
           </TouchableWithoutFeedback>

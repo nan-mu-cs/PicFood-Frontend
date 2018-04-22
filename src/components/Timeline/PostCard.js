@@ -28,6 +28,8 @@ class PostCard extends Component {
     };
     this.handleClickImage = this.handleClickImage.bind(this);
     this.handleClickUser = this.handleClickUser.bind(this);
+    this.handleClickRestaurant = this.handleClickRestaurant.bind(this);
+
   }
 
   handleClickImage() {
@@ -41,6 +43,12 @@ class PostCard extends Component {
     // this.props.history.push(`/user/${this.props.data.creatorId}`)
     this.props.navigation.navigate('User',{
       userId:this.props.data.creatorId
+    });
+  }
+
+  handleClickRestaurant(){
+    this.props.navigation.navigate('Restaurant',{
+      restaurantId:this.props.data.restaurantId
     });
   }
 
@@ -58,6 +66,11 @@ class PostCard extends Component {
               <Text style={{fontSize: 16}}>{this.props.data.userName}</Text>
               </Body>
             </Left>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={this.handleClickRestaurant}>
+            <Right>
+              <Text style={{fontSize:15,color:'grey'}}>At {this.props.data.restaurantName}</Text>
+            </Right>
           </TouchableWithoutFeedback>
         </CardItem>
         {
