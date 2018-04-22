@@ -49,7 +49,8 @@ const Tabs = TabNavigator({
     style: {
       backgroundColor: '#D8485D',
     },
-    activeBackgroundColor: '#526bce',
+    activeBackgroundColor: '#b03f55',
+
     labelStyle: {
       color: 'white',
       marginTop: -5,
