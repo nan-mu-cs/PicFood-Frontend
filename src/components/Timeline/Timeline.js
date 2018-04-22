@@ -16,7 +16,7 @@ import {
   ListItem,
   Spinner
 } from 'native-base';
-import {StyleSheet, ScrollView, RefreshControl} from 'react-native';
+import {StyleSheet, ScrollView, RefreshControl, StatusBar} from 'react-native';
 import {connect} from 'react-redux';
 import PostCard from "./PostCard";
 import LikeCard from "./LikeCard";
@@ -105,6 +105,7 @@ class Timeline extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Body>
           <Title style={{color: 'white'}}>PicFood</Title>
           </Body>

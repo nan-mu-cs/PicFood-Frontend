@@ -2,7 +2,7 @@
  * Created by Chaofeng on 30/03/2018.
  */
 import React, {Component} from 'react';
-import {AsyncStorage, StyleSheet, Text, View} from 'react-native';
+import {AsyncStorage, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import network from "../network";
 import {Location, Permissions} from "expo";
@@ -81,6 +81,7 @@ class LandingPage extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="blue" barStyle="light-content"/>
         <Text style={styles.title}>Pic Food</Text>
         <Text style={styles.description}>Welcome!</Text>
       </View>
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 18,
-    color: '#cccccc'
+    color: '#e5e5e5'
   }
 });
 

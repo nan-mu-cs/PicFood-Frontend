@@ -16,7 +16,10 @@ import {
   ListItem,
   Thumbnail
 } from 'native-base';
-import {StyleSheet, ScrollView, Dimensions, Image, View, AsyncStorage, TouchableWithoutFeedback} from 'react-native';
+import {
+  StyleSheet, ScrollView, Dimensions, Image, View, AsyncStorage, TouchableWithoutFeedback,
+  StatusBar
+} from 'react-native';
 import {connect} from 'react-redux';
 import ImageCard from "./Timeline/PostCard";
 import Footer from "./Footer";
@@ -47,6 +50,7 @@ class PersonalPage extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Body>
           <Title style={{color: 'white'}}>{(this.props.user && this.props.user.name) || "username"}</Title>
           </Body>

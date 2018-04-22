@@ -19,7 +19,7 @@ import {
   Text,
   Title
 } from 'native-base';
-import {Image, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Image, StatusBar, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
 import Footer from "./Footer"
 
@@ -33,6 +33,7 @@ class DishPhoto extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Body>
           <Title style={{color: 'white'}}>{this.props.restaurant.name}</Title>
           </Body>

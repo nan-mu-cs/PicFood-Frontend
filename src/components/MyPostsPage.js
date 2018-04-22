@@ -16,7 +16,10 @@ import {
   Right,
   Thumbnail
 } from 'native-base';
-import {StyleSheet, ScrollView, Dimensions, Image, View, AsyncStorage, TouchableWithoutFeedback} from 'react-native';
+import {
+  StyleSheet, ScrollView, Dimensions, Image, View, AsyncStorage, TouchableWithoutFeedback,
+  StatusBar
+} from 'react-native';
 import {connect} from 'react-redux';
 import {Col, Row, Grid} from "react-native-easy-grid";
 import network from "../network";
@@ -104,14 +107,15 @@ class MyPostsPage extends Component {
     // console.log(this.props);
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>{(this.props.user && this.props.user.name) || "username"}</Title>
+          <Title style={{color: 'white'}}>{(this.props.user && this.props.user.name) || "username"}</Title>
           </Body>
           <Right/>
         </Header>

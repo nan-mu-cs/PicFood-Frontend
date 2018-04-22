@@ -21,7 +21,7 @@ import {
   Text,
   Title
 } from 'native-base';
-import {Image, StyleSheet, ScrollView, TouchableWithoutFeedback} from 'react-native';
+import {Image, StyleSheet, ScrollView, TouchableWithoutFeedback, StatusBar} from 'react-native';
 import {connect} from 'react-redux';
 import Footer from "../Footer";
 import StarRating from 'react-native-star-rating';
@@ -102,6 +102,7 @@ class RestaurantPage extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
               <Icon style={{color: 'white'}} name='arrow-back'/>

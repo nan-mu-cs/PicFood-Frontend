@@ -26,7 +26,7 @@ import {
   Thumbnail,
   Title
 } from 'native-base';
-import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {StatusBar, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
 import Footer from "../Footer";
 import network from "../../network";
@@ -137,6 +137,7 @@ class UserList extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.onBackPress.bind(this)}>
               <Icon style={{color: 'white'}} name='arrow-back'/>

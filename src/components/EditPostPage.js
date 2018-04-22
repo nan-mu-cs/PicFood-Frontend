@@ -22,7 +22,7 @@ import {
   Input,
   Label
 } from 'native-base';
-import {StyleSheet, Image} from 'react-native';
+import {StyleSheet, Image, StatusBar} from 'react-native';
 import {connect} from 'react-redux';
 import {Col, Row, Grid} from "react-native-easy-grid";
 import StarRating from 'react-native-star-rating';
@@ -108,6 +108,7 @@ class EditPostPage extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
               <Icon style={{color: 'white'}} name='arrow-back'/>
