@@ -11,22 +11,19 @@ import {
   Container,
   Content,
   Header,
-  Text,
   Icon,
   Left,
-  Spinner,
   List,
-  ListItem,
   Right,
-  Title,
-  Thumbnail
+  Spinner,
+  Text,
+  Thumbnail,
+  Title
 } from 'native-base';
-import {Image, StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
+import {Image, StatusBar, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
-import Footer from "../Footer";
 import StarRating from 'react-native-star-rating';
 import network from '../../network';
-import moment from 'moment';
 
 class DishPage extends Component {
   constructor(props, context) {
@@ -35,12 +32,13 @@ class DishPage extends Component {
       loading: true,
       dishId: this.props.navigation.state.params.dishId,
       dish: {},
-      posts: []
+      posts: [],
+      pressed: false,
     };
     console.log(this.state.dishId);
     this.handleClickBack = this.handleClickBack.bind(this);
-    this.upvote = this.upvote.bind(this);
     this.handleClickDish = this.handleClickDish.bind(this);
+    this.upvote = this.upvote.bind(this);
   }
 
   handleClickBack() {
@@ -50,6 +48,99 @@ class DishPage extends Component {
   handleClickDish(postId){
     this.props.navigation.navigate('ViewPost', {postId});
   }
+
+  upvote(postId){
+    if (this.state.pressed === false) {
+      this.setState({
+        pressed: true
+      });
+      console.log("user = " + this.props.user);
+      network.social.hasUpvoted(postId, this.props.user.userId)
+      .then(res => res.text())
+      .then(res => {
+        console.log(res);
+        console.log("=========== hasUpvoted???? ===========");
+        console.log("postId = " + postId);
+        console.log("userId = " + this.props.user.userId);
+        //console.log(res["_bodyText"]);
+        if (res == "Not Upvoted") {
+          network.social.upvotePost(postId)
+            .then(response => response.json())
+            .then((res) => {
+                console.log(res);
+                console.log("=========== UPVOTE ===========");
+                console.log("postID = " + postId);
+                network.dish.getDishById(this.state.dishId)
+                  .then(res => res.json())
+                  .then(res => {
+                    console.log(res)
+                    this.setState({...res, posts: res.posts || [], loading: false})
+                  })
+                  .catch(err => {
+                    console.log(err)
+                  });
+                // network.social.getPostByPostId(postId)
+                //   .then(res => {
+                //     console.log(res);
+                //     this.props.dispatch({type: "GET_POST_INFO", data: res});
+                //   })
+                //   .catch(err => {
+
+                //   });
+                  
+                // console.log("upvoteCount = " + this.props.post.upvoteCount);
+                this.setState({
+                  pressed: false
+                });
+            })
+            .catch((e) => {
+              this.setState({
+                error: true
+              });
+              console.log("ERR" + e.message);
+            });
+        }
+
+        else {
+          //console.log("=========== DOWNVOTE ===========");
+          network.social.deleteUpvoteOfPost(postId, res)
+            .then((res) => {
+                console.log(res);
+                console.log("=========== DOWNVOTE ===========");
+                //console.log("postID = " + this.state.postId);
+                network.dish.getDishById(this.state.dishId)
+                  .then(res => res.json())
+                  .then(res => {
+                    console.log(res)
+                    this.setState({...res, posts: res.posts || [], loading: false})
+                  })
+                  .catch(err => {
+                    console.log(err)
+                  });
+                // network.social.getPostByPostId(postId)
+                //   .then(res => {
+                //     console.log(res);
+                //     this.props.dispatch({type: "GET_POST_INFO", data: res});
+                //   })
+                //   .catch(err => {
+
+                //   });
+                // console.log("upvoteCount = " + this.props.post.upvoteCount);
+                this.setState({
+                  pressed: false
+                });
+            })
+            .catch((e) => {
+              this.setState({
+                error: true
+              });
+              console.log("ERR" + e.message);
+            });
+        }
+      })
+    }
+  }
+
   componentDidMount() {
     console.log(this.state.dishId);
     network.dish.getDishById(this.state.dishId)
@@ -59,7 +150,7 @@ class DishPage extends Component {
         this.setState({...res, posts: res.posts || [], loading: false})
       })
       .catch(err => {
-        // console.log(err)
+        console.log(err)
       });
   }
 
@@ -75,35 +166,6 @@ class DishPage extends Component {
   //   this.props.history.push(`/dishphoto/${imageUrl}`);
   // }
 
-  upvote() {
-    //         //this.props.dispatch({type: "UPVOTE_POST", data: this.props.post.upvoteCount + 1});
-    // network.social.upvotePost(this.state.postId)
-    //   .then(response=>response.json())
-    //   .then((res) => {
-    //       //res = res.json();
-    //       console.log(res);
-    //       console.log("postID = " + this.state.postId);
-    //       console.log("upvoteCount = " + this.props.post.upvoteCount);
-
-    //       network.social.getPostByPostId(this.state.postId)
-    //         .then(res => {
-    //           console.log(res);
-    //           this.props.dispatch({type: "GET_POST_INFO", data: res});
-    //         })
-    //         .catch(err => {
-
-    //         })
-
-    //       console.log("upvoteCount = " + this.props.post.upvoteCount);
-    //   })
-    //   .catch((e) => {
-    //       this.setState({
-    //           error:true
-    //       });
-    //       console.log("ERR"+e.message);
-    //   });
-  }
-
   renderPostsOfDish() {
     let photos = this.state.posts.map(item => {
         let image = item.imageUrl || "http://via.placeholder.com/100x100";
@@ -118,7 +180,7 @@ class DishPage extends Component {
             </CardItem>
             <CardItem style={styles.cardItem}>
               <Left>
-                <Button transparent onPress={this.upvote}>
+                <Button transparent onPress={this.upvote.bind(this,item.postId)}>
                   <Icon active name="heart"/>
                   <Text>{item.upvoteCount} Likes</Text>
                 </Button>
@@ -142,14 +204,15 @@ class DishPage extends Component {
   render() {
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>Dish</Title>
+          <Title style={{color: 'white'}}>Dish</Title>
           </Body>
           <Right/>
         </Header>
@@ -187,6 +250,7 @@ const styles = StyleSheet.create({
   card: {
     marginLeft: 10,
     marginRight: 10,
+    padding: 10,
   },
   image: {
     paddingLeft: 0,
@@ -217,11 +281,10 @@ const styles = StyleSheet.create({
   }
 });
 
-
 const mapStateToProps = (state, ownProps) => {
   return {
-    // dish: state.dish,
-    // postsOfDish: state.postsOfDish
+    post: state.post,
+    user: state.user
   }
 };
 

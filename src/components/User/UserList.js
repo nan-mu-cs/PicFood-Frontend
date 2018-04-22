@@ -3,14 +3,10 @@
  */
 import React, {Component} from 'react';
 import {
-  ActionSheet,
   Body,
   Button,
-  Card,
-  CardItem,
   Container,
   Content,
-  FooterTab,
   Header,
   Icon,
   Input,
@@ -20,15 +16,12 @@ import {
   ListItem,
   Right,
   Spinner,
-  Tab,
-  Tabs,
   Text,
   Thumbnail,
   Title
 } from 'native-base';
-import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {StatusBar, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
-import Footer from "../Footer";
 import network from "../../network";
 
 class UserList extends Component {
@@ -41,12 +34,10 @@ class UserList extends Component {
   }
 
   onBackPress() {
-    // this.props.history.goBack();
     this.props.navigation.goBack();
   }
 
   onUnfollowPress(userId) {
-    console.log('onUnfollowPress')
     network.social.unfollowUserById(userId)
       .then(res => {
         // console.log(this.state.users);
@@ -94,14 +85,12 @@ class UserList extends Component {
     network.social.searchUsers(this.state.keyword)
       .then(res => {
         this.setState({users: res});
-        // this.props.dispatch({type:"GET_USERS", data: res});
       })
       .catch(err => {
       })
   }
 
   onUserPress(userId) {
-    // this.props.history.push(`/user/${userId}`);
     this.props.navigation.navigate('User',{userId});
   }
 
@@ -140,14 +129,15 @@ class UserList extends Component {
 
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.onBackPress.bind(this)}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>Users</Title>
+          <Title style={{color: 'white'}}>Users</Title>
           </Body>
           <Right/>
         </Header>
@@ -164,7 +154,6 @@ class UserList extends Component {
               {userList}
             </List>
           </Content>}
-        {/*<Footer/>*/}
       </Container>
     );
   }

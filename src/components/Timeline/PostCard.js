@@ -3,22 +3,8 @@
  */
 import React, {Component} from 'react';
 import {Image, StyleSheet, TouchableWithoutFeedback} from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right
-} from 'native-base';
+import {Body, Card, CardItem, Left, Text, Thumbnail} from 'native-base';
 import {withNavigation} from 'react-navigation';
-import network from "../../network";
 import moment from 'moment';
 
 class PostCard extends Component {

@@ -7,47 +7,65 @@ import Timeline from "./components/Timeline/Timeline";
 import SearchTab from "./components/SearchTab/SearchTab";
 import SearchBy from "./components/SearchTab/SearchBy";
 import UserPage from "./components/User/UserPage"
-import DishPhoto from "./components/DishPhoto"
+import DishPhoto from "./components/Post/DishPhoto"
 import RestaurantPage from "./components/Restaurant/RestaurantPage"
 import DishPage from "./components/Restaurant/DishPage"
-import PersonalPage from "./components/PersonalPage";
-import LoginPage from "./components/LoginPage";
-import RegisterPage from "./components/RegisterPage";
+import PersonalPage from "./components/User/PersonalPage";
+import LoginPage from "./components/Auth/LoginPage";
+import RegisterPage from "./components/Auth/RegisterPage";
 import FollowerList from "./components/User/FollowerList";
 import FollowingList from "./components/User/FollowingList";
-import LandingPage from "./components/LandingPage";
+import LandingPage from "./components/Auth/LandingPage";
 import UserList from "./components/User/UserList";
-import PostPhotoPage from "./components/PostPhotoPage";
-import ViewPost from "./components/ViewPost";
-import EditPostPage from "./components/EditPostPage";
-import EditProfilePage from "./components/EditProfilePage";
-import MyPostsPage from "./components/MyPostsPage";
+import PostPhotoPage from "./components/Post/PostPhotoPage";
+import ViewPost from "./components/Post/ViewPost";
+import EditPostPage from "./components/Post/EditPostPage";
+import EditProfilePage from "./components/User/EditProfilePage";
+import MyPostsPage from "./components/User/MyPostsPage";
 import {Icon} from 'native-base';
 
 const Tabs = TabNavigator({
   TimeLine:{
     screen:Timeline,
     navigationOptions:{
-      tabBarIcon:<Icon name={"home"}/>
+      tabBarIcon:<Icon style={{color: 'white'}} name={"home"}/>
     }
   },
   Search:{
     screen:SearchTab,
     navigationOptions:{
-      tabBarIcon:<Icon name={"search"}/>
+      tabBarIcon:<Icon style={{color: 'white'}} name={"search"}/>
     }
   },
   Profile:{
     screen:PersonalPage,
     navigationOptions:{
-      tabBarIcon:<Icon name={"person"}/>
+      tabBarIcon:<Icon style={{color: 'white'}} name={"person"}/>
     }
   }
 },{
   initialRouteName: 'TimeLine',
+  headerTintColor: 'white',
   tabBarOptions:{
+    style: {
+      backgroundColor: '#D8485D',
+      color: 'white'
+    },
+    activeTintColor: 'blue',
+    inactiveTintColor: 'white',
+    activeBackgroundColor: '#526bce',
+    // inactiveBackgroundColor: 'white',
+    labelStyle: {
+      color: 'white',
+      marginTop: -5,
+      paddingBottom: 3,
+    },
+    indicatorStyle: {
+      borderBottomColor: 'blue',
+      borderBottomWidth: 3,
+    }
   },
-  // animationEnabled: true,
+  animationEnabled: true,
   swipeEnabled: false,
   tabBarPosition: 'bottom',
 });
@@ -114,6 +132,7 @@ const AppStack = StackNavigator({
   }
 },{
   headerMode:"none",
+  headerTintColor: 'white',
 });
 
 export default RootRouter = SwitchNavigator({

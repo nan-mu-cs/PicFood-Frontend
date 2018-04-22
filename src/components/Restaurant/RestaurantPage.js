@@ -15,15 +15,13 @@ import {
   Icon,
   Left,
   List,
-  ListItem,
-  Spinner,
   Right,
+  Spinner,
   Text,
   Title
 } from 'native-base';
-import {Image, StyleSheet, ScrollView, TouchableWithoutFeedback} from 'react-native';
+import {StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import Footer from "../Footer";
 import StarRating from 'react-native-star-rating';
 import {ImagePicker} from 'expo';
 import network from '../../network';
@@ -41,7 +39,6 @@ class RestaurantPage extends Component {
     };
     this.handleClickBack = this.handleClickBack.bind(this);
     this.updateData = this.updateData.bind(this);
-    // this.handlePostImage = this.handlePostImage.bind(this);
   }
 
   handlePostImage(type) {
@@ -94,6 +91,67 @@ class RestaurantPage extends Component {
   }
 
   render() {
+    if (this.state.restaurant.dishes.length === 0) {
+      return (
+        <Container>
+          <Header style={{backgroundColor: '#D8485D'}}>
+            <StatusBar backgroundColor="blue" barStyle="light-content"/>
+            <Left>
+              <Button transparent onPress={this.handleClickBack}>
+                <Icon style={{color: 'white'}}  name='arrow-back'/>
+              </Button>
+            </Left>
+            <Body>
+            <Title style={{color: 'white'}}>Restaurant</Title>
+            </Body>
+            <Right/>
+          </Header>
+          {this.state.loading ? <Content><Spinner color='black'/></Content> :
+          <Content>
+            <Card style={styles.card}>
+              <CardItem>
+                <Left>
+                  <Body>
+                  <Text style={styles.restaurant}>{this.state.restaurant.name}</Text>
+                  <StarRating
+                    disabled={true}
+                    maxStars={5}
+                    rating={this.state.restaurant.avgRate}
+                    containerStyle={{marginTop: 10, alignSelf: "center"}}
+                    fullStarColor={"#f5af4b"}
+                    emptyStarColor={"#f5af4b"}
+                    halfStarEnabled
+                    starSize={15}
+                  />
+                  <Text note>{this.state.restaurant.location}</Text>
+                  <Text note>{this.state.restaurant.address}</Text>
+                  <Text note>{this.state.restaurant.teleNumber}</Text>
+                  <Text note>{this.state.restaurant.category}</Text>
+                  </Body>
+                </Left>
+              </CardItem>
+            </Card>
+            <Text style={styles.titleForDishes}>Dishes Not Found</Text>
+          </Content>}
+          <Fab
+              active={this.state.active}
+              direction="left"
+              style={{backgroundColor: '#5067FF'}}
+              containerStyle={{bottom:100}}
+              position="bottomRight"
+              onPress={() => this.setState({active: !this.state.active})}>
+            <Icon name="add"/>
+            <Button style={{backgroundColor: '#34A34F'}} onPress={this.handlePostImage.bind(this, "image")}>
+              <Icon name="ios-images"/>
+            </Button>
+            <Button style={{backgroundColor: '#3B5998'}} onPress={this.handlePostImage.bind(this, "camera")}>
+              <Icon name="ios-camera"/>
+            </Button>
+          </Fab>
+        </Container>
+      )
+    }
+    
     let dishes = this.state.restaurant.dishes.map((item) => {
       return (
         <Dishes key={item.dishId} data={item}/>
@@ -102,14 +160,15 @@ class RestaurantPage extends Component {
 
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.handleClickBack}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>Restaurant</Title>
+          <Title style={{color: 'white'}}>Restaurant</Title>
           </Body>
           <Right/>
         </Header>
@@ -150,12 +209,12 @@ class RestaurantPage extends Component {
             containerStyle={{bottom:100}}
             position="bottomRight"
             onPress={() => this.setState({active: !this.state.active})}>
-          <Icon name="add"/>
+          <Icon style={{color: 'white'}} name="add"/>
           <Button style={{backgroundColor: '#34A34F'}} onPress={this.handlePostImage.bind(this, "image")}>
-            <Icon name="ios-images"/>
+            <Icon style={{color: 'white'}} name="ios-images"/>
           </Button>
           <Button style={{backgroundColor: '#3B5998'}} onPress={this.handlePostImage.bind(this, "camera")}>
-            <Icon name="ios-camera"/>
+            <Icon style={{color: 'white'}} name="ios-camera"/>
           </Button>
         </Fab>
       </Container>

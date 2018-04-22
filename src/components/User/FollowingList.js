@@ -3,32 +3,23 @@
  */
 import React, {Component} from 'react';
 import {
-  ActionSheet,
   Body,
   Button,
-  Card,
-  CardItem,
   Container,
   Content,
-  FooterTab,
   Header,
-  Text,
-  Thumbnail,
   Icon,
-  Input,
-  Item,
   Left,
   List,
   ListItem,
   Right,
   Spinner,
-  Tab,
-  Tabs,
+  Text,
+  Thumbnail,
   Title
 } from 'native-base';
-import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {StatusBar, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
-import Footer from "../Footer";
 import network from "../../network";
 
 class FollowingList extends Component {
@@ -42,7 +33,6 @@ class FollowingList extends Component {
   }
 
   onBackPress() {
-    // this.props.history.goBack();
     this.props.navigation.goBack();
   }
 
@@ -62,7 +52,6 @@ class FollowingList extends Component {
   }
 
   onUserPress(userId) {
-    // this.props.history.push(`/user/${userId}`);
     this.props.navigation.navigate('User',{userId});
   }
 
@@ -104,14 +93,15 @@ class FollowingList extends Component {
 
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Left>
             <Button transparent onPress={this.onBackPress.bind(this)}>
-              <Icon name='arrow-back'/>
+              <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
           <Body>
-          <Title>Followings</Title>
+          <Title style={{color: 'white'}}>Followings</Title>
           </Body>
           <Right/>
         </Header>
@@ -129,7 +119,6 @@ class FollowingList extends Component {
 
 const styles = StyleSheet.create({
   listItem: {
-    // borderBottomWidth: 0
   },
   buttonText: {
     fontSize: 13,
@@ -140,7 +129,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    // followings: state.followings,
     user: state.user,
   }
 };

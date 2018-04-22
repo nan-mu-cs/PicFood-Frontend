@@ -2,23 +2,9 @@
  * Created by kai on 10/03/2018.
  */
 import React, {Component} from 'react';
-import {Image, StyleSheet, TouchableWithoutFeedback} from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right
-} from 'native-base';
-import { withNavigation } from 'react-navigation';
-import network from "../../network";
+import {TouchableWithoutFeedback} from 'react-native';
+import {Body, Card, CardItem, Icon, Left, Text, Thumbnail} from 'native-base';
+import {withNavigation} from 'react-navigation';
 import moment from 'moment';
 
 class CommentCard extends Component {
@@ -34,21 +20,18 @@ class CommentCard extends Component {
     console.log("click");
     console.log(this.props.data);
     console.log(this.props.data.dishId);
-    // this.props.history.push(`/dishes/${this.props.data.dishId}`)
     this.props.navigation.navigate('Dish',{
       dishId:this.props.data.dishId
     });
   }
 
   handleClickUser() {
-    // this.props.history.push(`/user/${this.props.data.commenterId}`)
     this.props.navigation.navigate('User',{
       userId:this.props.data.commenterId
     });
   }
 
   render() {
-    // console.log(this.props.data);
     return (
       <Card style={{padding: 5}}>
         <CardItem>

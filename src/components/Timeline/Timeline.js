@@ -2,28 +2,13 @@
  * Created by kai on 05/03/2018.
  */
 import React, {Component} from 'react';
-import {
-  Container,
-  Header,
-  Content,
-  FooterTab,
-  Button,
-  Text,
-  Icon,
-  Body,
-  Title,
-  List,
-  ListItem,
-  Spinner
-} from 'native-base';
-import {StyleSheet, ScrollView, RefreshControl} from 'react-native';
+import {Body, Container, Header, List, ListItem, Spinner, Title} from 'native-base';
+import {RefreshControl, ScrollView, StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import PostCard from "./PostCard";
 import LikeCard from "./LikeCard";
-import RateCard from "./RateCard";
 import CommentCard from "./CommentCard";
-import Footer from "../Footer";
-import {Col, Row, Grid} from "react-native-easy-grid";
+import {Col, Grid, Row} from "react-native-easy-grid";
 import network from "../../network";
 
 class Timeline extends Component {
@@ -39,7 +24,6 @@ class Timeline extends Component {
   }
 
   componentDidMount() {
-    //console.log(this.props.token);
     if (this.props.timelines.length === 0) {
       this.setState({loading: true});
       this.getData();
@@ -102,18 +86,13 @@ class Timeline extends Component {
             <CommentCard data={item}/>
           </ListItem>
         );
-      // card = <CommentCard data={item}/>;
-      // return (
-      //     <ListItem key={item.postId} style={styles.listItem}>
-      //         {card}
-      //     </ListItem>
-      // );
     });
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar backgroundColor="blue" barStyle="light-content"/>
           <Body>
-          <Title>PicFood</Title>
+          <Title style={{color: 'white'}}>PicFood</Title>
           </Body>
         </Header>
         <Grid>
@@ -134,16 +113,7 @@ class Timeline extends Component {
               </ScrollView>
             </Col>
           </Row>
-
         </Grid>
-        {/*<List dataArray={this.props.timelines}*/}
-        {/*renderRow={(item) =>*/}
-        {/*<ListItem style={styles.listItem}>*/}
-        {/*<ImageCard  data={item}/>*/}
-        {/*</ListItem>*/}
-        {/*}>*/}
-        {/*</List>*/}
-        {/*<Footer/>*/}
       </Container>
     );
   }
@@ -175,11 +145,6 @@ const
     }
   };
 
-export default connect
-
-(
+export default connect(
   mapStateToProps
-)(
-  Timeline
-)
-;
+)(Timeline);

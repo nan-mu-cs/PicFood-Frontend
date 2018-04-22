@@ -2,23 +2,9 @@
  * Created by kai on 10/03/2018.
  */
 import React, {Component} from 'react';
-import {Image, StyleSheet, TouchableWithoutFeedback} from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  Text,
-  CardItem,
-  Thumbnail,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right
-} from 'native-base';
-import { withNavigation } from 'react-navigation';
-import network from "../../network";
+import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Body, Card, CardItem, Icon, Left, Text, Thumbnail} from 'native-base';
+import {withNavigation} from 'react-navigation';
 import moment from 'moment';
 
 class LikeCard extends Component {
@@ -31,14 +17,12 @@ class LikeCard extends Component {
   }
 
   handleClickImage() {
-    // this.props.history.push(`/dishes/${this.state.dishId}`)
     this.props.navigation.navigate('Dish',{
       dishId:this.props.data.dishId
     });
   }
 
   handleClickUser() {
-    // this.props.history.push(`/user/${this.props.data.userId}`)
     this.props.navigation.navigate('User',{
       userId:this.props.data.userId
     });
@@ -61,7 +45,7 @@ class LikeCard extends Component {
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.handleClickImage}>
             <Body style={{paddingTop: 10, paddingLeft: 5}}>
-            <Text note><Icon name="md-heart" style={{fontSize: 15, color: 'red'}}/> Liked <Text> {this.props.data.posterName}</Text>'s post <Text
+            <Text note><Icon style={{color: 'white'}} name="md-heart" style={{fontSize: 15, color: 'red'}}/> Liked <Text> {this.props.data.posterName}</Text>'s post <Text
               style={{marginLeft: 5}}>{this.props.data.dishName}</Text></Text>
             </Body>
           </TouchableWithoutFeedback>
