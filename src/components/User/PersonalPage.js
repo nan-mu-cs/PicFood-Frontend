@@ -2,11 +2,13 @@
  * Created by kai on 07/03/2018.
  */
 import React, {Component} from 'react';
+
 import {Body, Button, Container, Header, Text, Thumbnail, Title} from 'native-base';
 import {AsyncStorage, Modal, StatusBar, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
 import {Col, Grid, Row} from "react-native-easy-grid";
 import ImageViewer from 'react-native-image-zoom-viewer';
+import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 
 class PersonalPage extends Component {
   constructor(props, context) {
@@ -36,7 +38,7 @@ class PersonalPage extends Component {
           </Body>
         </Header>
         <Grid>
-          <Row size={25} style={{alignItems: "center"}}>
+          <Row size={15} style={{alignItems: "center"}}>
             <Col size={3}>
               <TouchableWithoutFeedback onPress={() => (this.setState({pictureModalShow: true}))}>
                 <Thumbnail round size={150}
@@ -72,35 +74,35 @@ class PersonalPage extends Component {
             </Col>
           </Row>
           <Row size={10}>
-            <Col>
-              <Button primary block style={{flex: 1, marginLeft: 15, marginRight: 15}}
+            <Col style={{alignItems: "center"}}>
+              <AwesomeButtonRick type="primary" height= {70} width={280}
                       onPress={() => this.props.navigation.navigate('UserList')}>
                 <Text>Add Friends</Text>
-              </Button>
+              </AwesomeButtonRick>
             </Col>
           </Row>
-          <Row size={10} style={{marginTop: 12}}>
-            <Col>
-              <Button primary block style={{flex: 1, marginLeft: 15, marginRight: 15}}
+          <Row size={10} style={{marginTop: 6}}>
+            <Col style={{alignItems: "center"}}>
+              <AwesomeButtonRick type="secondary" height= {70} width={280}
                       onPress={() => this.props.navigation.navigate('EditProfile',{userId:this.props.user.userId})}>
                 <Text>Edit Profile</Text>
-              </Button>
+              </AwesomeButtonRick>
             </Col>
           </Row>
-          <Row size={10} style={{marginTop: 12}}>
-            <Col>
-              <Button primary block style={{flex: 1, marginLeft: 15, marginRight: 15}}
+          <Row size={10} style={{marginTop: 6}}>
+            <Col style={{alignItems: "center"}}>
+              <AwesomeButtonRick type="anchor" height= {70} width={280}
                       onPress={() => this.props.navigation.navigate('MyPosts',{userId:this.props.user.userId})}>
                 <Text>My Posts</Text>
-              </Button>
+              </AwesomeButtonRick>
             </Col>
           </Row>
-          <Row size={10} style={{marginTop: 12, marginBottom: 10}}>
-            <Col>
-              <Button danger block style={{flex: 1, marginLeft: 15, marginRight: 15}}
+          <Row size={10} style={{marginTop: 6, marginBottom: 100}}>
+            <Col style={{alignItems: "center"}}>
+              <AwesomeButtonRick backgroundColor='#d35058' backgroundDarker="#ff7fbe" height= {70} width={280}
                       onPress={() => this.handleLogout()}>
                 <Text>Logout</Text>
-              </Button>
+              </AwesomeButtonRick>
             </Col>
           </Row>
         </Grid>
