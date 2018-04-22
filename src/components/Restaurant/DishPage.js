@@ -40,12 +40,16 @@ class DishPage extends Component {
     console.log(this.state.dishId);
     this.handleClickBack = this.handleClickBack.bind(this);
     this.upvote = this.upvote.bind(this);
+    this.handleClickDish = this.handleClickDish.bind(this);
   }
 
   handleClickBack() {
     this.props.navigation.goBack();
   }
 
+  handleClickDish(postId){
+    this.props.navigation.navigate('ViewPost', {postId});
+  }
   componentDidMount() {
     console.log(this.state.dishId);
     network.dish.getDishById(this.state.dishId)
@@ -108,7 +112,9 @@ class DishPage extends Component {
         return (
           <Card key={item.postId} style={styles.card}>
             <CardItem style={styles.image}>
-              <Image source={{cache: 'force-cache', uri: image}} style={{height: 200, width: null, flex: 1}}/>
+              <TouchableWithoutFeedback onPress={this.handleClickDish.bind(this,item.postId)}>
+                <Image source={{cache: 'force-cache', uri: image}} style={{height: 200, width: null, flex: 1}}/>
+              </TouchableWithoutFeedback>
             </CardItem>
             <CardItem style={styles.cardItem}>
               <Left>
