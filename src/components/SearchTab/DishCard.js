@@ -31,19 +31,6 @@ class DishCard extends Component {
     };
   }
 
-  componentDidMount() {
-    network.dish.getDishImages(this.props.data.dishId)
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.length > 0)
-          this.setState({
-            imageUrl: data[0]
-          });
-      }).catch(err => {
-      console.log(err);
-    });
-  }
-
   onCardPress(dishId) {
     this.props.navigation.navigate("Dish", {
       dishId
@@ -51,35 +38,7 @@ class DishCard extends Component {
   }
 
   render() {
-    let avatar = this.props.data.avatar || "http://via.placeholder.com/100x100";
-    return (
-      <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.restaurantId)}>
-        <Card>
-          <CardItem style={styles.cardItem}>
-            <Thumbnail source={{cache: 'force-cache', uri: avatar}} style={{height: 100, width: 100}}/>
-            <View style={{flex: 1, paddingLeft: 10, justifyContent: 'flex-start',}}>
-              <Text>{this.props.data.name}</Text>
-              <Text note style={{fontSize: 13}}>{this.props.data.address}</Text>
-              <Text note style={{color: 'gray'}}>{this.props.data.category}</Text>
-              <StarRating
-                disabled={true}
-                maxStars={5}
-                rating={this.props.data.avgRate}
-                containerStyle={{marginTop: 3, alignSelf: "flex-start"}}
-                fullStarColor={"#f5af4b"}
-                emptyStarColor={"#f5af4b"}
-                halfStarEnabled
-                starSize={15}
-              />
-            </View>
-          </CardItem>
-        </Card>
-      </TouchableWithoutFeedback>
-    );
-  }
-
-  render() {
-    let avatar = this.props.data.imageUrl || "http://via.placeholder.com/100x100";
+    let avatar = this.props.data.imageUrls.length > 0 && this.props.data.imageUrls[0] || "http://via.placeholder.com/100x100";
     return (
       <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.dishId)}>
         <Card>

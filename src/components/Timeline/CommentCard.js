@@ -2,7 +2,7 @@
  * Created by kai on 10/03/2018.
  */
 import React, {Component} from 'react';
-import {Image, TouchableWithoutFeedback} from 'react-native';
+import {Image, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {
   Container,
   Header,
@@ -72,13 +72,9 @@ class CommentCard extends Component {
             </Body>
           </TouchableWithoutFeedback>
         </CardItem>
-        <CardItem>
-          <Left>
-            <Text style={{fontSize:10,color:'grey'}}>
-              {moment(this.props.data.time).fromNow()}
-            </Text>
-          </Left>
-        </CardItem>
+        <Text style={{fontSize: 13, marginTop: 10, paddingRight: 10, paddingBottom: 10, textAlign: 'right', color: 'grey'}}>
+          {moment(this.props.data.time).fromNow()}
+        </Text>
       </Card>
     );
   }
