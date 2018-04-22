@@ -19,6 +19,7 @@ import {
 } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import network from "../../network";
+import moment from 'moment';
 
 class CommentCard extends Component {
   constructor(props, context) {
@@ -45,6 +46,7 @@ class CommentCard extends Component {
   }
 
   render() {
+    // console.log(this.props.data);
     return (
       <Card style={{padding: 5}}>
         <CardItem>
@@ -66,6 +68,13 @@ class CommentCard extends Component {
             <Text style={{marginTop: 5, marginLeft: 10}}>{this.props.data.content}</Text>
             </Body>
           </TouchableWithoutFeedback>
+        </CardItem>
+        <CardItem>
+          <Left>
+            <Text style={{fontSize:10,color:'grey'}}>
+              {moment(this.props.data.time).fromNow()}
+            </Text>
+          </Left>
         </CardItem>
       </Card>
     );

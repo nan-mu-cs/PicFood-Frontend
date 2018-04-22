@@ -19,6 +19,7 @@ import {
 } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import network from "../../network";
+import moment from 'moment';
 
 class LikeCard extends Component {
   constructor(props, context) {
@@ -44,6 +45,7 @@ class LikeCard extends Component {
   }
 
   render() {
+    // console.log(this.props.data);
     return (
       <Card style={{marginBottom: 5}}>
         {/*<Card style={{bordeNrColor: "transparent", shadowColor: "transparent"}}>*/}
@@ -65,6 +67,13 @@ class LikeCard extends Component {
               style={{marginLeft: 5}}>{this.props.data.dishName}</Text></Text>
             </Body>
           </TouchableWithoutFeedback>
+        </CardItem>
+        <CardItem>
+          <Left>
+            <Text style={{fontSize:10,color:'grey'}}>
+              {moment(this.props.data.time).fromNow()}
+            </Text>
+          </Left>
         </CardItem>
 
       </Card>

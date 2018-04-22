@@ -18,7 +18,7 @@ export default {
       return fetch(HOST + '/api/users/me', verb('get'));
     },
 
-    postUserProfile(body) { // avatar, bio, email, name, password (all optional)
+    postUserProfile(body) { // avatar, bio, email, name, password
       return fetch(HOST + '/api/users/me', verb('post', body));
     },
     getUserTimeline(userId) {

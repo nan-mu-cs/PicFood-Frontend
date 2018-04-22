@@ -11,7 +11,6 @@ export default (state = initialState, action) => {
     case "CHANGE_SORTING_OPTIONS":
       return {...state, searchOptions: action.data};
     case "UPDATE_TOKEN":
-      //console.log(action.data);
       return {...state, token: action.data};
     case "GET_LOCATION":
       return {...state, location: action.data};
@@ -46,6 +45,8 @@ export default (state = initialState, action) => {
       return initialState;
     case "UPDATE_USER_TIMELINE":
       return {...state, userTimeline: action.data};
+    case "UPDATE_OTHERUSER_TIMELINE":
+      return {...state, otherUserTimeline: action.data};
     default:
       return state;
   }

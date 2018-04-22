@@ -18,6 +18,8 @@ import {
   Right
 } from 'native-base';
 import StarRating from 'react-native-star-rating';
+import moment from 'moment';
+
 
 class RateCard extends Component {
   constructor(props, context) {
@@ -70,6 +72,13 @@ class RateCard extends Component {
             />
             </Body>
           </TouchableWithoutFeedback>
+        </CardItem>
+        <CardItem>
+          <Left>
+            <Text style={{fontSize:10,color:'grey'}}>
+              {moment(this.props.data.time).fromNow()}
+            </Text>
+          </Left>
         </CardItem>
         {/*<CardItem>*/}
         {/*<Left>*/}

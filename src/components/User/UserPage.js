@@ -24,7 +24,9 @@ import {connect} from 'react-redux';
 import Footer from "../Footer";
 import {Col, Row, Grid} from "react-native-easy-grid";
 import network from "../../network";
-import ImagePreview from 'react-native-image-preview';
+import ImageViewer from 'react-native-image-zoom-viewer';
+import {Modal} from "react-native";
+// import ImagePreview from 'react-native-image-preview';
 
 class UserPage extends Component {
   constructor(props, context) {
@@ -50,10 +52,11 @@ class UserPage extends Component {
       .then(data => {
         this.setState(data);
         // this.props.dispatch({type:"UPDATE_USER_PROFILE",data:data});
+
         network.account.getUserTimeline(data.userId)
           .then(res => res.json())
           .then(data => {
-            this.props.dispatch({type: "UPDATE_USER_TIMELINE", data: data});
+            this.props.dispatch({type: "UPDATE_OTHERUSER_TIMELINE", data: data});
           }).catch(err => {
           console.log(err);
         })
@@ -68,11 +71,13 @@ class UserPage extends Component {
   }
 
   render() {
+    console.log("usertime line!!!");
+    console.log(this.props);
     let images = [];
     let post = [];
-    for (let i = 0; i < this.props.userTimeline.length; i++) {
-      if (this.props.userTimeline[i].creatorId)
-        post.push(this.props.userTimeline[i]);
+    for (let i = 0; i < this.props.otherUserTimeline.length; i++) {
+      if (this.props.otherUserTimeline[i].creatorId)
+        post.push(this.props.otherUserTimeline[i]);
     }
     for (let i = 0; i < post.length; i += 3) {
       let card1 = (
@@ -134,8 +139,11 @@ class UserPage extends Component {
                   uri: (this.state.avatar) || "http://via.placeholder.com/100x100"
                 }} style={{marginLeft: 30}}/>
               </TouchableWithoutFeedback>
-              <ImagePreview visible={this.state.pictureModalShow} source={{uri: (this.state.avatar)}}
-                            close={() => (this.setState({pictureModalShow: false}))}/>
+              <Modal visible={this.state.pictureModalShow} transparent={true} >
+                <ImageViewer imageUrls={[{url:this.state.avatar}]} enableImageZoom={true} onCancel={() => (this.setState({pictureModalShow: false}))}  onClick={() => (this.setState({pictureModalShow: false}))} />
+              </Modal>
+              {/*<ImagePreview visible={this.state.pictureModalShow} source={{uri: (this.state.avatar)}}*/}
+                            {/*close={() => (this.setState({pictureModalShow: false}))}/>*/}
             </Col>
             <Col size={7}>
               <Row style={{alignItems: "center"}}>
@@ -189,7 +197,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state, ownProps) => {
   return {
     user: state.user,
-    userTimeline: state.userTimeline
+    otherUserTimeline: state.otherUserTimeline
   }
 };
 
