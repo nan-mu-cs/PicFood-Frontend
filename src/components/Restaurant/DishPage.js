@@ -33,33 +33,31 @@ class DishPage extends Component {
     super(props);
     this.state = {
       loading: true,
-      dishId: this.props.navigation.state.params.dishId
+      dishId: this.props.navigation.state.params.dishId,
+      dish: {},
+      posts: []
     };
     this.handleClickBack = this.handleClickBack.bind(this);
     this.upvote = this.upvote.bind(this);
   }
 
   handleClickBack() {
-    // this.props.history.goBack();
     this.props.navigation.goBack();
   }
 
   componentDidMount() {
     console.log(this.state.dishId);
-    network.dish.getPostsOfDish(this.state.dishId)
+    network.dish.getDishById(this.state.dishId)
       .then(res => res.json())
       .then(res => {
-        // console.log(res)
-        this.props.dispatch({type: "GET_POSTS_OF_DISH", data: res});
-        this.setState({loading: false});
+        this.setState({...res, posts: res.posts, loading: false})
       })
       .catch(err => {
-        console.log(err)
-      })
+        // console.log(err)
+      });
   }
 
   onDishCreatorPress(userId) {
-    // this.props.history.push(`/user/${userId}`);
     this.props.navigation.navigate('User', {userId});
   }
 
@@ -100,8 +98,8 @@ class DishPage extends Component {
     //   });
   }
 
-  render() {
-    let photos = this.props.postsOfDish.map(item => {
+  renderPostsOfDish() {
+    let photos = this.state.posts.map(item => {
         let image = item.imageUrl || "http://via.placeholder.com/100x100";
         let poster = item.creator;
         let avatar = item.creatorAvater || "http://via.placeholder.com/100x100";
@@ -130,7 +128,10 @@ class DishPage extends Component {
         )
       }
     );
-    //console.log(this.props);
+    return photos;
+  }
+
+  render() {
     return (
       <Container>
         <Header>
@@ -148,7 +149,7 @@ class DishPage extends Component {
           <Content>
             <Card style={styles.card}>
               <Text
-                style={styles.dishName}>{(this.props.postsOfDish.length && this.props.postsOfDish[0].dishName) || "DishName"}</Text>
+                style={styles.dishName}>{this.state.name}</Text>
               <StarRating
                 disabled={true}
                 maxStars={5}
@@ -160,17 +161,15 @@ class DishPage extends Component {
                 starSize={15}
               />
               <TouchableWithoutFeedback
-                onPress={this.onRestaurantPress.bind(this, this.props.postsOfDish[0].restaurantId)}>
+                onPress={this.onRestaurantPress.bind(this, this.state.restaurantId)}>
                 <Text
-                  style={styles.restaurant}>{(this.props.postsOfDish.length && this.props.postsOfDish[0].restaurantName) || "restaurantName"}</Text>
+                  style={styles.restaurant}>{this.state.restaurantName}</Text>
               </TouchableWithoutFeedback>
             </Card>
-
             <List>
-              {photos}
+              {this.renderPostsOfDish()}
             </List>
           </Content>}
-        {/*<Footer/>*/}
       </Container>
     )
   }
@@ -202,6 +201,7 @@ const styles = StyleSheet.create({
   restaurant: {
     paddingTop: 10,
     marginBottom: 18,
+    color: '#0f87f8',
     textAlign: 'center',
   },
   poster: {

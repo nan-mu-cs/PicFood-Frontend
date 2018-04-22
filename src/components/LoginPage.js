@@ -124,24 +124,28 @@ const styles = StyleSheet.create({
   title: {
     color: 'white', fontSize: 42,
     shadowOffset: {width: 1, height: 1,},
-    shadowColor: 'white',
+    shadowColor: 'black',
     shadowOpacity: 0.3,
   },
   signupHint: {
     fontSize: 15, color: 'white', shadowOffset: {width: 2, height: 2,},
-    shadowColor: 'white',
+    shadowColor: 'black',
     shadowOpacity: 0.5,
   },
   registerBtn: {
     marginLeft: 10, paddingHorizontal: 14, height: 30,
     shadowOffset: {width: 1, height: 1,},
-    shadowColor: 'white',
+    shadowColor: 'black',
     shadowOpacity: 0.3,
   },
-  inputBox: {marginBottom: 20, borderRadius: 6, borderWidth: 0, height: 47, backgroundColor: '#fdfdf8'},
+  inputBox: {marginBottom: 20, borderRadius: 6, borderWidth: 0, height: 47, backgroundColor: '#fdfdf8',
+    shadowOffset: {width: 1, height: 1,},
+    shadowColor: 'black',
+    shadowOpacity: 0.3,
+  },
   shadow: {
     shadowOffset: {width: 2, height: 2,},
-    shadowColor: 'white',
+    shadowColor: 'black',
     shadowOpacity: .4,
   },
   bottomDiv: {

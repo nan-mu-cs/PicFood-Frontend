@@ -78,11 +78,8 @@ class RestaurantPage extends Component {
   }
 
   handleClickBack() {
-    // this.props.history.goBack();
     this.props.navigation.goBack();
   }
-
-
 
   async componentDidMount() {
     let cache = this.props.cachedRestaurants[this.state.restaurantId];
