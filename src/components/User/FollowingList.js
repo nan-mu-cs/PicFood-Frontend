@@ -85,7 +85,8 @@ class FollowingList extends Component {
   }
 
   render() {
-    let userList = this.state.followings.map(item =>
+    let followings = this.state.followings.filter(item => item.userId !== this.props.user.userId);
+    let userList = followings.map(item =>
       <ListItem key={item.userId} style={styles.listItem}>
         <TouchableWithoutFeedback onPress={this.onUserPress.bind(this, item.userId)}>
           <Left>
@@ -140,6 +141,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state, ownProps) => {
   return {
     // followings: state.followings,
+    user: state.user,
   }
 };
 
