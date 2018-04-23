@@ -51,7 +51,24 @@ class RegisterPage extends Component {
   }
 
   handleClickRegister() {
-    console.log(this.state);
+    // console.log(this.state);
+    let emailRe = new RegExp(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
+    if(!emailRe.test(this.state.email))
+    {
+      this.setState({
+        error:true,
+        errorMessage:"Wrong email format!"
+      });
+      return ;
+    }
+    let pwdRe = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+    if(!pwdRe.test(this.state.password)){
+      this.setState({
+        error:true,
+        errorMessage:"Password must be at least 6 length and has both digit and character"
+      });
+      return ;
+    }
     network.account.register({
       email: this.state.email,
       password: this.state.password,
@@ -102,7 +119,7 @@ class RegisterPage extends Component {
               <Text style={{fontSize: 18, color: 'white'}}>Register</Text>
             </Button>
             {this.state.error && Toast.show({
-              text: 'Wrong email or password!',
+              text: this.state.errorMessage,
               position: 'bottom',
               buttonText: 'Okay'
             })
