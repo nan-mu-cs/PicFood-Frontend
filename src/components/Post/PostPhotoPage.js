@@ -30,7 +30,7 @@ class PostPhotoPage extends Component {
     super(props);
     this.state = {
       avatar: "",
-      dishname: "",
+      dishname: this.props.navigation.state.params.name,
       rate: 0,
       comment: "",
       category: "",

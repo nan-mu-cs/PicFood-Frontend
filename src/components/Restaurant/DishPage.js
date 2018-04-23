@@ -11,6 +11,7 @@ import {
   Container,
   Content,
   Header,
+  Fab,
   Icon,
   Left,
   List,
@@ -24,6 +25,7 @@ import {Image, StatusBar, StyleSheet, TouchableWithoutFeedback} from 'react-nati
 import {connect} from 'react-redux';
 import StarRating from 'react-native-star-rating';
 import network from '../../network';
+import {ImagePicker} from "expo";
 
 class DishPage extends Component {
   constructor(props, context) {
@@ -37,6 +39,7 @@ class DishPage extends Component {
     console.log(this.state.dishId);
     this.handleClickBack = this.handleClickBack.bind(this);
     this.handleClickDish = this.handleClickDish.bind(this);
+    this.updateData = this.updateData.bind(this);
   }
 
   handleClickBack() {
@@ -47,18 +50,47 @@ class DishPage extends Component {
     this.props.navigation.navigate('ViewPost', {postId});
   }
   componentDidMount() {
-    console.log(this.state.dishId);
+    this.updateData();
+  }
+
+  handlePostImage(type) {
+    let result;
+    if (type === "image") {
+      result = ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        aspect: [4, 3],
+      });
+    } else {
+      result = ImagePicker.launchCameraAsync({
+        allowsEditing: true,
+        aspect: [4, 3],
+      });
+    }
+    result.then((result) => {
+      if (!result.cancelled) {
+        this.props.navigation.navigate("Post",{
+          image:result.uri,
+          name: this.state.name,
+          restaurantId:this.state.restaurantId,
+          callback:this.updateData
+        });
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+  async updateData(){
     network.dish.getDishById(this.state.dishId)
       .then(res => res.json())
       .then(res => {
         console.log(res)
         this.setState({...res, posts: res.posts || [], loading: false})
+        console.log(this.state)
       })
       .catch(err => {
         console.log(err)
       });
   }
-
   onDishCreatorPress(userId) {
     this.props.navigation.navigate('User', {userId});
   }
@@ -129,7 +161,7 @@ class DishPage extends Component {
               <StarRating
                 disabled={true}
                 maxStars={5}
-                rating={4.5}
+                rating={this.state.avgRate}
                 containerStyle={{marginTop: 3, alignSelf: "center"}}
                 fullStarColor={"#f5af4b"}
                 emptyStarColor={"#f5af4b"}
@@ -146,6 +178,21 @@ class DishPage extends Component {
               {this.renderPostsOfDish()}
             </List>
           </Content>}
+        <Fab
+          active={this.state.active}
+          direction="left"
+          style={{backgroundColor: '#5067FF'}}
+          containerStyle={{bottom:100}}
+          position="bottomRight"
+          onPress={() => this.setState({active: !this.state.active})}>
+          <Icon name="add"/>
+          <Button style={{backgroundColor: '#34A34F'}} onPress={this.handlePostImage.bind(this, "image")}>
+            <Icon name="ios-images"/>
+          </Button>
+          <Button style={{backgroundColor: '#3B5998'}} onPress={this.handlePostImage.bind(this, "camera")}>
+            <Icon name="ios-camera"/>
+          </Button>
+        </Fab>
       </Container>
     )
   }

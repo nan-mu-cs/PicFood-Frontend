@@ -189,7 +189,7 @@ class ViewPost extends Component {
           });
           console.log("ERR " + e.message);
         });
-      this.props.navigation.navigate('Profile');
+      this.props.navigation.goBack();
     }
   }
 
