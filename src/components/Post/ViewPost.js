@@ -51,6 +51,7 @@ class ViewPost extends Component {
     this.deletePost = this.deletePost.bind(this);
     this.editPost = this.editPost.bind(this);
     this.handleClickUser = this.handleClickUser.bind(this);
+    this.handleClickRestaurant = this.handleClickRestaurant.bind(this);
   }
 
   onBackPress() {
@@ -146,8 +147,6 @@ class ViewPost extends Component {
 
 
   postComment() {
-    console.log("66666" + this.state.com);
-    console.log(this.state.postId + " ====== " + this.state.com);
     if (!this.state.com) return;
     network.comment.postComment({postId: this.state.postId, content: this.state.com})
       .then(response => response.json())
@@ -217,6 +216,13 @@ class ViewPost extends Component {
   handleClickUser(commenterId) {
     this.props.navigation.navigate('User', {
       userId: commenterId
+    });
+  }
+
+  handleClickRestaurant() {
+    console.log(this.props.post.restaurantId);
+    this.props.navigation.navigate('Restaurant', {
+      restaurantId: this.props.post.restaurantId
     });
   }
 
@@ -340,9 +346,11 @@ class ViewPost extends Component {
                 })
                 }
               </Left>
-              <Right>
-                <Text>{this.props.post.restaurantName}</Text>
-              </Right>
+              <TouchableWithoutFeedback onPress={() => this.handleClickRestaurant()}>
+                <Right>
+                  <Text>{this.props.post.restaurantName}</Text>
+                </Right>
+              </TouchableWithoutFeedback>
             </CardItem>
             <CardItem>
               <Left>
