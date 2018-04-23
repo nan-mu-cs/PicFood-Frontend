@@ -41,7 +41,7 @@ class PersonalPage extends Component {
           <Row size={15} style={{alignItems: "center"}}>
             <Col size={3}>
               <TouchableWithoutFeedback onPress={() => (this.setState({pictureModalShow: true}))}>
-                <Thumbnail round size={150}
+                <Thumbnail round large
                            source={{cache: 'force-cache', uri: (this.props.user && this.props.user.avatar) || "http://via.placeholder.com/100x100"}}
                            style={{marginLeft: 30}}/>
               </TouchableWithoutFeedback>
@@ -50,25 +50,27 @@ class PersonalPage extends Component {
                 <ImageViewer imageUrls={[{url:this.props.user.avatar}]} enableImageZoom={true} onCancel={() => (this.setState({pictureModalShow: false}))}  onClick={() => (this.setState({pictureModalShow: false}))} />
               </Modal>
             </Col>
-            <Col size={2}>
+            <Col size={1}>
             </Col>
-            <Col size={10}>
+            <Col size={8}>
               <Row style={{alignItems: "center"}}>
-                <Col size={3}>
+                <Col size={4} style={{alignItems: "center"}}>
                   <TouchableWithoutFeedback
                     onPress={() => this.props.navigation.navigate('Followings',{
                       userId:this.props.user.userId
                     })}>
-                    <Text>{this.props.user.followCount || 0} following</Text>
+                    <Text style={{fontWeight:'bold'}}>{this.props.user.followCount || 0}</Text>
                   </TouchableWithoutFeedback>
+                  <Text>following</Text>
                 </Col>
-                <Col size={3}>
+                <Col size={4} style={{alignItems: "center"}}>
                   <TouchableWithoutFeedback
                     onPress={() =>  this.props.navigation.navigate('Followers',{
                       userId:this.props.user.userId
                     })}>
-                    <Text>{this.props.user.fanCount || 0} followers</Text>
+                    <Text style={{fontWeight:'bold'}}>{this.props.user.fanCount || 0} </Text>
                   </TouchableWithoutFeedback>
+                  <Text>followers</Text>
                 </Col>
               </Row>
             </Col>

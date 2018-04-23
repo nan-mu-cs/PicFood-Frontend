@@ -95,7 +95,6 @@ class SearchTab extends Component {
     console.log(this.props.location.lat, this.props.location.lon)
     network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
       .then(res => {
-        // console.log(res)
         this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res.splice(0, 18)});
         this.setState({loading: false})
       })
@@ -105,7 +104,6 @@ class SearchTab extends Component {
 
     network.dish.searchDishes('', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, 10000)
       .then(res => {
-        // console.log(res)
         this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 18)});
       })
       .catch(err => {

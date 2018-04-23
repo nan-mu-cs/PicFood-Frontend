@@ -3,7 +3,10 @@
  */
 
 import React, {Component} from 'react';
-import {Body, Button, Container, Header, Icon, Left, Right, Text, Thumbnail, Title} from 'native-base';
+import {
+  Body, Button, Container, Content, Header, Icon, Left, Right, Spinner, Text, Thumbnail,
+  Title
+} from 'native-base';
 import {
   Dimensions,
   Image,
@@ -35,7 +38,6 @@ class UserPage extends Component {
   }
 
   handleClickBack() {
-    // this.props.history.goBack();
     this.props.navigation.goBack();
   }
 
@@ -45,10 +47,10 @@ class UserPage extends Component {
       .then(data => {
         this.setState(data);
         // this.props.dispatch({type:"UPDATE_USER_PROFILE",data:data});
-
         network.account.getUserTimeline(data.userId)
           .then(res => res.json())
           .then(data => {
+            this.setState({loading: false})
             this.props.dispatch({type: "UPDATE_OTHERUSER_TIMELINE", data: data});
           }).catch(err => {
           console.log(err);
@@ -59,7 +61,6 @@ class UserPage extends Component {
   }
 
   handleClickImage(postId) {
-    // this.props.history.push(`/viewpost/${postId}`)
     this.props.navigation.navigate('ViewPost', {postId});
   }
 
@@ -98,7 +99,7 @@ class UserPage extends Component {
             <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this, post[i + 2].postId)}>
               <Image source={{
                 cache: 'force-cache',
-                uri: post[i + 1].imageUrl || "http://via.placeholder.com/350x150"
+                uri: post[i + 2].imageUrl || "http://via.placeholder.com/350x150"
               }} style={styles.photoItem}/>
             </TouchableWithoutFeedback>
         );
@@ -124,6 +125,7 @@ class UserPage extends Component {
           </View>
           <Right/>
         </Header>
+        {this.state.loading ? <Content><Spinner color='black'/></Content> :
         <Grid>
           <Row size={15} style={{alignItems: "center"}}>
             <Col size={3}>
@@ -139,21 +141,28 @@ class UserPage extends Component {
               {/*<ImagePreview visible={this.state.pictureModalShow} source={{uri: (this.state.avatar)}}*/}
                             {/*close={() => (this.setState({pictureModalShow: false}))}/>*/}
             </Col>
-            <Col size={7}>
+            <Col size={1}>
+            </Col>
+            <Col size={8}>
               <Row style={{alignItems: "center"}}>
-                <Col size={3}>
-                  <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Followings', {
-                    userId: this.state.userId
-                  })}>
-                    <Text>{this.state.followCount || 0} following</Text>
+                <Col size={4} style={{alignItems: "center"}}>
+                  <TouchableWithoutFeedback
+                    onPress={() => this.props.navigation.navigate('Followings',{
+                      userId:this.props.user.userId
+                    })}>
+                    <Text style={{fontWeight:'bold'}}>{this.props.user.followCount || 0}</Text>
                   </TouchableWithoutFeedback>
+                  <Text>following</Text>
                 </Col>
-                <Col size={3}>
-                  <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Followers', {
-                    userId: this.state.userId
-                  })}>
-                    <Text>{this.state.fanCount || 0} followers</Text>
+                <Col size={4} style={{alignItems: "center"}}>
+                  <TouchableWithoutFeedback
+                    onPress={() =>  this.props.navigation.navigate('Followers',{
+                      userId:this.props.user.userId
+                    })}>
+
+                    <Text style={{fontWeight:'bold'}}>{this.props.user.fanCount || 0} </Text>
                   </TouchableWithoutFeedback>
+                  <Text>followers</Text>
                 </Col>
               </Row>
             </Col>
@@ -166,8 +175,7 @@ class UserPage extends Component {
               </ScrollView>
             </Col>
           </Row>
-        </Grid>
-        {/*<Footer/>*/}
+        </Grid>}
       </Container>
     );
   }
