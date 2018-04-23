@@ -24,7 +24,7 @@ import {
   Title,
   Toast
 } from 'native-base';
-import {Image, Modal, ScrollView, StatusBar, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
+import {Image, Modal, ScrollView, StatusBar, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux';
 // import ImagePreview from 'react-native-image-preview';
 import ImageViewer from 'react-native-image-zoom-viewer';
@@ -274,11 +274,12 @@ class ViewPost extends Component {
               <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
-          <View style={{flex: 5, justifyContent: 'center'}}>
-            <Title style={{color: 'white'}}>{this.props.post.dishName}</Title>
-          </View>
+          <Body>
+          <Title style={{color: 'white'}}>Post</Title>
+          </Body>
           {this.props.user.userId == this.state.creatorId &&
           <Right>
+
             <Button transparent onPress={this.editPost.bind(this, this.state.postId)}>
               <Icon style={{color: 'white'}} name='cut'/>
               {/*icon name here was attached prefix 'ios-' automatically */}
@@ -289,6 +290,7 @@ class ViewPost extends Component {
               buttonText: 'Okay'
             })
             }
+
             <Button transparent onPress={this.deletePost}>
               <Icon style={{color: 'white'}} name='trash'/>
               {/*icon name here was attached prefix 'ios-' automatically */}
@@ -299,14 +301,17 @@ class ViewPost extends Component {
               buttonText: 'Okay'
             })
             }
+
           </Right>}
           {this.props.user.userId != this.state.creatorId &&
           <Right/>}
         </Header>
         {this.state.loading ? <Content><Spinner color='black'/></Content> :
           <Content>
-            <Card style={{marginLeft: 10, marginRight: 10, marginTop: 10}}>
-              <Text style={{alignSelf: 'center', paddingVertical: 12, fontSize: 18}}>{this.props.post.dishName}</Text>
+            <Body>
+            <Text style={{paddingVertical: 12, fontSize: 15}}>{this.props.post.dishName}</Text>
+            </Body>
+            <Card>
               <TouchableWithoutFeedback onPress={() => (this.setState({pictureModalShow: true}))}>
                 <CardItem cardBody style={styles.star}>
                   <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}}/>
@@ -326,7 +331,7 @@ class ViewPost extends Component {
                 fullStarColor={"#f5af4b"}
                 emptyStarColor={"#f5af4b"}
                 halfStarEnabled
-                starSize={21}
+                starSize={30}
               />
               <CardItem>
                 <Left>
@@ -341,77 +346,39 @@ class ViewPost extends Component {
                   })
                   }
                 </Left>
-                <View style={{width: 240}}>
-                  <Text style={{textAlign: 'right'}}>{this.props.post.restaurantName}</Text>
-                </View>
+                <TouchableWithoutFeedback onPress={() => this.handleClickRestaurant()}>
+                  <Right>
+                    <Text>{this.props.post.restaurantName}</Text>
+                  </Right>
+                </TouchableWithoutFeedback>
               </CardItem>
               <CardItem>
                 <Left>
                   <Text>{this.props.post.content}</Text>
                 </Left>
               </CardItem>
-            </TouchableWithoutFeedback>
-            <Modal visible={this.state.pictureModalShow} transparent={true}>
-              <ImageViewer imageUrls={[{url: image}]} enableImageZoom={true}
-                           onCancel={() => (this.setState({pictureModalShow: false}))}
-                           onClick={() => (this.setState({pictureModalShow: false}))}/>
-            </Modal>
-            {/*<ImagePreview visible={this.state.pictureModalShow} source={{uri:image}} close={() => (this.setState({pictureModalShow: false}))} />*/}
-            <StarRating
-              disabled={true}
-              maxStars={5}
-              rating={this.props.post.rate}
-              containerStyle={{marginTop: 3, alignSelf: "center"}}
-              fullStarColor={"#f5af4b"}
-              emptyStarColor={"#f5af4b"}
-              halfStarEnabled
-              starSize={30}
-            />
-            <CardItem>
-              <Left>
-                <Button transparent onPress={this.upvote}>
-                  <Icon active name="thumbs-up"/>
-                  <Text>{this.props.post.upvoteCount} Likes</Text>
-                </Button>
-                {this.state.error && Toast.show({
-                  text: 'Can\'t upvote!',
-                  position: 'bottom',
-                  buttonText: 'Okay'
-                })
-                }
-              </Left>
-              <TouchableWithoutFeedback onPress={() => this.handleClickRestaurant()}>
+              <CardItem>
+                <Item rounded style={styles.comment}>
+                  <Input placeholder='Comment...' value={this.state.com}
+                         onChangeText={(val) => this.setState({com: val})}/>
+                </Item>
                 <Right>
-                  <Text>{this.props.post.restaurantName}</Text>
+                  <Button onPress={this.postComment}>
+                    <Text>Post</Text>
+                  </Button>
+                  {this.state.error && Toast.show({
+                    text: 'Can\'t comment!',
+                    position: 'bottom',
+                    buttonText: 'Okay'
+                  })
+                  }
                 </Right>
-              </TouchableWithoutFeedback>
-            </CardItem>
-            <CardItem>
-              <Left>
-                <Text>{this.props.post.content}</Text>
-              </Left>
-            </CardItem>
-            <CardItem>
-              <Item rounded style={styles.comment}>
-                <Input placeholder='Comment...' value={this.state.com}
-                       onChangeText={(val) => this.setState({com: val})}/>
-              </Item>
-              <Right>
-                <Button onPress={this.postComment}>
-                  <Text>Post</Text>
-                </Button>
-                {this.state.error && Toast.show({
-                  text: 'Can\'t comment!',
-                  position: 'bottom',
-                  buttonText: 'Okay'
-                })
-                }
-              </Right>
-            </CardItem>
-          </Card>
-          < List >
-          {reviews}
-          </List>
+              </CardItem>
+            </Card>
+
+            <List>
+              {reviews}
+            </List>
           </Content>}
       </Container>
     )
