@@ -3,24 +3,27 @@
  */
 import React, {Component} from 'react';
 import {Body, Container, Header, List, ListItem, Spinner, Title} from 'native-base';
-import {RefreshControl, ScrollView, StatusBar, StyleSheet} from 'react-native';
+import {RefreshControl, ScrollView, StatusBar, StyleSheet,ListView} from 'react-native';
 import {connect} from 'react-redux';
 import PostCard from "./PostCard";
 import LikeCard from "./LikeCard";
 import CommentCard from "./CommentCard";
 import {Col, Grid, Row} from "react-native-easy-grid";
 import network from "../../network";
+// import {PullView} from 'react-native-pull';
 
 class Timeline extends Component {
   constructor(props, context) {
     super(props);
+    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      data: [],
+      data: this.ds.cloneWithRows([]),
       refreshing: false,
       loading: false
     };
     this.handleRefresh = this.handleRefresh.bind(this);
     this.getData = this.getData.bind(this);
+    this.renderItem = this.renderItem.bind(this);
   }
 
   componentDidMount() {
@@ -48,7 +51,7 @@ class Timeline extends Component {
       })
       .then(data => {
         this.setState({
-          data,
+          data:this.ds.cloneWithRows(data),
           refreshing: false,
           loading: false
         });
@@ -62,31 +65,52 @@ class Timeline extends Component {
     this.setState({refreshing: true});
     this.getData();
   }
-
+  renderItem(item){
+    if (item.creatorId)
+      return (
+        <ListItem key={item.postId} style={styles.listItem}>
+          <PostCard data={item}/>
+        </ListItem>
+      );
+    // card = <PostCard data={item}/>;
+    else if (item.upvoteId)
+      return (
+        <ListItem key={item.upvoteId} style={styles.listItem}>
+          <LikeCard data={item}/>
+        </ListItem>
+      );
+    // card = <LikeCard data={item}/>;
+    else if (item.commentId)
+      return (
+        <ListItem key={item.commentId} style={styles.listItem}>
+          <CommentCard data={item}/>
+        </ListItem>
+      );
+  }
   render() {
-    let cards = this.props.timelines.map((item) => {
-      let card;
-      if (item.creatorId)
-        return (
-          <ListItem key={item.postId} style={styles.listItem}>
-            <PostCard data={item}/>
-          </ListItem>
-        );
-      // card = <PostCard data={item}/>;
-      else if (item.upvoteId)
-        return (
-          <ListItem key={item.upvoteId} style={styles.listItem}>
-            <LikeCard data={item}/>
-          </ListItem>
-        );
-      // card = <LikeCard data={item}/>;
-      else if (item.commentId)
-        return (
-          <ListItem key={item.commentId} style={styles.listItem}>
-            <CommentCard data={item}/>
-          </ListItem>
-        );
-    });
+    // let cards = this.props.timelines.map((item) => {
+    //   let card;
+    //   if (item.creatorId)
+    //     return (
+    //       <ListItem key={item.postId} style={styles.listItem}>
+    //         <PostCard data={item}/>
+    //       </ListItem>
+    //     );
+    //   // card = <PostCard data={item}/>;
+    //   else if (item.upvoteId)
+    //     return (
+    //       <ListItem key={item.upvoteId} style={styles.listItem}>
+    //         <LikeCard data={item}/>
+    //       </ListItem>
+    //     );
+    //   // card = <LikeCard data={item}/>;
+    //   else if (item.commentId)
+    //     return (
+    //       <ListItem key={item.commentId} style={styles.listItem}>
+    //         <CommentCard data={item}/>
+    //       </ListItem>
+    //     );
+    // });
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
@@ -99,18 +123,22 @@ class Timeline extends Component {
           <Row>
             <Col>
               {this.state.loading && <Spinner color='black'/>}
-              <ScrollView
+              <ListView
+                dataSource={this.state.data}
+                renderRow={(item)=>this.renderItem(item)}
                 refreshControl={
                   <RefreshControl
                     refreshing={this.state.refreshing}
                     onRefresh={this.handleRefresh}
                   />
                 }
+                onEndReached={()=>console.log("reach end!!!")}
               >
-                <List style={styles.listStyle}>
-                  {cards}
-                </List>
-              </ScrollView>
+                {/*{cards}*/}
+                {/*<List style={styles.listStyle}>*/}
+                  {/**/}
+                {/*</List>*/}
+              </ListView>
             </Col>
           </Row>
         </Grid>
