@@ -139,21 +139,28 @@ class UserPage extends Component {
               {/*<ImagePreview visible={this.state.pictureModalShow} source={{uri: (this.state.avatar)}}*/}
                             {/*close={() => (this.setState({pictureModalShow: false}))}/>*/}
             </Col>
-            <Col size={7}>
+            <Col size={1}>
+            </Col>
+            <Col size={8}>
               <Row style={{alignItems: "center"}}>
-                <Col size={3}>
-                  <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Followings', {
-                    userId: this.state.userId
-                  })}>
-                    <Text>{this.state.followCount || 0} following</Text>
+                <Col size={4} style={{alignItems: "center"}}>
+                  <TouchableWithoutFeedback
+                    onPress={() => this.props.navigation.navigate('Followings',{
+                      userId:this.props.user.userId
+                    })}>
+                    <Text style={{fontWeight:'bold'}}>{this.props.user.followCount || 0}</Text>
                   </TouchableWithoutFeedback>
+                  <Text>following</Text>
                 </Col>
-                <Col size={3}>
-                  <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Followers', {
-                    userId: this.state.userId
-                  })}>
-                    <Text>{this.state.fanCount || 0} followers</Text>
+                <Col size={4} style={{alignItems: "center"}}>
+                  <TouchableWithoutFeedback
+                    onPress={() =>  this.props.navigation.navigate('Followers',{
+                      userId:this.props.user.userId
+                    })}>
+
+                    <Text style={{fontWeight:'bold'}}>{this.props.user.fanCount || 0} </Text>
                   </TouchableWithoutFeedback>
+                  <Text>followers</Text>
                 </Col>
               </Row>
             </Col>
