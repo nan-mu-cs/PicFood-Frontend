@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import {Button, Container, Form, Input, Item, Toast} from 'native-base';
-import {AsyncStorage, ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {AsyncStorage, ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import network from "../../network/index";
 
@@ -58,6 +58,7 @@ class LoginPage extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar hidden/>
         <Container style={{justifyContent: "center"}}>
           <Form style={{width: 300}}>
             <Item regular style={styles.inputBox}>

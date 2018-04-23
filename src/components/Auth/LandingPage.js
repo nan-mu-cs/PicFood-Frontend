@@ -81,7 +81,7 @@ class LandingPage extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor="blue" barStyle="light-content"/>
+        <StatusBar barStyle="light-content"/>
         <Text style={styles.title}>Pic Food</Text>
         <Text style={styles.description}>Welcome!</Text>
       </View>

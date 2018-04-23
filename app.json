@@ -6,22 +6,22 @@
     "slug": "pic-food",
     "sdkVersion": "25.0.0",
     "ios": {
-      "bundleIdentifier": "com.pic-food.picfood",
+      "bundleIdentifier": "com.picfood.picfood",
       "publishBundlePath": "ios/picfood/Supporting/shell-app.bundle",
       "publishManifestPath": "ios/picfood/Supporting/shell-app-manifest.json"
     },
     "android": {
-      "package": "com.pic-food.picfood",
+      "package": "com.picfood.picfood",
       "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
       "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
     },
     "ignoreNodeModulesValidation": true,
     "isDetached": true,
     "detach": {
-      "scheme": "expb340cf2726d2458aa4283852c34b87da",
+      "scheme": "exp",
       "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.3.3-sdk25.0.0-e7a4361a-631d-4caf-9692-1880d71c394a.tar.gz",
       "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.3.0-sdk25.0.0-0c32461b-a7c6-4ddc-b85b-32a80c4f18d9.tar.gz"
     },
-    "scheme": "expb340cf2726d2458aa4283852c34b87da"
+    "scheme": "exp"
   }
 }

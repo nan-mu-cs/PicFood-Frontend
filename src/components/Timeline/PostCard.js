@@ -50,12 +50,10 @@ class PostCard extends Component {
               </Body>
             </Left>
           </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={this.handleClickRestaurant}>
-            {/*<Right>*/}
-              <Text style={{fontSize: 15, color: 'grey'}}>at {this.props.data.restaurantName}</Text>
-            {/*</Right>*/}
-          </TouchableWithoutFeedback>
         </CardItem>
+        <TouchableWithoutFeedback onPress={this.handleClickRestaurant}>
+          <Text style={{fontSize: 15, color: 'grey', paddingVertical: 10,}}>at {this.props.data.restaurantName}</Text>
+        </TouchableWithoutFeedback>
         {
           this.props.data.content !== "" &&
           <CardItem cardBody>

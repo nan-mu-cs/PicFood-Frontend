@@ -4,12 +4,13 @@
 
 import React, {Component} from 'react';
 import {Button, Container, Form, Input, Item, Text, Thumbnail, Toast, View} from 'native-base';
-import {AsyncStorage, ImageBackground, StyleSheet} from 'react-native';
+import {AsyncStorage, ImageBackground, StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {ImagePicker} from 'expo';
 import network from "../../network/index";
 
 class RegisterPage extends Component {
+
   constructor(props, context) {
     super(props);
     this.state = {
@@ -80,6 +81,7 @@ class RegisterPage extends Component {
                           style={{alignSelf: "center", marginTop: 20}}/>;
     return (
       <View style={styles.container}>
+        <StatusBar hidden/>
         <Container style={{justifyContent: "center"}}>
           <Form style={{width: 300}}>
             <Item regular style={styles.inputBox}>

@@ -45,7 +45,7 @@ class LikeCard extends Component {
         <CardItem cardBody>
           <TouchableWithoutFeedback onPress={this.handleClickImage}>
             <Body style={{paddingTop: 10, paddingLeft: 5}}>
-            <Text note><Icon style={{color: 'white'}} name="md-heart" style={{fontSize: 15, color: 'red'}}/> Liked <Text> {this.props.data.posterName}</Text>'s post <Text
+            <Text note><Icon name="md-heart" style={{fontSize: 15, color: 'red'}}/> Liked <Text> {this.props.data.posterName}</Text>'s post <Text
               style={{marginLeft: 5}}>{this.props.data.dishName}</Text></Text>
             </Body>
           </TouchableWithoutFeedback>

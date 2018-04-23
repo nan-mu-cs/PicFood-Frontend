@@ -45,16 +45,12 @@ const Tabs = TabNavigator({
   }
 },{
   initialRouteName: 'TimeLine',
-  headerTintColor: 'white',
   tabBarOptions:{
     style: {
       backgroundColor: '#D8485D',
-      color: 'white'
     },
-    activeTintColor: 'blue',
-    inactiveTintColor: 'white',
-    activeBackgroundColor: '#526bce',
-    // inactiveBackgroundColor: 'white',
+    activeBackgroundColor: '#b03f55',
+
     labelStyle: {
       color: 'white',
       marginTop: -5,
@@ -75,14 +71,12 @@ const AuthStack = StackNavigator({
     screen: LoginPage,
     navigationOptions: {
       header: null,
-    //   title: "Login",
     },
   },
   Register: {
     screen: RegisterPage,
     navigationOptions: {
       header: null,
-      // title: "Register",
     }
   }
 },{
@@ -145,16 +139,3 @@ export default RootRouter = SwitchNavigator({
   headerMode:"none",
   initialRouteName: 'Landing',
 });
-
-// export default SwitchNavigator(
-//   {
-//     Landing:{
-//       screen: LandingPage
-//     },
-//     Tabs:Tabs,
-//     Stacks:Stack
-//   },
-//   {
-//     initialRouteName: 'Landing',
-//   }
-// );
