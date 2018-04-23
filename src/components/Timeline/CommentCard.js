@@ -51,7 +51,7 @@ class CommentCard extends Component {
             <Text note><Icon ios="ios-quote" android="quote" style={{fontSize: 15, color: 'blue'}}/> Comment on
               <Text> {this.props.data.posterName}</Text>'s post <Text
               style={{marginLeft: 10}}>{this.props.data.dishName}</Text> with:</Text>
-            <Text style={{marginTop: 5, marginLeft: 10}}>{this.props.data.content}</Text>
+            <Text style={{marginTop: 5, marginLeft: 0}}>{this.props.data.content}</Text>
             </Body>
           </TouchableWithoutFeedback>
         </CardItem>
