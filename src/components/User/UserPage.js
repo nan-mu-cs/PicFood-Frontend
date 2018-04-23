@@ -32,7 +32,9 @@ class UserPage extends Component {
       userId: this.props.navigation.state.params.userId,
       name: '',
       avatar: "http://via.placeholder.com/100x100",
-      pictureModalShow: false
+      pictureModalShow: false,
+      followCount:0,
+      fanCount:0
     };
     this.handleClickBack = this.handleClickBack.bind(this);
   }
@@ -148,19 +150,19 @@ class UserPage extends Component {
                 <Col size={4} style={{alignItems: "center"}}>
                   <TouchableWithoutFeedback
                     onPress={() => this.props.navigation.navigate('Followings',{
-                      userId:this.props.user.userId
+                      userId:this.state.userId
                     })}>
-                    <Text style={{fontWeight:'bold'}}>{this.props.user.followCount || 0}</Text>
+                    <Text style={{fontWeight:'bold'}}>{this.state.followCount || 0}</Text>
                   </TouchableWithoutFeedback>
                   <Text>following</Text>
                 </Col>
                 <Col size={4} style={{alignItems: "center"}}>
                   <TouchableWithoutFeedback
                     onPress={() =>  this.props.navigation.navigate('Followers',{
-                      userId:this.props.user.userId
+                      userId:this.state.userId
                     })}>
 
-                    <Text style={{fontWeight:'bold'}}>{this.props.user.fanCount || 0} </Text>
+                    <Text style={{fontWeight:'bold'}}>{this.state.fanCount || 0} </Text>
                   </TouchableWithoutFeedback>
                   <Text>followers</Text>
                 </Col>

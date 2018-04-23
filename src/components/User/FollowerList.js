@@ -54,7 +54,7 @@ class FollowerList extends Component {
   }
 
   render() {
-    let followers = this.state.followers.filter(item => item.userId !== this.props.user.userId);
+    let followers = this.state.followers.filter(item => item.userId !== this.state.userId);
     let userList = followers.map(item =>
       <ListItem key={item.userId} style={styles.listItem}>
         <TouchableWithoutFeedback onPress={this.onUserPress.bind(this, item.userId)}>
