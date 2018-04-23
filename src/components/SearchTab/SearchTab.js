@@ -70,7 +70,8 @@ class SearchTab extends Component {
       return;
     }
 
-    let restaurants = this.state.keyword ? network.restaurant.searchRestaurants(this.state.keyword, this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, range) :
+    let restaurants = this.state.keyword ?
+      network.restaurant.searchRestaurants(this.state.keyword, this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, range) :
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon);
     restaurants.then(res => {
       this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res.splice(0, 18)});
@@ -91,29 +92,23 @@ class SearchTab extends Component {
   }
 
   componentDidMount() {
-    if (this.props.searchedRestaurants.length === 0)
-      network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
-        .then(res => {
-          console.log(res)
-          this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res.splice(0, 18)});
-          this.setState({loading: false})
-        })
-        .catch(err => {
-          console.log(err)
-        });
-    else
-      this.setState({loading: false});
+    console.log(this.props.location.lat, this.props.location.lon)
+    network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
+      .then(res => {
+        this.props.dispatch({type: "GET_SEARCHED_RESTAURANTS", data: res.splice(0, 18)});
+        this.setState({loading: false})
+      })
+      .catch(err => {
+        console.log(err)
+      });
 
-    // network.dish.searchDishes('rice', 'rate', this.props.location.lat, this.props.location.lon)
-    if (this.props.searchedDishes.length === 0)
-      network.dish.searchDishes('', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, 10000)
-        .then(res => {
-          console.log(res)
-          this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 18)});
-        })
-        .catch(err => {
-          console.log(err)
-        })
+    network.dish.searchDishes('', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, 10000)
+      .then(res => {
+        this.props.dispatch({type: "GET_SEARCHED_DISHES", data: res.splice(0, 18)});
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   renderRestaurantCards() {
@@ -301,7 +296,6 @@ class SearchTab extends Component {
             </Content>
           </Tab>
         </Tabs>
-        {/*<Footer/>*/}
       </Container>
     );
   }

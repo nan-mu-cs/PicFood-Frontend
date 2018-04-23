@@ -71,13 +71,13 @@ class ViewPost extends Component {
       })
   }
 
-    upvote() {
-      if (this.state.pressed === false) {
-        this.setState({
-          pressed: true
-        });
-        console.log("user = " + this.props.user);
-        network.social.hasUpvoted(this.state.postId, this.props.user.userId)
+  upvote() {
+    if (this.state.pressed === false) {
+      this.setState({
+        pressed: true
+      });
+      console.log("user = " + this.props.user);
+      network.social.hasUpvoted(this.state.postId, this.props.user.userId)
         .then(res => res.text())
         .then(res => {
           console.log(res);
@@ -89,22 +89,22 @@ class ViewPost extends Component {
             network.social.upvotePost(this.state.postId)
               .then(response => response.json())
               .then((res) => {
-                  console.log(res);
-                  console.log("=========== UPVOTE ===========");
-                  console.log("postID = " + this.state.postId);
-                  network.social.getPostByPostId(this.state.postId)
-                    .then(res => {
-                      console.log(res);
-                      this.props.dispatch({type: "GET_POST_INFO", data: res});
-                    })
-                    .catch(err => {
+                console.log(res);
+                console.log("=========== UPVOTE ===========");
+                console.log("postID = " + this.state.postId);
+                network.social.getPostByPostId(this.state.postId)
+                  .then(res => {
+                    console.log(res);
+                    this.props.dispatch({type: "GET_POST_INFO", data: res});
+                  })
+                  .catch(err => {
 
-                    });
-                    
-                  console.log("upvoteCount = " + this.props.post.upvoteCount);
-                  this.setState({
-                    pressed: false
                   });
+
+                console.log("upvoteCount = " + this.props.post.upvoteCount);
+                this.setState({
+                  pressed: false
+                });
               })
               .catch((e) => {
                 this.setState({
@@ -118,21 +118,21 @@ class ViewPost extends Component {
             //console.log("=========== DOWNVOTE ===========");
             network.social.deleteUpvoteOfPost(this.state.postId, res)
               .then((res) => {
-                  console.log(res);
-                  console.log("=========== DOWNVOTE ===========");
-                  //console.log("postID = " + this.state.postId);
-                  network.social.getPostByPostId(this.state.postId)
-                    .then(res => {
-                      console.log(res);
-                      this.props.dispatch({type: "GET_POST_INFO", data: res});
-                    })
-                    .catch(err => {
+                console.log(res);
+                console.log("=========== DOWNVOTE ===========");
+                //console.log("postID = " + this.state.postId);
+                network.social.getPostByPostId(this.state.postId)
+                  .then(res => {
+                    console.log(res);
+                    this.props.dispatch({type: "GET_POST_INFO", data: res});
+                  })
+                  .catch(err => {
 
-                    });
-                  console.log("upvoteCount = " + this.props.post.upvoteCount);
-                  this.setState({
-                    pressed: false
                   });
+                console.log("upvoteCount = " + this.props.post.upvoteCount);
+                this.setState({
+                  pressed: false
+                });
               })
               .catch((e) => {
                 this.setState({
@@ -142,8 +142,8 @@ class ViewPost extends Component {
               });
           }
         })
-      }
     }
+  }
 
 
   postComment() {
@@ -307,79 +307,79 @@ class ViewPost extends Component {
           <Right/>}
         </Header>
         {this.state.loading ? <Content><Spinner color='black'/></Content> :
-        <Content>
-          <Body>
-          <Text style={{paddingVertical: 12, fontSize: 15}}>{this.props.post.dishName}</Text>
-          </Body>
-          <Card>
-            <TouchableWithoutFeedback onPress={() => (this.setState({pictureModalShow: true}))}>
-              <CardItem cardBody style={styles.star}>
-                <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}}/>
-              </CardItem>
-            </TouchableWithoutFeedback>
-            <Modal visible={this.state.pictureModalShow} transparent={true}>
-              <ImageViewer imageUrls={[{url: image}]} enableImageZoom={true}
-                           onCancel={() => (this.setState({pictureModalShow: false}))}
-                           onClick={() => (this.setState({pictureModalShow: false}))}/>
-            </Modal>
-            {/*<ImagePreview visible={this.state.pictureModalShow} source={{uri:image}} close={() => (this.setState({pictureModalShow: false}))} />*/}
-            <StarRating
-              disabled={true}
-              maxStars={5}
-              rating={this.props.post.rate}
-              containerStyle={{marginTop: 3, alignSelf: "center"}}
-              fullStarColor={"#f5af4b"}
-              emptyStarColor={"#f5af4b"}
-              halfStarEnabled
-              starSize={30}
-            />
-            <CardItem>
-              <Left>
-                <Button transparent onPress={this.upvote}>
-                  <Icon active name="thumbs-up"/>
-                  <Text>{this.props.post.upvoteCount} Likes</Text>
-                </Button>
-                {this.state.error && Toast.show({
-                  text: 'Can\'t upvote!',
-                  position: 'bottom',
-                  buttonText: 'Okay'
-                })
-                }
-              </Left>
-              <TouchableWithoutFeedback onPress={() => this.handleClickRestaurant()}>
-                <Right>
-                  <Text>{this.props.post.restaurantName}</Text>
-                </Right>
+          <Content>
+            <Body>
+            <Text style={{paddingVertical: 12, fontSize: 15}}>{this.props.post.dishName}</Text>
+            </Body>
+            <Card>
+              <TouchableWithoutFeedback onPress={() => (this.setState({pictureModalShow: true}))}>
+                <CardItem cardBody style={styles.star}>
+                  <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}}/>
+                </CardItem>
               </TouchableWithoutFeedback>
-            </CardItem>
-            <CardItem>
-              <Left>
-                <Text>{this.props.post.content}</Text>
-              </Left>
-            </CardItem>
-            <CardItem>
-              <Item rounded style={styles.comment}>
-                <Input placeholder='Comment...' value={this.state.com}
-                       onChangeText={(val) => this.setState({com: val})}/>
-              </Item>
-              <Right>
-                <Button onPress={this.postComment}>
-                  <Text>Post</Text>
-                </Button>
-                {this.state.error && Toast.show({
-                  text: 'Can\'t comment!',
-                  position: 'bottom',
-                  buttonText: 'Okay'
-                })
-                }
-              </Right>
-            </CardItem>
-          </Card>
+              <Modal visible={this.state.pictureModalShow} transparent={true}>
+                <ImageViewer imageUrls={[{url: image}]} enableImageZoom={true}
+                             onCancel={() => (this.setState({pictureModalShow: false}))}
+                             onClick={() => (this.setState({pictureModalShow: false}))}/>
+              </Modal>
+              {/*<ImagePreview visible={this.state.pictureModalShow} source={{uri:image}} close={() => (this.setState({pictureModalShow: false}))} />*/}
+              <StarRating
+                disabled={true}
+                maxStars={5}
+                rating={this.props.post.rate}
+                containerStyle={{marginTop: 3, alignSelf: "center"}}
+                fullStarColor={"#f5af4b"}
+                emptyStarColor={"#f5af4b"}
+                halfStarEnabled
+                starSize={30}
+              />
+              <CardItem>
+                <Left>
+                  <Button transparent onPress={this.upvote}>
+                    <Icon active name="thumbs-up"/>
+                    <Text>{this.props.post.upvoteCount} Likes</Text>
+                  </Button>
+                  {this.state.error && Toast.show({
+                    text: 'Can\'t upvote!',
+                    position: 'bottom',
+                    buttonText: 'Okay'
+                  })
+                  }
+                </Left>
+                <TouchableWithoutFeedback onPress={() => this.handleClickRestaurant()}>
+                  <Right>
+                    <Text>{this.props.post.restaurantName}</Text>
+                  </Right>
+                </TouchableWithoutFeedback>
+              </CardItem>
+              <CardItem>
+                <Left>
+                  <Text>{this.props.post.content}</Text>
+                </Left>
+              </CardItem>
+              <CardItem>
+                <Item rounded style={styles.comment}>
+                  <Input placeholder='Comment...' value={this.state.com}
+                         onChangeText={(val) => this.setState({com: val})}/>
+                </Item>
+                <Right>
+                  <Button onPress={this.postComment}>
+                    <Text>Post</Text>
+                  </Button>
+                  {this.state.error && Toast.show({
+                    text: 'Can\'t comment!',
+                    position: 'bottom',
+                    buttonText: 'Okay'
+                  })
+                  }
+                </Right>
+              </CardItem>
+            </Card>
 
-          <List>
-            {reviews}
-          </List>
-        </Content>}
+            <List>
+              {reviews}
+            </List>
+          </Content>}
       </Container>
     )
   }

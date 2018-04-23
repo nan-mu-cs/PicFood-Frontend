@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "slug": "pic-food",
     "sdkVersion": "25.0.0",
+    "privacy": "public",
     "ios": {
       "bundleIdentifier": "com.picfood.picfood",
       "publishBundlePath": "ios/picfood/Supporting/shell-app.bundle",

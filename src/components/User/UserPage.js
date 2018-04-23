@@ -3,7 +3,10 @@
  */
 
 import React, {Component} from 'react';
-import {Body, Button, Container, Header, Icon, Left, Right, Text, Thumbnail, Title} from 'native-base';
+import {
+  Body, Button, Container, Content, Header, Icon, Left, Right, Spinner, Text, Thumbnail,
+  Title
+} from 'native-base';
 import {
   Dimensions,
   Image,
@@ -35,7 +38,6 @@ class UserPage extends Component {
   }
 
   handleClickBack() {
-    // this.props.history.goBack();
     this.props.navigation.goBack();
   }
 
@@ -45,10 +47,10 @@ class UserPage extends Component {
       .then(data => {
         this.setState(data);
         // this.props.dispatch({type:"UPDATE_USER_PROFILE",data:data});
-
         network.account.getUserTimeline(data.userId)
           .then(res => res.json())
           .then(data => {
+            this.setState({loading: false})
             this.props.dispatch({type: "UPDATE_OTHERUSER_TIMELINE", data: data});
           }).catch(err => {
           console.log(err);
@@ -59,7 +61,6 @@ class UserPage extends Component {
   }
 
   handleClickImage(postId) {
-    // this.props.history.push(`/viewpost/${postId}`)
     this.props.navigation.navigate('ViewPost', {postId});
   }
 
@@ -119,11 +120,12 @@ class UserPage extends Component {
               <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
-          <Body>
-          <Title style={{color: 'white'}}>{this.state.name}</Title>
-          </Body>
+          <View style={{flex: 5, justifyContent: 'center'}}>
+            <Title style={{color: 'white'}}>{this.state.name}</Title>
+          </View>
           <Right/>
         </Header>
+        {this.state.loading ? <Content><Spinner color='black'/></Content> :
         <Grid>
           <Row size={15} style={{alignItems: "center"}}>
             <Col size={3}>
@@ -173,8 +175,7 @@ class UserPage extends Component {
               </ScrollView>
             </Col>
           </Row>
-        </Grid>
-        {/*<Footer/>*/}
+        </Grid>}
       </Container>
     );
   }
