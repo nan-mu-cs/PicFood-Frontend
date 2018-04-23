@@ -59,7 +59,7 @@ class PersonalPage extends Component {
                     })}>
                     <View>
                       <Text style={{fontWeight:'bold', textAlign: 'center'}}>{this.props.user.followCount || 0}</Text>
-                      <Text>followees</Text>
+                      <Text>following</Text>
                     </View>
                   </TouchableWithoutFeedback>
                 </Col>

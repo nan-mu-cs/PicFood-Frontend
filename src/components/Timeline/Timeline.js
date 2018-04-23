@@ -81,7 +81,7 @@ class Timeline extends Component {
   }
 
   render() {
-    let followHint = !this.state.loading && this.state.data._cachedRowCount === 0 ?
+    let followHint = !this.state.loading && !this.state.refreshing && this.state.data._cachedRowCount === 0 ?
       (<View style={styles.followHint}>
         <TouchableOpacity onPress={() => {
           this.props.navigation.navigate('UserList')

@@ -56,6 +56,6 @@ export default {
   token: "",
   location: {lat: 1, lon: 1},
   post: {},
-  sort_criteria: {distance: "key0", sort_by: "rate"},
+  sort_criteria: {distance: "10000", sort_by: "rate"},
   cachedRestaurants: {},
 };

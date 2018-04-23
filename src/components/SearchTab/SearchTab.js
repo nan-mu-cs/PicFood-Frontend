@@ -48,32 +48,7 @@ class SearchTab extends Component {
   }
 
   onSubmitEditing() {
-    let range = 0;
-    if (this.props.sort_criteria.distance == "key0") {
-      console.log("====== Searching Restaurants within 2 kilometers =======");
-      range = 2;
-    }
-    else if (this.props.sort_criteria.distance == "key1") {
-      console.log("====== Searching Restaurants within 5 kilometers =======");
-      range = 5;
-    }
-    else if (this.props.sort_criteria.distance == "key2") {
-      console.log("====== Searching Restaurants within 10 kilometers =======");
-      range = 10;
-    }
-    else if (this.props.sort_criteria.distance == "key3") {
-      console.log("====== Searching Restaurants within 15 kilometers =======");
-      range = 15;
-    }
-    else if (this.props.sort_criteria.distance == "key4") {
-      console.log("====== Searching Restaurants further than 15 kilometers =======");
-      range = 10000;
-    }
-    else {
-      console.log("=========== Wrong Search Criteria!!! ==========");
-      return;
-    }
-
+    let range = this.props.sort_criteria.distance;
     let restaurants = this.state.keyword ?
       network.restaurant.searchRestaurants(this.state.keyword, this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, range) :
       network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon);

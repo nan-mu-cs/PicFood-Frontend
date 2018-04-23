@@ -28,8 +28,6 @@ class SearchBy extends Component {
   }
 
   render() {
-    // console.log("distance = " + this.props.distance);
-    // console.log("sort_by = " + this.props.sort_by);
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
@@ -40,18 +38,15 @@ class SearchBy extends Component {
             </Button>
           </Left>
           <View style={{flex: 5, justifyContent: 'center'}}>
-          <Title style={{color: 'white'}}>Search Criteria</Title>
+            <Title style={{color: 'white'}}>Search Criteria</Title>
           </View>
           <Right/>
         </Header>
         <Content>
-          <List>
-            <ListItem itemDivider style={styles.distance}>
-              <Text>Distance</Text>
-            </ListItem>
-          </List>
+          <Text style={{marginTop: 15, marginBottom: 10, marginLeft: 10}}>Distance</Text>
           <Form>
             <Picker
+              style={{backgroundColor: 'white', width: '100%', borderRadius: 0}}
               mode="dropdown"
               headerStyle={{backgroundColor: "#D8485D"}}
               headerBackButtonTextStyle={{color: "#fff"}}
@@ -59,21 +54,17 @@ class SearchBy extends Component {
               selectedValue={this.props.distance}
               onValueChange={this.onDistanceChange.bind(this)}
             >
-              <Item label="less than 2 miles" value="2"/>
-              <Item label="less than 5 miles" value="5"/>
-              <Item label="less than 10 miles" value="10"/>
-              <Item label="less than 15 miles" value="15"/>
-              <Item label="greater than 15 miles" value="10000"/>
+              <Item label="Less than 2 miles" value="2"/>
+              <Item label="Less than 5 miles" value="5"/>
+              <Item label="Less than 10 miles" value="10"/>
+              <Item label="Less than 15 miles" value="15"/>
+              <Item label="No limit" value="10000"/>
             </Picker>
           </Form>
-
-          <List>
-            <ListItem itemDivider style={styles.sortby}>
-              <Text>Sort By</Text>
-            </ListItem>
-          </List>
+          <Text style={{marginTop: 15, marginBottom: 10, marginLeft: 10}}>Sort By</Text>
           <Form>
             <Picker
+              style={{backgroundColor: 'white', width: '100%', borderRadius: 0}}
               mode="dropdown"
               headerStyle={{backgroundColor: "#D8485D"}}
               headerBackButtonTextStyle={{color: "#fff"}}
