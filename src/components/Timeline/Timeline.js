@@ -107,6 +107,7 @@ class Timeline extends Component {
                 style={styles.listStyle}
                 dataSource={this.state.data}
                 renderRow={(item) => this.renderItem(item)}
+                pageSize={10}
                 refreshControl={
                   <RefreshControl
                     refreshing={this.state.refreshing}
