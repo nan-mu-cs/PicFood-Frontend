@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 
 import {Body, Button, Container, Header, Text, Thumbnail, Title} from 'native-base';
-import {AsyncStorage, Modal, StatusBar, TouchableWithoutFeedback} from 'react-native';
+import {AsyncStorage, Modal, StatusBar, TouchableWithoutFeedback, View} from 'react-native';
 import {connect} from 'react-redux';
 import {Col, Grid, Row} from "react-native-easy-grid";
 import ImageViewer from 'react-native-image-zoom-viewer';
@@ -21,12 +21,10 @@ class PersonalPage extends Component {
   }
 
   handleLogout() {
-    // this.props.history.push("/login");
     this.props.navigation.navigate('Auth');
     AsyncStorage.clear();
     this.props.dispatch({type: "LOGOUT"});
   }
-
 
   render() {
     return (
@@ -59,18 +57,30 @@ class PersonalPage extends Component {
                     onPress={() => this.props.navigation.navigate('Followings',{
                       userId:this.props.user.userId
                     })}>
-                    <Text style={{fontWeight:'bold'}}>{this.props.user.followCount || 0}</Text>
+<<<<<<< HEAD
+                    <Text style={{fontWeight:'bold', fontSize:30}}>{this.props.user.followCount || 0}</Text>
+=======
+                    <View>
+                      <Text style={{fontWeight:'bold', textAlign: 'center'}}>{this.props.user.followCount || 0}</Text>
+                      <Text>following</Text>
+                    </View>
+>>>>>>> 3b7b15455e3c6c284b2d69607f2c722b1a0f9074
                   </TouchableWithoutFeedback>
-                  <Text>following</Text>
                 </Col>
                 <Col size={4} style={{alignItems: "center"}}>
                   <TouchableWithoutFeedback
                     onPress={() =>  this.props.navigation.navigate('Followers',{
                       userId:this.props.user.userId
                     })}>
-                    <Text style={{fontWeight:'bold'}}>{this.props.user.fanCount || 0} </Text>
+<<<<<<< HEAD
+                    <Text style={{fontWeight:'bold', fontSize:30}}>{this.props.user.fanCount || 0} </Text>
+=======
+                    <View>
+                      <Text style={{fontWeight:'bold', textAlign: 'center'}}>{this.props.user.fanCount || 0} </Text>
+                      <Text>followers</Text>
+                    </View>
+>>>>>>> 3b7b15455e3c6c284b2d69607f2c722b1a0f9074
                   </TouchableWithoutFeedback>
-                  <Text>followers</Text>
                 </Col>
               </Row>
             </Col>
@@ -108,7 +118,6 @@ class PersonalPage extends Component {
             </Col>
           </Row>
         </Grid>
-        {/*<Footer/>*/}
       </Container>
     );
   }

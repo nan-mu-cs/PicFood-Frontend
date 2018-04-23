@@ -152,7 +152,7 @@ class UserPage extends Component {
                     onPress={() => this.props.navigation.navigate('Followings',{
                       userId:this.state.userId
                     })}>
-                    <Text style={{fontWeight:'bold'}}>{this.state.followCount || 0}</Text>
+                    <Text style={{fontWeight:'bold', fontSize:30}}>{this.state.followCount || 0}</Text>
                   </TouchableWithoutFeedback>
                   <Text>following</Text>
                 </Col>
@@ -162,7 +162,7 @@ class UserPage extends Component {
                       userId:this.state.userId
                     })}>
 
-                    <Text style={{fontWeight:'bold'}}>{this.state.fanCount || 0} </Text>
+                    <Text style={{fontWeight:'bold', fontSize:30}}>{this.state.fanCount || 0} </Text>
                   </TouchableWithoutFeedback>
                   <Text>followers</Text>
                 </Col>
