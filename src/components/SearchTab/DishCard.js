@@ -38,7 +38,7 @@ class DishCard extends Component {
   }
 
   render() {
-    let avatar = this.props.data.imageUrls.length > 0 && this.props.data.imageUrls[0] || "http://via.placeholder.com/100x100";
+    let avatar = this.props.data.imageUrls && this.props.data.imageUrls.length > 0 && this.props.data.imageUrls[0] || "http://via.placeholder.com/100x100";
     return (
       <TouchableWithoutFeedback onPress={this.onCardPress.bind(this, this.props.data.dishId)}>
         <Card>

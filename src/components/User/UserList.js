@@ -10,7 +10,7 @@ import {
   Header,
   Icon,
   Input,
-  Item,
+  Item, Label,
   Left,
   List,
   ListItem,
@@ -40,7 +40,6 @@ class UserList extends Component {
   onUnfollowPress(userId) {
     network.social.unfollowUserById(userId)
       .then(res => {
-        // console.log(this.state.users);
         this.updateFollowStatus(this.state.users, userId, false);
         console.log('new state', this.state.users);
         this.setState({users: this.state.users});
@@ -144,9 +143,9 @@ class UserList extends Component {
         {this.state.loading ? <Content><Spinner color='black'/></Content> :
           <Content>
             <Left>
-              <Item>
-                <Input placeholder='Search Users'
-                       onChangeText={(value) => this.setState({keyword: value})}
+              <Item floatingLabel style={{marginVertical: 5}}>
+                <Label>Search Users</Label>
+                <Input onChangeText={(value) => this.setState({keyword: value})}
                        onSubmitEditing={this.onSearch.bind(this)}/>
               </Item>
             </Left>

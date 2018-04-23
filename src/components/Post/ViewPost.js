@@ -24,7 +24,7 @@ import {
   Title,
   Toast
 } from 'native-base';
-import {Image, Modal, ScrollView, StatusBar, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Image, Modal, ScrollView, StatusBar, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import {connect} from 'react-redux';
 // import ImagePreview from 'react-native-image-preview';
 import ImageViewer from 'react-native-image-zoom-viewer';
@@ -274,9 +274,9 @@ class ViewPost extends Component {
               <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
-          <Body>
-          <Title style={{color: 'white'}}>Post</Title>
-          </Body>
+          <View style={{flex: 5, justifyContent: 'center'}}>
+            <Title style={{color: 'white'}}>{this.props.post.dishName}</Title>
+          </View>
           {this.props.user.userId == this.state.creatorId &&
           <Right>
 
@@ -308,10 +308,8 @@ class ViewPost extends Component {
         </Header>
         {this.state.loading ? <Content><Spinner color='black'/></Content> :
           <Content>
-            <Body>
-            <Text style={{paddingVertical: 12, fontSize: 15}}>{this.props.post.dishName}</Text>
-            </Body>
-            <Card>
+            <Card style={{marginLeft: 10, marginRight: 10, marginTop: 10}}>
+              <Text style={{alignSelf: 'center', paddingVertical: 12, fontSize: 18}}>{this.props.post.dishName}</Text>
               <TouchableWithoutFeedback onPress={() => (this.setState({pictureModalShow: true}))}>
                 <CardItem cardBody style={styles.star}>
                   <Image source={{uri: image}} style={{height: 200, width: null, flex: 1}}/>
@@ -331,7 +329,7 @@ class ViewPost extends Component {
                 fullStarColor={"#f5af4b"}
                 emptyStarColor={"#f5af4b"}
                 halfStarEnabled
-                starSize={30}
+                starSize={21}
               />
               <CardItem>
                 <Left>
@@ -347,9 +345,9 @@ class ViewPost extends Component {
                   }
                 </Left>
                 <TouchableWithoutFeedback onPress={() => this.handleClickRestaurant()}>
-                  <Right>
-                    <Text>{this.props.post.restaurantName}</Text>
-                  </Right>
+                  <View style={{width: 240}}>
+                    <Text style={{textAlign: 'right'}}>{this.props.post.restaurantName}</Text>
+                  </View>
                 </TouchableWithoutFeedback>
               </CardItem>
               <CardItem>

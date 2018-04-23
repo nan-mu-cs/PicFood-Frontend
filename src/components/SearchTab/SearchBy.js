@@ -7,7 +7,7 @@ import {
   Container, Header, Content, Button, Text, Icon, ListItem, Left, Body,
   Card, CardItem, List, Title, Right, Picker, Form, Item as FormItem
 } from 'native-base';
-import {Platform, StyleSheet, ScrollView, Image, View} from 'react-native';
+import {Platform, StyleSheet, ScrollView, Image, View, StatusBar} from 'react-native';
 import {connect} from 'react-redux';
 import {Col, Row, Grid} from "react-native-easy-grid";
 
@@ -33,6 +33,7 @@ class SearchBy extends Component {
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
+          <StatusBar barStyle="light-content"/>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
               <Icon style={{color: 'white'}} name="arrow-back"/>
