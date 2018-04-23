@@ -19,11 +19,11 @@ class SearchBy extends Component {
     this.state = {};
   }
 
-  onValueChange1(value: string) {
+  onDistanceChange(value: string) {
     this.props.dispatch({type: "SORT_CRITERIA", data: {distance: value, sort_by: this.props.sort_by}});
   }
 
-  onValueChange2(value: string) {
+  onSortByChange(value: string) {
     this.props.dispatch({type: "SORT_CRITERIA", data: {distance: this.props.distance, sort_by: value}});
   }
 
@@ -57,13 +57,13 @@ class SearchBy extends Component {
               headerBackButtonTextStyle={{color: "#fff"}}
               headerTitleStyle={{color: "#fff"}}
               selectedValue={this.props.distance}
-              onValueChange={this.onValueChange1.bind(this)}
+              onValueChange={this.onDistanceChange.bind(this)}
             >
-              <Item label="within 2 kilometers" value="key0"/>
-              <Item label="within 5 kilometers" value="key1"/>
-              <Item label="within 10 kilometers" value="key2"/>
-              <Item label="within 15 kilometers" value="key3"/>
-              <Item label=">15 kilometers" value="key4"/>
+              <Item label="less than 2 miles" value="2"/>
+              <Item label="less than 5 miles" value="5"/>
+              <Item label="less than 10 miles" value="10"/>
+              <Item label="less than 15 miles" value="15"/>
+              <Item label="greater than 15 miles" value="10000"/>
             </Picker>
           </Form>
 
@@ -79,7 +79,7 @@ class SearchBy extends Component {
               headerBackButtonTextStyle={{color: "#fff"}}
               headerTitleStyle={{color: "#fff"}}
               selectedValue={this.props.sort_by}
-              onValueChange={this.onValueChange2.bind(this)}
+              onValueChange={this.onSortByChange.bind(this)}
             >
               <Item label="Distance" value="distance"/>
               <Item label="Rate" value="rate"/>
