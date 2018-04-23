@@ -20,7 +20,7 @@ import {
   Text,
   Title
 } from 'native-base';
-import {StatusBar, StyleSheet} from 'react-native';
+import {StatusBar, StyleSheet, View} from 'react-native';
 import {connect} from 'react-redux';
 import StarRating from 'react-native-star-rating';
 import {ImagePicker} from 'expo';
@@ -84,6 +84,7 @@ class RestaurantPage extends Component {
       this.props.dispatch({type: "GET_RESTAURANT_INFO", restaurantId: restaurantInfo.restaurantId, data: restaurantInfo});
       this.setState({loading: false, restaurant: restaurantInfo});
     } catch(e) {
+
     }
   }
   componentDidMount() {
@@ -91,67 +92,6 @@ class RestaurantPage extends Component {
   }
 
   render() {
-    if (this.state.restaurant.dishes.length === 0) {
-      return (
-        <Container>
-          <Header style={{backgroundColor: '#D8485D'}}>
-            <StatusBar barStyle="light-content"/>
-            <Left>
-              <Button transparent onPress={this.handleClickBack}>
-                <Icon style={{color: 'white'}}  name='arrow-back'/>
-              </Button>
-            </Left>
-            <Body>
-            <Title style={{color: 'white'}}>Restaurant</Title>
-            </Body>
-            <Right/>
-          </Header>
-          {this.state.loading ? <Content><Spinner color='black'/></Content> :
-          <Content>
-            <Card style={styles.card}>
-              <CardItem>
-                <Left>
-                  <Body>
-                  <Text style={styles.restaurant}>{this.state.restaurant.name}</Text>
-                  <StarRating
-                    disabled={true}
-                    maxStars={5}
-                    rating={this.state.restaurant.avgRate}
-                    containerStyle={{marginTop: 10, alignSelf: "center"}}
-                    fullStarColor={"#f5af4b"}
-                    emptyStarColor={"#f5af4b"}
-                    halfStarEnabled
-                    starSize={15}
-                  />
-                  <Text note>{this.state.restaurant.location}</Text>
-                  <Text note>{this.state.restaurant.address}</Text>
-                  <Text note>{this.state.restaurant.teleNumber}</Text>
-                  <Text note>{this.state.restaurant.category}</Text>
-                  </Body>
-                </Left>
-              </CardItem>
-            </Card>
-            <Text style={styles.titleForDishes}>Dishes Not Found</Text>
-          </Content>}
-          <Fab
-              active={this.state.active}
-              direction="left"
-              style={{backgroundColor: '#5067FF'}}
-              containerStyle={{bottom:100}}
-              position="bottomRight"
-              onPress={() => this.setState({active: !this.state.active})}>
-            <Icon name="add"/>
-            <Button style={{backgroundColor: '#34A34F'}} onPress={this.handlePostImage.bind(this, "image")}>
-              <Icon name="ios-images"/>
-            </Button>
-            <Button style={{backgroundColor: '#3B5998'}} onPress={this.handlePostImage.bind(this, "camera")}>
-              <Icon name="ios-camera"/>
-            </Button>
-          </Fab>
-        </Container>
-      )
-    }
-    
     let dishes = this.state.restaurant.dishes.map((item) => {
       return (
         <Dishes key={item.dishId} data={item}/>
@@ -167,9 +107,9 @@ class RestaurantPage extends Component {
               <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
-          <Body>
-          <Title style={{color: 'white'}}>Restaurant</Title>
-          </Body>
+          <View style={{flex: 5, justifyContent: 'center'}}>
+            <Title style={{color: 'white'}}>{this.state.restaurant.name}</Title>
+          </View>
           <Right/>
         </Header>
         {this.state.loading ? <Content><Spinner color='black'/></Content> :
@@ -197,9 +137,9 @@ class RestaurantPage extends Component {
               </Left>
             </CardItem>
           </Card>
-          <Text style={styles.titleForDishes}>Dishes</Text>
+          <Text style={styles.titleForDishes}>{dishes.length > 0 ? 'Dishes' : 'Add dishes for this restaurant!'}</Text>
             <List>
-                {dishes}
+              {dishes}
             </List>
         </Content>}
         <Fab

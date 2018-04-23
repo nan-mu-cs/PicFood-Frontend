@@ -137,7 +137,7 @@ class UserList extends Component {
             </Button>
           </Left>
           <Body>
-          <Title style={{color: 'white'}}>Users</Title>
+          <Title style={{color: 'white'}}>Find Users</Title>
           </Body>
           <Right/>
         </Header>

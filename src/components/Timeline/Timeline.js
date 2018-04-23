@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {Body, Container, Header, List, ListItem, Spinner, Title} from 'native-base';
-import {RefreshControl, ScrollView, StatusBar, StyleSheet} from 'react-native';
+import {RefreshControl, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {connect} from 'react-redux';
 import PostCard from "./PostCard";
 import LikeCard from "./LikeCard";
@@ -64,29 +64,39 @@ class Timeline extends Component {
   }
 
   render() {
-    let cards = this.props.timelines.map((item) => {
-      let card;
-      if (item.creatorId)
-        return (
-          <ListItem key={item.postId} style={styles.listItem}>
-            <PostCard data={item}/>
-          </ListItem>
-        );
-      // card = <PostCard data={item}/>;
-      else if (item.upvoteId)
-        return (
-          <ListItem key={item.upvoteId} style={styles.listItem}>
-            <LikeCard data={item}/>
-          </ListItem>
-        );
-      // card = <LikeCard data={item}/>;
-      else if (item.commentId)
-        return (
-          <ListItem key={item.commentId} style={styles.listItem}>
-            <CommentCard data={item}/>
-          </ListItem>
-        );
-    });
+    let cards;
+    if(this.props.timelines.length > 0) {
+      cards = this.props.timelines.map((item) => {
+        let card;
+        if (item.creatorId)
+          return (
+            <ListItem key={item.postId} style={styles.listItem}>
+              <PostCard data={item}/>
+            </ListItem>
+          );
+        else if (item.upvoteId)
+          return (
+            <ListItem key={item.upvoteId} style={styles.listItem}>
+              <LikeCard data={item}/>
+            </ListItem>
+          );
+        else if (item.commentId)
+          return (
+            <ListItem key={item.commentId} style={styles.listItem}>
+              <CommentCard data={item}/>
+            </ListItem>
+          );
+      });
+    } else {
+      cards = (
+        this.state.loading ? null :
+          (<View style={styles.followHint}>
+            <TouchableOpacity onPress={() => {this.props.navigation.navigate('UserList')}}>
+              <Text style={{alignSelf: 'center', fontSize: 18, color: '#0f87f8'}}>Follow some friends!</Text>
+            </TouchableOpacity>
+          </View>)
+      );
+    }
     return (
       <Container>
         <Header style={{backgroundColor: '#D8485D'}}>
@@ -132,6 +142,9 @@ const
     listStyle: {
       paddingTop: 10,
       paddingHorizontal: 8
+    },
+    followHint: {
+      paddingTop: 40,
     }
   });
 

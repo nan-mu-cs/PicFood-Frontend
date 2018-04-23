@@ -56,7 +56,6 @@ class RegisterPage extends Component {
       email: this.state.email,
       password: this.state.password,
       name: this.state.username,
-      avatar: this.state.avatar
     })
       .then(response => response.json())
       .then(res => {

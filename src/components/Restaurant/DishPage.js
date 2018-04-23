@@ -20,7 +20,7 @@ import {
   Thumbnail,
   Title
 } from 'native-base';
-import {Image, StatusBar, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Image, StatusBar, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import {connect} from 'react-redux';
 import StarRating from 'react-native-star-rating';
 import network from '../../network';
@@ -79,16 +79,6 @@ class DishPage extends Component {
                   .catch(err => {
                     console.log(err)
                   });
-                // network.social.getPostByPostId(postId)
-                //   .then(res => {
-                //     console.log(res);
-                //     this.props.dispatch({type: "GET_POST_INFO", data: res});
-                //   })
-                //   .catch(err => {
-
-                //   });
-                  
-                // console.log("upvoteCount = " + this.props.post.upvoteCount);
                 this.setState({
                   pressed: false
                 });
@@ -211,9 +201,9 @@ class DishPage extends Component {
               <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
-          <Body>
-          <Title style={{color: 'white'}}>Dish</Title>
-          </Body>
+          <View style={{flex: 5, justifyContent: 'center'}}>
+          <Title style={{color: 'white'}}>{this.state.name}</Title>
+          </View>
           <Right/>
         </Header>
         {this.state.loading ? <Content><Spinner color='black'/></Content> :
@@ -266,7 +256,7 @@ const styles = StyleSheet.create({
   },
   dishName: {
     paddingTop: 10,
-    fontSize: 24,
+    fontSize: 21,
     marginBottom: 5,
     textAlign: 'center',
   },

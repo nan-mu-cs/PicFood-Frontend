@@ -57,7 +57,7 @@ class PostCard extends Component {
         {
           this.props.data.content !== "" &&
           <CardItem cardBody>
-            <Text style={{paddingTop: 10, paddingBottom: 12}}>{this.props.data.content || "this is a content"}</Text>
+            <Text style={{paddingBottom: 12}}>{this.props.data.content || "this is a content"}</Text>
           </CardItem>
         }
         <CardItem cardBody>

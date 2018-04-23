@@ -119,9 +119,9 @@ class UserPage extends Component {
               <Icon style={{color: 'white'}} name='arrow-back'/>
             </Button>
           </Left>
-          <Body>
-          <Title style={{color: 'white'}}>{this.state.name}</Title>
-          </Body>
+          <View style={{flex: 5, justifyContent: 'center'}}>
+            <Title style={{color: 'white'}}>{this.state.name}</Title>
+          </View>
           <Right/>
         </Header>
         <Grid>

@@ -7,7 +7,7 @@ import {
   Container, Header, Content, Button, Text, Icon, ListItem, Left, Body,
   Card, CardItem, List, Title, Right, Picker, Form, Item as FormItem
 } from 'native-base';
-import {Platform, StyleSheet, ScrollView, Image} from 'react-native';
+import {Platform, StyleSheet, ScrollView, Image, View} from 'react-native';
 import {connect} from 'react-redux';
 import {Col, Row, Grid} from "react-native-easy-grid";
 
@@ -20,16 +20,10 @@ class SearchBy extends Component {
   }
 
   onValueChange1(value: string) {
-    // console.log("selected1 = " + this.props.selected1);
-    // console.log("selected2 = " + this.props.selected2);
-    // console.log("value = " + value);
     this.props.dispatch({type: "SORT_CRITERIA", data: {distance: value, sort_by: this.props.sort_by}});
   }
 
   onValueChange2(value: string) {
-    // console.log("selected1 = " + this.props.selected1);
-    // console.log("selected2 = " + this.props.selected2);
-    // console.log("value = " + value);
     this.props.dispatch({type: "SORT_CRITERIA", data: {distance: this.props.distance, sort_by: value}});
   }
 
@@ -44,9 +38,9 @@ class SearchBy extends Component {
               <Icon style={{color: 'white'}} name="arrow-back"/>
             </Button>
           </Left>
-          <Body>
+          <View style={{flex: 5, justifyContent: 'center'}}>
           <Title style={{color: 'white'}}>Search Criteria</Title>
-          </Body>
+          </View>
           <Right/>
         </Header>
         <Content>
@@ -58,7 +52,7 @@ class SearchBy extends Component {
           <Form>
             <Picker
               mode="dropdown"
-              headerStyle={{backgroundColor: "#b95dd3"}}
+              headerStyle={{backgroundColor: "#D8485D"}}
               headerBackButtonTextStyle={{color: "#fff"}}
               headerTitleStyle={{color: "#fff"}}
               selectedValue={this.props.distance}
@@ -80,7 +74,7 @@ class SearchBy extends Component {
           <Form>
             <Picker
               mode="dropdown"
-              headerStyle={{backgroundColor: "#b95dd3"}}
+              headerStyle={{backgroundColor: "#D8485D"}}
               headerBackButtonTextStyle={{color: "#fff"}}
               headerTitleStyle={{color: "#fff"}}
               selectedValue={this.props.sort_by}
