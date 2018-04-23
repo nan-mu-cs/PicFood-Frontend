@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import {Image, StyleSheet, TouchableWithoutFeedback} from 'react-native';
-import {Card, CardItem, Left, Text} from 'native-base';
+import {Card, CardItem, Left,Body, Right,Col,Text} from 'native-base';
 import network from "../../network";
 import {withNavigation} from 'react-navigation';
 
@@ -40,11 +40,15 @@ class Dishes extends Component {
       <TouchableWithoutFeedback onPress={this.onDishCardPress.bind(this, this.props.data.dishId)}>
         <Card style={styles.card}>
           <CardItem style={styles.zeroPadding}>
-            <Left>
+            <Col size = {5}>
               <Image source={{cache: 'force-cache', uri: this.state.imageUrl || "http://via.placeholder.com/100x100"}}
-                     style={{height: 60, width: 60}}/>
-              <Text>{this.props.data.name}</Text>
-            </Left>
+                     style={{height: 80, width: 140}}/>
+
+            </Col>
+            <Col size = {8} style={{alignItems: "center"}}>
+              <Text style={styles.dish}>{this.props.data.name}</Text>
+            </Col>
+
           </CardItem>
         </Card>
       </TouchableWithoutFeedback>
@@ -67,7 +71,7 @@ const styles = StyleSheet.create({
     borderColor: "transparent"
   },
   dish: {
-    fontSize: 17,
+    fontSize: 20,
     textAlign: 'center',
   }
 });
