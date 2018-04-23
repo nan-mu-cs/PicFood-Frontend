@@ -59,7 +59,7 @@ class PersonalPage extends Component {
                     onPress={() => this.props.navigation.navigate('Followings',{
                       userId:this.props.user.userId
                     })}>
-                    <Text style={{fontWeight:'bold'}}>{this.props.user.followCount || 0}</Text>
+                    <Text style={{fontWeight:'bold', fontSize:30}}>{this.props.user.followCount || 0}</Text>
                   </TouchableWithoutFeedback>
                   <Text>following</Text>
                 </Col>
@@ -68,7 +68,7 @@ class PersonalPage extends Component {
                     onPress={() =>  this.props.navigation.navigate('Followers',{
                       userId:this.props.user.userId
                     })}>
-                    <Text style={{fontWeight:'bold'}}>{this.props.user.fanCount || 0} </Text>
+                    <Text style={{fontWeight:'bold', fontSize:30}}>{this.props.user.fanCount || 0} </Text>
                   </TouchableWithoutFeedback>
                   <Text>followers</Text>
                 </Col>
