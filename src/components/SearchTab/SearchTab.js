@@ -18,7 +18,7 @@ import {
   Text,
   View
 } from 'native-base';
-import {RefreshControl, StatusBar, StyleSheet} from 'react-native';
+import {ListView, RefreshControl, StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import RestaurantCard from "./RestaurantCard";
 import DishCard from "./DishCard";
@@ -28,9 +28,10 @@ import network from '../../network';
 class SearchTab extends Component {
   constructor(props, context) {
     super(props);
+    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      searchedRestaurantsData: [],
-      searchedDishesData: [],
+      searchedRestaurantsData: this.ds.cloneWithRows([]),
+      searchedDishesData: this.ds.cloneWithRows([]),
       loading: true,
       refreshing: false
     };
@@ -54,8 +55,7 @@ class SearchTab extends Component {
         this.setState({
           refreshing: false,
           loading: false,
-          // searchedRestaurantsData: this.ds.cloneWithRows(res)
-          searchedRestaurantsData: res
+          searchedRestaurantsData: this.ds.cloneWithRows(res)
         });
       })
       .catch(err => {
@@ -65,8 +65,7 @@ class SearchTab extends Component {
       .then(res => {
         this.setState({
           refreshing: false,
-          // searchedDishesData: this.ds.cloneWithRows(res)
-          searchedDishesData: res
+          searchedDishesData: this.ds.cloneWithRows(res)
         });
       })
       .catch(err => {
@@ -81,7 +80,7 @@ class SearchTab extends Component {
   renderCards(type) {
     if (this.state.loading)
       return <Spinner color='black'/>;
-    if (this.state[`searched${type}Data`].length === 0)
+    if (this.state[`searched${type}Data`]._cachedRowCount === 0)
       return <View style={styles.notFoundText}><Text>{`${type} Not Found`}</Text></View>;
 
     let renderRow = (item) => {
@@ -95,9 +94,16 @@ class SearchTab extends Component {
     };
 
     return (
-      <List
-        dataArray={this.state[`searched${type}Data`]}
+      <ListView
+        dataSource={this.state[`searched${type}Data`]}
         renderRow={renderRow}
+        enableEmptySections
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this.handleRefresh.bind(this)}
+          />
+        }
       />);
   }
 
@@ -110,14 +116,7 @@ class SearchTab extends Component {
              activeTextStyle={{color: '#fff', fontWeight: 'normal'}}
              textStyle={{color: '#fff', fontWeight: 'normal'}}
         >
-          <View
-            refreshControl={
-              <RefreshControl
-                refreshing={this.state.refreshing}
-                onRefresh={this.handleRefresh.bind(this)}
-              />
-            }
-          >
+          <View style={{flex: 1}}>
             {this.renderCards(heading)}
           </View>
         </Tab>
