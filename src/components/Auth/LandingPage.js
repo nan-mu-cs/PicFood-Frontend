@@ -20,6 +20,7 @@ class LandingPage extends Component {
     this.getLocation();
   }
 
+
   getUserInformation() {
     AsyncStorage.multiGet(["email", "password"], function (err, stores) {
       if (err) {
@@ -43,7 +44,7 @@ class LandingPage extends Component {
           this.setState({
             loading: false
           });
-          console.log("token", res);
+          // console.log("token", res);
           this.props.dispatch({type: "UPDATE_TOKEN", data: res.token});
           network.account.getMyProfile()
             .then(res => res.json())

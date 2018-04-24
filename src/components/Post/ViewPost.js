@@ -240,7 +240,7 @@ class ViewPost extends Component {
           if (!name)
             name = "Xiaoxin"
           return (
-            <Card key={item.commentId}>
+            <Card key={item.commentId} style={{marginLeft: 10, marginRight: 10, marginTop: 10}}>
               <ScrollView>
                 <CardItem>
                   <TouchableWithoutFeedback onPress={() => this.handleClickUser(item.commenterId)}>
@@ -397,7 +397,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    dish: state.dish,
+    // dish: state.dish,
     post: state.post,
     user: state.user
   }

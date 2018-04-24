@@ -18,21 +18,19 @@ import {
   Text,
   View
 } from 'native-base';
-import {ListView, RefreshControl, StatusBar, StyleSheet} from 'react-native';
+import {RefreshControl, StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import RestaurantCard from "./RestaurantCard";
 import DishCard from "./DishCard";
 import {withNavigation} from 'react-navigation';
 import network from '../../network';
-import {Location} from "expo";
 
 class SearchTab extends Component {
   constructor(props, context) {
     super(props);
-    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      searchedRestaurantsData: this.ds.cloneWithRows([]),
-      searchedDishesData: this.ds.cloneWithRows([]),
+      searchedRestaurantsData: [],
+      searchedDishesData: [],
       loading: true,
       refreshing: false
     };
@@ -47,116 +45,83 @@ class SearchTab extends Component {
     this.onSubmitEditing();
   }
 
-  onSubmitEditing() {
-    let range = this.props.sort_criteria.distance;
-    let restaurants = this.state.keyword ?
-      network.restaurant.searchRestaurants(this.state.keyword, this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, range) :
-      network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon);
-    restaurants.then(res => {
-      this.setState({
-        refreshing: false,
-        searchedRestaurantsData: this.ds.cloneWithRows(res),
-      });
-    })
-      .catch(err => {
-        console.log(err)
-      });
-    network.dish.searchDishes(this.state.keyword || '', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, range)
+  async onSubmitEditing() {
+    let {sort_criteria, location} = this.props;
+    let range = sort_criteria.distance;
+
+    network.restaurant.searchRestaurants(this.state.keyword, sort_criteria.sort_by, location.lat, location.lon, range)
       .then(res => {
-        console.log('searchDish', res);
         this.setState({
           refreshing: false,
-          searchedDishesData: this.ds.cloneWithRows(res)
-        });
-      })
-      .catch(err => {
-        console.log(err)
-      });
-  }
-
-  async componentDidMount() {
-    let location = await Location.getCurrentPositionAsync();
-    this.props.dispatch({type: "GET_LOCATION", data: {lat: location.coords.latitude, lon: location.coords.longitude}});
-    network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
-      .then(res => {
-        this.setState({
           loading: false,
-          searchedRestaurantsData: this.ds.cloneWithRows(res),
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      });
-
-    network.dish.searchDishes('', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, 10000)
-      .then(res => {
-        this.setState({
-          searchedDishesData: this.ds.cloneWithRows(res)
+          searchedRestaurantsData: res
         });
       })
       .catch(err => {
         console.log(err)
+      });
+    network.dish.searchDishes(this.state.keyword, sort_criteria.sort_by, location.lat, location.lon, range)
+      .then(res => {
+        this.setState({
+          refreshing: false,
+          searchedDishesData: res
+        });
       })
+      .catch(err => {
+        console.log(err)
+      });
   }
 
-  renderRestaurantCards() {
-    if (this.state.loading) {
-      return <Spinner color='black'/>;
-    }
-    if (this.state.searchedRestaurantsData._cachedRowCount === 0) {
-      return (<View style={styles.notFoundText}><Text>Restaurants Not Found</Text></View>);
-    }
-
-    return (
-      <ListView
-        dataSource={this.state.searchedRestaurantsData}
-        renderRow={(item) =>
-          <ListItem key={item.dishId} style={styles.listItem}>
-            <RestaurantCard data={item}/>
-          </ListItem>
-        }
-        pageSize={10}
-        refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this.handleRefresh}
-          />
-        }
-        onEndReached={() => console.log("reach end!!!")}
-      >
-      </ListView>
-    );
+  componentDidMount() {
+    this.onSubmitEditing();
   }
 
-  renderDishCards() {
-    if (this.state.loading) {
+  renderCards(type) {
+    if (this.state.loading)
       return <Spinner color='black'/>;
-    }
-    if (this.state.searchedDishesData._cachedRowCount === 0) {
-      return (<View style={styles.notFoundText}><Text>Dishes Not Found</Text></View>);
-    }
+    if (this.state[`searched${type}Data`].length === 0)
+      return <View style={styles.notFoundText}><Text>{`${type} Not Found`}</Text></View>;
 
-    return (
-      <ListView
-        dataSource={this.state.searchedDishesData}
-        renderRow={(item) =>
-          <ListItem key={item.dishId} style={styles.listItem}>
-            <DishCard data={item}/>
-          </ListItem>
-        }
-        refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this.handleRefresh}
-          />
-        }
-        onEndReached={() => console.log("reach end!!!")}
-      >
-      </ListView>
-    );
+    let renderRow = (item) => {
+      return type === 'Restaurants' ?
+        <ListItem key={item.restaurantId} style={styles.listItem}>
+          <RestaurantCard data={item}/>
+        </ListItem> :
+        <ListItem key={item.dishId} style={styles.listItem}>
+          <DishCard data={item}/>
+        </ListItem>
+    };
+
+    return
+      <List
+        dataArray={this.state[`searched${type}Data`]}
+        renderRow={renderRow}
+      />;
   }
 
   render() {
+    const tab = (heading) => {
+      return (
+        <Tab heading={heading}
+             tabStyle={{backgroundColor: '#D8485D'}}
+             activeTabStyle={{backgroundColor: '#D8485D'}}
+             activeTextStyle={{color: '#fff', fontWeight: 'normal'}}
+             textStyle={{color: '#fff', fontWeight: 'normal'}}
+        >
+          <Content
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this.handleRefresh.bind(this)}
+              />
+            }
+          >
+            {this.renderCards(heading)}
+          </Content>
+        </Tab>
+      );
+    };
+
     return (
       <Container>
         <Header searchBar hasTabs rounded style={{backgroundColor: '#D8485D'}}>
@@ -173,36 +138,8 @@ class SearchTab extends Component {
           </Button>
         </Header>
         <Tabs initialPage={0} tabBarUnderlineStyle={{backgroundColor: '#b03f55'}}>
-          <Tab heading="Restaurants" tabStyle={{backgroundColor: '#D8485D'}}
-               activeTabStyle={{backgroundColor: '#D8485D'}}
-               activeTextStyle={{color: '#fff', fontWeight: 'normal'}}
-               textStyle={{color: '#fff', fontWeight: 'normal'}}
-          >
-            <Content
-              refreshControl={
-                <RefreshControl
-                  refreshing={this.state.refreshing}
-                  onRefresh={this.handleRefresh.bind(this)}
-                />
-              }
-            >
-              {this.renderRestaurantCards()}
-            </Content>
-          </Tab>
-          <Tab heading="Dishes" tabStyle={{backgroundColor: '#D8485D'}} activeTabStyle={{backgroundColor: '#D8485D'}}
-               activeTextStyle={{color: '#fff', fontWeight: 'normal'}}
-               textStyle={{color: '#fff', fontWeight: 'normal'}}>
-            <Content
-              refreshControl={
-                <RefreshControl
-                  refreshing={this.state.refreshing}
-                  onRefresh={this.handleRefresh.bind(this)}
-                />
-              }
-            >
-              {this.renderDishCards()}
-            </Content>
-          </Tab>
+          {tab('Restaurants')}
+          {tab('Dishes')}
         </Tabs>
       </Container>
     );
