@@ -54,6 +54,7 @@ class SearchTab extends Component {
         this.setState({
           refreshing: false,
           loading: false,
+          // searchedRestaurantsData: this.ds.cloneWithRows(res)
           searchedRestaurantsData: res
         });
       })
@@ -64,6 +65,7 @@ class SearchTab extends Component {
       .then(res => {
         this.setState({
           refreshing: false,
+          // searchedDishesData: this.ds.cloneWithRows(res)
           searchedDishesData: res
         });
       })
@@ -92,11 +94,11 @@ class SearchTab extends Component {
         </ListItem>
     };
 
-    return
+    return (
       <List
         dataArray={this.state[`searched${type}Data`]}
         renderRow={renderRow}
-      />;
+      />);
   }
 
   render() {
@@ -108,7 +110,7 @@ class SearchTab extends Component {
              activeTextStyle={{color: '#fff', fontWeight: 'normal'}}
              textStyle={{color: '#fff', fontWeight: 'normal'}}
         >
-          <Content
+          <View
             refreshControl={
               <RefreshControl
                 refreshing={this.state.refreshing}
@@ -117,7 +119,7 @@ class SearchTab extends Component {
             }
           >
             {this.renderCards(heading)}
-          </Content>
+          </View>
         </Tab>
       );
     };
