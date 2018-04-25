@@ -24,6 +24,7 @@ import RestaurantCard from "./RestaurantCard";
 import DishCard from "./DishCard";
 import {withNavigation} from 'react-navigation';
 import network from '../../network';
+import {Location} from "expo";
 
 class SearchTab extends Component {
   constructor(props, context) {
@@ -49,9 +50,10 @@ class SearchTab extends Component {
   async onSubmitEditing() {
     let {sort_criteria, location} = this.props;
     let range = sort_criteria.distance;
-
+    // console.log('location', location)
     network.restaurant.searchRestaurants(this.state.keyword, sort_criteria.sort_by, location.lat, location.lon, range)
       .then(res => {
+        // console.log('res', res)
         this.setState({
           refreshing: false,
           loading: false,
@@ -74,6 +76,12 @@ class SearchTab extends Component {
   }
 
   componentDidMount() {
+    Location.getCurrentPositionAsync({})
+      .then((res) => {
+        this.props.dispatch({type: "GET_LOCATION", data: {lat: res.coords.latitude, lon: res.coords.longitude}});
+      }).catch(err => {
+      console.log(err);
+    });
     this.onSubmitEditing();
   }
 
