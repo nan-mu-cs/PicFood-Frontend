@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 
 import {Body, Button, Container, Header, Text, Thumbnail, Title} from 'native-base';
-import {AsyncStorage, Modal, StatusBar, TouchableWithoutFeedback, View} from 'react-native';
+import {Alert, AsyncStorage, Modal, StatusBar, TouchableWithoutFeedback, View} from 'react-native';
 import {connect} from 'react-redux';
 import {Col, Grid, Row} from "react-native-easy-grid";
 import ImageViewer from 'react-native-image-zoom-viewer';
@@ -21,9 +21,22 @@ class PersonalPage extends Component {
   }
 
   handleLogout() {
-    this.props.navigation.navigate('Auth');
-    AsyncStorage.clear();
-    this.props.dispatch({type: "LOGOUT"});
+    Alert.alert(
+      'Alert',
+      'Are you sure you want to log out?',
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed')},
+
+        {text: 'OK', onPress: () => {
+            console.log('OK Pressed');
+            this.props.navigation.navigate('Auth');
+            AsyncStorage.clear();
+            this.props.dispatch({type: "LOGOUT"});
+          }
+        },
+      ],
+      { cancelable: false }
+    )
   }
 
   render() {

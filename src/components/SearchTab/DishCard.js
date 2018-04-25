@@ -51,12 +51,13 @@ class DishCard extends Component {
                 disabled={true}
                 maxStars={5}
                 rating={this.props.data.avgRate}
-                containerStyle={{marginTop: 3, alignSelf: "flex-start"}}
+                containerStyle={{marginTop: 2, alignSelf: "flex-start"}}
                 fullStarColor={"#f5af4b"}
                 emptyStarColor={"#f5af4b"}
                 halfStarEnabled
                 starSize={15}
               />
+              <Text note style={{color: 'gray', fontSize: 13, marginTop: 6}}>{this.props.data.distance.toFixed(2)} miles</Text>
             </View>
           </CardItem>
         </Card>

@@ -107,6 +107,7 @@ class Timeline extends Component {
                 style={styles.listStyle}
                 dataSource={this.state.data}
                 renderRow={(item) => this.renderItem(item)}
+                enableEmptySections
                 pageSize={10}
                 refreshControl={
                   <RefreshControl

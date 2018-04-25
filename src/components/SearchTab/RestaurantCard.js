@@ -53,6 +53,7 @@ class RestaurantCard extends Component {
               halfStarEnabled
               starSize={15}
             />
+            <Text note style={{color: 'gray', fontSize: 13, marginTop: 3}}>{this.props.data.distance.toFixed(2)} miles</Text>
             </View>
             <Thumbnail source={{cache: 'force-cache', uri: avatar}} style={{height: 100, width: 100}}/>
           </CardItem>

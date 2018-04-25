@@ -47,23 +47,24 @@ class SearchTab extends Component {
     this.onSubmitEditing();
   }
 
-  onSubmitEditing() {
-    let range = this.props.sort_criteria.distance;
-    let restaurants = this.state.keyword ?
-      network.restaurant.searchRestaurants(this.state.keyword, this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, range) :
-      network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon);
-    restaurants.then(res => {
-      this.setState({
-        refreshing: false,
-        searchedRestaurantsData: this.ds.cloneWithRows(res),
-      });
-    })
+  async onSubmitEditing() {
+    let {sort_criteria, location} = this.props;
+    let range = sort_criteria.distance;
+    console.log('location', location)
+    network.restaurant.searchRestaurants(this.state.keyword, sort_criteria.sort_by, location.lat, location.lon, range)
+      .then(res => {
+        this.setState({
+          refreshing: false,
+          loading: false,
+          searchedRestaurantsData: this.ds.cloneWithRows(res)
+        });
+      })
       .catch(err => {
         console.log(err)
       });
-    network.dish.searchDishes(this.state.keyword || '', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, range)
+    network.dish.searchDishes(this.state.keyword, sort_criteria.sort_by, location.lat, location.lon, range)
       .then(res => {
-        console.log('searchDish', res);
+        console.log('res', res)
         this.setState({
           refreshing: false,
           searchedDishesData: this.ds.cloneWithRows(res)
@@ -74,89 +75,62 @@ class SearchTab extends Component {
       });
   }
 
-  async componentDidMount() {
-    let location = await Location.getCurrentPositionAsync();
-    this.props.dispatch({type: "GET_LOCATION", data: {lat: location.coords.latitude, lon: location.coords.longitude}});
-    network.restaurant.getRestaurantsByLocation(this.props.location.lat, this.props.location.lon)
-      .then(res => {
-        this.setState({
-          loading: false,
-          searchedRestaurantsData: this.ds.cloneWithRows(res),
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      });
-
-    network.dish.searchDishes('', this.props.sort_criteria.sort_by, this.props.location.lat, this.props.location.lon, 10000)
-      .then(res => {
-        this.setState({
-          searchedDishesData: this.ds.cloneWithRows(res)
-        });
-      })
-      .catch(err => {
-        console.log(err)
-      })
+  componentDidMount() {
+    Location.getCurrentPositionAsync({})
+      .then((res) => {
+        this.props.dispatch({type: "GET_LOCATION", data: {lat: res.coords.latitude, lon: res.coords.longitude}});
+      }).catch(err => {
+      console.log(err);
+    });
+    this.onSubmitEditing();
   }
 
-  renderRestaurantCards() {
-    if (this.state.loading) {
+  renderCards(type) {
+    if (this.state.loading)
       return <Spinner color='black'/>;
-    }
-    if (this.state.searchedRestaurantsData._cachedRowCount === 0) {
-      return (<View style={styles.notFoundText}><Text>Restaurants Not Found</Text></View>);
-    }
+    if (this.state[`searched${type}Data`]._cachedRowCount === 0)
+      return <View style={styles.notFoundText}><Text>{`${type} Not Found`}</Text></View>;
+
+    let renderRow = (item) => {
+      return type === 'Restaurants' ?
+        <ListItem key={item.restaurantId} style={styles.listItem}>
+          <RestaurantCard data={item}/>
+        </ListItem> :
+        <ListItem key={item.dishId} style={styles.listItem}>
+          <DishCard data={item}/>
+        </ListItem>
+    };
 
     return (
       <ListView
-        dataSource={this.state.searchedRestaurantsData}
-        renderRow={(item) =>
-          <ListItem key={item.dishId} style={styles.listItem}>
-            <RestaurantCard data={item}/>
-          </ListItem>
-        }
-        pageSize={10}
+        dataSource={this.state[`searched${type}Data`]}
+        renderRow={renderRow}
+        enableEmptySections
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
-            onRefresh={this.handleRefresh}
+            onRefresh={this.handleRefresh.bind(this)}
           />
         }
-        onEndReached={() => console.log("reach end!!!")}
-      >
-      </ListView>
-    );
-  }
-
-  renderDishCards() {
-    if (this.state.loading) {
-      return <Spinner color='black'/>;
-    }
-    if (this.state.searchedDishesData._cachedRowCount === 0) {
-      return (<View style={styles.notFoundText}><Text>Dishes Not Found</Text></View>);
-    }
-
-    return (
-      <ListView
-        dataSource={this.state.searchedDishesData}
-        renderRow={(item) =>
-          <ListItem key={item.dishId} style={styles.listItem}>
-            <DishCard data={item}/>
-          </ListItem>
-        }
-        refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this.handleRefresh}
-          />
-        }
-        onEndReached={() => console.log("reach end!!!")}
-      >
-      </ListView>
-    );
+      />);
   }
 
   render() {
+    const tab = (heading) => {
+      return (
+        <Tab heading={heading}
+             tabStyle={{backgroundColor: '#D8485D'}}
+             activeTabStyle={{backgroundColor: '#D8485D'}}
+             activeTextStyle={{color: '#fff', fontWeight: 'normal'}}
+             textStyle={{color: '#fff', fontWeight: 'normal'}}
+        >
+          <View style={{flex: 1}}>
+            {this.renderCards(heading)}
+          </View>
+        </Tab>
+      );
+    };
+
     return (
       <Container>
         <Header searchBar hasTabs rounded style={{backgroundColor: '#D8485D'}}>
@@ -173,36 +147,8 @@ class SearchTab extends Component {
           </Button>
         </Header>
         <Tabs initialPage={0} tabBarUnderlineStyle={{backgroundColor: '#b03f55'}}>
-          <Tab heading="Restaurants" tabStyle={{backgroundColor: '#D8485D'}}
-               activeTabStyle={{backgroundColor: '#D8485D'}}
-               activeTextStyle={{color: '#fff', fontWeight: 'normal'}}
-               textStyle={{color: '#fff', fontWeight: 'normal'}}
-          >
-            <Content
-              refreshControl={
-                <RefreshControl
-                  refreshing={this.state.refreshing}
-                  onRefresh={this.handleRefresh.bind(this)}
-                />
-              }
-            >
-              {this.renderRestaurantCards()}
-            </Content>
-          </Tab>
-          <Tab heading="Dishes" tabStyle={{backgroundColor: '#D8485D'}} activeTabStyle={{backgroundColor: '#D8485D'}}
-               activeTextStyle={{color: '#fff', fontWeight: 'normal'}}
-               textStyle={{color: '#fff', fontWeight: 'normal'}}>
-            <Content
-              refreshControl={
-                <RefreshControl
-                  refreshing={this.state.refreshing}
-                  onRefresh={this.handleRefresh.bind(this)}
-                />
-              }
-            >
-              {this.renderDishCards()}
-            </Content>
-          </Tab>
+          {tab('Restaurants')}
+          {tab('Dishes')}
         </Tabs>
       </Container>
     );
@@ -224,7 +170,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    location: state.location,
+    location: state.location_akw,
     sort_criteria: state.sort_criteria,
   }
 };
