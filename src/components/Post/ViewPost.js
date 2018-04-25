@@ -24,7 +24,7 @@ import {
   Title,
   Toast
 } from 'native-base';
-import {Image, Modal, ScrollView, StatusBar, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
+import {Alert, Image, Modal, ScrollView, StatusBar, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import {connect} from 'react-redux';
 // import ImagePreview from 'react-native-image-preview';
 import ImageViewer from 'react-native-image-zoom-viewer';
@@ -176,19 +176,42 @@ class ViewPost extends Component {
   deletePost() {
     if (this.props.user.userId == this.state.creatorId) {
 
-      network.social.deletePost(this.state.postId)
-        .then((res) => {
-          console.log(res);
-          console.log("=========== Delete ===========");
-          console.log("postID = " + this.state.postId);
-        })
-        .catch((e) => {
-          this.setState({
-            error: true
-          });
-          console.log("ERR " + e.message);
-        });
-      this.props.navigation.goBack();
+      Alert.alert(
+        'Alert',
+        'Are you sure you want to delete this post?',
+        [
+          {text: 'Cancel', onPress: () => console.log('Cancel Pressed')},
+          
+          {text: 'OK', onPress: () => {
+              console.log('OK Pressed');
+              network.social.deletePost(this.state.postId)
+                .then((res) => {
+                  console.log(res);
+                  console.log("=========== Delete ===========");
+                  console.log("postID = " + this.state.postId);
+                  network.account.getUserTimeline(this.props.user.userId)
+                    .then(res => res.json())
+                    .then(data => {
+                      this.props.dispatch({type: "UPDATE_USER_TIMELINE", data: data});
+                      // console.log("get time line");
+                      console.log(data);
+                      this.props.navigation.navigate('MyPosts',{userId:this.props.user.userId})
+                    }).catch(err => {
+                    console.log(err);
+                  })
+                })
+                .catch((e) => {
+                  this.setState({
+                    error: true
+                  });
+                  console.log("ERR " + e.message);
+                });
+              //this.props.navigation.goBack();
+            }
+          },
+        ],
+        { cancelable: false }
+      )
     }
   }
 
