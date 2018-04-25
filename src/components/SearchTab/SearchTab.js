@@ -50,10 +50,9 @@ class SearchTab extends Component {
   async onSubmitEditing() {
     let {sort_criteria, location} = this.props;
     let range = sort_criteria.distance;
-    // console.log('location', location)
+    console.log('location', location)
     network.restaurant.searchRestaurants(this.state.keyword, sort_criteria.sort_by, location.lat, location.lon, range)
       .then(res => {
-        // console.log('res', res)
         this.setState({
           refreshing: false,
           loading: false,
@@ -65,6 +64,7 @@ class SearchTab extends Component {
       });
     network.dish.searchDishes(this.state.keyword, sort_criteria.sort_by, location.lat, location.lon, range)
       .then(res => {
+        console.log('res', res)
         this.setState({
           refreshing: false,
           searchedDishesData: this.ds.cloneWithRows(res)
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    location: state.location,
+    location: state.location_akw,
     sort_criteria: state.sort_criteria,
   }
 };
