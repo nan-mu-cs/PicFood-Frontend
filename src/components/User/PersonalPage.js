@@ -57,14 +57,10 @@ class PersonalPage extends Component {
                     onPress={() => this.props.navigation.navigate('Followings',{
                       userId:this.props.user.userId
                     })}>
-<<<<<<< HEAD
-                    <Text style={{fontWeight:'bold', fontSize:30}}>{this.props.user.followCount || 0}</Text>
-=======
                     <View>
                       <Text style={{fontWeight:'bold', textAlign: 'center'}}>{this.props.user.followCount || 0}</Text>
                       <Text>following</Text>
                     </View>
->>>>>>> 3b7b15455e3c6c284b2d69607f2c722b1a0f9074
                   </TouchableWithoutFeedback>
                 </Col>
                 <Col size={4} style={{alignItems: "center"}}>
@@ -72,14 +68,11 @@ class PersonalPage extends Component {
                     onPress={() =>  this.props.navigation.navigate('Followers',{
                       userId:this.props.user.userId
                     })}>
-<<<<<<< HEAD
-                    <Text style={{fontWeight:'bold', fontSize:30}}>{this.props.user.fanCount || 0} </Text>
-=======
                     <View>
                       <Text style={{fontWeight:'bold', textAlign: 'center'}}>{this.props.user.fanCount || 0} </Text>
                       <Text>followers</Text>
                     </View>
->>>>>>> 3b7b15455e3c6c284b2d69607f2c722b1a0f9074
+
                   </TouchableWithoutFeedback>
                 </Col>
               </Row>
