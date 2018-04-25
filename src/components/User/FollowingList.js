@@ -41,7 +41,7 @@ class FollowingList extends Component {
       .then(res => {
         let newFollowings = this.filterOutUnfollowedUser(this.state.followings, userId);
         this.setState({followings: newFollowings});
-        network.account.getMyProfile()
+        network.account.getMyProfile()  // update the page
           .then(res => res.json())
           .then(res => {
             this.props.dispatch({type: 'GET_USER_PROFILE', data: res});

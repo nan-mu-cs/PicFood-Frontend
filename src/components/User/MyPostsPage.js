@@ -45,13 +45,13 @@ class MyPostsPage extends Component {
     console.log("usertime line!!!");
     console.log(this.props.personTimeline);
     let images = [];
-    let post = [];
+    let post = []; // all of my posts
     for (let i = 0; i < this.props.personTimeline.length; i++) {
       if (this.props.personTimeline[i].creatorId)
         post.push(this.props.personTimeline[i]);
     }
     console.log(post);
-    for (let i = 0; i < post.length; i += 3) {
+    for (let i = 0; i < post.length; i += 3) { // display 3 pictures in each row
       let card1 = (
 
         <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this, post[i].postId)}>

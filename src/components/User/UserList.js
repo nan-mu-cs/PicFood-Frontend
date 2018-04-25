@@ -43,7 +43,7 @@ class UserList extends Component {
         this.updateFollowStatus(this.state.users, userId, false);
         console.log('new state', this.state.users);
         this.setState({users: this.state.users});
-        network.account.getMyProfile()
+        network.account.getMyProfile() // update the page
           .then(res => res.json())
           .then(res => {
             console.log(res.userId)
@@ -69,7 +69,7 @@ class UserList extends Component {
         this.updateFollowStatus(this.state.users, userId, true);
         this.setState({users: this.state.users});
         console.log('onUnfollowPress', this.state.users);
-        network.account.getMyProfile()
+        network.account.getMyProfile()  // update the page
           .then(res => res.json())
           .then(res => {
             console.log(res)
@@ -94,7 +94,7 @@ class UserList extends Component {
   }
 
   componentDidMount() {
-    network.social.searchUsers('')
+    network.social.searchUsers('') // default: show all users
       .then(res => {
         this.setState({users: res, loading: false});
         // this.props.dispatch({type: "GET_USERS", data: res});

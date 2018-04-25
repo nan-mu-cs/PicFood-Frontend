@@ -72,14 +72,14 @@ class ViewPost extends Component {
   }
 
   upvote() {
-    if (this.state.pressed === false) {
+    if (this.state.pressed === false) { //disable the button when dealing with previous upvote
       this.setState({
         pressed: true
       });
       console.log("user = " + this.props.user);
       network.social.hasUpvoted(this.state.postId, this.props.user.userId)
         .then(res => res.text())
-        .then(res => {
+        .then(res => {  // return "Not Upvoted" when hasn't upvoted, otherwise return an upvoteId
           console.log(res);
           console.log("=========== hasUpvoted???? ===========");
           console.log("postId = " + this.state.postId);
@@ -92,7 +92,7 @@ class ViewPost extends Component {
                 console.log(res);
                 console.log("=========== UPVOTE ===========");
                 console.log("postID = " + this.state.postId);
-                network.social.getPostByPostId(this.state.postId)
+                network.social.getPostByPostId(this.state.postId) // update the page
                   .then(res => {
                     console.log(res);
                     this.props.dispatch({type: "GET_POST_INFO", data: res});
@@ -121,7 +121,7 @@ class ViewPost extends Component {
                 console.log(res);
                 console.log("=========== DOWNVOTE ===========");
                 //console.log("postID = " + this.state.postId);
-                network.social.getPostByPostId(this.state.postId)
+                network.social.getPostByPostId(this.state.postId) // update the page
                   .then(res => {
                     console.log(res);
                     this.props.dispatch({type: "GET_POST_INFO", data: res});
@@ -155,7 +155,7 @@ class ViewPost extends Component {
         console.log(res);
         console.log(this.state.postId);
 
-        network.social.getPostByPostId(this.state.postId)
+        network.social.getPostByPostId(this.state.postId) // update the page
           .then(res => {
             console.log(res);
             this.props.dispatch({type: "GET_POST_INFO", data: res});
@@ -189,7 +189,7 @@ class ViewPost extends Component {
                   console.log(res);
                   console.log("=========== Delete ===========");
                   console.log("postID = " + this.state.postId);
-                  network.account.getUserTimeline(this.props.user.userId)
+                  network.account.getUserTimeline(this.props.user.userId) // update the page
                     .then(res => res.json())
                     .then(data => {
                       this.props.dispatch({type: "UPDATE_USER_TIMELINE", data: data});

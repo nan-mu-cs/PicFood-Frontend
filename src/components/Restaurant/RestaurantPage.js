@@ -43,12 +43,12 @@ class RestaurantPage extends Component {
 
   handlePostImage(type) {
     let result;
-    if (type === "image") {
+    if (type === "image") { // upload image from local device
       result = ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
         aspect: [4, 3],
       });
-    } else {
+    } else { // take picture
       result = ImagePicker.launchCameraAsync({
         allowsEditing: true,
         aspect: [4, 3],
@@ -71,7 +71,7 @@ class RestaurantPage extends Component {
     this.props.navigation.goBack();
   }
 
-  async updateData(){
+  async updateData(){ // load from cache if there be
     let cache = this.props.cachedRestaurants[this.state.restaurantId];
     if(cache) {
       this.setState({loading: false, restaurant: cache});

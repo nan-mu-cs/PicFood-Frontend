@@ -75,7 +75,7 @@ class SearchTab extends Component {
       });
   }
 
-  componentDidMount() {
+  componentDidMount() { // dynamic location
     Location.getCurrentPositionAsync({})
       .then((res) => {
         this.props.dispatch({type: "GET_LOCATION", data: {lat: res.coords.latitude, lon: res.coords.longitude}});

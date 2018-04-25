@@ -70,12 +70,12 @@ class UserPage extends Component {
     console.log("usertime line!!!");
     console.log(this.props);
     let images = [];
-    let post = [];
+    let post = []; // all of my posts
     for (let i = 0; i < this.props.otherUserTimeline.length; i++) {
       if (this.props.otherUserTimeline[i].creatorId)
         post.push(this.props.otherUserTimeline[i]);
     }
-    for (let i = 0; i < post.length; i += 3) {
+    for (let i = 0; i < post.length; i += 3) { // display 3 pictures in each row
       let card1 = (
           <TouchableWithoutFeedback onPress={this.handleClickImage.bind(this, post[i].postId)}>
             <Image source={{cache: 'force-cache', uri: post[i].imageUrl || "http://via.placeholder.com/350x150"}}

@@ -53,14 +53,14 @@ class DishPage extends Component {
   }
 
   upvote(postId){
-    if (this.state.pressed === false) {
+    if (this.state.pressed === false) { //disable the button when dealing with previous upvote
       this.setState({
         pressed: true
       });
       console.log("user = " + this.props.user);
       network.social.hasUpvoted(postId, this.props.user.userId)
       .then(res => res.text())
-      .then(res => {
+      .then(res => { // return "Not Upvoted" when hasn't upvoted, otherwise return an upvoteId
         console.log(res);
         console.log("=========== hasUpvoted???? ===========");
         console.log("postId = " + postId);
@@ -73,7 +73,7 @@ class DishPage extends Component {
                 console.log(res);
                 console.log("=========== UPVOTE ===========");
                 console.log("postID = " + postId);
-                network.dish.getDishById(this.state.dishId)
+                network.dish.getDishById(this.state.dishId) // update the page
                   .then(res => res.json())
                   .then(res => {
                     console.log(res)
@@ -101,7 +101,7 @@ class DishPage extends Component {
                 console.log(res);
                 console.log("=========== DOWNVOTE ===========");
                 //console.log("postID = " + this.state.postId);
-                network.dish.getDishById(this.state.dishId)
+                network.dish.getDishById(this.state.dishId) // update the page
                   .then(res => res.json())
                   .then(res => {
                     console.log(res)
@@ -140,12 +140,12 @@ class DishPage extends Component {
 
   handlePostImage(type) {
     let result;
-    if (type === "image") {
+    if (type === "image") { // upload image from local device
       result = ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
         aspect: [4, 3],
       });
-    } else {
+    } else {  // take picture
       result = ImagePicker.launchCameraAsync({
         allowsEditing: true,
         aspect: [4, 3],
