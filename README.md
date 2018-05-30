@@ -25,9 +25,9 @@ It has four main functions.
 ## Demo
 ### Screenshots
 ![alt text](https://github.com/yangkai2g7k/PicFood-Frontend/blob/master/assets/login.jpg?raw=true)
-![alt text](https://github.com/yangkai2g7k/PicFood-Frontend/tree/master/assets/timeline.jpg?raw=true)
-![alt text](https://github.com/yangkai2g7k/PicFood-Frontend/tree/master/assets/search.jpg?raw=true)
-![alt text](https://github.com/yangkai2g7k/PicFood-Frontend/tree/master/assets/restaurant.jpg?raw=true)
+![alt text](https://github.com/yangkai2g7k/PicFood-Frontend/blob/master/assets/timeline.jpg?raw=true)
+![alt text](https://github.com/yangkai2g7k/PicFood-Frontend/blob/master/assets/search.jpg?raw=true)
+![alt text](https://github.com/yangkai2g7k/PicFood-Frontend/blob/master/assets/restaurant.jpg?raw=true)
 
 ### Demo Video
 
