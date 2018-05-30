@@ -24,7 +24,7 @@ It has four main functions.
 
 ## Demo
 ### Screenshots
-![alt text](https://github.com/yangkai2g7k/PicFood-Frontend/tree/master/assets/login.jpg)
+[![alt text](https://github.com/yangkai2g7k/PicFood-Frontend/tree/master/assets/login.jpg)]
 ![alt text](https://github.com/yangkai2g7k/PicFood-Frontend/tree/master/assets/timeline.jpg)
 ![alt text](https://github.com/yangkai2g7k/PicFood-Frontend/tree/master/assets/search.jpg)
 ![alt text](https://github.com/yangkai2g7k/PicFood-Frontend/tree/master/assets/restaurant.jpg)
