@@ -2,6 +2,7 @@
   "expo": {
     "name": "PicFood",
     "icon": "./assets/cheese.png",
+    "description":"PicFood is A social network based food photo sharing and restaurant review application, here is the code: https://github.com/yangkai2g7k/PicFood-Frontend"
     "version": "1.0.0",
     "slug": "pic-food",
     "sdkVersion": "25.0.0",

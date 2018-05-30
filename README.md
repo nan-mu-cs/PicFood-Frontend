@@ -38,10 +38,10 @@ It has four main functions.
 
 ## Demo
 ### Screenshots
-![alt text][./assets/login.jpg]
-![alt text][./assets/timeline.jpg]
-![alt text][./assets/search.jpg]
-![alt text][./assets/restaurant.jpg]
+![alt text][https://github.com/yangkai2g7k/PicFood-Frontend/tree/master/assets/login.jpg]
+![alt text][https://github.com/yangkai2g7k/PicFood-Frontend/tree/master/assets/timeline.jpg]
+![alt text][https://github.com/yangkai2g7k/PicFood-Frontend/tree/master/assets/search.jpg]
+![alt text][https://github.com/yangkai2g7k/PicFood-Frontend/tree/master/assets/restaurant.jpg]
 
 ### Demo Video
 
