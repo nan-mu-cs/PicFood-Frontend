@@ -40,7 +40,7 @@ It has four main functions.
 * Expo
 * React Redux
 * React Navigation
-Backend:
+### Backend:
 * Spring Boot framework
 * JSON Web Tokens
 * Swagger
