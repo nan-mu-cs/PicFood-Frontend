@@ -3,8 +3,9 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
 
 ## Table of Contents
-
-* [Updating to New Releases](#updating-to-new-releases)
+* [Overview](#overview)
+* [Demo](#demo)
+* [Technology](#technology)
 * [Available Scripts](#available-scripts)
   * [npm start](#npm-start)
   * [npm test](#npm-test)
@@ -27,13 +28,40 @@ Below you'll find information about performing common tasks. The most recent ver
   * [iOS Simulator won't open](#ios-simulator-wont-open)
   * [QR Code does not scan](#qr-code-does-not-scan)
 
-## Updating to New Releases
+## Overview
+In general, PicFood is an application that aims at improving the current food review system.
+It has four main functions.
+* Photo sharing: user can post photos a dish, which can be viewed by the user’s followers and users who view the dish in the restaurant page.
+* review system: user can post write reviews of a dish, which can be viewed by the user’s followers and users who view the dish in the restaurant page.
+* Search function: users can search a dish or a restaurant by keyword and the returned results is based on the user location and will be sorted according to the user-defined criteria.
+* Social network: a user can follow other users to view their recent food sharing activities.
 
-You should only need to update the global installation of `create-react-native-app` very rarely, ideally never.
+## Demo
+### Screenshots
+![alt text][./assets/login.jpg]
+![alt text][./assets/timeline.jpg]
+![alt text][./assets/search.jpg]
+![alt text][./assets/restaurant.jpg]
 
-Updating the `react-native-scripts` dependency of your app should be as simple as bumping the version number in `package.json` and reinstalling your project's dependencies.
+### Demo Video
 
-Upgrading to a new version of React Native requires updating the `react-native`, `react`, and `expo` package versions, and setting the correct `sdkVersion` in `app.json`. See the [versioning guide](https://github.com/react-community/create-react-native-app/blob/master/VERSIONS.md) for up-to-date information about package version compatibility.
+[![IMAGE ALT TEXT HERE](https://i.ytimg.com/vi_webp/nSnPSLVaOSE/sddefault.webp)](https://youtu.be/nSnPSLVaOSE)
+
+## Technology
+### Frontend:
+* React Native
+* Native Base
+* Expo
+* React Redux
+* React Navigation
+Backend:
+* Spring Boot framework
+* JSON Web Tokens
+* Swagger
+* Amazon AWS and S3
+* Postman
+* MySQL Workbench / DataGrip
+
 
 ## Available Scripts
 
